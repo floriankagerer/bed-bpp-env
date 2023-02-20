@@ -1,0 +1,47 @@
+# # # # # # # # # # # # #
+# ignore the directores #
+# # # # # # # # # # # # #
+__pycache__/
+output/
+.ipynb_checkpoints/
+.vscode/
+.gradle/
+.DS_Store/
+
+# # # # # # # # # # #
+# ignore the files  #
+# # # # # # # # # # #
+*.blend1
+*.log
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# ignore files in directory of alexfrom0815 PCT solver  #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+alexfrom0815_O3D-BPP-PCT/Online-3D-BPP-PCT-main/logs/*/*.monitor.csv
+alexfrom0815_O3D-BPP-PCT/Online-3D-BPP-PCT-main/logs/runinfo/
+alexfrom0815_O3D-BPP-PCT/Online-3D-BPP-PCT-main/logs/runs/
+alexfrom0815_O3D-BPP-PCT/Online-3D-BPP-PCT-main/logs/evaluation/
+alexfrom0815_O3D-BPP-PCT/Online-3D-BPP-PCT-main/logs/experiment/
+
+# # # # # # # # # # # # # # # # # # # # # # # #
+# ignore files in directory of hschneid/xflp  #
+# # # # # # # # # # # # # # # # # # # # # # # #
+# some directores are ignored because of hschneid_xflp/xflp-master/.gitignore
+hschneid_xflp/*.txt
+hschneid_xflp/*json
+
+# # # # # # # # # # # # # # # # # #
+# ignore xml files in vmac_solver #
+# # # # # # # # # # # # # # # # # #
+josch_sisyphus/*.xml
+josch_sisyphus/*/*.xml
+
+# # # # # # # # # # # # # # # # # # # # # # # # #
+# ignore the visualization colors for an order  #
+# # # # # # # # # # # # # # # # # # # # # # # # #
+code/visualization/colors/*.json
+# but include the definition of the own colors
+!code/visualization/colors/colors.json 
+
+
+

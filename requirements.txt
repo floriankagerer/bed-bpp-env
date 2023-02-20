@@ -1,0 +1,13 @@
+# This modules can be installed by running pip3 install -r requirements.txt
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+gym #==0.21
+matplotlib #==3.4.2
+numpy #==1.24.1
+opencv-python #==4.7.0.68
+openpyxl
+pandas #==1.5.3
+pdoc3 #==0.10.0
+plotly #==5.9.0
+PyYAML #==6.0
+tqdm #==4.62.2
+vtk #==9.2.5

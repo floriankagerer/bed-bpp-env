@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<xs:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:complexType name="Error">
+		<xs:sequence>
+			<xs:element name="ErrorCode" type="xs:long"/>
+			<xs:element name="ErrorType" type="xs:string"/>
+			<xs:element name="ErrorMessage" type="xs:string"/>
+			<xs:element name="Parameter1" type="xs:string"/>
+			<xs:element name="Parameter2" type="xs:string"/>
+			<xs:element name="Parameter3" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

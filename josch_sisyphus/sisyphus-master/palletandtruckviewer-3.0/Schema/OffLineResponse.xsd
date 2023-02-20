@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!-- Mit XMLSpy v2008 rel. 2 sp2 (http://www.altova.com) von Heinz Rager (KUKA Roboter GmbH) bearbeitet -->
+<!-- edited with XMLSPY v2004 rel. 4 U (http://www.xmlspy.com) by Gerda Ruge (KUKA Systec) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:res="urn:OffLineResponse" targetNamespace="urn:OffLineResponse" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="Article.xsd"/>
+	<xs:include schemaLocation="Point.xsd"/>
+	<xs:include schemaLocation="Error.xsd"/>
+	<xs:element name="Response">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element name="PackList">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="OrderID" type="xs:string"/>
+							<xs:element name="PackPallets">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="PackPallet" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="PalletNumber" type="xs:unsignedInt"/>
+													<xs:element name="Description" type="xs:string"/>
+													<xs:element name="Dimensions">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Length">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:unsignedInt">
+																			<xs:minInclusive value="1"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="Width">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:unsignedInt">
+																			<xs:minInclusive value="1"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="MaxLoadHeight">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:unsignedInt">
+																			<xs:minInclusive value="1"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element name="MaxLoadWeight">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:unsignedLong">
+																			<xs:minInclusive value="1"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="Packages">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Package" maxOccurs="unbounded">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="PackSequence" type="xs:unsignedInt"/>
+																			<xs:element name="IncomingSequence" type="xs:unsignedInt"/>
+																			<xs:element name="OrderLineNo" type="xs:unsignedInt"/>
+																			<xs:element name="ParentLayer" type="xs:unsignedInt" minOccurs="0"/>
+																			<xs:element name="Article" type="res:Article"/>
+																			<xs:element name="Barcode" type="xs:string"/>
+																			<xs:element name="PlacePosition" type="res:Point"/>
+																			<xs:element name="Orientation">
+																				<xs:simpleType>
+																					<xs:restriction base="xs:unsignedInt">
+																						<xs:minInclusive value="1"/>
+																						<xs:maxInclusive value="2"/>
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:element>
+																			<xs:element name="ApproachPoint1" type="res:Point"/>
+																			<xs:element name="ApproachPoint2" type="res:Point"/>
+																			<xs:element name="ApproachPoint3" type="res:Point"/>
+																			<xs:element name="StackHeightBefore" type="xs:unsignedInt"/>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Error" type="res:Error"/>
+			</xs:choice>
+			<xs:attribute name="index" type="xs:unsignedInt"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

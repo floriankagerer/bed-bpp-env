@@ -1,0 +1,454 @@
+diff --git Makefile.am Makefile.am
+index 875cfda..1585028 100644
+--- Makefile.am
++++ Makefile.am
+@@ -16,21 +16,15 @@ SampleData/truckLoadingPlan1.xml \
+ SampleData/truckLoadingJob1.xml \
+ Schema/*
+ 
+-bin_PROGRAMS = palletViewer truckViewer
+-
+-palletViewer_SOURCES = \
+-palletView/main.cc \
++lib_LTLIBRARIES = libpallet.la
++libpallet_la_SOURCES = \
++palletView/libpallet.cc \
+ palletView/palletViewer.h \
+ palletView/palletViewer.cc \
+-palletView/mouse.hh \
+-palletView/mouse.cc \
+-palletView/view.h \
+-palletView/view.cc \
+ palletView/xml_parser.cc \
+ palletView/response.cc \
+ palletView/packlist.cc \
+ palletView/asBuilt.cc \
+-palletView/mouse.hh \
+ palletView/scoreAsPlannedClasses.cc \
+ palletView/scoreAsPlannedClasses.hh \
+ palletView/scoreAsPlannedLex.cc     \
+@@ -41,8 +35,7 @@ palletView/packlist.h \
+ palletView/response.h \
+ palletView/xml_parser.h 
+ 
+-palletViewer_CXXFLAGS = @X_CFLAGS@ @GL_CFLAGS@ @GLU_CFLAGS@ @GLUT_CFLAGS@ -I palletView 
+-palletViewer_LDADD = @GLUT_LIBS@ @GLU_LIBS@ @GL_LIBS@ @X_EXTRA_LIBS@ @X_PRE_LIBS@ @X_LIBS@
++noinst_PROGRAMS = truckViewer
+ 
+ truckViewer_SOURCES =                                      \
+ truckView/mouse.cc                       \
+@@ -67,4 +60,4 @@ truckView/xmlSchemaInstance.cc           \
+ truckView/xmlSchemaInstance.hh
+ 
+ truckViewer_CXXFLAGS = @X_CFLAGS@ @GL_CFLAGS@ @GLU_CFLAGS@ @GLUT_CFLAGS@
+-truckViewer_LDADD = $(bin_LIBS) @GLUT_LIBS@ @GLU_LIBS@ @GL_LIBS@ @X_EXTRA_LIBS@ @X_PRE_LIBS@ @X_LIBS@ -lX11
++truckViewer_LDADD = $(bin_LIBS) @GLUT_LIBS@ @GLU_LIBS@ @GL_LIBS@ @X_EXTRA_LIBS@ @X_PRE_LIBS@ @X_LIBS@ -lX11 -lglut
+diff --git configure.ac configure.ac
+index ed990a4..4095c7d 100644
+--- configure.ac
++++ configure.ac
+@@ -6,6 +6,8 @@ AM_CONFIG_HEADER(./config.h)
+ # Checks for programs.
+ AC_PROG_CXX
+ 
++LT_INIT
++
+ # Checks for header files.
+ AC_HEADER_STDC
+ 
+@@ -18,3 +20,4 @@ AX_CHECK_GLUT
+ AC_CONFIG_FILES([Makefile])
+ 
+ AC_OUTPUT
++
+diff --git palletView/asBuilt.cc palletView/asBuilt.cc
+index d27d7b7..bedfd40 100755
+--- palletView/asBuilt.cc
++++ palletView/asBuilt.cc
+@@ -28,7 +28,7 @@
+ #ifdef MOASTSTATIC
+ #include "asBuilt.h"
+ #else
+-#include <asBuilt.h>
++#include "asBuilt.h"
+ #endif
+ #include "response.h"
+ #include <stdlib.h>
+diff --git palletView/libpallet.cc palletView/libpallet.cc
+new file mode 100644
+index 0000000..bc6d8cf
+--- /dev/null
++++ palletView/libpallet.cc
+@@ -0,0 +1,9 @@
++#include "palletViewer.h"
++
++extern "C"
++{
++  double evaluate(char* orderFile, char* packlistFile, char* scoringFile)
++  {
++    return PalletViewer::evaluate(orderFile, packlistFile, scoringFile);
++  }
++}
+diff --git palletView/packlist.cc palletView/packlist.cc
+index 9aeceab..1cb31c5 100644
+--- palletView/packlist.cc
++++ palletView/packlist.cc
+@@ -28,8 +28,8 @@
+ #include "packlist.h"
+ #include "xml_parser.h"
+ #else
+-#include <packlist.h>
+-#include <xml_parser.h>
++#include "packlist.h"
++#include "xml_parser.h"
+ #endif
+ #include <stdlib.h>
+ #include <fstream>
+@@ -193,7 +193,6 @@ Order readOrder(
+   
+   Order order;
+   order.parse(xml_parse_tag(orderlist_xml, "Order"));
+-  printf("Order Read.\n");
+   free(orderlist_buf);
+   return order;
+ }
+@@ -215,7 +214,6 @@ Pallet readPallet(
+   
+   Pallet pallet;
+   pallet.parse(xml_parse_tag(pallet_xml, "Pallets"));
+-  printf("Pallets Read.\n");
+   free(pallet_buf);
+   return pallet;
+ }
+diff --git palletView/palletViewer.cc palletView/palletViewer.cc
+index 99cb1e7..8804146 100644
+--- palletView/palletViewer.cc
++++ palletView/palletViewer.cc
+@@ -30,7 +30,7 @@
+ #include <map>
+ #include <time.h>
+ #include <math.h>
+-#include "view.h"    // for draw_string, gl functions, glut functions
++//#include "view.h"    // for draw_string, gl functions, glut functions
+ #include "xml_parser.h"
+ #include "packlist.h"
+ #include "response.h"
+@@ -205,11 +205,12 @@ The font argument is actually a symbol such as GLUT_BITMAP_HELVETICA_10.
+ 
+ */
+ 
+-void PalletViewer::drawString( /* ARGUMENTS                   */
+- float x,                      /* X location of start of text */
+- float y,                      /* Y location of start of text */
+- void * font,                  /* the font to use             */
+- char* string)                 /* the text to print           */
++/*
++void PalletViewer::drawString( *//* ARGUMENTS                   *//*
++ float x,                      *//* X location of start of text *//*
++ float y,                      *//* Y location of start of text *//*
++ void * font,                  *//* the font to use             *//*
++ char* string)                 *//* the text to print           *//*
+ {
+   char * c;
+ 
+@@ -219,6 +220,7 @@ void PalletViewer::drawString( /* ARGUMENTS                   */
+       glutBitmapCharacter(font, *c);
+     }
+ }
++*/
+ 
+ /********************************************************************/
+ 
+@@ -563,6 +565,54 @@ void PalletViewer::init( /* ARGUMENTS                          */
+   
+ }
+ 
++double PalletViewer::evaluate( /* ARGUMENTS                          */
++ char * orderFile,       /* name of order file                 */
++ char * packlistFile,    /* name of packlist file              */
++ char * scoringFileIn)   /* name of scoring configuration file */
++{
++  Order order;
++  unsigned int i;
++
++  tolerance = 0;
++  strncpy(scoringFile, scoringFileIn, 100);
++  order = readOrder(orderFile);
++  makeColors(order.n_orderline());
++  for (i = 0; i < order.n_orderline(); i++)
++    {
++      color.insert(std::pair<int, col>
++		   (order.orderline[i].article.id, colors[i]));
++    }
++  list = PackList::read_response(packlistFile);
++  yyin = fopen(scoringFile, "r");
++  if (yyin == 0)
++    {
++      fprintf(stderr, "unable to open file %s for reading\n", scoringFile);
++      exit(1);
++    }
++  yyparse();
++  fclose(yyin);
++  cpallet = list.packedPallets[0];
++  checkPlannedItems(&order);
++  scale = 0.450f / max(cpallet.dimensions.length, cpallet.dimensions.width);
++  spacing = max(cpallet.dimensions.length, cpallet.dimensions.width)/9000.0f;
++  cpallet.findSequenceErrors();
++  cpallet.findOverlaps(tolerance, MINIMUM_OVERLAP);
++  cpallet.findCogs();
++  cpallet.findIntersections(tolerance);
++  cpallet.findOverhangs(tolerance);
++  cpallet.findPressures();
++  cpallet.findPressureMetrics();
++  cpallet.findVolumes();
++  cpallet.findTotalErrors();
++  findAsPlannedScore();
++
++  for (i = 0; i < cpallet.packages.size(); i++) {
++      recalculate(1);
++      if (countAsPlanned == cpallet.packages.size())
++          return score;
++  }
++}
++
+ /********************************************************************/
+ 
+ /* PalletViewer::insertBox
+@@ -581,15 +631,16 @@ The location point of a box is in the middle of the top of the box.
+ 
+ */
+ 
+-void PalletViewer::insertBox( /* ARGUMENTS                                  */
+- col boxColor,                /* color of box                               */
+- double minX,                 /* minimum value of X on box in millimeters   */
+- double minY,                 /* minimum value of Y on box in millimeters   */
+- double minZ,                 /* minimum value of Z on box in millimeters   */
+- double maxX,                 /* maximum value of X on box in millimeters   */
+- double maxY,                 /* maximum value of Y on box in millimeters   */
+- double maxZ,                 /* maximum value of Z on box in millimeters   */
+- bool solid)                  /* true = faces and edges, false = edges only */
++/*
++void PalletViewer::insertBox( *//* ARGUMENTS                                  *//*
++ col boxColor,                *//* color of box                               *//*
++ double minX,                 *//* minimum value of X on box in millimeters   *//*
++ double minY,                 *//* minimum value of Y on box in millimeters   *//*
++ double minZ,                 *//* minimum value of Z on box in millimeters   *//*
++ double maxX,                 *//* maximum value of X on box in millimeters   *//*
++ double maxY,                 *//* maximum value of Y on box in millimeters   *//*
++ double maxZ,                 *//* maximum value of Z on box in millimeters   *//*
++ bool solid)                  *//* true = faces and edges, false = edges only *//*
+ {
+   static GLubyte allIndices[] = {4,5,6,7, 1,2,6,5, 0,1,5,4,
+ 				 0,3,2,1, 0,4,7,3, 2,3,7,6};
+@@ -643,6 +694,7 @@ void PalletViewer::insertBox( /* ARGUMENTS                                  */
+       glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, allIndices);
+     }
+ }
++*/
+ 
+ /********************************************************************/
+ 
+@@ -794,9 +846,10 @@ gives metrics for the most recently loaded package.
+ 
+ */
+ 
+-void PalletViewer::printAsBuiltPackageText( /* ARGUMENTS                  */
+- BuiltPackage * pack,              /* Package to print from               */
+- float * wy)                       /* Y-value on screen at which to print */
++/*
++void PalletViewer::printAsBuiltPackageText( *//* ARGUMENTS                  *//*
++ BuiltPackage * pack,              *//* Package to print from               *//*
++ float * wy)                       *//* Y-value on screen at which to print *//*
+ {
+   char str[STR_LENGTH];  // string to print in
+   float yy;
+@@ -833,6 +886,7 @@ void PalletViewer::printAsBuiltPackageText( /* ARGUMENTS                  */
+   drawString(20.0f, (yy -= 15.0f), GLUT_BITMAP_HELVETICA_10, str);
+   *wy = yy;
+ }
++*/
+ 
+ /********************************************************************/
+ 
+@@ -852,8 +906,9 @@ corner of the metrics window.
+ 
+ */
+ 
+-void PalletViewer::printAsBuiltText( /* ARGUMENTS                 */
+- int height)                         /* side of screen, in pixels */
++/*
++void PalletViewer::printAsBuiltText( *//* ARGUMENTS                 *//*
++ int height)                         *//* side of screen, in pixels *//*
+ {
+   char str[STR_LENGTH];   // string to print in
+   BuiltPackage * pack;    // package to get data from
+@@ -875,6 +930,7 @@ void PalletViewer::printAsBuiltText( /* ARGUMENTS                 */
+   snprintf(str, STR_LENGTH, "Tolerance: %.4f millimeters", tolerance);
+   drawString(20.0f, (wy -= 15.0f), GLUT_BITMAP_HELVETICA_10, str);
+ }
++*/
+ 
+ /********************************************************************/
+ 
+@@ -890,9 +946,10 @@ loaded package.
+ 
+ */
+ 
+-void PalletViewer::printAsBuiltStackText( /* ARGUMENTS                    */
+- BuiltPackage * pack,              /* Package to print from               */
+- float * wy)                       /* Y-value on screen at which to print */
++/*
++void PalletViewer::printAsBuiltStackText( *//* ARGUMENTS                    *//*
++ BuiltPackage * pack,              *//* Package to print from               *//*
++ float * wy)                       *//* Y-value on screen at which to print *//*
+ {
+   char str[STR_LENGTH];  // string to print in
+   float yy;
+@@ -936,6 +993,7 @@ void PalletViewer::printAsBuiltStackText( /* ARGUMENTS                    */
+   drawString(20.0f, (yy -= 15.0f), GLUT_BITMAP_HELVETICA_10, str);
+   *wy = yy;
+ }
++*/
+ 
+ /********************************************************************/
+ 
+@@ -950,9 +1008,10 @@ gives metrics for the most recently loaded package.
+ 
+ */
+ 
+-void PalletViewer::printAsPlannedPackageText( /* ARGUMENTS                  */
+- Package * pack,                     /* Package to print                    */
+- float * wy)                         /* Y-value on screen at which to print */
++/*
++void PalletViewer::printAsPlannedPackageText( *//* ARGUMENTS                  *//*
++ Package * pack,                     *//* Package to print                    *//*
++ float * wy)                         *//* Y-value on screen at which to print *//*
+ {
+   char str[STR_LENGTH];                // string to print in
+   std::list<int>::iterator iter;       // iterator for intersections list
+@@ -1043,6 +1102,7 @@ void PalletViewer::printAsPlannedPackageText( /* ARGUMENTS                  */
+   drawString(20.0f, (yy -= 15.0f), GLUT_BITMAP_HELVETICA_10, str);
+   *wy = yy;
+ }
++*/
+ 
+ /***********************************************************************/
+ 
+@@ -1062,8 +1122,9 @@ corner of the metrics window.
+ 
+ */
+ 
+-void PalletViewer::printAsPlannedText( /* ARGUMENTS                 */
+- int height)                           /* side of screen, in pixels */
++/*
++void PalletViewer::printAsPlannedText( *//* ARGUMENTS                 *//*
++ int height)                           *//* side of screen, in pixels *//*
+ {
+   char str[STR_LENGTH];   // string to print in
+   Package * pack;         // package to get data from
+@@ -1087,6 +1148,7 @@ void PalletViewer::printAsPlannedText( /* ARGUMENTS                 */
+   snprintf(str, STR_LENGTH, "Scoring file: %s ", scoringFile);
+   drawString(20.0f, (wy -= 15.0f), GLUT_BITMAP_HELVETICA_10, str);
+ }
++*/
+ 
+ /********************************************************************/
+ 
+@@ -1107,9 +1169,10 @@ space before the next line is printed.
+ 
+ */
+ 
+-void PalletViewer::printAsPlannedStackText( /* ARGUMENTS                  */
+- Package * pack,                   /* Package to print from               */
+- float * wy)                       /* Y-value on screen at which to print */
++/*
++void PalletViewer::printAsPlannedStackText( *//* ARGUMENTS                  *//*
++ Package * pack,                   *//* Package to print from               *//*
++ float * wy)                       *//* Y-value on screen at which to print *//*
+ {
+   char str[STR_LENGTH];  // string to print in
+   float yy;
+@@ -1200,6 +1263,7 @@ void PalletViewer::printAsPlannedStackText( /* ARGUMENTS                  */
+     }
+   *wy = yy;
+ }
++*/
+ 
+ /***********************************************************************/
+ 
+@@ -1338,7 +1402,8 @@ in error, so they will be drawn as small gray boxes.
+ 
+ */
+ 
+-void PalletViewer::redraw() /* NO ARGUMENTS   */
++/*
++void PalletViewer::redraw()
+ {
+   float radToDeg = 57.29577958f; // for asBuilt
+   double offsetX;   // for as-planned, in millimeters
+@@ -1424,6 +1489,7 @@ void PalletViewer::redraw() /* NO ARGUMENTS   */
+ 	}
+     }
+ }
++*/
+ 
+ /********************************************************************/
+ 
+diff --git palletView/palletViewer.h palletView/palletViewer.h
+index 1268687..260cebb 100644
+--- palletView/palletViewer.h
++++ palletView/palletViewer.h
+@@ -36,6 +36,7 @@ class PalletViewer
+   static void findAsPlannedScore();
+   static void init(char * orderFile, char * packlistFile, char * asBuiltFile,
+ 		   char * scoringFileIn, double toleranceIn);
++  static double evaluate(char * orderFile, char * packlistFile, char * scoringFileIn);
+   static void insertBox(col boxColor, double minX, double minY, double minZ,
+ 			double maxX, double maxY, double maxZ, bool solid);
+   static void makeColors(int howMany);
+diff --git palletView/response.cc palletView/response.cc
+index 346d3bc..a833eeb 100644
+--- palletView/response.cc
++++ palletView/response.cc
+@@ -556,7 +556,6 @@ PackList PackList::read_response( /* ARGUMENTS            */
+   ifs.read(buffer, bufferLength);
+   packlistString = buffer;
+   list.parsePackList(xml_parse_tag(packlistString, "PackList"));
+-    printf("PackList Read.\n");
+   free(buffer);
+   return list;
+ }
+diff --git palletView/scoreAsPlannedLex.cc palletView/scoreAsPlannedLex.cc
+index c73e4a0..16f1a56 100644
+--- palletView/scoreAsPlannedLex.cc
++++ palletView/scoreAsPlannedLex.cc
+@@ -890,7 +890,7 @@ static int input (void );
+ /* This used to be an fputs(), but since the string might contain NUL's,
+  * we now use fwrite().
+  */
+-#define ECHO fwrite( yytext, yyleng, 1, yyout )
++#define ECHO
+ #endif
+ 
+ /* Gets input and stuffs it into "buf".  number of characters read, or YY_NULL,
+diff --git palletView/scoreAsPlannedYACC.cc palletView/scoreAsPlannedYACC.cc
+index 213f0c0..f9e55b6 100644
+--- palletView/scoreAsPlannedYACC.cc
++++ palletView/scoreAsPlannedYACC.cc
+@@ -163,7 +163,7 @@
+ 
+ 
+ 
+-#include <stdio.h>             // for stderr
++//#include <stdio.h>             // for stderr
+ #include <string.h>            // for strcat
+ #include <stdlib.h>            // for malloc, free
+ #include "scoreAsPlannedClasses.hh"   // for scoreAsPlanned classes
+@@ -1273,7 +1273,6 @@ yyparse ()
+ #endif
+ #endif
+ {
+-  
+   int yystate;
+   int yyn;
+   int yyresult;

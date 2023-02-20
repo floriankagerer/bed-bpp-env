@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!-- Mit XMLSpy v2008 rel. 2 sp2 (http://www.altova.com) von Heinz Rager (KUKA Roboter GmbH) bearbeitet -->
+<!-- edited with XMLSPY v2004 rel. 4 U (http://www.xmlspy.com) by KUKA SysTec GmbH (KUKA SysTec GmbH) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mes="urn:OffLineMessage" targetNamespace="urn:OffLineMessage" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="PalletInit.xsd"/>
+	<xs:include schemaLocation="Restrictions.xsd"/>
+	<xs:include schemaLocation="Article.xsd"/>
+	<xs:element name="Message">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="PalletInit" type="mes:PalletInit"/>
+				<xs:element name="Order">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ID" type="xs:string"/>
+							<xs:element name="Description" type="xs:string"/>
+							<xs:element name="Restrictions" type="mes:Restrictions"/>
+							<xs:element name="OrderLines">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="OrderLine" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="OrderLineNo" type="xs:unsignedInt"/>
+													<xs:element name="Article" type="mes:Article"/>
+													<xs:element name="Barcodes">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Barcode" type="xs:string" maxOccurs="unbounded"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="index" type="xs:unsignedInt"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

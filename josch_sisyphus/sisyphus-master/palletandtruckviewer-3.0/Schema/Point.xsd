@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<xs:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:complexType name="Point">
+		<xs:sequence>
+			<xs:element name="X" type="xs:int"/>
+			<xs:element name="Y" type="xs:int"/>
+			<xs:element name="Z" type="xs:unsignedInt"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

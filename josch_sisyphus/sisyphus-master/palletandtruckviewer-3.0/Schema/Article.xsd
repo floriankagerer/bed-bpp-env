@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!-- Mit XMLSpy v2009 sp1 (http://www.altova.com) von Julian Haselmayr (KUKA Roboter GmbH) bearbeitet -->
+<!-- edited with XMLSPY v2004 rel. 4 U (http://www.xmlspy.com) by KUKA SysTec GmbH (KUKA SysTec GmbH) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="Article">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:string"/>
+			<xs:element name="Description" type="xs:string"/>
+			<xs:element name="Type">
+				<xs:simpleType>
+					<xs:restriction base="xs:unsignedInt">
+						<xs:minInclusive value="1"/>
+						<xs:maxInclusive value="4"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Length">
+				<xs:simpleType>
+					<xs:restriction base="xs:unsignedInt">
+						<xs:minInclusive value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Width">
+				<xs:simpleType>
+					<xs:restriction base="xs:unsignedInt">
+						<xs:minInclusive value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Height">
+				<xs:simpleType>
+					<xs:restriction base="xs:unsignedInt">
+						<xs:minInclusive value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Weight">
+				<xs:simpleType>
+					<xs:restriction base="xs:unsignedLong">
+						<xs:minInclusive value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FrictionCoefficient" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:unsignedLong">
+						<xs:minInclusive value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Family" type="xs:unsignedInt" minOccurs="0"/>
+			<xs:element name="Robustness" minOccurs="0">
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="MaxPressureOnTop" type="xs:double">
+							<xs:annotation>
+								<xs:documentation>g/mm^2</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:sequence minOccurs="0">
+							<xs:element name="SourcePalletLayers" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:unsignedInt">
+										<xs:minInclusive value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="RelativeRobustness" minOccurs="0">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="VeryWeak"/>
+										<xs:enumeration value="Weak"/>
+										<xs:enumeration value="Normal"/>
+										<xs:enumeration value="Strong"/>
+										<xs:enumeration value="VeryStrong"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SubUnits" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Layers">
+							<xs:simpleType>
+								<xs:restriction base="xs:unsignedInt">
+									<xs:minInclusive value="1"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="Quantity">
+							<xs:simpleType>
+								<xs:restriction base="xs:unsignedInt">
+									<xs:minInclusive value="1"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HandlingAngles" type="xs:string" minOccurs="0"/>
+			<xs:element name="MinTorque" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:unsignedInt">
+						<xs:minInclusive value="1"/>
+						<xs:maxInclusive value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="MaxTorque" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:unsignedInt">
+						<xs:minInclusive value="1"/>
+						<xs:maxInclusive value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

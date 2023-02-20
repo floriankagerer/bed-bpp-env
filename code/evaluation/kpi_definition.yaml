@@ -1,0 +1,51 @@
+"unpalletized_order_ratio":
+  name: unpalletized_order_ratio
+  description: This KPI can be interpreted as ratio of an order that could not be palletized.
+  num: 1
+  method: evalUnpalletizedOrderRatio
+
+"volume_utilization":
+  name: volume_utilization
+  description: This KPI shows how many times the volume of the items is needed on the target caused by the pile of a packing plan.
+  num: 2
+  method: evalVolumeUtilization
+
+"target_height":
+  name: target_height
+  description: This KPI represents the highest point of the pile of an order.
+  num: 3
+  method: evalMaxHeightOnTarget
+
+"mean_support_area":
+  name: mean_support_area
+  description: This KPI holds the mean of the support areas of all items in a packing plan.
+  num: 4
+  method: evalSupportArea
+
+"stability":
+  name: stability
+  description: This KPI represents whether a packing plan produces a stable pile in simulation.
+  threshold: 0.01
+  num: 5
+  method: evalStability
+
+"eval_score_pal_ratio":
+  name: eval_score_pal_ratio
+  description: This KPI hold the ratio of stable palletized items below the height threshold divided by the amount of items in the corresponding order. If the packing plan produced an unstable pallet, the ratio is 0.
+  num: 6
+  method: evalScoreOrderPalletizingRatio
+  threshold: 2.0
+
+"eval_score_height":
+  name: eval_score_height
+  description: This method returns the height of the highest pile of a given packing plan, where all items that are not completely below the threshold are removed.
+  num: 7
+  method: evalScorePalletizingHeight
+  threshold: 2.0
+
+"eval_score_absolute_n_stable_pal_items":
+  name: eval_score_absolute_n_stable_pal_items
+  description: This KPI holds the amount of items for which the packing plan created a stable pallet and that lie below the height threshold.
+  num: 8
+  method: evalScoreAbsoluteNStablePalletizedItems
+  threshold: 2.0

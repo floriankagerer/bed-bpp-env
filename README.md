@@ -1,16 +1,16 @@
-<center>
+<div align="center">
 
 ![Banner_Image](./example_data/images/banner.png)
 
-</center>
+</div>
 
 ---
 
-<center>
+<div align="center">
 
 # BED-BPP: Benchmark Dataset for Robotic Bin Packing Problems
 
-</center>
+</div>
 
 <!-- -------------------------------------------------------------- -->
 ## <div align="center">Getting Started</div>
@@ -27,14 +27,14 @@ To use all features and functions in this repository, make sure that you have in
 
 **Python.** Depending on your system, we suggest to use different Python versions (Take a look for which platform and Python version the [Visualization Toolkit](https://vtk.org/download/) wheels are available.). We suggest to use the environment with
 
-<center>
+<div align="center">
 
 | Platform              | Python Version |
 |-----------------------|----------------|
 | macOS (with M1 chip)  | Python >= 3.9  |
 | Ubuntu/Linux          | Python >= 3.8  |
 
-</center>
+</div>
 
 Note, that we will use python3.9 in the following instructions.
 
@@ -127,12 +127,12 @@ and check whether the setup was successful by running
 ```
 After a few seconds you should see an image that is similar to the following
 
-<center>
+<div align="center">
 
 ![test_image](./example_data/images/example_render_image.png)
 
 **😀 Happy Coding 😀**
-</center>
+</div>
 </details> <!-- end usage-->
 <br>
 
@@ -181,11 +181,11 @@ We encourage you to develop solvers for the three-dimensional bin packing proble
 
 For details, visit https://floriankagerer.github.io/dataset and https://floriankagerer.github.io/leaderboard.
 
-<center> 
+<div align="center">
+    
+![Leaderboardr_Image](./example_data/images/leaderboard.png)
 
-## Add here an image of the leaderboard
-
-</center>
+</div>
 
 Till now, we integrated the following solvers in this repo and used `BED-BPP` as benchmark:  
 

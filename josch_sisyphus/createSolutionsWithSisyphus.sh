@@ -29,6 +29,6 @@ do
 
 done
 
-echo "convert output of sisyphus of ${ORDER} for myopic palletizing"
+echo "convert output of sisyphus of ${ORDER} for bed-bpp-env"
 python3 ../code/utils/sisyphus/packlistConverter.py --dir_solver . --src_order ${INPUT_DATA}
 

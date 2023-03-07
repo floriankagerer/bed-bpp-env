@@ -6,7 +6,7 @@ output/
 .ipynb_checkpoints/
 .vscode/
 .gradle/
-.DS_Store/
+.DS_Store
 
 # # # # # # # # # # #
 # ignore the files  #

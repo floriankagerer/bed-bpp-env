@@ -23,7 +23,7 @@ Please find below the instructions on how to setup and use the code in this repo
 
 To use all features and functions in this repository, make sure that you have installed Python and Blender on your system.
 
-**Blender.** Download and install [Blender](https://www.blender.org/download/). Please check in [script_evaluate_packing_plan.py](./code/script_evaluate_packing_plan.py) the used `cmd` for the Blender path. 
+**Blender.** Download and install [Blender](https://www.blender.org/download/). If [script_evaluate_packing_plan.py](./code/script_evaluate_packing_plan.py) does not find the location of Blender, add the [Blender path to bed-bpp_env.conf](./code/bed-bpp_env.conf#L16).
 
 **Python.** Depending on your system, we suggest to use different Python versions (Take a look for which platform and Python version the [Visualization Toolkit](https://vtk.org/download/) wheels are available.). We suggest to use the environment with
 

@@ -17,6 +17,26 @@ logger = logging.getLogger(__name__)
 ppEvaluator = evaluation.PackingPlanEvaluator()
 '''An instance of PackingPlanEvaluator that evaluates the given packing plan.'''
 
+EVALCONFIG = utils.ENTIRECONFIG["evaluation"]
+'''The configuration for the evaluation.'''
+
+# get blender cmd
+# cmd = ["blender"] # works only when "blender" is in PATH
+if EVALCONFIG["blenderpath"] == "":
+    usedPlatform = platform.platform()
+    if "macOS" in usedPlatform:
+        BLENDERPATH = "/Applications/Blender.app/Contents/MacOS/Blender"
+    elif "Linux" in usedPlatform:
+        BLENDERPATH = "/snap/blender/current/blender"
+    else:
+        raise ValueError(f"platform {usedPlatform} is currently not implemented > set blenderpath in bed-bpp_env.conf")
+else:
+    print(f"use blender path from configuration file")
+    BLENDERPATH = EVALCONFIG["blenderpath"]
+    if not(pathlib.Path(BLENDERPATH).exists()): raise FileNotFoundError(f"check your blender path in bed-bpp_env.conf!")
+    
+
+
 
 def evaluatePackingPlan(id:str, order:dict, packingplan:list) -> None:
     '''
@@ -54,14 +74,7 @@ def runBlenderStabilityCheck(background:bool, orderid:str, renderscene:bool, act
     templFile = str(evaluation.blender.TEMPLATEFILE)
     blenderSceneGen = str(evaluation.blender.TEMPLATEFILE.parent.resolve().joinpath("scene_creation.py"))
     
-    # cmd = ["blender"] # works only when "blender" is in PATH
-    usedPlatform = platform.platform()
-    if "macOS" in usedPlatform:
-        cmd = ["/Applications/Blender.app/Contents/MacOS/Blender"]
-    elif "Linux" in usedPlatform:
-        cmd = ["/snap/blender/current/blender"]
-    else:
-        raise ValueError(f"platform {usedPlatform} is currently not implemented")
+    cmd = [BLENDERPATH]
 
     if background: cmd += ["-b"]
     cmd += [templFile, "--python", blenderSceneGen, "--", "order_number", orderid, "output_dir", EVALOUTPUTDIR, "render", str(renderscene), "order_packing_plan", str(actionplan), "order", str(orderofpackingplan), "order_colors", str(ordercolors)]

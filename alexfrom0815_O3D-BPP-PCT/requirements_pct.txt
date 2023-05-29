@@ -26,7 +26,7 @@ idna==3.3
 imageio==2.21.2
 importlib-metadata==4.12.0
 importlib-resources==5.9.0
-joblib==1.1.0
+joblib # joblib==1.1.0
 keras==2.9.0
 Keras-Preprocessing==1.1.2
 kiwisolver==1.4.4
@@ -68,9 +68,9 @@ tensorboard==2.9.1
 tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.1
 tensorboardX==2.5.1
-tensorflow==2.9.1
-tensorflow-estimator==2.9.0
-tensorflow-io-gcs-filesystem==0.26.0
+tensorflow # tensorflow==2.9.1
+tensorflow-estimator # tensorflow-estimator==2.9.0
+tensorflow-io-gcs-filesystem # tensorflow-io-gcs-filesystem==0.26.0
 termcolor==1.1.0
 torch==1.12.1
 tqdm==4.64.0

@@ -6,6 +6,7 @@ from environment import HEIGHT_TOLERANCE_MM as HEIGHT_TOLERANCE_MM
 import numpy as np
 import logging
 import utils
+from typing import List
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +50,7 @@ class Space3D():
         '''This `np.ndarray` has the same shape as the height map of the three-dimensional space and stores a counter that represents the counter of the uppermost item.'''
 
 
-    def getPlacedItems(self) -> list:
+    def getPlacedItems(self) -> List["environment.Item3D"]:
         '''Returns all placed items as list of "environment.Item3D".'''
         return list(self.__PlacedItems.values())
 

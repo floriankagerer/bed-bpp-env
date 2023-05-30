@@ -210,6 +210,40 @@ class PackingPlanEvaluator():
         return nStablePalletizedItems
 
 
+    def evalInterlockingRatio(self) -> float:
+        '''
+        This method evaluates the interlocking ratio of the packing plan. Items that are considered for this KPI are not directly placed at the target.  
+        
+        Returns.
+        --------
+        interlockingRatio: float  
+            The interlocking ratio of the packing plan.  
+        '''
+        placedItems = self.__TargetSpace.getPlacedItems()
+        rInterlEnumerator = 0 
+        rInterlDenominator = 0
+
+        for item in placedItems:
+            itemsBelowItem = item.getItemsBelow()
+            nItemsBelow = len(itemsBelowItem)
+
+            if not(nItemsBelow == 0):
+                # item is not directly placed on target
+                rInterlDenominator += 1
+
+                # check whether item contributes to enumerator
+                if nItemsBelow > 1:
+                    rInterlEnumerator += 1
+                elif nItemsBelow == 1:
+                    if not(item.getOrientation() == placedItems[0].getOrientation()):
+                        rInterlEnumerator += 1
+                  
+        logger.debug(f"r_interl = {rInterlEnumerator} / {rInterlDenominator}")
+
+        rInterl = pd.NA if rInterlDenominator == 0 else float(rInterlEnumerator/rInterlDenominator)
+        return rInterl
+
+
     def evaluate(self, orderid:str, order:dict, packingplan:list) -> dict:
         '''
         This method evaluates the packing plan for a given order.  
@@ -238,6 +272,7 @@ class PackingPlanEvaluator():
             'kpi_3': 3.97, 
             'kpi_4': 0.8335259392910519, 
             'kpi_5': 1, 
+            'kpi_6': 1, 
             'eval_score_pal_ratio': 0.7272727272727273, 
             'eval_score_height': 1.849, 
             'eval_score_absolute_n_stable_pal_items': 32

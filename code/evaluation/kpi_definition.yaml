@@ -22,30 +22,36 @@
   num: 4
   method: evalSupportArea
 
+"interlocking_ratio":
+  name: interlocking_ratio
+  description: This KPI represents how many percent of the placed items (except the first layer), are placed on either a single item with different orientation or on more than one item regardless of the orientation.
+  num: 5
+  method: evalInterlockingRatio
+
 "stability":
   name: stability
   description: This KPI represents whether a packing plan produces a stable pile in simulation.
   threshold: 0.01
-  num: 5
+  num: 6
   method: evalStability
 
 "eval_score_pal_ratio":
   name: eval_score_pal_ratio
   description: This KPI hold the ratio of stable palletized items below the height threshold divided by the amount of items in the corresponding order. If the packing plan produced an unstable pallet, the ratio is 0.
-  num: 6
+  num: 7
   method: evalScoreOrderPalletizingRatio
   threshold: 2.0
 
 "eval_score_height":
   name: eval_score_height
   description: This method returns the height of the highest pile of a given packing plan, where all items that are not completely below the threshold are removed.
-  num: 7
+  num: 8
   method: evalScorePalletizingHeight
   threshold: 2.0
 
 "eval_score_absolute_n_stable_pal_items":
   name: eval_score_absolute_n_stable_pal_items
   description: This KPI holds the amount of items for which the packing plan created a stable pallet and that lie below the height threshold.
-  num: 8
+  num: 9
   method: evalScoreAbsoluteNStablePalletizedItems
   threshold: 2.0

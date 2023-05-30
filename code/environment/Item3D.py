@@ -82,6 +82,26 @@ class Item3D():
             logger.warning(f"item \"{self.__ID}\" orientation: value {value} is not known! do nothing")
 
 
+    def getOrientation(self) -> int:
+        '''
+        Returns the orientation of an item.  
+
+        Returns.
+        --------
+        orientation: int  
+            Indicates whether the long edge is parallel to the long edge of the target or whether the item is rotated by 90 degrees.  
+        '''
+        shape = self.__Representation.shape
+
+        if shape == (self.__Width, self.__Length):
+            return 0
+        elif shape == (self.__Length, self.__Width):
+            return 1
+        else:
+            logger.warning(f"item \"{self.__ID}\" get orientation: not known! return None")
+            return None
+
+
     def storeFLBCoordinates(self, coordinates:list) -> None:
         '''Stores the FLB coordinates, e.g. `[x, y, z]`, of this object.'''
         self.__FLBCoordinates = coordinates

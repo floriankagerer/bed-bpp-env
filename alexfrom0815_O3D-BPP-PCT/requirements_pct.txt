@@ -72,7 +72,7 @@ tensorflow >= 2.11.1 # tensorflow==2.9.1
 tensorflow-estimator # tensorflow-estimator==2.9.0
 tensorflow-io-gcs-filesystem # tensorflow-io-gcs-filesystem==0.26.0
 termcolor==1.1.0
-torch # torch==1.12.1
+torch>=1.13.1 # torch==1.12.1
 tqdm==4.64.0
 transforms3d==0.4
 typing_extensions==4.3.0

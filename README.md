@@ -15,7 +15,8 @@
 
 <!-- -------------------------------------------------------------- -->
 ## <div align="center">Paper Accepted</div>
-I am happy to announce that our paper "BED-BPP: Benchmarking Dataset for Robotic Bin Packing" has been accepted for publication in the [International Journal of Robotics Research (IJR)](https://journals.sagepub.com/home/ijr){:target="_blank"}. 
+I am happy to announce that our paper "BED-BPP: Benchmarking Dataset for Robotic Bin Packing" has been accepted for publication in the <a href="https://journals.sagepub.com/home/ijr" target="_blank">International Journal of Robotics Research (IJR)</a>.
+
 
 Whenever you use the dataset, please cite our publication:
 

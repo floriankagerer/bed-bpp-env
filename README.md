@@ -11,6 +11,8 @@
 # BED-BPP: Benchmark Dataset for Robotic Bin Packing Problems
 
 </div>
+
+
 <!-- -------------------------------------------------------------- -->
 ## <div align="center">Paper Accepted</div>
 I am happy to announce that our paper "BED-BPP: Benchmarking Dataset for Robotic Bin Packing" has been accepted for publication in the [International Journal of Robotics Research (IJR)](https://journals.sagepub.com/home/ijr){:target="_blank"}. 

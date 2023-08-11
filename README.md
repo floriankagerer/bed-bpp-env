@@ -15,13 +15,15 @@
 
 <!-- -------------------------------------------------------------- -->
 ## <div align="center">Paper Accepted</div>
-I am happy to announce that our paper "BED-BPP: Benchmarking Dataset for Robotic Bin Packing" has been accepted for publication in the <a href="https://journals.sagepub.com/home/ijr" target="_blank">International Journal of Robotics Research (IJR)</a>.
+I am happy to announce that our paper "BED-BPP: Benchmarking Dataset for Robotic Bin Packing" has been accepted for publication in the <a href="https://journals.sagepub.com/home/ijr" target="_blank">International Journal of Robotics Research (IJJR)</a>.
 
 
 Whenever you use the dataset, please cite our publication:
 
 >
-> TBD
+> Kagerer F, Beinhofer M, Stricker S, Nüchter A. BED-BPP: Benchmarking dataset for robotic bin packing problems. *The International Journal of Robotics Research*. 2023;0(0). doi:10.1177/02783649231193048 \\
+> <a href="https://floriankagerer.github.io/assets/publications/Kagereretal2023-ijrr.bib" target="_blank">[BibTeX]</a>
+<a href="https://doi.org/10.1177/02783649231193048" target="_blank">[DOI]</a>
 >
 
 

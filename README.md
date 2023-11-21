@@ -21,7 +21,7 @@ I am happy to announce that our paper "BED-BPP: Benchmarking Dataset for Robotic
 Whenever you use the dataset, please cite our publication:
 
 >
-> Kagerer F, Beinhofer M, Stricker S, Nüchter A. BED-BPP: Benchmarking dataset for robotic bin packing problems. *The International Journal of Robotics Research*. 2023;0(0). doi:10.1177/02783649231193048 \\
+> Kagerer F, Beinhofer M, Stricker S, Nüchter A. BED-BPP: Benchmarking dataset for robotic bin packing problems. The International Journal of Robotics Research. 2023;42(11):1007-1014. doi:10.1177/02783649231193048 \\
 > <a href="https://floriankagerer.github.io/assets/publications/Kagereretal2023-ijrr.bib" target="_blank">[BibTeX]</a>
 <a href="https://doi.org/10.1177/02783649231193048" target="_blank">[DOI]</a>
 >

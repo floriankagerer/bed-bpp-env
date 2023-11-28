@@ -164,7 +164,7 @@ def __addGround(size:tuple=(500, 500, 1), target:str="euro-pallet") -> None:
     color = (1, 1, 1, 1)#color = (0, 0.0684781, 0.278894, 1)
     bsdf.inputs["Base Color"].default_value = color
     bsdf.inputs["Alpha"].default_value = 1
-    bsdf.inputs["Emission"].default_value = (1,1,1,1)
+    bsdf.inputs["Emission Color"].default_value = (1,1,1,1)
 
     bottomMaterial.diffuse_color = color
     ob = bpy.context.active_object

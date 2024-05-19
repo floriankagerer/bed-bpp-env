@@ -9,7 +9,7 @@ class LC:
     """
 
     def __init__(self, props: dict) -> None:
-        self.__ID = props["cont_id"]
+        self._id = props["cont_id"]
         """The id of the object."""
 
         self.__SKU = props.get("sku", "")
@@ -35,11 +35,16 @@ class LC:
         }
         """The position of the load carrier on a target."""
 
+    @property
+    def id(self) -> str:
+        """The id of the object."""
+        return self._id
+
     def getProperties(self) -> dict:
         """Returns the properties of the load carrier as dictionary."""
         length, width, height = self.getDimensions()
         lcProps = {
-            "cont_id": self.getID(),
+            "cont_id": self.id,
             "sku": self.getSKU(),
             "lc_type": self.getLCType(),
             "length": length,
@@ -53,10 +58,6 @@ class LC:
     def getLCType(self) -> str:
         """Returns the load carrier type."""
         return self.__LCType
-
-    def getID(self) -> str:
-        """Returns the load carrier's ID number."""
-        return self.__ID
 
     def getHeight(self) -> int:
         """Returns the height of the load carrier."""

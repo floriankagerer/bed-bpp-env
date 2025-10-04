@@ -27,7 +27,6 @@ import json
 import logging
 from heuristics import LowestArea
 import environment.PalletizingEnvironment, environment.LC
-import wrappers
 import subprocess
 
 logger = logging.getLogger(__name__)
@@ -36,6 +35,9 @@ logger = logging.getLogger(__name__)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
+    from bed_bpp_env.wrappers.equally_distributed_reward_wrapper import EquallyDistributedRewardWrapper
+    from bed_bpp_env.wrappers.rescale_wrapper import RescaleWrapper
+
     logger.info(f"given arguments: {utils.PARSEDARGUMENTS}")
     logger.info(f"the results are stored in {utils.OUTPUTDIRECTORY}")
 
@@ -48,8 +50,8 @@ if __name__ == "__main__":
 
     # USE IMPLEMENTED WRAPPERS
     base_env = environment.PalletizingEnvironment()
-    env = wrappers.RescaleWrapper(base_env)  # base_env = env.env
-    env = wrappers.EquallyDistributedReward(env)
+    env = RescaleWrapper(base_env)  # base_env = env.env
+    env = EquallyDistributedRewardWrapper(env)
 
     observation, info = env.reset(data_for_episodes=ORDERS_FOR_EPISODES)
 

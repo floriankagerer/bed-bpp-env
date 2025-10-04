@@ -10,7 +10,7 @@ import utils
 VISUALIZE_REWARD_DISTRIBUTION = utils.PARSEDARGUMENTS.get("vis_debug", False)
 
 
-class EquallyDistributedReward(gym.Wrapper):
+class EquallyDistributedRewardWrapper(gym.Wrapper):
     """
     This wrapper creates an environment that distributes equally the reward in each `step`.
 

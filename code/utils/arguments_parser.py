@@ -1,31 +1,34 @@
-'''
-This file contains argument parsing methods.  
-'''
+"""
+This file contains argument parsing methods.
+"""
+
 import logging
 import argparse
 import utils
+
 parser = argparse.ArgumentParser(description=__doc__, fromfile_prefix_chars="@")
 
 __logger = logging.getLogger(__name__)
 
 parsedArguments = {}
-'''A dictionary that contains the parsed arguments'''
+"""A dictionary that contains the parsed arguments"""
 
-def addGroupToParser(title, description = ""):
-    '''
-    Adds a group to the global parser.  
+
+def addGroupToParser(title, description=""):
+    """
+    Adds a group to the global parser.
 
     Parameters.
     -----------
-    title: str  
-        The title of the group  
-    description: str (default: "")  
-        The description of the added group.  
-    
+    title: str
+        The title of the group
+    description: str (default: "")
+        The description of the added group.
+
     Returns.
     --------
-    Returns a handle.  
-    '''
+    Returns a handle.
+    """
     return parser.add_argument_group(title, description)
 
 
@@ -39,7 +42,7 @@ def parse():
 
     givenTask = parsedArguments.get("task", "None")
     # format the task in a general format, namely O3DBP-k-s
-    if not(givenTask == "None"):
+    if not (givenTask == "None"):
         taskComponents = givenTask.split("-")
         while len(taskComponents) < 3:
             taskComponents.append(1)
@@ -52,18 +55,20 @@ def parse():
         utils.updateUsedConfigurationFile()
 
     __logger.info(f"parsed the arguments {parsedArguments}")
-    
+
     return parsedArguments
 
 
-def changeLoggingBasicConfiguration(lowestlevel:int = logging.debug) -> None:
-    '''Changes the basic configuration of the `logging` module.'''
+def changeLoggingBasicConfiguration(lowestlevel: int = logging.debug) -> None:
+    """Changes the basic configuration of the `logging` module."""
     from utils.configuration import LOGGING_FILE as loggingfile
-    logging.basicConfig(level=lowestlevel, 
-                        format="%(asctime)s %(name)s %(levelname)s | %(message)s", 
-                        handlers=[logging.FileHandler(loggingfile), logging.StreamHandler()])
+
+    logging.basicConfig(
+        level=lowestlevel,
+        format="%(asctime)s %(name)s %(levelname)s | %(message)s",
+        handlers=[logging.FileHandler(loggingfile), logging.StreamHandler()],
+    )
 
     # set the levels that the logs are not polluted
     logging.getLogger("matplotlib").setLevel(logging.WARN)
-    logging.getLogger('PIL').setLevel(logging.WARN)
-
+    logging.getLogger("PIL").setLevel(logging.WARN)

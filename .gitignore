@@ -4,7 +4,7 @@
 __pycache__/
 output/
 .ipynb_checkpoints/
-.vscode/
+# .vscode/
 .gradle/
 .DS_Store
 

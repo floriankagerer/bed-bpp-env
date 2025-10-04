@@ -10,8 +10,8 @@ import cv2
 import environment
 import evaluation
 import json
-import gym
-from gym.spaces import Discrete, Dict, Box
+import gymnasium as gym
+from gymnasium.spaces import Discrete, Dict, Box
 import logging
 import numpy as np
 import PIL

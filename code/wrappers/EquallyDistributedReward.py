@@ -1,7 +1,7 @@
 '''
 This wrapper distribtues the reward equally in each call of `step`.  
 '''
-import gym
+import gymnasium as gym
 import matplotlib.pyplot as plt
 import numpy as np
 import utils

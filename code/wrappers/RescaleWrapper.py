@@ -8,7 +8,7 @@ This wrapper rescales a gym PalletizingEnvironment. For given divisors of the or
 
 are rescaled. This wrapper changes the `reset` and the `step` method of the original environment.
 '''
-import gym
+import gymnasium as gym
 import numpy as np
 
 class RescaleWrapper(gym.Wrapper):

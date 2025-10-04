@@ -1,11 +1,13 @@
-'''
+"""
 This module loads the configurations as given in `bed-bpp_env.conf` (`ENTIRECONFIG`), creates an output folder where all simulation results are stored (`OUTPUTDIR`), and defines the configuration of the `logging` module. In order to make the simulations reproducable, the loaded configuration file is copied to the generated output folder.
 
 Note.
 -----
 Access the variables via the module `utils`.
-'''
+"""
+
 import logging
+
 __logger = logging.getLogger(__name__)
 import pathlib
 import configparser
@@ -20,11 +22,11 @@ fnameLogging = "logs.log"
 
 # create the path to the configuration file
 dirFile = pathlib.Path(__file__).parent.resolve()
-dirConfigFile = dirFile.parent.resolve() # go one level/folder up
+dirConfigFile = dirFile.parent.resolve()  # go one level/folder up
 configFile = pathlib.Path.joinpath(dirConfigFile, fnameConfiguration)
 
 # create the outputfolder
-dirOutput = dirFile.parents[1].resolve() # go two levels up
+dirOutput = dirFile.parents[1].resolve()  # go two levels up
 dirOutput = pathlib.Path.joinpath(dirOutput, f"output/{datetime.datetime.now().strftime('%Y-%m-%d')}")
 OUTPUTDIR = pathlib.Path.joinpath(dirOutput, currentOutputfname)
 OUTPUTDIR.mkdir(parents=True, exist_ok=True)

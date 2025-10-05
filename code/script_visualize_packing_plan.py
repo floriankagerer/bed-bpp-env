@@ -29,14 +29,14 @@ utils.arguments_parser.parse()
 
 import json
 import pathlib
-import visualization.PalletizingEnvironmentVisualization
-from visualization import Video
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
     from bed_bpp_env.environment.lc import LC
+    from bed_bpp_env.visualization.palletizing_environment_visualization import PalletizingEnvironmentVisualization
+    from bed_bpp_env.visualization.video import Video
 
     # prepare
     packingPlan = pathlib.Path(utils.PARSEDARGUMENTS.get("packing_plan"))
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     # simulate
     for orderID, actions in PACKING_PLAN.items():
         target = SRC_ORDER[orderID]["properties"]["target"]
-        vis = visualization.PalletizingEnvironmentVisualization(visID=orderID, target=target, algo=algoName)
+        vis = PalletizingEnvironmentVisualization(visID=orderID, target=target, algo=algoName)
         vis.setDisplayTime(1)
 
         for i, action in enumerate(actions):

@@ -25,7 +25,6 @@ utils.arguments_parser.parse()
 
 import json
 import logging
-from heuristics import LowestArea
 import subprocess
 
 logger = logging.getLogger(__name__)
@@ -35,6 +34,7 @@ logger = logging.getLogger(__name__)
 
 if __name__ == "__main__":
     from bed_bpp_env.environment.palletizing_environment import PalletizingEnvironment
+    from bed_bpp_env.heuristics.lowest_area import LowestArea
     from bed_bpp_env.wrappers.equally_distributed_reward_wrapper import EquallyDistributedRewardWrapper
     from bed_bpp_env.wrappers.rescale_wrapper import RescaleWrapper
 

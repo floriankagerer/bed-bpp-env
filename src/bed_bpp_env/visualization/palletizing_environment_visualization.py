@@ -6,9 +6,11 @@ import logging
 import cv2
 import os
 import vtk
+from bed_bpp_env.visualization import COLOR_DATABASE
 import utils
 from bed_bpp_env.environment.lc import LC
-import visualization
+from bed_bpp_env.visualization.visualization import Visualization
+
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +18,7 @@ WALL_HEIGHT = 2020
 """The height of the stacking wall that is added to the scene and after setting the zoom of the camera removed immediately."""
 
 
-class PalletizingEnvironmentVisualization(visualization.Visualization):
+class PalletizingEnvironmentVisualization(Visualization):
     """
     This class visualizes the palletization of items. Items can be added to the visualization with the method `addLoadCarrier(item)`. The item must be an instance of `LC`.
 
@@ -68,7 +70,7 @@ class PalletizingEnvironmentVisualization(visualization.Visualization):
         self.__Actors = {"text": {}, "lcs": []}
         """Contains all actors, i.e., all elements that are visualized in the scene. Possible keys are `text` and `lcs`."""
 
-        self.__DBItemColors = visualization.COLOR_DATABASE.get(self.__VisID)
+        self.__DBItemColors = COLOR_DATABASE.get(self.__VisID)
         """The available database for the item colors of a given order."""
 
         self.__initScene(target)

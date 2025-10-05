@@ -6,7 +6,7 @@ import cv2
 import logging
 import os
 import pathlib
-import visualization
+from bed_bpp_env.visualization import OUTPUTDIRECTORY
 
 logger = logging.getLogger(__name__)
 
@@ -31,7 +31,7 @@ class Video:
     def __init__(self, filename: str = "video.mp4") -> None:
         self.__Filename = filename
         """The filename of the video."""
-        self.__Outputfolder = visualization.OUTPUTDIRECTORY
+        self.__Outputfolder = OUTPUTDIRECTORY
         """The folder in which the video is stored."""
 
     def makeVideo(self, listOfImages) -> None:

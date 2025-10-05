@@ -21,7 +21,7 @@ import numpy as np
 import PIL
 from PIL import Image, ImageDraw, ImageFont
 import platform
-from visualization import PalletizingEnvironmentVisualization as EnvironmentVisualization
+from bed_bpp_env.visualization.palletizing_environment_visualization import PalletizingEnvironmentVisualization
 
 logger = logging.getLogger(__name__)
 
@@ -272,7 +272,9 @@ class PalletizingEnvironment(gym.Env):
         )
 
         del self.__Visualization
-        self.__Visualization = EnvironmentVisualization(visID=self.__CurrentOrder["key"], target=palletizingTarget)
+        self.__Visualization = PalletizingEnvironmentVisualization(
+            visID=self.__CurrentOrder["key"], target=palletizingTarget
+        )
 
         self.__TargetSpace.reset(self.__Size)
         self.__Actions = []

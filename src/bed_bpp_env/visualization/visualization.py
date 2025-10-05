@@ -6,7 +6,7 @@ import cv2
 import json
 import pathlib
 import utils
-import visualization
+from bed_bpp_env.visualization import OUTPUTDIRECTORY
 import vtk
 
 
@@ -76,7 +76,7 @@ class Visualization:
         self.__DISPLAYTIME = 50  # 150 or 300
         """The time in [ms] to display the visualization."""
 
-        self.__OutputFolder = visualization.OUTPUTDIRECTORY
+        self.__OutputFolder = OUTPUTDIRECTORY
         """The directory in which the images are stored."""
 
         self.__Interactive = False

@@ -32,13 +32,15 @@ import logging
 
 logger = logging.getLogger(__name__)
 from heuristics import O3DBP_3_2
-import environment.PalletizingEnvironment, environment.LC, environment.SimPalEnv
 import subprocess
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
+    from bed_bpp_env.environment.palletizing_environment import PalletizingEnvironment
+    from bed_bpp_env.environment.sim_pal_env import SimPalEnv
+
     logger.info(f"given arguments: {utils.PARSEDARGUMENTS}")
     logger.info(f"the results are stored in {utils.OUTPUTDIRECTORY}")
 
@@ -51,9 +53,9 @@ if __name__ == "__main__":
         ORDERS_FOR_EPISODES = json.load(f, parse_int=False)
 
     # setup a simulation palletizing environment
-    env = environment.PalletizingEnvironment()
+    env = PalletizingEnvironment()
     observation, info = env.reset(data_for_episodes=ORDERS_FOR_EPISODES)
-    simenv = environment.SimPalEnv()
+    simenv = SimPalEnv()
     _, _ = simenv.reset(data_for_episodes=ORDERS_FOR_EPISODES)
     heuristic.setSimEnv(simenv)
 

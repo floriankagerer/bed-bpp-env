@@ -3,7 +3,7 @@ This heuristic demonstrates the task O3DBP-3-2, i.e., it can choose one of the t
 """
 
 import copy
-import environment.SimPalEnv
+from bed_bpp_env.environment.sim_pal_env import SimPalEnv
 import logging
 import numpy as np
 from typing import Tuple
@@ -41,7 +41,7 @@ class O3DBP_3_2:
         The amount of items that are selectable for the next palletizing step.
     __SCORE_WEIGHTS: list
         The weights that are used to determine the score of an action.
-    __SimEnvironment: "environment.SimPalEnv"
+    __SimEnvironment: SimPalEnv
         A deepcopy of the palletizing environment for which an action is determined. This deepcopy is needed for estimating the scores of the possible actions.
     """
 
@@ -62,14 +62,14 @@ class O3DBP_3_2:
         self.FUNC_VECTORSCOREEVAL = np.vectorize(self.multiplyWeightScore, excluded=[1], signature="(n)->()")
         """Vectorized function to make the dot product of weights and components of score."""
 
-    def setSimEnv(self, environment: "environment.SimPalEnv") -> None:
+    def setSimEnv(self, environment: SimPalEnv) -> None:
         """
         Sets an environment that is needed for simulations when having preview or selection.
 
         Parameters.
         -----------
-        environment: `environment.SimPalEnv`
-            Identical to the current state of `environment.PalletizingEnvironment`, but without any render methods. These were removed because these methods could not be pickled, which is needed when using `multiprocessing`.
+        environment: SimPalEnv
+            Identical to the current state of PalletizingEnvironment, but without any render methods. These were removed because these methods could not be pickled, which is needed when using `multiprocessing`.
         """
         self.__SimEnvironment = environment
 
@@ -452,13 +452,13 @@ class O3DBP_3_2:
         gc.collect()
         return maxScoreAction
 
-    def mpStepSimulation(self, dcSimEnv: "environment.SimPalEnv", stepactions: list) -> dict:
+    def mpStepSimulation(self, dcSimEnv: SimPalEnv, stepactions: list) -> dict:
         """
         We make the steps that are given. After doing these actions, we return a dictionary that holds the information about each step.
 
         Parameters.
         -----------
-        dcSimEnv: `environment.SimPalEnv`
+        dcSimEnv: SimPalEnv
             A deepcopy of the template self.__SimEnvironment.
         stepactions: list
             All step actions that are required to create the actual state of the environment, starting from the stored template state.

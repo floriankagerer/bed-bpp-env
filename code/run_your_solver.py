@@ -32,7 +32,6 @@ import numpy as np
 import logging
 
 logger = logging.getLogger(__name__)
-import environment.PalletizingEnvironment
 import subprocess
 
 # # # # # # # # # # # # #
@@ -44,6 +43,8 @@ from solver import your_solver
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
+    from bed_bpp_env.environment.palletizing_environment import PalletizingEnvironment
+
     logger.info(f"given arguments: {utils.PARSEDARGUMENTS}")
     logger.info(f"the results are stored in {utils.OUTPUTDIRECTORY}")
 
@@ -56,7 +57,7 @@ if __name__ == "__main__":
     with open(dirOutputfile) as f:
         ORDERS_FOR_EPISODES = json.load(f, parse_int=False)
 
-    env = environment.PalletizingEnvironment()
+    env = PalletizingEnvironment()
     observation, info = env.reset(data_for_episodes=ORDERS_FOR_EPISODES)
 
     # start simulation

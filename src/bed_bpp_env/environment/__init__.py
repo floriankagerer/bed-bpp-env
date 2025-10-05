@@ -13,12 +13,3 @@ MAXHEIGHT_TARGET = 2000  # mm
 
 MAXHEIGHT_OBSERVATION_SPACE = 2000  # mm
 """The maximum height of the observation space/target in millimeters."""
-
-from environment.HeightMap import HeightMap
-from environment.PalletizingEnvironment import PalletizingEnvironment
-from environment.LC import LC
-
-from environment.Space3D import Space3D
-from environment.Item3D import Item3D
-
-from environment.SimPalEnv import SimPalEnv

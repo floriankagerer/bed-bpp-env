@@ -1,12 +1,12 @@
 """
-Instances of this class represents cubic items that can be placed in a three-dimensional space, e.g., `environment.Space3D`.
+Instances of this class represents cubic items that can be placed in a three-dimensional space, e.g., `Space3D`.
 
 One essential assumption we made here is that the items are placed parallel to the edges of the target!
 """
 
 import logging
 import numpy as np
-from environment import HEIGHT_TOLERANCE_MM as HEIGHT_TOLERANCE_MM
+from bed_bpp_env.environment import HEIGHT_TOLERANCE_MM
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +16,7 @@ PROPERTIES_DEFAULT_VALUE = -1
 
 class Item3D:
     """
-    Instances of this class represents cubic items that can be placed in a three-dimensional space, e.g., `environment.Space3D`.
+    Instances of this class represents cubic items that can be placed in a three-dimensional space, e.g., `Space3D`.
 
     Parameters.
     -----------

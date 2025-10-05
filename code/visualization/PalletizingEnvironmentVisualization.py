@@ -7,7 +7,7 @@ import cv2
 import os
 import vtk
 import utils
-import environment
+from bed_bpp_env.environment.lc import LC
 import visualization
 
 logger = logging.getLogger(__name__)
@@ -18,7 +18,7 @@ WALL_HEIGHT = 2020
 
 class PalletizingEnvironmentVisualization(visualization.Visualization):
     """
-    This class visualizes the palletization of items. Items can be added to the visualization with the method `addLoadCarrier(item)`. The item must be an instance of `environment.LC`.
+    This class visualizes the palletization of items. Items can be added to the visualization with the method `addLoadCarrier(item)`. The item must be an instance of `LC`.
 
     In order to show the visualization, call `PalletizingEnvironmentVisualization.displayVisualization()`.
 
@@ -89,7 +89,7 @@ class PalletizingEnvironmentVisualization(visualization.Visualization):
         """Closes the visualization window."""
         cv2.destroyWindow(super().getWindowname())
 
-    def addLoadCarrier(self, item: "environment.LC") -> None:
+    def addLoadCarrier(self, item: LC) -> None:
         """Adds the given item to the renderer of the visualization."""
         # create the item actor for the visualization
         actor = vtk.vtkActor()

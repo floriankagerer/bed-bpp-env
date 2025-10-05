@@ -27,7 +27,6 @@ parser.add_argument(
 )
 utils.arguments_parser.parse()
 
-import environment.LC
 import json
 import pathlib
 import visualization.PalletizingEnvironmentVisualization
@@ -37,6 +36,8 @@ from visualization import Video
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
+    from bed_bpp_env.environment.lc import LC
+
     # prepare
     packingPlan = pathlib.Path(utils.PARSEDARGUMENTS.get("packing_plan"))
     orderData = pathlib.Path(utils.PARSEDARGUMENTS.get("data"))
@@ -67,7 +68,7 @@ if __name__ == "__main__":
             }
             lcTarget = {"area": "area", "x": flb[0], "y": flb[1], "z": flb[2]}
 
-            lc = environment.LC(lcProps)
+            lc = LC(lcProps)
             lc.setTargetposition(lcTarget)
 
             vis.addLoadCarrier(lc)

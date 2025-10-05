@@ -5,7 +5,7 @@ For the paper we used the following implementation of `O3DBP-3-2`.
 ### Source Code
 ```python
 import copy
-import environment.SimPalEnv
+import bed_bpp_env.environment.SimPalEnv
 import logging
 import numpy as np
 import os

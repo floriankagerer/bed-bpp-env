@@ -26,7 +26,6 @@ utils.arguments_parser.parse()
 import json
 import logging
 from heuristics import LowestArea
-import environment.PalletizingEnvironment, environment.LC
 import subprocess
 
 logger = logging.getLogger(__name__)
@@ -35,6 +34,7 @@ logger = logging.getLogger(__name__)
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
+    from bed_bpp_env.environment.palletizing_environment import PalletizingEnvironment
     from bed_bpp_env.wrappers.equally_distributed_reward_wrapper import EquallyDistributedRewardWrapper
     from bed_bpp_env.wrappers.rescale_wrapper import RescaleWrapper
 
@@ -49,7 +49,7 @@ if __name__ == "__main__":
         ORDERS_FOR_EPISODES = json.load(f, parse_int=False)
 
     # USE IMPLEMENTED WRAPPERS
-    base_env = environment.PalletizingEnvironment()
+    base_env = PalletizingEnvironment()
     env = RescaleWrapper(base_env)  # base_env = env.env
     env = EquallyDistributedRewardWrapper(env)
 

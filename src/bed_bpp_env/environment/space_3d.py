@@ -2,12 +2,13 @@
 This module contains a class that represents a virtual, three-dimensional space.
 """
 
-import environment
-from environment import HEIGHT_TOLERANCE_MM as HEIGHT_TOLERANCE_MM
+from bed_bpp_env.environment import HEIGHT_TOLERANCE_MM as HEIGHT_TOLERANCE_MM
 import numpy as np
 import logging
+from bed_bpp_env.environment.item_3d import Item3D
 import utils
 from typing import List
+
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +31,7 @@ class Space3D:
     __Heights: np.ndarray
         'This `np.ndarray` has the shape of the palletizing target and stores the height in each position in millimeters.
     __PlacedItems: dict
-        This dictionary's keys are the chronological order of the placed items and its values are the items as `"environment.Item3D"` object.
+        This dictionary's keys are the chronological order of the placed items and its values are the items as `Item3D` object.
     __Size: tuple
        The space's size of the base area in x- and y-direction given in millimeters.
     __UppermostItems:  np.ndarray
@@ -42,7 +43,7 @@ class Space3D:
         """The space's size of the base area in x- and y-direction given in millimeters."""
 
         self.__PlacedItems = {}
-        """This dictionary's keys are the chronological order of the placed items and its values are the items as `"environment.Item3D"` object."""
+        """This dictionary's keys are the chronological order of the placed items and its values are the items as `Item3D` object."""
 
         targetShape = self.__Size[1], self.__Size[0]
         self.__Heights = np.zeros(targetShape, dtype=int)
@@ -51,17 +52,17 @@ class Space3D:
         self.__UppermostItems = np.zeros(targetShape, dtype=int)
         """This `np.ndarray` has the same shape as the height map of the three-dimensional space and stores a counter that represents the counter of the uppermost item."""
 
-    def getPlacedItems(self) -> List["environment.Item3D"]:
-        """Returns all placed items as list of "environment.Item3D"."""
+    def getPlacedItems(self) -> list[Item3D]:
+        """Returns all placed items as list of `Item3D`."""
         return list(self.__PlacedItems.values())
 
-    def addItem(self, item: "environment.Item3D", orientation: int, flbcoordinates: list) -> None:
+    def addItem(self, item: Item3D, orientation: int, flbcoordinates: list) -> None:
         """
         Adds an item to the virtual three-dimensional space and calculates the required attributes for the stability check evaluation.
 
         Parameters.
         -----------
-        item: "environment.Item3D"
+        item: Item3D
             The item that is added to the space.
         orientation: int
             The orientation of the item.
@@ -196,7 +197,7 @@ class Space3D:
 
         return maxTargetHeight
 
-    def __identifyNeighbors(self, item: "environment.Item3D", possibleneighbors: list) -> None:
+    def __identifyNeighbors(self, item: Item3D, possibleneighbors: list) -> None:
         """
         Identifies the neighbors of the given item and stores the neighbors of item in the object.
 
@@ -208,9 +209,9 @@ class Space3D:
 
         Parameters.
         -----------
-        item: "environment.Item3D"
+        item: Item3D
             The item for which the neighbors are identified.
-        possibleneighbors: list (of "environment.Item3D" objects)
+        possibleneighbors: list (of Item3D objects)
             Items that could be neighbors of item.
         """
         EDGES_TO_COMPARE = {0: ["north", "south"], 1: ["east", "west"], 2: ["south", "north"], 3: ["west", "east"]}
@@ -319,7 +320,7 @@ class Space3D:
             The corner points for an item that has the given dimension.
         """
 
-        def __getEndpointYthenX(item: "environment.Item3D") -> tuple:
+        def __getEndpointYthenX(item: Item3D) -> tuple:
             """Returns the endpoint of the item as (y, x)."""
             xCoordinate, yCoordinate, _ = item.getFLBCoordinates()
             deltaY, deltaX = item.getRepresentation().shape

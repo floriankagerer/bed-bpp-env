@@ -8,11 +8,10 @@ import utils
 import argparse
 import json
 import pathlib
-import environment
 import logging
 import torch
 from tqdm import tqdm
-
+from bed_bpp_env.environment import MAXHEIGHT_TARGET, SIZE_EURO_PALLET, SIZE_ROLLCONTAINER
 
 logger = logging.getLogger(__name__)
 loggingfile = utils.OUTPUTDIRECTORY.joinpath("torchconverter_logs.log")
@@ -60,12 +59,12 @@ def convertJSONDataToEvaluationPKL(src_order: pathlib.Path) -> None:
 
         target = values["properties"]["target"]
         if target == "rollcontainer" and not (f"{target}/cmxcmxcm" in targetSizes.keys()):
-            targetSizes[f"{target}/cmxcmxcm"] = [int(size / 10) for size in environment.SIZE_ROLLCONTAINER] + [
-                int(environment.MAXHEIGHT_TARGET / 10)
+            targetSizes[f"{target}/cmxcmxcm"] = [int(size / 10) for size in SIZE_ROLLCONTAINER] + [
+                int(MAXHEIGHT_TARGET / 10)
             ]
         elif target == "euro-pallet" and not (f"{target}/cmxcmxcm" in targetSizes.keys()):
-            targetSizes[f"{target}/cmxcmxcm"] = [int(size / 10) for size in environment.SIZE_EURO_PALLET] + [
-                int(environment.MAXHEIGHT_TARGET / 10)
+            targetSizes[f"{target}/cmxcmxcm"] = [int(size / 10) for size in SIZE_EURO_PALLET] + [
+                int(MAXHEIGHT_TARGET / 10)
             ]
 
         # append the converted order

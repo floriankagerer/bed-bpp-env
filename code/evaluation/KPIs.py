@@ -2,7 +2,7 @@
 This module gathers the KPIs in a single class.
 """
 
-import environment
+from bed_bpp_env.environment.space_3d import Space3D
 import numpy as np
 import statistics
 
@@ -81,7 +81,7 @@ class KPIs:
 
         return kpisString
 
-    def reset(self, targetspace: "environment.Space3D", order: dict) -> None:
+    def reset(self, targetspace: Space3D, order: dict) -> None:
         self.__DataSources["target"] = targetspace
         self.__DataSources["order"] = order
 

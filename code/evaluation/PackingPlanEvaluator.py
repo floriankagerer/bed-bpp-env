@@ -3,7 +3,8 @@ This module contains a packing plan evaluator class.
 """
 
 import ast
-import environment
+from bed_bpp_env.environment.item_3d import Item3D
+from bed_bpp_env.environment.space_3d import Space3D
 import evaluation
 from evaluation import EVALOUTPUTDIR, KPI_DEFINITION
 import logging
@@ -36,7 +37,7 @@ class PackingPlanEvaluator:
         The ID of the order for which the currently investigated packing plan was created.
     __PackingPlan: list
         The packing plan that is currently investigated. It is a list of actions.
-    __TargetSpace: "environment.Space3D"
+    __TargetSpace: Space3D
         The target that represents the rebuilt packing plan.
     """
 
@@ -51,7 +52,7 @@ class PackingPlanEvaluator:
         """The packing plan that is currently investigated. It is a list of actions."""
         self.__KPIs = evaluation.KPIs()
         """An instance of this class is responsible for the calculation of the KPIs. It is coupled with the target space."""
-        self.__TargetSpace = environment.Space3D()
+        self.__TargetSpace = Space3D()
         """The target that represents the rebuilt packing plan."""
 
     def evalStability(self) -> Literal[0, 1]:
@@ -287,7 +288,7 @@ class PackingPlanEvaluator:
         self.__KPIs.reset(self.__TargetSpace, {"order": self.__Order})
 
         for action in self.__PackingPlan:
-            item = environment.Item3D(action["item"])
+            item = Item3D(action["item"])
             item.setOrientation(action["orientation"])
             flbCoordinates = [int(coord) for coord in action["flb_coordinates"]]
             self.__TargetSpace.addItem(item, action["orientation"], flbCoordinates)

@@ -31,7 +31,7 @@ import json
 import logging
 
 logger = logging.getLogger(__name__)
-from heuristics import O3DBP_3_2
+
 import subprocess
 
 
@@ -40,6 +40,7 @@ import subprocess
 if __name__ == "__main__":
     from bed_bpp_env.environment.palletizing_environment import PalletizingEnvironment
     from bed_bpp_env.environment.sim_pal_env import SimPalEnv
+    from bed_bpp_env.heuristics.o3dbp_3_2 import O3DBP_3_2
 
     logger.info(f"given arguments: {utils.PARSEDARGUMENTS}")
     logger.info(f"the results are stored in {utils.OUTPUTDIRECTORY}")

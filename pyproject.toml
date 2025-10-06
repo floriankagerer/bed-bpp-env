@@ -29,6 +29,11 @@ test = [
 [tool.poetry]
 package-mode = false
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-v"
+
 [tool.ruff]
 line-length = 120
 

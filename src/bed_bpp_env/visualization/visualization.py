@@ -2,12 +2,14 @@
 This module contains the class `Visualization`, which is the base class of many other visualization classes. It contains essential methods that the different inherited visualization classes need.
 """
 
-import cv2
 import json
 import pathlib
+
+import cv2
+import vtk
+
 import bed_bpp_env.utils as utils
 from bed_bpp_env.visualization import OUTPUTDIRECTORY
-import vtk
 
 
 class Visualization:

@@ -9,7 +9,6 @@ from bed_bpp_env.utils import OUTPUTDIRECTORY as UTILS_OUTPUTDIRECTORY
 from bed_bpp_env.utils import PARSEDARGUMENTS
 from bed_bpp_env.visualization.colors import generate_color_database
 
-
 OUTPUTDIRECTORY = pathlib.Path.joinpath(UTILS_OUTPUTDIRECTORY, "vis")
 OUTPUTDIRECTORY.mkdir(parents=True, exist_ok=True)
 

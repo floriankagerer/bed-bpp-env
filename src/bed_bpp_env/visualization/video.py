@@ -2,10 +2,12 @@
 This module creates .mp4 videos from list of images.
 """
 
-import cv2
 import logging
 import os
 import pathlib
+
+import cv2
+
 from bed_bpp_env.visualization import OUTPUTDIRECTORY
 
 logger = logging.getLogger(__name__)

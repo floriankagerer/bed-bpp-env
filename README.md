@@ -12,6 +12,10 @@
 
 </div>
 
+>
+> ℹ️ To take a look at the actual paper implementation, please use the branch 
+> [paper-implementation](https://github.com/floriankagerer/bed-bpp-env/tree/paper-implementation).
+>
 
 <!-- -------------------------------------------------------------- -->
 ## <div align="center">Paper Accepted</div>
@@ -30,6 +34,9 @@ Whenever you use the dataset, please cite our publication:
 
 <!-- -------------------------------------------------------------- -->
 ## <div align="center">Getting Started</div>
+
+### <div align="center"> 🚧 Work in progress 🚧</div>
+
 
 Please find below the instructions on how to setup and use the code in this repository.
 

@@ -5,31 +5,31 @@ Depending on the task, e.g., `"O3DBP-k-s"`, the dictionary that contains additio
 """
 
 import configparser
-from typing import Tuple
-import pathlib
-import cv2
-from bed_bpp_env.environment import MAXHEIGHT_OBSERVATION_SPACE, SIZE_EURO_PALLET, SIZE_ROLLCONTAINER
-from bed_bpp_env.environment.lc import LC
-from bed_bpp_env.environment.item_3d import Item3D
-from bed_bpp_env.environment.space_3d import Space3D
-from bed_bpp_env.evaluation.kpis import KPIs
 import json
-import gymnasium as gym
-from gymnasium.spaces import Discrete, Dict, Box
 import logging
+import pathlib
+import platform
+from typing import Tuple
+
+import cv2
+import gymnasium as gym
 import numpy as np
 import PIL
+from gymnasium.spaces import Box, Dict, Discrete
 from PIL import Image, ImageDraw, ImageFont
-import platform
-from bed_bpp_env.visualization.palletizing_environment_visualization import PalletizingEnvironmentVisualization
 
-logger = logging.getLogger(__name__)
-
-
+from bed_bpp_env.environment import MAXHEIGHT_OBSERVATION_SPACE, SIZE_EURO_PALLET, SIZE_ROLLCONTAINER
+from bed_bpp_env.environment.item_3d import Item3D
+from bed_bpp_env.environment.lc import LC
+from bed_bpp_env.environment.space_3d import Space3D
+from bed_bpp_env.evaluation.kpis import KPIs
 from bed_bpp_env.utils import OUTPUTDIRECTORY, PARSEDARGUMENTS
 from bed_bpp_env.utils.configuration import USEDCONFIGURATIONFILE
+from bed_bpp_env.visualization.palletizing_environment_visualization import PalletizingEnvironmentVisualization
 
 RENDER = PARSEDARGUMENTS.get("visualize", False)
+
+logger = logging.getLogger(__name__)
 
 conf = configparser.ConfigParser()
 conf.read(USEDCONFIGURATIONFILE)

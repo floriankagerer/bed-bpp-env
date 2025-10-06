@@ -5,7 +5,9 @@ One essential assumption we made here is that the items are placed parallel to t
 """
 
 import logging
+
 import numpy as np
+
 from bed_bpp_env.environment import HEIGHT_TOLERANCE_MM
 
 logger = logging.getLogger(__name__)

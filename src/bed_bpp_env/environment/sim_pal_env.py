@@ -3,19 +3,18 @@ Similar to `PalletizingEnvironment`, but with little changes for the tasks with 
 """
 
 import configparser
+import copy
+import logging
 from typing import Tuple
-import pathlib
+
+import gymnasium as gym
+import numpy as np
+from gymnasium.spaces import Box, Dict, Discrete
+
 from bed_bpp_env.environment import MAXHEIGHT_OBSERVATION_SPACE, SIZE_EURO_PALLET, SIZE_ROLLCONTAINER
 from bed_bpp_env.environment.item_3d import Item3D
 from bed_bpp_env.environment.space_3d import Space3D
 from bed_bpp_env.evaluation.kpis import KPIs
-import json
-import gymnasium as gym
-from gymnasium.spaces import Discrete, Dict, Box
-import logging
-import numpy as np
-import copy
-
 
 logger = logging.getLogger(__name__)
 

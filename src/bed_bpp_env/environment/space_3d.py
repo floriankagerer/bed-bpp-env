@@ -2,12 +2,12 @@
 This module contains a class that represents a virtual, three-dimensional space.
 """
 
-from bed_bpp_env.environment import HEIGHT_TOLERANCE_MM as HEIGHT_TOLERANCE_MM
-import numpy as np
 import logging
-from bed_bpp_env.environment.item_3d import Item3D
-from typing import List
 
+import numpy as np
+
+from bed_bpp_env.environment import HEIGHT_TOLERANCE_MM as HEIGHT_TOLERANCE_MM
+from bed_bpp_env.environment.item_3d import Item3D
 
 logger = logging.getLogger(__name__)
 

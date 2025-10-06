@@ -2,9 +2,10 @@
 Convenience class for representing the height of a Space3D.
 """
 
+import logging
+
 import matplotlib.pyplot as plt
 import numpy as np
-import logging
 
 logger = logging.getLogger(__name__)
 

@@ -59,17 +59,22 @@ if __name__ == "__main__":
 
         for i, action in enumerate(actions):
             item, flb, orientation = action["item"], action["flb_coordinates"], action["orientation"]
-            lcProps = {
-                "cont_id": item["id"],
-                "length": item["length/mm"] if orientation == 0 else item["width/mm"],
-                "width": item["width/mm"] if orientation == 0 else item["length/mm"],
-                "height": item["height/mm"],
-                "sku": item["article"],
-            }
+
             lcTarget = {"area": "area", "x": flb[0], "y": flb[1], "z": flb[2]}
 
-            lc = LC(lcProps)
-            lc.setTargetposition(lcTarget)
+            length = item["length/mm"] if orientation == 0 else item["width/mm"]
+            width = item["width/mm"] if orientation == 0 else item["length/mm"]
+
+            lc = LC(
+                id=item["id"],
+                sku=item["article"],
+                type=None,
+                length=length,
+                width=width,
+                height=item["height/mm"],
+                weight=None,
+                position=lcTarget,
+            )
 
             vis.addLoadCarrier(lc)
             vis.updateVisualization()

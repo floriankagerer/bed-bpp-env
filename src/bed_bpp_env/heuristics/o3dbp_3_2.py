@@ -3,13 +3,15 @@ This heuristic demonstrates the task O3DBP-3-2, i.e., it can choose one of the t
 """
 
 import copy
-from bed_bpp_env.environment.sim_pal_env import SimPalEnv
+import gc
 import logging
-import numpy as np
-from typing import Tuple
 import multiprocessing
 import time
-import gc
+from typing import Tuple
+
+import numpy as np
+
+from bed_bpp_env.environment.sim_pal_env import SimPalEnv
 
 logger = logging.getLogger(__name__)
 

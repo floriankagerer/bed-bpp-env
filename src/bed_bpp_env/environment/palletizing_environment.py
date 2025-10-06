@@ -690,26 +690,26 @@ class PalletizingEnvironment(gym.Env):
         flbcoordinates = action["flb_coordinates"]
         orientation = action["orientation"]
         if orientation == 0:
-            lcProps = {
-                "cont_id": item["id"],
-                "length": item["length/mm"],
-                "width": item["width/mm"],
-                "height": item["height/mm"],
-                "sku": item["article"],
-            }
+            length = item["length/mm"]
+            width = item["width/mm"]
+
         elif orientation == 1:
-            lcProps = {
-                "cont_id": item["id"],
-                "length": item["width/mm"],
-                "width": item["length/mm"],
-                "height": item["height/mm"],
-                "sku": item["article"],
-            }
+            length = item["width/mm"]
+            width = item["length/mm"]
 
         lcTarget = {"area": "area", "x": flbcoordinates[0], "y": flbcoordinates[1], "z": flbcoordinates[2]}
 
-        lc = LC(lcProps)
-        lc.setTargetposition(lcTarget)
+        lc = LC(
+            id=item["id"],
+            sku=item["article"],
+            type=None,
+            length=length,
+            width=width,
+            height=item["height/mm"],
+            weight=None,
+            position=lcTarget,
+        )
+
         self.__Visualization.addLoadCarrier(lc)
         self.__Visualization.updateVisualization()
 

@@ -95,12 +95,12 @@ class PalletizingEnvironmentVisualization(Visualization):
         """Adds the given item to the renderer of the visualization."""
         # create the item actor for the visualization
         actor = vtk.vtkActor()
-        lccolor = self.__DBItemColors.get(item.getSKU(), "NOT_IN_DB")
+        lccolor = self.__DBItemColors.get(item.sku, "NOT_IN_DB")
         actor.GetProperty().SetColor(self.Colors.GetColor3d(lccolor))
         actor.SetMapper(super().getMapper())
         size = item.getDimensions()
         actor.SetScale(size)
-        targetPosition = item.getTargetposition()
+        targetPosition = item.position.copy()
         actor.SetPosition([targetPosition["x"], targetPosition["y"], targetPosition["z"]])
         actor.GetProperty().EdgeVisibilityOn()
 

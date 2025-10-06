@@ -2,43 +2,42 @@
 This module provides a class which represents a virtual load carrier.
 """
 
+from dataclasses import dataclass
+from typing import Optional
 
-class LC:
+
+@dataclass
+class LC(object):
     """
     Objects of this class represent represent different load carriers.
     """
 
-    def __init__(self, props: dict) -> None:
-        self._id = props["cont_id"]
-        """The id of the object."""
+    id: str
+    """The id of the object."""
+    sku: str
+    """The SKU of the object."""
+    type: Optional[str]
+    """The type of the object."""
 
-        self.__SKU = props.get("sku", "")
-        """The SKU of the object."""
-        self.__LCType = props.get("lc_type", "None")
-        """The type of the object."""
+    length: int
+    """The object's length in millimeters."""
+    width: int
+    """The object's width in millimeters."""
+    height: int
+    """The object's height in millimeters."""
+    weight: Optional[float]
+    """The object's weight in kilogramm."""
 
-        self.__Length = int(props.get("length", 0))
-        """The object's length in millimeters."""
-        self.__Width = int(props.get("width", 0))
-        """The object's width in millimeters."""
-        self.__Height = int(props.get("height", 0))
-        """The object's height in millimeters."""
+    position: dict
+    """The position of the load carrier on a target."""
 
-        self.__Weight = props.get("weight", 0.0)
-        """The object's weight in kilogramm."""
-
-        self.__Targetposition = {
-            "area": None,
-            "x": 0,  # on target
-            "y": 0,  # on target
-            "z": 0,  # on target
-        }
-        """The position of the load carrier on a target."""
-
-    @property
-    def id(self) -> str:
-        """The id of the object."""
-        return self._id
+    # TODO(florian): Define dataclass for position
+    # self.__Targetposition = {
+    #     "area": None,
+    #     "x": 0,  # on target
+    #     "y": 0,  # on target
+    #     "z": 0,  # on target
+    # }
 
     def getProperties(self) -> dict:
         """Returns the properties of the load carrier as dictionary."""
@@ -57,23 +56,23 @@ class LC:
 
     def getLCType(self) -> str:
         """Returns the load carrier type."""
-        return self.__LCType
+        return self.type
 
     def getHeight(self) -> int:
         """Returns the height of the load carrier."""
-        return self.__Height
+        return self.height
 
     def getWeight(self) -> float:
         """Returns the weight of the load carrier."""
-        return self.__Weight
+        return self.weight
 
     def getSKU(self) -> str:
         """Returns the SKU of the load carrier."""
-        return self.__SKU
+        return self.sku
 
     def getDimensions(self) -> list:
         """Returns the length, width and height of the load carrier as a list."""
-        return [self.__Length, self.__Width, self.__Height].copy()
+        return [self.length, self.width, self.height].copy()
 
     def getTargetposition(self, coordinate=None):
         """
@@ -94,14 +93,14 @@ class LC:
         """
         if coordinate is None:
             # return a copy of the targetposition coordinates
-            return self.__Targetposition.copy()
+            return self.position.copy()
         else:
             # return the specified coordinate
-            return self.__Targetposition.copy()[coordinate]
+            return self.position.copy()[coordinate]
 
     def getVolume(self) -> float:
         """Calculates the volume of the LC in [mm^3] and returns it as float."""
-        return float(self.__Length * self.__Width * self.__Height)
+        return float(self.length * self.width * self.height)
 
     def setTargetposition(self, target: dict) -> None:
         """
@@ -112,7 +111,7 @@ class LC:
         target: dict
             The target position of the object, i.e., a dictionary with the keys 'area', 'x', 'y' and 'z'.
         """
-        self.__Targetposition["area"] = target["area"]
-        self.__Targetposition["x"] = target["x"]
-        self.__Targetposition["y"] = target["y"]
-        self.__Targetposition["z"] = target["z"]
+        self.position["area"] = target["area"]
+        self.position["x"] = target["x"]
+        self.position["y"] = target["y"]
+        self.position["z"] = target["z"]

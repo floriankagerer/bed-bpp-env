@@ -98,7 +98,7 @@ class PalletizingEnvironmentVisualization(Visualization):
         lccolor = self.__DBItemColors.get(item.sku, "NOT_IN_DB")
         actor.GetProperty().SetColor(self.Colors.GetColor3d(lccolor))
         actor.SetMapper(super().getMapper())
-        size = item.getDimensions()
+        size = list(item.dimensions)
         actor.SetScale(size)
         targetPosition = item.position.copy()
         actor.SetPosition([targetPosition["x"], targetPosition["y"], targetPosition["z"]])

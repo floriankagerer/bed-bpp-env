@@ -27,13 +27,13 @@ parser.add_argument(
 )
 utils.arguments_parser.parse()
 
-import json
-import pathlib
-
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
+    import json
+    import pathlib
+
     from bed_bpp_env.environment.lc import LC
     from bed_bpp_env.visualization.palletizing_environment_visualization import PalletizingEnvironmentVisualization
     from bed_bpp_env.visualization.video import Video

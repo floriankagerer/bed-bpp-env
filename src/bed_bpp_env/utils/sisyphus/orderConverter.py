@@ -7,8 +7,8 @@ This file can either be run as main with `python3 orderConverter.py --src_order 
 """
 
 import argparse
-import xml.etree.ElementTree as ET
 import json
+import xml.etree.ElementTree as ET
 
 TARGET_MAX_LOAD_HEIGHT = 3000
 TARGET_MAX_LOAD_WEIGHT = 166667

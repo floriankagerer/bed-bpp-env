@@ -5,6 +5,7 @@ This wrapper distribtues the reward equally in each call of `step`.
 import gymnasium as gym
 import matplotlib.pyplot as plt
 import numpy as np
+
 from bed_bpp_env.utils import PARSEDARGUMENTS
 
 VISUALIZE_REWARD_DISTRIBUTION = PARSEDARGUMENTS.get("vis_debug", False)

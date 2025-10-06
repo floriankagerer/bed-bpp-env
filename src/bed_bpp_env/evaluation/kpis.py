@@ -2,9 +2,11 @@
 This module gathers the KPIs in a single class.
 """
 
-from bed_bpp_env.environment.space_3d import Space3D
-import numpy as np
 import statistics
+
+import numpy as np
+
+from bed_bpp_env.environment.space_3d import Space3D
 
 
 class KPIs:

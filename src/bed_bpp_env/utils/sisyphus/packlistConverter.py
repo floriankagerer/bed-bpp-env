@@ -17,9 +17,9 @@ import ast
 import glob
 import json
 import pathlib
-import tqdm
 import xml.etree.ElementTree as ET
 
+import tqdm
 
 OUTPUT_FNAME = "sisyphus_output.json"
 """The file that contains the results of sisyphus in JSON format."""

@@ -3,15 +3,16 @@ This module contains a packing plan evaluator class.
 """
 
 import ast
-from bed_bpp_env.environment.item_3d import Item3D
-from bed_bpp_env.environment.space_3d import Space3D
-from bed_bpp_env.evaluation.kpis import KPIs
-from bed_bpp_env.evaluation import EVALOUTPUTDIR, FILE_KPI_DEFINITION, KPI_DEFINITION
 import logging
-import pandas as pd
 import shutil
 from typing import Literal
 
+import pandas as pd
+
+from bed_bpp_env.environment.item_3d import Item3D
+from bed_bpp_env.environment.space_3d import Space3D
+from bed_bpp_env.evaluation import EVALOUTPUTDIR, FILE_KPI_DEFINITION, KPI_DEFINITION
+from bed_bpp_env.evaluation.kpis import KPIs
 
 logger = logging.getLogger(__name__)
 

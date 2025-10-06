@@ -2,11 +2,13 @@
 This script generates for a given benchmark data file the corresponding database that stores the colors for the items within an order.
 """
 
-from bed_bpp_env.utils import getPathToExampleData
 import json
 import logging
 import pathlib
+
 import tqdm
+
+from bed_bpp_env.utils import getPathToExampleData
 
 logger = logging.getLogger(__name__)
 

@@ -2,6 +2,8 @@
 This script runs the heuristic solver `heuristics.O3DBP_3_2`.
 """
 
+import logging
+
 import bed_bpp_env.utils as utils
 
 # configure the parser of the given arguments
@@ -27,17 +29,16 @@ parser.add_argument(
 utils.arguments_parser.parse()
 
 
-import json
-import logging
-
 logger = logging.getLogger(__name__)
-
-import subprocess
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
+    import json
+    import subprocess
+    from pathlib import Path
+
     from bed_bpp_env.environment.palletizing_environment import PalletizingEnvironment
     from bed_bpp_env.environment.sim_pal_env import SimPalEnv
     from bed_bpp_env.heuristics.o3dbp_3_2 import O3DBP_3_2
@@ -81,9 +82,10 @@ if __name__ == "__main__":
     env.close()
 
     # run evaluation
+    EVALUATION_SCRIPT_PATH = Path(__file__).parent / "script_evaluate_packing_plan.py"
     cmd = [
         "python3",
-        "script_evaluate_packing_plan.py",
+        EVALUATION_SCRIPT_PATH.as_posix(),
         "--data",
         utils.PARSEDARGUMENTS["data"],
         "--packing_plan",

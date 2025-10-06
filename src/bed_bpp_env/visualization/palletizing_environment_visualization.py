@@ -3,13 +3,14 @@ This module contains the class `PalletizingEnvironmentVisualization`, which is i
 """
 
 import logging
-import cv2
 import os
-import vtk
-from bed_bpp_env.visualization import COLOR_DATABASE
-from bed_bpp_env.environment.lc import LC
-from bed_bpp_env.visualization.visualization import Visualization
 
+import cv2
+import vtk
+
+from bed_bpp_env.environment.lc import LC
+from bed_bpp_env.visualization import COLOR_DATABASE
+from bed_bpp_env.visualization.visualization import Visualization
 
 logger = logging.getLogger(__name__)
 

@@ -9,15 +9,16 @@ Procedure.
 (3) Save all orders in a new .json file.
 """
 
-import numpy as np
-from bed_bpp_env.utils import OUTPUTDIRECTORY
-import logging
 import argparse
 import ast
 import json
-from tqdm import tqdm
+import logging
 import typing
 
+import numpy as np
+from tqdm import tqdm
+
+from bed_bpp_env.utils import OUTPUTDIRECTORY
 
 logger = logging.getLogger(__name__)
 loggingfile = OUTPUTDIRECTORY.joinpath("converter_logs.log")

@@ -26,12 +26,13 @@ from bed_bpp_env.visualization.palletizing_environment_visualization import Pall
 logger = logging.getLogger(__name__)
 
 
-import utils
+from bed_bpp_env.utils import OUTPUTDIRECTORY, PARSEDARGUMENTS
+from bed_bpp_env.utils.configuration import USEDCONFIGURATIONFILE
 
-RENDER = utils.PARSEDARGUMENTS.get("visualize", False)
+RENDER = PARSEDARGUMENTS.get("visualize", False)
 
 conf = configparser.ConfigParser()
-conf.read(utils.configuration.USEDCONFIGURATIONFILE)
+conf.read(USEDCONFIGURATIONFILE)
 
 
 class PalletizingEnvironment(gym.Env):
@@ -427,7 +428,7 @@ class PalletizingEnvironment(gym.Env):
 
         if True:  # tofile:
             packingPlansFile = "packing_plans.json"
-            outputFile = pathlib.Path.joinpath(utils.OUTPUTDIRECTORY, packingPlansFile)
+            outputFile = pathlib.Path.joinpath(OUTPUTDIRECTORY, packingPlansFile)
             with open(outputFile, "w") as PPFile:
                 json.dump(self.__PackingPlans, PPFile)
 

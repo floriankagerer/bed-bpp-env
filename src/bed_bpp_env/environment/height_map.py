@@ -2,8 +2,6 @@
 Convenience class for representing the height of a Space3D.
 """
 
-import utils
-
 import matplotlib.pyplot as plt
 import numpy as np
 import logging

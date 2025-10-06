@@ -7,7 +7,6 @@ import cv2
 import os
 import vtk
 from bed_bpp_env.visualization import COLOR_DATABASE
-import utils
 from bed_bpp_env.environment.lc import LC
 from bed_bpp_env.visualization.visualization import Visualization
 

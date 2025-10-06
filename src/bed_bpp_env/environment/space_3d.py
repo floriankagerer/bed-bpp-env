@@ -6,7 +6,6 @@ from bed_bpp_env.environment import HEIGHT_TOLERANCE_MM as HEIGHT_TOLERANCE_MM
 import numpy as np
 import logging
 from bed_bpp_env.environment.item_3d import Item3D
-import utils
 from typing import List
 
 

@@ -2,7 +2,7 @@
 This script runs the heuristic solver `heuristics.O3DBP_3_2`.
 """
 
-import utils, utils.arguments_parser
+import bed_bpp_env.utils as utils
 
 # configure the parser of the given arguments
 parser = utils.arguments_parser.addGroupToParser(

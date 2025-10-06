@@ -10,7 +10,7 @@ Procedure.
 """
 
 import numpy as np
-import utils
+from bed_bpp_env.utils import OUTPUTDIRECTORY
 import logging
 import argparse
 import ast
@@ -20,7 +20,7 @@ import typing
 
 
 logger = logging.getLogger(__name__)
-loggingfile = utils.OUTPUTDIRECTORY.joinpath("converter_logs.log")
+loggingfile = OUTPUTDIRECTORY.joinpath("converter_logs.log")
 logger.addHandler(logging.FileHandler(loggingfile))
 
 
@@ -169,6 +169,9 @@ if __name__ == "__main__":
     """
     Main of the converter.
     """
+    from bed_bpp_env.utils import getPathToExampleData
+    from bed_bpp_env.utils.o3dbpp_pct import DEFAULT_FILENAME_CONVERTED_OUTPUT
+
     parser = argparse.ArgumentParser(
         description="Possible arguments for the results converter Online-3D-BPP-PCT => MyPa format."
     )
@@ -178,13 +181,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "--src_order",
         type=str,
-        default=utils.getPathToExampleData().joinpath("benchmark_data/bed-bpp_v1.json"),
+        default=getPathToExampleData().joinpath("benchmark_data/bed-bpp_v1.json"),
         help="The order data that was used to create the solver output..",
     )
     parser.add_argument(
         "--dest",
         type=str,
-        default=utils.o3dbpp_pct.DEFAULT_FILENAME_CONVERTED_OUTPUT,
+        default=DEFAULT_FILENAME_CONVERTED_OUTPUT,
         help="The location where the converted output is stored.",
     )
     args = parser.parse_args()

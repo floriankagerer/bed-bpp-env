@@ -12,6 +12,10 @@
 
 </div>
 
+>
+> ℹ️ To take a look at the actual paper implementation, please use the branch 
+> [paper-implementation](https://github.com/floriankagerer/bed-bpp-env/tree/paper-implementation).
+>
 
 <!-- -------------------------------------------------------------- -->
 ## <div align="center">Paper Accepted</div>
@@ -31,6 +35,9 @@ Whenever you use the dataset, please cite our publication:
 <!-- -------------------------------------------------------------- -->
 ## <div align="center">Getting Started</div>
 
+### <div align="center"> 🚧 Work in progress 🚧</div>
+
+
 Please find below the instructions on how to setup and use the code in this repository.
 
 <!-- Preliminaries -->
@@ -41,89 +48,38 @@ To use all features and functions in this repository, make sure that you have in
 
 **Blender.** Download and install [Blender](https://www.blender.org/download/). If [script_evaluate_packing_plan.py](./code/script_evaluate_packing_plan.py) does not find the location of Blender, add the [Blender path to bed-bpp_env.conf](./code/bed-bpp_env.conf#L16).
 
-**Python.** Depending on your system, we suggest to use different Python versions (Take a look for which platform and Python version the [Visualization Toolkit](https://vtk.org/download/) wheels are available.). We suggest to use the environment with
-
-<div align="center">
-
-| Platform              | Python Version |
-|-----------------------|----------------|
-| macOS (with M1 chip)  | Python >= 3.9  |
-| Ubuntu/Linux          | Python >= 3.8  |
-
-</div>
-
-Note, that we will use python3.9 in the following instructions.
-
+**Python.** We manage our Python environments with [Anaconda](https://www.anaconda.com/download). The dependencies of this project are managed with [Poetry](https://python-poetry.org/).
 
 </details> <!-- end preliminaries-->
 <br>
 
 <!-- Install Requirements -->
 <details open>
-<summary><u>Install (Requirements in Python venv)</u></summary>
+<summary><u>Install (Requirements in virtual Python environment)</u></summary>
 
 1. Create and activate a virtual Python environment
     
-    (a) Check your Python version with
-    ```bash
-    dev@nb:~$ compgen -c python
-    ```
-    This command should list all available Python versions.
-
-    <br>
-
-    (b) Create a virtual environment with
-    ```bash
-    dev@nb:~$ python3.9 -m venv /path/to/venv/bed-bpp
-    ```
-    > &#x26A0;&#xFE0F; \
-    > Change `/path/to/venv/bed-bpp` according to your needs. \
-    > Note that you can remove a virtual environment with `sudo rm -rf /path/to/venv/bed-bpp`.
-    
-    <br>
-
-    (c) Activate the virtual environment with
-    ```bash
-    dev@nb:~$ source /path/to/venv/bed-bpp/bin/activate
-    ```
-    Now your terminal should look similar to
-    ```bash
-    (bed-bpp) dev@nb:~$ 
-    ```
-
-    (d) Add the full path to [code/](./code/) to your PYTHONPATH. 
-
-
-> &#x26A0;&#xFE0F; \
-> We added the script [activate_venv.sh](activate_venv.sh) which automatically activates the venv and updates the PYTHONPATH.\
-> Just enter your location of the virtual environment in line 2 and run the script with 
-> ```bash
-> source activate_venv.sh
-> ```
-> <br> 
-
-
-
-<br>
-
-2. Install the required packages
-
-    (a) Upgrade pip with
-    ```bash
-    (bed-bpp) dev@nb:~$ /full/path/to/venv/bed-bpp/bin/python3 -m pip install --upgrade pip
+    (a) Create a virtual environment with Anaconda by running
+    ```powershell
+    (base) dev@nb:~$ conda create -n bed-bpp-env python=3.12
     ```
 
     <br>
 
-    (b) Install the requirements with
-    ```bash
-    (bed-bpp) dev@nb:~$ pip install -r requirements.txt
+    (b) Activate the created environment with
+    ```powershell
+    (base) dev@nb:~$ conda activate bed-bpp-env
     ```
+    This should update your terminal to
+    ```powershell
+    (bed-bpp-env) dev@nb:~$
+    ```
+    <br>
 
-<br>
-
-> &#x26A0;&#xFE0F; **Note for Debugging with VS Code.** \
-> If you can’t find the Python interpreter of the virtual environment, you might set a venv path in VS Code. To do this, open the settings with `"Ctrl + ,"` and search for `"venv"`. Then, add the folder where your venv is stored to the field `"Python: Venv Path"`.
+    (c) Install the dependencies with
+    ```powershell
+    (bed-bpp-env) dev@nb:~$ poetry install
+    ```
 
 </details> <!-- end install-->
 <br>
@@ -133,13 +89,9 @@ Note, that we will use python3.9 in the following instructions.
 <details open>
 <summary><u>Usage</u></summary>
 
-Change the current working directory to
-```bash
-(bed-bpp) dev@nb:~$ cd RepoDir/bed-bpp-env/code/
-```
-and check whether the setup was successful by running
-```bash
-(bed-bpp) dev@nb:~/RepoDir/bed-bpp-env/code$ python3 demo_gym_palenv-py -v
+Check whether the setup was successful by running
+```powershell
+(bed-bpp-env) dev@nb:~$ python demo_gym_pal_env.py -v
 ```
 After a few seconds you should see an image that is similar to the following
 

@@ -26,7 +26,7 @@ dirConfigFile = dirFile.parent.resolve()  # go one level/folder up
 configFile = pathlib.Path.joinpath(dirConfigFile, fnameConfiguration)
 
 # create the outputfolder
-dirOutput = dirFile.parents[1].resolve()  # go two levels up
+dirOutput = dirFile.parents[2].resolve()  # go three levels up
 dirOutput = pathlib.Path.joinpath(dirOutput, f"output/{datetime.datetime.now().strftime('%Y-%m-%d')}")
 OUTPUTDIR = pathlib.Path.joinpath(dirOutput, currentOutputfname)
 OUTPUTDIR.mkdir(parents=True, exist_ok=True)

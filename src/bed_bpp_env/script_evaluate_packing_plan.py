@@ -2,8 +2,9 @@
 This script evaluates a packing plan, i.e., a Blender stability check is performed and the KPIs of the packing plan are calculated.
 """
 
-import evaluation
-from evaluation import EVALOUTPUTDIR
+from bed_bpp_env.evaluation import EVALOUTPUTDIR
+from bed_bpp_env.evaluation.packing_plan_evaluator import PackingPlanEvaluator
+from bed_bpp_env.evaluation.blender import TEMPLATEFILE
 import json
 import logging
 import subprocess
@@ -15,7 +16,7 @@ from bed_bpp_env.utils import ENTIRECONFIG
 
 logger = logging.getLogger(__name__)
 
-ppEvaluator = evaluation.PackingPlanEvaluator()
+ppEvaluator = PackingPlanEvaluator()
 """An instance of PackingPlanEvaluator that evaluates the given packing plan."""
 
 EVALCONFIG = ENTIRECONFIG["evaluation"]
@@ -73,8 +74,8 @@ def runBlenderStabilityCheck(
     orderofpackingplan: dict
         The order that was the basis for the given packing plan.
     """
-    templFile = str(evaluation.blender.TEMPLATEFILE)
-    blenderSceneGen = str(evaluation.blender.TEMPLATEFILE.parent.resolve().joinpath("scene_creation.py"))
+    templFile = str(TEMPLATEFILE)
+    blenderSceneGen = str(TEMPLATEFILE.parent.resolve().joinpath("scene_creation.py"))
 
     cmd = [BLENDERPATH]
 

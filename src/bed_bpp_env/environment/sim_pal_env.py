@@ -19,12 +19,14 @@ import copy
 
 logger = logging.getLogger(__name__)
 
-import utils
 
-RENDER = utils.PARSEDARGUMENTS.get("visualize", False)
+from bed_bpp_env.utils import PARSEDARGUMENTS
+from bed_bpp_env.utils.configuration import USEDCONFIGURATIONFILE
+
+RENDER = PARSEDARGUMENTS.get("visualize", False)
 
 conf = configparser.ConfigParser()
-conf.read(utils.configuration.USEDCONFIGURATIONFILE)
+conf.read(USEDCONFIGURATIONFILE)
 
 
 class SimPalEnv(gym.Env):

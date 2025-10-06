@@ -2,12 +2,12 @@
 This script demonstrates the use of our PalletizingEnvironment in addition to our evaluation with Blender.
 """
 
-import utils, utils.arguments_parser
+import bed_bpp_env.utils as utils
+import bed_bpp_env.utils.arguments_parser as arguments_parser
+
 
 # configure the parser of the given arguments
-parser = utils.arguments_parser.addGroupToParser(
-    "DemoGymPalEnv", "the arguments of the gym PalletizingEnvironment demo"
-)
+parser = arguments_parser.addGroupToParser("DemoGymPalEnv", "the arguments of the gym PalletizingEnvironment demo")
 parser.add_argument(
     "-d", "--debug", action="store_true", default=False, help="Indicates whether the simulation is debugged."
 )
@@ -21,7 +21,7 @@ parser.add_argument("--task", type=str, default="O3DBP", help="Defines the task.
 parser.add_argument(
     "--data", type=str, default=utils.getPathToExampleData().joinpath("5_bed-bpp.json"), help="Defines the used data."
 )
-utils.arguments_parser.parse()
+arguments_parser.parse()
 
 import json
 import logging

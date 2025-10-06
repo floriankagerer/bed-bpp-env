@@ -2,7 +2,6 @@
 This script evaluates a packing plan, i.e., a Blender stability check is performed and the KPIs of the packing plan are calculated.
 """
 
-import utils
 import evaluation
 from evaluation import EVALOUTPUTDIR
 import json
@@ -12,13 +11,14 @@ import gc
 import time
 import pathlib
 import platform
+from bed_bpp_env.utils import ENTIRECONFIG
 
 logger = logging.getLogger(__name__)
 
 ppEvaluator = evaluation.PackingPlanEvaluator()
 """An instance of PackingPlanEvaluator that evaluates the given packing plan."""
 
-EVALCONFIG = utils.ENTIRECONFIG["evaluation"]
+EVALCONFIG = ENTIRECONFIG["evaluation"]
 """The configuration for the evaluation."""
 
 # get blender cmd
@@ -108,18 +108,21 @@ def runBlenderStabilityCheck(
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
+    import bed_bpp_env.utils as utils
+    from bed_bpp_env.utils import getPathToExampleData, PARSEDARGUMENTS
+
     # configure the parser of the given arguments
     parser = utils.arguments_parser.addGroupToParser("EvalPackingPlan", "the arguments of the packing plan evaluation")
     parser.add_argument(
         "--data",
         type=str,
-        default=utils.getPathToExampleData().joinpath("5_bed-bpp.json"),
+        default=getPathToExampleData().joinpath("5_bed-bpp.json"),
         help="Defines which data is used.",
     )
     parser.add_argument(
         "--packing_plan",
         type=str,
-        default=utils.getPathToExampleData().joinpath("packing_plan_5-bed-bpp.json"),
+        default=getPathToExampleData().joinpath("packing_plan_5-bed-bpp.json"),
         help="Defines the packing plan that is evaluated.",
     )
     parser.add_argument(
@@ -137,7 +140,7 @@ if __name__ == "__main__":
         help="Indicates whether the created scenes are written to disk.",
     )
     utils.arguments_parser.parse()
-    args = utils.PARSEDARGUMENTS
+    args = PARSEDARGUMENTS
     logger.info(f"got arguments: {args}")
 
     pathPackingPlan = pathlib.Path(args.get("packing_plan"))

@@ -2,7 +2,7 @@
 This script visualizes a packing plan, which is given as dict with order ids as key and a list of actions as values, and finally creates a video of the palletization for each order.
 """
 
-import utils
+import bed_bpp_env.utils as utils
 
 # configure the parser of the given arguments
 parser = utils.arguments_parser.addGroupToParser("VisPackingPlan", "the arguments of the packing plan visualization")

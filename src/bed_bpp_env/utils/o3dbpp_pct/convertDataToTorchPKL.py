@@ -4,17 +4,19 @@ Converts a json file that contains orders to a .pkl file with torch. This .pkl f
 After the conversion, a summary of the contained items and targets is printed to a logfile.
 """
 
-import utils
 import argparse
 import json
-import pathlib
 import logging
+import pathlib
+
 import torch
 from tqdm import tqdm
+
 from bed_bpp_env.environment import MAXHEIGHT_TARGET, SIZE_EURO_PALLET, SIZE_ROLLCONTAINER
+from bed_bpp_env.utils import OUTPUTDIRECTORY
 
 logger = logging.getLogger(__name__)
-loggingfile = utils.OUTPUTDIRECTORY.joinpath("torchconverter_logs.log")
+loggingfile = OUTPUTDIRECTORY.joinpath("torchconverter_logs.log")
 logger.addHandler(logging.FileHandler(loggingfile))
 
 
@@ -73,7 +75,7 @@ def convertJSONDataToEvaluationPKL(src_order: pathlib.Path) -> None:
     outputList.append([])
 
     # write the converted data to a file
-    outputFile = utils.OUTPUTDIRECTORY.joinpath(outputFilename)
+    outputFile = OUTPUTDIRECTORY.joinpath(outputFilename)
     with open(outputFile, "wb") as file:
         torch.save(outputList, file)
 
@@ -110,13 +112,15 @@ if __name__ == "__main__":
     """
     Main of the converter.
     """
+    from bed_bpp_env.utils import OUTPUTDIRECTORY, getPathToExampleData
+
     parser = argparse.ArgumentParser(
         description="Possible arguments for the results converter BED-BPP format => Online-3D-BPP-PCT. The converted file can be used for `evaluation.py` of the solver."
     )
     parser.add_argument(
         "--src_order",
         type=str,
-        default=utils.getPathToExampleData().joinpath("benchmark_data/bed-bpp_v1.json"),
+        default=getPathToExampleData().joinpath("benchmark_data/bed-bpp_v1.json"),
         help="The order data that is converted to a torch pkl file.",
     )
     args = parser.parse_args()

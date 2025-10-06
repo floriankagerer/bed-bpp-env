@@ -5,7 +5,7 @@ This module contains the class `Visualization`, which is the base class of many 
 import cv2
 import json
 import pathlib
-import utils
+import bed_bpp_env.utils as utils
 from bed_bpp_env.visualization import OUTPUTDIRECTORY
 import vtk
 

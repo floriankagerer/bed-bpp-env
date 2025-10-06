@@ -2,9 +2,11 @@
 This file contains argument parsing methods.
 """
 
-import logging
 import argparse
-import utils
+import configparser
+import logging
+
+from bed_bpp_env.utils.configuration import USEDCONFIGURATIONFILE
 
 parser = argparse.ArgumentParser(description=__doc__, fromfile_prefix_chars="@")
 
@@ -52,7 +54,7 @@ def parse():
         # O3DBP-k-s
         taskInGeneralFormat = "-".join([str(comp) for comp in taskComponents])
         parsedArguments["task"] = taskInGeneralFormat
-        utils.updateUsedConfigurationFile()
+        updateUsedConfigurationFile()
 
     __logger.info(f"parsed the arguments {parsedArguments}")
 
@@ -61,7 +63,7 @@ def parse():
 
 def changeLoggingBasicConfiguration(lowestlevel: int = logging.debug) -> None:
     """Changes the basic configuration of the `logging` module."""
-    from utils.configuration import LOGGING_FILE as loggingfile
+    from bed_bpp_env.utils.configuration import LOGGING_FILE as loggingfile
 
     logging.basicConfig(
         level=lowestlevel,
@@ -72,3 +74,18 @@ def changeLoggingBasicConfiguration(lowestlevel: int = logging.debug) -> None:
     # set the levels that the logs are not polluted
     logging.getLogger("matplotlib").setLevel(logging.WARN)
     logging.getLogger("PIL").setLevel(logging.WARN)
+
+
+def updateUsedConfigurationFile() -> None:
+    """Updates the values of the preview k and selection s, according to the parsed task."""
+    task = parsedArguments.get("task", "None")
+    if not (task == "None"):
+        config = configparser.ConfigParser()
+        config.read(USEDCONFIGURATIONFILE)
+
+        _, k, s = task.split("-")
+        config.set("environment", "preview", str(k))
+        config.set("environment", "selection", str(s))
+
+        with open(USEDCONFIGURATIONFILE, "w") as file:
+            config.write(file)

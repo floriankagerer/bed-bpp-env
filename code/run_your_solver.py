@@ -2,7 +2,7 @@
 This script is ready to fill in your solver and run a simulation.
 """
 
-import utils, utils.arguments_parser
+import bed_bpp_env.utils as utils
 
 # configure the parser of the given arguments
 parser = utils.arguments_parser.addGroupToParser(

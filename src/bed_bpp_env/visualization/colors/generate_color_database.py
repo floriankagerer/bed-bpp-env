@@ -2,7 +2,7 @@
 This script generates for a given benchmark data file the corresponding database that stores the colors for the items within an order.
 """
 
-import utils
+from bed_bpp_env.utils import getPathToExampleData
 import json
 import logging
 import pathlib
@@ -34,7 +34,7 @@ def generateColorDatabase(indataorders: pathlib.Path) -> None:
         }
     }
     """
-    colorsAvailable = utils.getPathToExampleData().parent.joinpath("code/visualization/colors/colors.json")
+    colorsAvailable = getPathToExampleData().parent.joinpath("code/visualization/colors/colors.json")
 
     # load input data orders and the color base
     with open(indataorders) as file:

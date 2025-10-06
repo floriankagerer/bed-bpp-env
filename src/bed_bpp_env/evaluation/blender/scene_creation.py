@@ -7,7 +7,6 @@ Run in combination with
 The above mentioned command runs Blender in the background (-b) and opens the file `template.blend`, and runs the Python script `scene_creation.py`. The arguments following the Python file are needed by the script.
 """
 
-import bpy
 import ast
 import json
 import logging
@@ -16,6 +15,8 @@ import pathlib
 import statistics
 import sys
 import time
+
+import bpy
 
 logger = logging.getLogger(__name__)
 

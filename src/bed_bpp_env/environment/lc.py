@@ -5,6 +5,8 @@ This module provides a class which represents a virtual load carrier.
 from dataclasses import dataclass
 from typing import Optional
 
+from bed_bpp_env.data_model.position_3d import Position3D
+
 
 @dataclass
 class LC(object):
@@ -28,16 +30,8 @@ class LC(object):
     weight: Optional[float]
     """The object's weight in kilogramm."""
 
-    position: dict
+    position: Position3D
     """The position of the load carrier on a target."""
-
-    # TODO(florian): Define dataclass for position
-    # self.__Targetposition = {
-    #     "area": None,
-    #     "x": 0,  # on target
-    #     "y": 0,  # on target
-    #     "z": 0,  # on target
-    # }
 
     @property
     def dimensions(self) -> tuple[int, int, int]:

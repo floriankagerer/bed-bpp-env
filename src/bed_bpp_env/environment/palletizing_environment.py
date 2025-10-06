@@ -18,6 +18,7 @@ import PIL
 from gymnasium.spaces import Box, Dict, Discrete
 from PIL import Image, ImageDraw, ImageFont
 
+from bed_bpp_env.data_model.position_3d import Position3D
 from bed_bpp_env.environment import MAXHEIGHT_OBSERVATION_SPACE, SIZE_EURO_PALLET, SIZE_ROLLCONTAINER
 from bed_bpp_env.environment.item_3d import Item3D
 from bed_bpp_env.environment.lc import LC
@@ -697,8 +698,6 @@ class PalletizingEnvironment(gym.Env):
             length = item["width/mm"]
             width = item["length/mm"]
 
-        lcTarget = {"area": "area", "x": flbcoordinates[0], "y": flbcoordinates[1], "z": flbcoordinates[2]}
-
         lc = LC(
             id=item["id"],
             sku=item["article"],
@@ -707,7 +706,7 @@ class PalletizingEnvironment(gym.Env):
             width=width,
             height=item["height/mm"],
             weight=None,
-            position=lcTarget,
+            position=Position3D(x=flbcoordinates[0], y=flbcoordinates[1], z=flbcoordinates[2]),
         )
 
         self.__Visualization.addLoadCarrier(lc)

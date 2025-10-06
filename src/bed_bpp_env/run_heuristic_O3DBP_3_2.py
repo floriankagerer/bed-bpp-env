@@ -2,6 +2,8 @@
 This script runs the heuristic solver `heuristics.O3DBP_3_2`.
 """
 
+import logging
+
 import bed_bpp_env.utils as utils
 
 # configure the parser of the given arguments
@@ -27,17 +29,14 @@ parser.add_argument(
 utils.arguments_parser.parse()
 
 
-import json
-import logging
-
 logger = logging.getLogger(__name__)
-
-import subprocess
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
+    import json
+    import subprocess
     from pathlib import Path
 
     from bed_bpp_env.environment.palletizing_environment import PalletizingEnvironment

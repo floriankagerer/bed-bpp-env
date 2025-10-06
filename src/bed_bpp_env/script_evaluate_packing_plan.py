@@ -2,16 +2,16 @@
 This script evaluates a packing plan, i.e., a Blender stability check is performed and the KPIs of the packing plan are calculated.
 """
 
-from bed_bpp_env.evaluation import EVALOUTPUTDIR
-from bed_bpp_env.evaluation.packing_plan_evaluator import PackingPlanEvaluator
-from bed_bpp_env.evaluation.blender import TEMPLATEFILE
-import json
-import logging
-import subprocess
 import gc
-import time
+import logging
 import pathlib
 import platform
+import subprocess
+import time
+
+from bed_bpp_env.evaluation import EVALOUTPUTDIR
+from bed_bpp_env.evaluation.blender import TEMPLATEFILE
+from bed_bpp_env.evaluation.packing_plan_evaluator import PackingPlanEvaluator
 from bed_bpp_env.utils import ENTIRECONFIG
 
 logger = logging.getLogger(__name__)
@@ -109,8 +109,10 @@ def runBlenderStabilityCheck(
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
+    import json
+
     import bed_bpp_env.utils as utils
-    from bed_bpp_env.utils import getPathToExampleData, PARSEDARGUMENTS
+    from bed_bpp_env.utils import PARSEDARGUMENTS, getPathToExampleData
 
     # configure the parser of the given arguments
     parser = utils.arguments_parser.addGroupToParser("EvalPackingPlan", "the arguments of the packing plan evaluation")

@@ -2,10 +2,11 @@
 This script demonstrates the use of our PalletizingEnvironment in addition to our evaluation with Blender.
 """
 
+import logging
 from pathlib import Path
+
 import bed_bpp_env.utils as utils
 import bed_bpp_env.utils.arguments_parser as arguments_parser
-
 
 # configure the parser of the given arguments
 parser = arguments_parser.addGroupToParser("DemoGymPalEnv", "the arguments of the gym PalletizingEnvironment demo")
@@ -24,16 +25,15 @@ parser.add_argument(
 )
 arguments_parser.parse()
 
-import json
-import logging
-import subprocess
-
 logger = logging.getLogger(__name__)
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
+    import json
+    import subprocess
+
     from bed_bpp_env.environment.palletizing_environment import PalletizingEnvironment
     from bed_bpp_env.heuristics.lowest_area import LowestArea
     from bed_bpp_env.wrappers.equally_distributed_reward_wrapper import EquallyDistributedRewardWrapper

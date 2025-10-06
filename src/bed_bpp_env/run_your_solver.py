@@ -2,6 +2,7 @@
 This script is ready to fill in your solver and run a simulation.
 """
 
+import logging
 import bed_bpp_env.utils as utils
 
 # configure the parser of the given arguments
@@ -26,26 +27,22 @@ parser.add_argument(
 )
 utils.arguments_parser.parse()
 
-
-import json
-import numpy as np
-import logging
-
 logger = logging.getLogger(__name__)
-import subprocess
-
-# # # # # # # # # # # # #
-# load your solver here #
-# # # # # # # # # # # # #
-from solver import your_solver
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
+    import json
     from pathlib import Path
+    import subprocess
 
     from bed_bpp_env.environment.palletizing_environment import PalletizingEnvironment
+
+    # # # # # # # # # # # # #
+    # load your solver here #
+    # # # # # # # # # # # # #
+    from solver import your_solver
 
     logger.info(f"given arguments: {utils.PARSEDARGUMENTS}")
     logger.info(f"the results are stored in {utils.OUTPUTDIRECTORY}")

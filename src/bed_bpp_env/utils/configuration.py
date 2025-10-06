@@ -6,14 +6,13 @@ Note.
 Access the variables via the module `utils`.
 """
 
-import logging
-
-__logger = logging.getLogger(__name__)
-import pathlib
 import configparser
 import datetime
+import logging
+import pathlib
 import shutil
 
+__logger = logging.getLogger(__name__)
 
 # define the names of the different files/folders
 fnameConfiguration = "bed-bpp_env.conf"

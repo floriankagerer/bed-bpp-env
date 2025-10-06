@@ -12,11 +12,12 @@ Procedure.
 (3) Save all orders in a new .json file.
 """
 
-import logging
 import argparse
 import ast
 import json
+import logging
 import typing
+
 import yaml
 
 

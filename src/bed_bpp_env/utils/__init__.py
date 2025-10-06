@@ -10,8 +10,9 @@ Variables that can be accessed by importing this package (with `utils.{VARNAME}`
 """
 
 import pathlib
-from bed_bpp_env.utils.configuration import OUTPUTDIR, ENTIRECONFIG, USEDCONFIGURATIONFILE
+
 import bed_bpp_env.utils.arguments_parser as arguments_parser
+from bed_bpp_env.utils.configuration import ENTIRECONFIG, OUTPUTDIR
 
 OUTPUTDIRECTORY = OUTPUTDIR
 ENTIRECONFIG = ENTIRECONFIG

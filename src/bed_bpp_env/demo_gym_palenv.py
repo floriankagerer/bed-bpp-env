@@ -2,6 +2,7 @@
 This script demonstrates the use of our PalletizingEnvironment in addition to our evaluation with Blender.
 """
 
+from pathlib import Path
 import bed_bpp_env.utils as utils
 import bed_bpp_env.utils.arguments_parser as arguments_parser
 
@@ -69,9 +70,10 @@ if __name__ == "__main__":
     env.close()
 
     # run evaluation
+    EVALUATION_SCRIPT_PATH = Path(__file__).parent / "script_evaluate_packing_plan.py"
     cmd = [
         "python3",
-        "script_evaluate_packing_plan.py",
+        EVALUATION_SCRIPT_PATH.as_posix(),
         "--data",
         utils.PARSEDARGUMENTS["data"],
         "--packing_plan",

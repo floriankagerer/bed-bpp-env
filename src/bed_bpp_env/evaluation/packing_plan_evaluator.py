@@ -5,8 +5,8 @@ This module contains a packing plan evaluator class.
 import ast
 from bed_bpp_env.environment.item_3d import Item3D
 from bed_bpp_env.environment.space_3d import Space3D
-import evaluation
-from evaluation import EVALOUTPUTDIR, KPI_DEFINITION
+from bed_bpp_env.evaluation.kpis import KPIs
+from bed_bpp_env.evaluation import EVALOUTPUTDIR, FILE_KPI_DEFINITION, KPI_DEFINITION
 import logging
 import pandas as pd
 import shutil
@@ -29,7 +29,7 @@ class PackingPlanEvaluator:
     -----------
     __EvaluationKPIs: list
         The values of the KPIs for each order that are stored in a file.
-    __KPIs: "evaluation.KPIs"
+    __KPIs: KPIs
         tbd
     __Order: dict
           The order for which the currently investigated packing plan was created.'
@@ -50,7 +50,7 @@ class PackingPlanEvaluator:
         """The order for which the currently investigated packing plan was created."""
         self.__PackingPlan = []
         """The packing plan that is currently investigated. It is a list of actions."""
-        self.__KPIs = evaluation.KPIs()
+        self.__KPIs = KPIs()
         """An instance of this class is responsible for the calculation of the KPIs. It is coupled with the target space."""
         self.__TargetSpace = Space3D()
         """The target that represents the rebuilt packing plan."""
@@ -330,7 +330,7 @@ class PackingPlanEvaluator:
         logger.info(f"SCORE OF ALGORITHM = {round(overviewDict['rating_algorithm'], 6)}")
         overviewDF = pd.DataFrame.from_dict(overviewDict, orient="index")
 
-        srcFile = evaluation.FILE_KPI_DEFINITION
+        srcFile = FILE_KPI_DEFINITION
         shutil.copy(srcFile, EVALOUTPUTDIR.joinpath(srcFile.name))
 
         with pd.ExcelWriter(EVALOUTPUTDIR.joinpath("evaluation.xlsx"), mode="w") as writer:

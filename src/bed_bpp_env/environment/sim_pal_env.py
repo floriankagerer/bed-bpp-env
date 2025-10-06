@@ -8,7 +8,7 @@ import pathlib
 from bed_bpp_env.environment import MAXHEIGHT_OBSERVATION_SPACE, SIZE_EURO_PALLET, SIZE_ROLLCONTAINER
 from bed_bpp_env.environment.item_3d import Item3D
 from bed_bpp_env.environment.space_3d import Space3D
-import evaluation
+from bed_bpp_env.evaluation.kpis import KPIs
 import json
 import gymnasium as gym
 from gymnasium.spaces import Discrete, Dict, Box
@@ -84,7 +84,7 @@ class SimPalEnv(gym.Env):
         self.__ItemsPreview = []
         """The preview items."""
 
-        self.__KPIs = evaluation.KPIs()
+        self.__KPIs = KPIs()
         """Holds the values of the KPIs for each order."""
 
         self.__MPScoreEstimation = False

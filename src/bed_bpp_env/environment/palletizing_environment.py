@@ -9,7 +9,6 @@ import json
 import logging
 import pathlib
 import platform
-from typing import Tuple
 
 import cv2
 import gymnasium as gym
@@ -112,7 +111,7 @@ class PalletizingEnvironment(gym.Env):
         self.__KPIs = KPIs()
         """Holds the values of the KPIs for each order."""
 
-    def step(self, action: dict) -> Tuple[np.ndarray, float, bool, dict]:
+    def step(self, action: dict) -> tuple[np.ndarray, float, bool, dict]:
         """
         In the step function we have to palletize the given item at the given position. Translated to this implementation that means that we have to
         (a) calculate the z-coordinate of the placement for the given action (x-,y-coordinate and orientation of item),
@@ -205,7 +204,7 @@ class PalletizingEnvironment(gym.Env):
         stepReturns = self.__TargetSpace.getHeights(), reward, done, info
         return stepReturns
 
-    def reset(self, data_for_episodes: dict = {}) -> Tuple[np.ndarray, dict]:
+    def reset(self, data_for_episodes: dict = {}) -> tuple[np.ndarray, dict]:
         """
         This method is responsible for
         (a) the change of the orders, e.g., from "00100001" -> "00100002",

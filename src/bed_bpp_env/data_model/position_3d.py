@@ -1,7 +1,12 @@
 """Contains a class that represents a position in 3D."""
 
-from dataclasses import dataclass
+from __future__ import annotations
+
+from dataclasses import dataclass, fields
 from typing import Optional
+
+SERIALIZE_NONE = False
+"""Indicates whether `None` values are serialized."""
 
 
 @dataclass
@@ -21,3 +26,23 @@ class Position3D(object):
     def xyz(self) -> tuple[int, int, int]:
         """The position given as `(x, y, z)`."""
         return self.x, self.y, self.z
+
+    def to_dict(self) -> dict[str, str | int | None]:
+        """Converts the object to a dictionary."""
+        position_to_dict = {}
+
+        for position_field in fields(self):
+            key = position_field.name
+            value = getattr(self, position_field.name)
+
+            if not SERIALIZE_NONE and value is None:
+                continue
+
+            position_to_dict[key] = value
+
+        return position_to_dict
+
+    @classmethod
+    def from_dict(cls, serialized: dict[str, str | int | None]) -> Position3D:
+        """Deserialize dictionary into dataclass instance."""
+        return cls(**serialized)

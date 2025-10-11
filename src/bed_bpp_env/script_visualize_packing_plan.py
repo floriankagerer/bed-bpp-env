@@ -2,6 +2,7 @@
 This script visualizes a packing plan, which is given as dict with order ids as key and a list of actions as values, and finally creates a video of the palletization for each order.
 """
 
+from bed_bpp_env.data_model.position_3d import Position3D
 import bed_bpp_env.utils as utils
 
 # configure the parser of the given arguments
@@ -60,8 +61,6 @@ if __name__ == "__main__":
         for i, action in enumerate(actions):
             item, flb, orientation = action["item"], action["flb_coordinates"], action["orientation"]
 
-            lcTarget = {"area": "area", "x": flb[0], "y": flb[1], "z": flb[2]}
-
             length = item["length/mm"] if orientation == 0 else item["width/mm"]
             width = item["width/mm"] if orientation == 0 else item["length/mm"]
 
@@ -73,7 +72,7 @@ if __name__ == "__main__":
                 width=width,
                 height=item["height/mm"],
                 weight=None,
-                position=lcTarget,
+                position=Position3D(x=flb[0], y=flb[1], z=flb[2]),
             )
 
             vis.addLoadCarrier(lc)

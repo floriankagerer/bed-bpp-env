@@ -100,8 +100,7 @@ class PalletizingEnvironmentVisualization(Visualization):
         actor.SetMapper(super().getMapper())
         size = list(item.dimensions)
         actor.SetScale(size)
-        targetPosition = item.position.copy()
-        actor.SetPosition([targetPosition["x"], targetPosition["y"], targetPosition["z"]])
+        actor.SetPosition([item.position.x, item.position.y, item.position.z])
         actor.GetProperty().EdgeVisibilityOn()
 
         # add item to renderer

@@ -5,12 +5,14 @@ from __future__ import annotations
 from dataclasses import dataclass, fields
 from typing import Optional
 
+from bed_bpp_env.data_model.dataclass_base import DataclassBase
+
 SERIALIZE_NONE = False
 """Indicates whether `None` values are serialized."""
 
 
 @dataclass
-class Position3D(object):
+class Position3D(DataclassBase):
     """A position in 3d with an optional area name."""
 
     x: int
@@ -41,8 +43,3 @@ class Position3D(object):
             position_to_dict[key] = value
 
         return position_to_dict
-
-    @classmethod
-    def from_dict(cls, serialized: dict[str, str | int | None]) -> Position3D:
-        """Deserialize dictionary into dataclass instance."""
-        return cls(**serialized)

@@ -26,6 +26,14 @@ class Item(DataclassBase):
     sequence: int
     """The position of this item within the item sequence."""
 
+    def repr_key_value_pair(self) -> str:
+        key_value_pair_repr = ""
+
+        for key, value in self.to_dict().items():
+            key_value_pair_repr += f"{key}: {value}\n"
+
+        return key_value_pair_repr
+
     def to_dict(self) -> dict[str, str | int | float]:
         """Converts the object to a dictionary."""
         item_to_dict = {}

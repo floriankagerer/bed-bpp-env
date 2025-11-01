@@ -12,15 +12,14 @@ import numpy as np
 from gymnasium.spaces import Box, Dict, Discrete
 
 from bed_bpp_env.environment import MAXHEIGHT_OBSERVATION_SPACE, SIZE_EURO_PALLET, SIZE_ROLLCONTAINER
-from bed_bpp_env.environment.item_3d import Item3D
+from bed_bpp_env.environment.cuboid import Cuboid
 from bed_bpp_env.environment.space_3d import Space3D
 from bed_bpp_env.evaluation.kpis import KPIs
+from bed_bpp_env.utils import PARSEDARGUMENTS
+from bed_bpp_env.utils.configuration import USEDCONFIGURATIONFILE
 
 logger = logging.getLogger(__name__)
 
-
-from bed_bpp_env.utils import PARSEDARGUMENTS
-from bed_bpp_env.utils.configuration import USEDCONFIGURATIONFILE
 
 RENDER = PARSEDARGUMENTS.get("visualize", False)
 
@@ -36,29 +35,29 @@ class SimPalEnv(gym.Env):
     metadata = {"render_modes": ["human", "rgb_array"], "render_fps": 4}
 
     def __init__(self) -> None:
-        self.__Size = SIZE_EURO_PALLET
+        self._size = SIZE_EURO_PALLET
         """The palletizing target's size of the base area in x- and y-direction given in millimeters."""
         self.__N_ORIENTATION = 2
         """The amount of different orientations that are allowed during palletization."""
 
         self.action_space = Dict(
             {
-                "x": Discrete(self.__Size[0]),
-                "y": Discrete(self.__Size[1]),
+                "x": Discrete(self._size[0]),
+                "y": Discrete(self._size[1]),
                 "orientation": Discrete(self.__N_ORIENTATION),
             }
         )
         """The action space consists of the simple action spaces for x-, y-coordinate and the orientation of the item."""
 
         self.observation_space = Box(
-            low=0, high=MAXHEIGHT_OBSERVATION_SPACE, shape=(self.__Size[1], self.__Size[0]), dtype=int
+            low=0, high=MAXHEIGHT_OBSERVATION_SPACE, shape=(self._size[1], self._size[0]), dtype=int
         )
         """The observation space describes the heights in each coordinate on the palletizing target."""
 
-        self.__TargetSpace = Space3D(self.__Size)
+        self.__TargetSpace = Space3D(self._size)
         """Represents the 3D space where the palletization takes place."""
 
-        self.__Actions = []
+        self._actions = []
         """A list that stores all actions done in the order of their palletizing point in time."""
 
         self.__PalletizedVolume = 0.0
@@ -121,42 +120,42 @@ class SimPalEnv(gym.Env):
         info = {}
 
         # get the variables that are needed here
-        sVars = self.__getStepVariables(action)
-        itemForAction = action["item"]
+        step_vars = self.__getStepVariables(action)
+        item_for_action = action["item"]
 
         # define the item
-        item = Item3D(sVars["item"])
-        item.setOrientation(sVars["orientation"])
+        item = Cuboid(step_vars["item"])
+        item.setOrientation(step_vars["orientation"])
 
         # create a np.ndarray that has the same shape as the target, its elements are 1 if the item is located in this region and 0 otherwise
-        itemOnTarget = np.zeros((self.__Size[1], self.__Size[0]), dtype=int)
-        itemDeltaY, itemDeltaX = item.getRepresentation().shape
-        startX, startY = sVars["xCoord"], sVars["yCoord"]
+        item_on_target = np.zeros((self._size[1], self._size[0]), dtype=int)
+        item_delta_y, item_delta_x = item.getRepresentation().shape
+        start_x, start_y = step_vars["xCoord"], step_vars["yCoord"]
         try:
-            itemOnTarget[startY : startY + itemDeltaY, startX : startX + itemDeltaX] = np.ones(
+            item_on_target[start_y : start_y + item_delta_y, start_x : start_x + item_delta_x] = np.ones(
                 item.getRepresentation().shape, dtype=int
             )
-        except:
+        except Exception:
             # have to crop item like in `environment.Space3D.addItem`
-            logger.warning(f"cropped item")
-            croppedShape = (
-                min(itemOnTarget.shape[0], startY + itemDeltaY) - startY,
-                min(itemOnTarget.shape[1], startX + itemDeltaX) - startX,
+            logger.warning("cropped item")
+            cropped_shape = (
+                min(item_on_target.shape[0], start_y + item_delta_y) - start_y,
+                min(item_on_target.shape[1], start_x + item_delta_x) - start_x,
             )
-            itemOnTarget[startY : startY + croppedShape[0], startX : startX + croppedShape[1]] = np.ones(
-                croppedShape, dtype=int
+            item_on_target[start_y : start_y + cropped_shape[0], start_x : start_x + cropped_shape[1]] = np.ones(
+                cropped_shape, dtype=int
             )
 
         # obtaiin the FLB height for the item in the selected (x, y)-coordinate
-        maxHeightInTargetArea = int(np.amax(np.multiply(self.__TargetSpace.getHeights(), itemOnTarget)))
+        maxHeightInTargetArea = int(np.amax(np.multiply(self.__TargetSpace.getHeights(), item_on_target)))
 
         # define the action in the needed format
         actionExt = {
-            "item": sVars["item"],
-            "flb_coordinates": [sVars["xCoord"], sVars["yCoord"], maxHeightInTargetArea],
-            "orientation": sVars["orientation"],
+            "item": step_vars["item"],
+            "flb_coordinates": [step_vars["xCoord"], step_vars["yCoord"], maxHeightInTargetArea],
+            "orientation": step_vars["orientation"],
         }
-        self.__Actions.append(actionExt)
+        self._actions.append(actionExt)
         info.update({"action_for_vis": actionExt})
         logger.debug(f"step() -> extended action: {actionExt}")
 
@@ -165,12 +164,12 @@ class SimPalEnv(gym.Env):
         info.update({"support_area/%": item.getPercentageDirectSupportSurface()})
 
         # prepare for next call of step
-        additionalInfo = self.__prepareForNextStep(itemForAction)
+        additionalInfo = self.__prepareForNextStep(item_for_action)
         done = additionalInfo.pop("done")
         info.update(additionalInfo)
 
         # update the attributes
-        self.__PalletizedVolume += (sVars["deltaX"] * sVars["deltaY"] * sVars["itemHeight"]) / 1000.0
+        self.__PalletizedVolume += (step_vars["deltaX"] * step_vars["deltaY"] * step_vars["itemHeight"]) / 1000.0
         self.__KPIs.update()
 
         reward = self.__getReward(done)
@@ -231,24 +230,24 @@ class SimPalEnv(gym.Env):
         # change the size related to the palletizing target and the action space
         palletizingTarget = self.__CurrentOrder["order"]["properties"]["target"]
         if palletizingTarget == "rollcontainer":
-            self.__Size = SIZE_ROLLCONTAINER
+            self._size = SIZE_ROLLCONTAINER
         elif palletizingTarget == "euro-pallet":
-            self.__Size = SIZE_EURO_PALLET
+            self._size = SIZE_EURO_PALLET
         else:
             # size is given as `"x,y,z"`
             sizes = palletizingTarget.split(",")
-            self.__Size = tuple([int(sizes[0]), int(sizes[1])])
+            self._size = tuple([int(sizes[0]), int(sizes[1])])
 
         self.action_space = Dict(
             {
-                "x": Discrete(self.__Size[0]),
-                "y": Discrete(self.__Size[1]),
+                "x": Discrete(self._size[0]),
+                "y": Discrete(self._size[1]),
                 "orientation": Discrete(self.__N_ORIENTATION),
             }
         )
 
-        self.__TargetSpace.reset(self.__Size)
-        self.__Actions = []
+        self.__TargetSpace.reset(self._size)
+        self._actions = []
         self.__PalletizedVolume = 0.0
         self.__KPIs.reset(self.__TargetSpace, self.__CurrentOrder)
 
@@ -454,7 +453,7 @@ class SimPalEnv(gym.Env):
 
     def getNPlacedItems(self) -> int:
         """Returns the amount of placed items in the environment."""
-        return len(self.__Actions)
+        return len(self._actions)
 
     def __updateItemsSelection(self, itemdict: dict = {}) -> None:
         """

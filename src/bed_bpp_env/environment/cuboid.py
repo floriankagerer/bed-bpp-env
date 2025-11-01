@@ -302,7 +302,7 @@ class Cuboid(object):
 
         Example.
         --------
-        >>> Item3D.getNeighbors()
+        >>> cuboid.getNeighbors()
         {
             "north": [Cuboid object],
             "east": [],

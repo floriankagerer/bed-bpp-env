@@ -31,7 +31,7 @@ class Space3D:
     _heights: np.ndarray
         'This `np.ndarray` has the shape of the palletizing target and stores the height in each position in millimeters.
     _placed_items: dict
-        This dictionary's keys are the chronological order of the placed items and its values are the items as `Item3D` object.
+        This dictionary's keys are the chronological order of the placed items and its values are the items as `Cuboid` object.
     _size: tuple
        The space's size of the base area in x- and y-direction given in millimeters.
     _uppermost_items:  np.ndarray
@@ -43,7 +43,7 @@ class Space3D:
         """The space's size of the base area in x- and y-direction given in millimeters."""
 
         self._placed_items = {}
-        """This dictionary's keys are the chronological order of the placed items and its values are the items as `Item3D` object."""
+        """This dictionary's keys are the chronological order of the placed items and its values are the items as `Cuboid` object."""
 
         target_shape = self._size[1], self._size[0]
         self._heights = np.zeros(target_shape, dtype=int)
@@ -53,7 +53,7 @@ class Space3D:
         """This `np.ndarray` has the same shape as the height map of the three-dimensional space and stores a counter that represents the counter of the uppermost item."""
 
     def getPlacedItems(self) -> list[Cuboid]:
-        """Returns all placed items as list of `Item3D`."""
+        """Returns all placed items as list of `Cuboid`."""
         return list(self._placed_items.values())
 
     def addItem(self, item: Cuboid, orientation: int, flbcoordinates: list) -> None:
@@ -62,7 +62,7 @@ class Space3D:
 
         Parameters.
         -----------
-        item: Item3D
+        item: Cuboid
             The item that is added to the space.
         orientation: int
             The orientation of the item.
@@ -88,7 +88,7 @@ class Space3D:
         counters_direct_items_below = [
             item for item in allItemsBelow if ((item > 0) and (item <= len(self._placed_items)))
         ]
-        # obtain the Item3D objects and store it in the current item
+        # obtain the Cuboid objects and store it in the current item
         items_directly_below = [self._placed_items[countItem] for countItem in counters_direct_items_below]
         item.storeItemsDirectlyBelow(items_directly_below)
 
@@ -109,7 +109,7 @@ class Space3D:
         counters_possible_neighbor_items = [
             item for item in all_items_surround if item > 0 and (item not in items_directly_below)
         ]
-        # # obtain the Item3D objects and store it in the current item
+        # # obtain the Cuboid objects and store it in the current item
         possible_neighbors = [self._placed_items[countItem] for countItem in counters_possible_neighbor_items]
         self.__identifyNeighbors(item, possible_neighbors)
 
@@ -210,9 +210,9 @@ class Space3D:
 
         Parameters.
         -----------
-        item: Item3D
+        item: Cuboid
             The item for which the neighbors are identified.
-        possibleneighbors: list (of Item3D objects)
+        possibleneighbors: list (of Cuboid objects)
             Items that could be neighbors of item.
         """
         EDGES_TO_COMPARE = {0: ["north", "south"], 1: ["east", "west"], 2: ["south", "north"], 3: ["west", "east"]}

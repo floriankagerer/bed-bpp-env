@@ -9,8 +9,12 @@ This wrapper rescales a gym PalletizingEnvironment. For given divisors of the or
 are rescaled. This wrapper changes the `reset` and the `step` method of the original environment.
 """
 
+from typing import Optional
 import gymnasium as gym
 import numpy as np
+
+from bed_bpp_env.data_model.item import Item
+from bed_bpp_env.data_model.order import Order
 
 
 class RescaleWrapper(gym.Wrapper):
@@ -43,7 +47,8 @@ class RescaleWrapper(gym.Wrapper):
 
         self.env.setSizeMultiplicator(size_divisor)
 
-    def reset(self, data_for_episodes={}) -> tuple:
+    def reset(self, order_sequence: Optional[list[Order]] = None) -> tuple:
+        # def reset(self, data_for_episodes={}) -> tuple:
         """
         This method rescales the observation and adapts the information dictionary of the base environment.
 
@@ -59,7 +64,7 @@ class RescaleWrapper(gym.Wrapper):
         info: dict
             The adapted information of the base environment's reset method.
         """
-        observation, info = self.env.reset(data_for_episodes)
+        observation, info = self.env.reset(order_sequence)
         rescaledObservation = self.__generateRescaledObservation(observation)
         info["allowed_area"] = self.__rescaleAllowedArea(info["allowed_area"])
         info["next_items_selection"] = self.__rescaleSizeOfNextItems(info["next_items_selection"])
@@ -195,7 +200,7 @@ class RescaleWrapper(gym.Wrapper):
 
         return rescaledObs
 
-    def __rescaleSizeOfNextItems(self, nextitems: list) -> list:
+    def __rescaleSizeOfNextItems(self, next_items: list[Item]) -> list[Item]:
         """
         Rescales the length and the width of the next items by the given size divisor.
 
@@ -209,18 +214,20 @@ class RescaleWrapper(gym.Wrapper):
         rescaledNextItems: list
             A list of dictionaries that contains the properties of the next items with rescaled length and width of each item.
         """
-        rescaledNextItems = []
+        rescaled_next_items = []
 
-        for item in nextitems:
-            rescaledItem = {}
-            for key, val in item.items():
-                if key == "length/mm":
-                    rescaledItem[key] = val / self.__SIZE_DIVISOR[1]
-                elif key == "width/mm":
-                    rescaledItem[key] = val / self.__SIZE_DIVISOR[0]
-                else:
-                    rescaledItem[key] = val
+        for item in next_items:
+            rescaled_item = Item(
+                article=item.article,
+                id=item.id,
+                product_group=item.product_group,
+                length_mm=item.length_mm / self.__SIZE_DIVISOR[1],
+                width_mm=item.width_mm / self.__SIZE_DIVISOR[0],
+                height_mm=item.height_mm,
+                weight_kg=item.weight_kg,
+                sequence=item.sequence,
+            )
 
-            rescaledNextItems.append(rescaledItem)
+            rescaled_next_items.append(rescaled_item)
 
-        return rescaledNextItems
+        return rescaled_next_items

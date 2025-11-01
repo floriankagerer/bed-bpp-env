@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field, fields
 
+from bed_bpp_env.data_model.dataclass_base import DataclassBase
+
 
 @dataclass
-class Item(object):
+class Item(DataclassBase):
     """Represents an object that has to be packed and that is part of an order."""
 
     article: str
@@ -24,6 +26,14 @@ class Item(object):
     sequence: int
     """The position of this item within the item sequence."""
 
+    def repr_key_value_pair(self) -> str:
+        key_value_pair_repr = ""
+
+        for key, value in self.to_dict().items():
+            key_value_pair_repr += f"{key}: {value}\n"
+
+        return key_value_pair_repr
+
     def to_dict(self) -> dict[str, str | int | float]:
         """Converts the object to a dictionary."""
         item_to_dict = {}
@@ -33,16 +43,3 @@ class Item(object):
             item_to_dict[key] = getattr(self, item_field.name)
 
         return item_to_dict
-
-    @classmethod
-    def from_dict(cls, serialized: dict[str, str | int | float]) -> Item:
-        """Deserialize dictionary into dataclass instance."""
-        init_kwargs = {}
-        for f in fields(cls):
-            alias = f.metadata.get("alias", f.name)
-            # Support either the alias or the original name in the input dict
-            if alias in serialized:
-                init_kwargs[f.name] = serialized[alias]
-            elif f.name in serialized:
-                init_kwargs[f.name] = serialized[f.name]
-        return cls(**init_kwargs)

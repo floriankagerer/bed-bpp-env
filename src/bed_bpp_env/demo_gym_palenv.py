@@ -36,6 +36,7 @@ if __name__ == "__main__":
 
     from bed_bpp_env.environment.palletizing_environment import PalletizingEnvironment
     from bed_bpp_env.heuristics.lowest_area import LowestArea
+    from bed_bpp_env.io_utils import load_order_sequence
     from bed_bpp_env.wrappers.equally_distributed_reward_wrapper import EquallyDistributedRewardWrapper
     from bed_bpp_env.wrappers.rescale_wrapper import RescaleWrapper
 
@@ -45,16 +46,18 @@ if __name__ == "__main__":
     # CHOOSE YOUR HEURISTIC
     heuristic = LowestArea()
 
-    dirOutputfile = utils.PARSEDARGUMENTS["data"]
-    with open(dirOutputfile) as f:
+    order_data_path = utils.PARSEDARGUMENTS["data"]
+    with open(order_data_path) as f:
         ORDERS_FOR_EPISODES = json.load(f, parse_int=False)
+
+    order_sequence = load_order_sequence(order_data_path)
 
     # USE IMPLEMENTED WRAPPERS
     base_env = PalletizingEnvironment()
     env = RescaleWrapper(base_env)  # base_env = env.env
     env = EquallyDistributedRewardWrapper(env)
 
-    observation, info = env.reset(data_for_episodes=ORDERS_FOR_EPISODES)
+    observation, info = env.reset(order_sequence=order_sequence)
 
     for _ in range(1000):
         env.render()

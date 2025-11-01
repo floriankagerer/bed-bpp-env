@@ -6,6 +6,7 @@ import statistics
 
 import numpy as np
 
+from bed_bpp_env.data_model.order import Order
 from bed_bpp_env.environment.space_3d import Space3D
 
 
@@ -38,17 +39,18 @@ class KPIs:
         return str(self.__Values)
 
     def update(self) -> dict:
-        targetSpace = self.__DataSources.get("target")
-        currentOrder = self.__DataSources.get("order")
+        targetSpace: Space3D = self.__DataSources.get("target")
+        currentOrder: Order = self.__DataSources.get("order")
+        print(f"KPI Update: type: {type(currentOrder)}")
 
         palHeightMap = targetSpace.getHeights()
 
         placedItems = targetSpace.getPlacedItems()
         percentageSupportingAreas = [item.getPercentageDirectSupportSurface() for item in placedItems]
 
-        itemVolumeOnPallet = sum([item.getVolume() / 1000.0 for item in placedItems])
+        itemVolumeOnPallet = sum([item.volume / 1000.0 for item in placedItems])
 
-        self.__Values["unpalletized_items"] = len(currentOrder["order"]["item_sequence"]) - len(placedItems)
+        self.__Values["unpalletized_items"] = len(currentOrder.item_sequence) - len(placedItems)
         self.__Values["maximum_palletizing_height/mm"] = np.amax(palHeightMap)
         self.__Values["vol_items/cm^3"] = itemVolumeOnPallet
         self.__Values["packing_stability"] = {
@@ -83,7 +85,7 @@ class KPIs:
 
         return kpisString
 
-    def reset(self, targetspace: Space3D, order: dict) -> None:
+    def reset(self, targetspace: Space3D, order: Order) -> None:
         self.__DataSources["target"] = targetspace
         self.__DataSources["order"] = order
 

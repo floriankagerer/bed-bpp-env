@@ -6,7 +6,9 @@ import logging
 
 import numpy as np
 
+from bed_bpp_env.data_model.position_3d import Position3D
 from bed_bpp_env.environment import HEIGHT_TOLERANCE_MM as HEIGHT_TOLERANCE_MM
+from bed_bpp_env.environment.cuboid import Cuboid
 from bed_bpp_env.environment.item_3d import Item3D
 
 logger = logging.getLogger(__name__)
@@ -51,11 +53,11 @@ class Space3D:
         self.__UppermostItems = np.zeros(targetShape, dtype=int)
         """This `np.ndarray` has the same shape as the height map of the three-dimensional space and stores a counter that represents the counter of the uppermost item."""
 
-    def getPlacedItems(self) -> list[Item3D]:
+    def getPlacedItems(self) -> list[Cuboid]:
         """Returns all placed items as list of `Item3D`."""
         return list(self.__PlacedItems.values())
 
-    def addItem(self, item: Item3D, orientation: int, flbcoordinates: list) -> None:
+    def addItem(self, item: Cuboid, orientation: int, flbcoordinates: list) -> None:
         """
         Adds an item to the virtual three-dimensional space and calculates the required attributes for the stability check evaluation.
 
@@ -68,7 +70,8 @@ class Space3D:
         flbcoordinates: list
             The FLB coordinates in which the item is placed.
         """
-        item.storeFLBCoordinates(flbcoordinates)
+        item.flb = Position3D(x=flbcoordinates[0], y=flbcoordinates[1], z=flbcoordinates[2])
+
         itemArray = item.getRepresentation()
         # define the area where the item is located
         startX, startY = flbcoordinates[0], flbcoordinates[1]
@@ -273,7 +276,7 @@ class Space3D:
             return [(0, 0, 0)]
 
         # create a list of height levels
-        targetHeightLevels = [0] + list(set([item.getFLBCoordinates()[2] + item.getHeight() for item in placedItems]))
+        targetHeightLevels = [0] + list(set([item.flb.z + item.height for item in placedItems]))
         targetHeightLevels.sort()
 
         threeDimCornerPoints = []
@@ -285,7 +288,7 @@ class Space3D:
                 break
 
             # create a subset of placed items that are located above the height level
-            I_k = [item for item in placedItems if ((item.getFLBCoordinates()[2] + item.getHeight()) > heightValue)]
+            I_k = [item for item in placedItems if ((item.flb.z + item.height) > heightValue)]
 
             # search for corner points in 2D
             twoDimCornerPoints = self.__get2DCorners(I_k, itemdimension[0:2])
@@ -302,7 +305,7 @@ class Space3D:
 
         return threeDimCornerPoints
 
-    def __get2DCorners(self, placeditems: list, itemdimension: tuple) -> list:
+    def __get2DCorners(self, placeditems: list[Cuboid], itemdimension: tuple) -> list:
         """
         Determines the corner points of the placed items and returns them. The corner points are calculated like described in the algorithm `2D-CORNERS` in (Martello et al, 2000).
 
@@ -319,11 +322,10 @@ class Space3D:
             The corner points for an item that has the given dimension.
         """
 
-        def __getEndpointYthenX(item: Item3D) -> tuple:
+        def __getEndpointYthenX(item: Cuboid) -> tuple:
             """Returns the endpoint of the item as (y, x)."""
-            xCoordinate, yCoordinate, _ = item.getFLBCoordinates()
-            deltaY, deltaX = item.getRepresentation().shape
-            return (yCoordinate + deltaY, xCoordinate + deltaX)
+            delta_y, delta_x = item.getRepresentation().shape
+            return (item.flb.y + delta_y, item.flb.x + delta_x)
 
         if placeditems == []:
             return [(0, 0)]
@@ -332,10 +334,10 @@ class Space3D:
         placeditems.sort(key=__getEndpointYthenX, reverse=True)
 
         # determine extreme points
-        itemsForExtremePoints = []
+        itemsForExtremePoints: list[Cuboid] = []
         maxXValue = 0
         for item in placeditems:
-            valEndpointX = item.getFLBCoordinates()[0] + item.getRepresentation().shape[1]
+            valEndpointX = item.flb.x + item.getRepresentation().shape[1]
             if (valEndpointX) > maxXValue:
                 itemsForExtremePoints.append(item)
                 maxXValue = valEndpointX
@@ -344,17 +346,17 @@ class Space3D:
         nExtremePoints = len(itemsForExtremePoints)
         twoDimCornerPoints = []
         firstCandiate = itemsForExtremePoints.pop(0)
-        prevX = firstCandiate.getFLBCoordinates()[0] + firstCandiate.getRepresentation().shape[1]
-        prevY = firstCandiate.getFLBCoordinates()[1] + firstCandiate.getRepresentation().shape[0]
+        prevX = firstCandiate.flb.x + firstCandiate.getRepresentation().shape[1]
+        prevY = firstCandiate.flb.y + firstCandiate.getRepresentation().shape[0]
         twoDimCornerPoints.append((0, prevY))
 
         if nExtremePoints > 1:
             lastCandiate = itemsForExtremePoints.pop()
-            lastX = lastCandiate.getFLBCoordinates()[0] + lastCandiate.getRepresentation().shape[1]
+            lastX = lastCandiate.flb.x + lastCandiate.getRepresentation().shape[1]
 
             for candidate in itemsForExtremePoints:
-                candX = candidate.getFLBCoordinates()[0] + candidate.getRepresentation().shape[1]
-                candY = candidate.getFLBCoordinates()[1] + candidate.getRepresentation().shape[0]
+                candX = candidate.flb.x + candidate.getRepresentation().shape[1]
+                candY = candidate.flb.y + candidate.getRepresentation().shape[0]
 
                 twoDimCornerPoints.append((prevX, candY))
                 prevX = candX

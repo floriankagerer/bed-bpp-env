@@ -57,7 +57,7 @@ if __name__ == "__main__":
     env = RescaleWrapper(base_env)  # base_env = env.env
     env = EquallyDistributedRewardWrapper(env)
 
-    observation, info = env.reset(data_for_episodes=ORDERS_FOR_EPISODES)
+    observation, info = env.reset(order_sequence=order_sequence)
 
     for _ in range(1000):
         env.render()

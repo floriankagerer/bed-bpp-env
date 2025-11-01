@@ -2,10 +2,12 @@
 This wrapper distribtues the reward equally in each call of `step`.
 """
 
+from typing import Optional
 import gymnasium as gym
 import matplotlib.pyplot as plt
 import numpy as np
 
+from bed_bpp_env.data_model.order import Order
 from bed_bpp_env.utils import PARSEDARGUMENTS
 
 VISUALIZE_REWARD_DISTRIBUTION = PARSEDARGUMENTS.get("vis_debug", False)
@@ -41,7 +43,8 @@ class EquallyDistributedRewardWrapper(gym.Wrapper):
         """Calculate the reward and return it."""
         return 1.0 / (self.__N_ITEMS_IN_ORDER)
 
-    def reset(self, data_for_episodes={}) -> tuple:
+    def reset(self, order_sequence: Optional[list[Order]] = None) -> tuple:
+        # def reset(self, data_for_episodes={}) -> tuple:
         """
         If `VISUALIZE_REWARD_DISTRIBUTION` is set to `True`, a plot is displayed that shows the original (=old) reward, the new values of the reward and the accumulative value of the new reward. Note that the `plt.show()` methods blocks the simulation!
 
@@ -63,7 +66,7 @@ class EquallyDistributedRewardWrapper(gym.Wrapper):
         if not (self.__Rewards["old"] is None) and VISUALIZE_REWARD_DISTRIBUTION:
             self.__visualizeDistributedReward()
 
-        observation, info = self.env.reset(data_for_episodes)
+        observation, info = self.env.reset(order_sequence)
         self.__N_ITEMS_IN_ORDER = info.get("n_items_in_order", np.inf)
         self.__resetRewardDict()
 

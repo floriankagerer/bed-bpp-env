@@ -9,6 +9,7 @@ import json
 import logging
 import pathlib
 import platform
+from typing import Optional
 
 import cv2
 import gymnasium as gym
@@ -17,9 +18,11 @@ import PIL
 from gymnasium.spaces import Box, Dict, Discrete
 from PIL import Image, ImageDraw, ImageFont
 
+from bed_bpp_env.data_model.item import Item
+from bed_bpp_env.data_model.order import Order
 from bed_bpp_env.data_model.position_3d import Position3D
 from bed_bpp_env.environment import MAXHEIGHT_OBSERVATION_SPACE, SIZE_EURO_PALLET, SIZE_ROLLCONTAINER
-from bed_bpp_env.environment.item_3d import Item3D
+from bed_bpp_env.environment.cuboid import Cuboid
 from bed_bpp_env.environment.lc import LC
 from bed_bpp_env.environment.space_3d import Space3D
 from bed_bpp_env.evaluation.kpis import KPIs
@@ -85,7 +88,7 @@ class PalletizingEnvironment(gym.Env):
 
         self._orders = {}
         """The orders that are given whenever the method `reset` is called with a non-empty parameter `data_for_episodes`. The format is identical to the format of the benchmark data."""
-        self._current_order = {}
+        self._current_order: Optional[Order] = None
         """This dictionary has the keys `"key"`, `"order"`, and `"seq"`, whose values store the key of the order as given in the order data, the current order itself, and the number in the sequence of all orders, respectively."""
         self._order_sequence = []  # list of the keys of the given order data
         """This list contains all keys in the order data in the same order as it is given."""
@@ -143,13 +146,13 @@ class PalletizingEnvironment(gym.Env):
         info = {}
 
         # get the variables that are needed here
-        sVars = self.__getStepVariables(action)
-        itemForAction = action["item"]
-        if not (self.__isItemSelectable(itemForAction)):
-            raise ValueError(f"item {itemForAction} must not be selected.")
+        sVars = self._get_step_variables(action)
+        item_for_action = action["item"]
+        if not (self.__isItemSelectable(item_for_action)):
+            raise ValueError(f"item {item_for_action} must not be selected.")
 
         # define the item
-        item = Item3D(itemForAction)
+        item = Cuboid(item_for_action)
         item.setOrientation(sVars["orientation"])
 
         # create a np.ndarray that has the same shape as the target, its elements are 1 if the item is located in this region and 0 otherwise
@@ -176,7 +179,7 @@ class PalletizingEnvironment(gym.Env):
 
         # define the action in the needed format
         actionExt = {
-            "item": itemForAction,
+            "item": item_for_action,
             "flb_coordinates": [sVars["xCoord"], sVars["yCoord"], maxHeightInTargetArea],
             "orientation": sVars["orientation"],
         }
@@ -189,7 +192,7 @@ class PalletizingEnvironment(gym.Env):
         info.update({"support_area/%": item.getPercentageDirectSupportSurface()})
 
         # prepare for next call of step
-        additionalInfo = self.__prepareForNextStep(itemForAction)
+        additionalInfo = self.__prepareForNextStep(item_for_action)
         done = additionalInfo.pop("done")
         info.update(additionalInfo)
 
@@ -199,12 +202,12 @@ class PalletizingEnvironment(gym.Env):
         self._kpis.update()
 
         reward = self.__getReward(done)
-        info = self.__getInfo("step", info)
+        info = self.__getInfo("step", info, done)
 
         stepReturns = self._target_space.getHeights(), reward, done, info
         return stepReturns
 
-    def reset(self, data_for_episodes: dict = {}) -> tuple[np.ndarray, dict]:
+    def reset(self, order_sequence: Optional[list[Order]] = None) -> tuple[np.ndarray, dict]:
         """
         This method is responsible for
         (a) the change of the orders, e.g., from "00100001" -> "00100002",
@@ -229,40 +232,35 @@ class PalletizingEnvironment(gym.Env):
         # # # # # Change the Order that is considered # # # # #
         done = False
         # change the current order
-        if self._current_order == {} or not (data_for_episodes == {}):
-            self._orders = data_for_episodes
-            self._order_sequence = list(self._orders.keys())
-            self._current_order["seq"] = 0
-            orderKey = self._order_sequence[self._current_order["seq"]]
-            self._current_order["key"] = orderKey
-            self._current_order["order"] = self._orders[orderKey]
+        if self._current_order is None or order_sequence is not None:
+            self._orders = order_sequence.copy()
+            self._order_sequence = [order.id for order in self._orders]
+            self._current_order = self._orders[0]
 
-        elif self._current_order["seq"] + 1 >= len(self._order_sequence):
+        elif self._current_order.id == self._order_sequence[-1]:
             # reached the last order in the data
             done = True
-            self._current_order["seq"] += 1
 
         else:
-            self._current_order["seq"] += 1
-            orderKey = self._order_sequence[self._current_order["seq"]]
-            self._current_order["key"] = orderKey
-            self._current_order["order"] = self._orders[orderKey]
+            current_order_id = self._current_order.id
+            next_order_index = self._order_sequence.index(current_order_id) + 1
+            self._current_order = self._orders[next_order_index]
 
-        if not (done):
-            logger.info(f"CURRENT ORDER:{self._current_order}\n\n\n")
+        if not done:
+            logger.info(f"CURRENT ORDER:{self._current_order.id}\n\n\n")
 
         # # # # # Reset the Attributes # # # # #
-        self._item_sequence_counter = 1
+        self._item_sequence_counter = 0
         # change the size related to the palletizing target and the action space
-        palletizingTarget = self._current_order["order"]["properties"]["target"]
-        if palletizingTarget == "rollcontainer":
+        palletizing_target = self._current_order.properties.target
+        if palletizing_target == "rollcontainer":
             self._size = SIZE_ROLLCONTAINER
-        elif palletizingTarget == "euro-pallet":
+        elif palletizing_target == "euro-pallet":
             self._size = SIZE_EURO_PALLET
         else:
             # size is given as `"x,y,z"`
-            sizes = palletizingTarget.split(",")
-            self._size = tuple([int(sizes[0]), int(sizes[1])])
+            sizes = palletizing_target.split(",")
+            self._size = (int(sizes[0]), int(sizes[1]))
 
         self.action_space = Dict(
             {
@@ -274,7 +272,7 @@ class PalletizingEnvironment(gym.Env):
 
         del self._visualization
         self._visualization = PalletizingEnvironmentVisualization(
-            visID=self._current_order["key"], target=palletizingTarget
+            visID=self._current_order.id, target=palletizing_target
         )
 
         self._target_space.reset(self._size)
@@ -284,14 +282,14 @@ class PalletizingEnvironment(gym.Env):
 
         self._items_selection = []
         self._items_preview = []
-        if not (done):
+        if not done:
             # only update items if we do not
             self.__updateItemsSelection()
             self.__updateItemsPreview()
 
         # # # # # Obtain the Observation and Info # # # # #
         observation = self._target_space.getHeights()
-        info = self.__getInfo("reset")
+        info = self.__getInfo("reset", done=done)
 
         return observation, info
 
@@ -331,10 +329,8 @@ class PalletizingEnvironment(gym.Env):
             fontTxt = ImageFont.truetype(pathToFont, size=20)
 
             action = self._actions[-1]
-            item = action["item"]
-            txtItem = ""
-            for key, value in item.items():
-                txtItem += f"{key}: {value}\n"
+            item: Item = action["item"]
+            txtItem = item.repr_key_value_pair()
 
             draw.text((700, 5), "Item", font=fontHeader, fill="black", align="left")
             draw.text((700, 40), txtItem, font=fontTxt, fill="black", align="left")
@@ -387,14 +383,13 @@ class PalletizingEnvironment(gym.Env):
 
     # utils
 
-    def __isItemSelectable(self, itemdict: dict) -> bool:
+    def __isItemSelectable(self, item: Item) -> bool:
         """
         This method checks whether the item that is given in an action is selectable in the current situation.
 
         Parameters.
         -----------
-        item: Item3D
-            tbd.
+
 
         Returns.
         --------
@@ -403,28 +398,34 @@ class PalletizingEnvironment(gym.Env):
         """
         selectable = False
 
-        tempdict = itemdict
-        if not (self._size_multiplicator == 1):
+        if self._size_multiplicator != 1:
             # adapt the item size whenever the RescaleWrapper is used
-            tempdict["length/mm"] *= self._size_multiplicator[0]
-            tempdict["width/mm"] *= self._size_multiplicator[1]
+            item.length_mm *= self._size_multiplicator[0]
+            item.width_mm *= self._size_multiplicator[1]
 
-        if tempdict in self._items_selection:
+        if item in self._items_selection:
             selectable = True
 
         return selectable
 
     def __savePackingPlan(self, tofile: bool = False) -> None:
-        if self._current_order == {}:
+        if self._current_order is None:
             # do nothing
             pass
         else:
-            orderKey = self._current_order["key"]
-            if not (orderKey in self._packing_plans.keys()):
-                self._packing_plans[orderKey] = self._actions
+            order_key = self._current_order.id
+            if order_key not in self._packing_plans.keys():
+                # serialize items
+                actions_with_serialized_items = []
+                for action in self._actions:
+                    item: Item = action.get("item")
+                    serializable_action = action
+                    serializable_action["item"] = item.to_dict()
+                    actions_with_serialized_items.append(serializable_action)
+                self._packing_plans[order_key] = actions_with_serialized_items
 
-                packingPlan = {orderKey: self._actions}
-                logger.info(f"PackingPlan = {packingPlan}")
+                packing_plan = {order_key: self._actions}
+                logger.info(f"PackingPlan = {packing_plan}")
 
         if True:  # tofile:
             packingPlansFile = "packing_plans.json"
@@ -442,43 +443,42 @@ class PalletizingEnvironment(gym.Env):
             reward = 0.0
         return reward
 
-    def __getInfo(self, calledby: str = "step", additionalinfo: dict = {}) -> dict:
+    def __getInfo(self, calledby: str = "step", additionalinfo: Optional[dict] = None, done: bool = False) -> dict:
         """Get the info dictionary after reset or step."""
-        info = additionalinfo
+        if additionalinfo is None:
+            info = {}
+        else:
+            info = additionalinfo
 
         if calledby == "step":
             info.update(
                 {
                     "all_orders_considered": None,
                     "item_volume_on_target/cm^3": self._palletized_volume,
-                    "n_items_in_order": len(self._current_order["order"]["item_sequence"]),
+                    "n_items_in_order": len(self._current_order.item_sequence),
                 }
             )
 
         elif calledby == "reset":
-            # obtain whether all orders are considered
-            done = self._current_order["seq"] >= len(
-                self._order_sequence
-            )  # do not need +1 because the counter is already increased
-
-            if not (done):
+            # if done is True, then all orders are considered
+            if not done:
                 # obtain np.array with allowed area
-                nextItems = self.__obtainNextItems()
-                item = nextItems["selection"][0]
-                allowedArea = self.__obtainAllowedAreas(item)
+                next_items = self.__obtainNextItems()
+                item = next_items["selection"][0]
+                allowed_area = self._obtain_allowed_areas(item)
 
-                cornerPoints = self.__determineCornerPoints(nextItems["selection"])
+                corner_points = self.__determineCornerPoints(next_items["selection"])
 
                 info.update(
                     {
                         "all_orders_considered": done,
-                        "allowed_area": allowedArea,
-                        "order_id": self._current_order["key"],
-                        "palletizing_target": self._current_order["order"]["properties"]["target"],
-                        "next_items_selection": nextItems["selection"],
-                        "next_items_preview": nextItems["preview"],
-                        "n_items_in_order": len(self._current_order["order"]["item_sequence"]),
-                        "corner_points": cornerPoints,
+                        "allowed_area": allowed_area,
+                        "order_id": self._current_order.id,
+                        "palletizing_target": self._current_order.properties.target,
+                        "next_items_selection": next_items["selection"],
+                        "next_items_preview": next_items["preview"],
+                        "n_items_in_order": len(self._current_order.item_sequence),
+                        "corner_points": corner_points,
                     }
                 )
 
@@ -499,31 +499,30 @@ class PalletizingEnvironment(gym.Env):
 
         return info
 
-    def __getStepVariables(self, action: dict) -> dict:
+    def _get_step_variables(self, action: dict) -> dict:
         """This method creates the variables that are needed in the `step` method, depending on the given action."""
         orientation = action["orientation"]
-        xCoord, yCoord = int(action["x"]), int(action["y"])
+        x_coord, y_coord = int(action["x"]), int(action["y"])
 
-        item = action["item"]
-        itemLength, itemWidth, itemHeight = int(item["length/mm"]), int(item["width/mm"]), int(item["height/mm"])
+        item: Item = action["item"]
 
         if orientation == 0:
-            deltaX, deltaY = itemLength, itemWidth
+            delta_x, delta_y = item.length_mm, item.width_mm
         elif orientation == 1:
-            deltaX, deltaY = itemWidth, itemLength
+            delta_x, delta_y = item.width_mm, item.length_mm
 
-        stepVar = {
-            "xCoord": xCoord,
-            "yCoord": yCoord,
-            "deltaX": deltaX,
-            "deltaY": deltaY,
-            "itemHeight": itemHeight,
+        step_var = {
+            "xCoord": x_coord,
+            "yCoord": y_coord,
+            "deltaX": delta_x,
+            "deltaY": delta_y,
+            "itemHeight": item.height_mm,
             "orientation": orientation,
         }
 
-        return stepVar
+        return step_var
 
-    def __obtainAllowedAreas(self, item: dict) -> dict:
+    def _obtain_allowed_areas(self, item: Item) -> dict:
         """
         This method returns a dictionary that contains np.arrays, which define in which coordinates the given item can be placed.
         Returns.
@@ -539,27 +538,29 @@ class PalletizingEnvironment(gym.Env):
                 <orientation>: np.array # element == 1: allowed; element == 0: not allowed
             }
         """
-        allowedArea = {}
+        allowed_area = {}
+        # if item is None:
+        #     return {}  # {0: np.zeros((self._size), dtype=int), 1: np.zeros((self._size), dtype=int)}
 
         # create the arrays such that the item is completely inside the palletizing target
-        itemLength, itemWidth = int(item["length/mm"]), int(item["width/mm"])
+        item_length, item_width = int(item.length_mm), int(item.width_mm)
         for orientation in range(self._n_orientations):
             if orientation == 0:
-                deltaX, deltaY = itemLength, itemWidth
+                delta_x, delta_y = item_length, item_width
             elif orientation == 1:
-                deltaX, deltaY = itemWidth, itemLength
+                delta_x, delta_y = item_width, item_length
 
-            if (self._size[1] >= deltaY) and (self._size[0] >= deltaX):
+            if (self._size[1] >= delta_y) and (self._size[0] >= delta_x):
                 # check whether the items can be placed in the target
-                allowedCoordinates = np.zeros((self._size[1], self._size[0]), dtype=int)
-                allowedCoordinates[0 : self._size[1] - deltaY, 0 : self._size[0] - deltaX] = np.ones(
-                    (self._size[1] - deltaY, self._size[0] - deltaX)
+                allowed_coordinates = np.zeros((self._size[1], self._size[0]), dtype=int)
+                allowed_coordinates[0 : self._size[1] - delta_y, 0 : self._size[0] - delta_x] = np.ones(
+                    (self._size[1] - delta_y, self._size[0] - delta_x)
                 )
-                allowedArea[orientation] = allowedCoordinates
+                allowed_area[orientation] = allowed_coordinates
 
-        return allowedArea
+        return allowed_area
 
-    def __prepareForNextStep(self, placeditem: dict) -> dict:
+    def __prepareForNextStep(self, placeditem: Item) -> dict:
         """
         This method prepares the environment for the next call of the `step` method. Hence, the _item_sequence_counter is increased and the next palletizing items and their allowed positions on the target are calculated, unless the current episode has not finished (after the currently called `step`).
 
@@ -571,7 +572,7 @@ class PalletizingEnvironment(gym.Env):
         info = {}
 
         self._item_sequence_counter += 1
-        if self._item_sequence_counter > len(self._current_order["order"]["item_sequence"]):
+        if self._item_sequence_counter >= len(self._current_order.item_sequence):
             done = True  # episode finished
             info.update(
                 {
@@ -586,7 +587,7 @@ class PalletizingEnvironment(gym.Env):
             self.__updateItemsPreview()
             nextItems = self.__obtainNextItems()
             item = nextItems["selection"][0]
-            allowedArea = self.__obtainAllowedAreas(item)
+            allowedArea = self._obtain_allowed_areas(item)
 
             # get the corner points for the items that can be selected
             cornerPoints = self.__determineCornerPoints(nextItems["selection"])
@@ -647,19 +648,17 @@ class PalletizingEnvironment(gym.Env):
         ----------
         Call this method before `self.__updateItemsPreview`.
         """
-        if (self._item_sequence_counter == 1) or (len(self._items_preview) == 0):
-            if not (self._item_sequence_counter == 1):
+        if (self._item_sequence_counter == 0) or (len(self._items_preview) == 0):
+            if self._item_sequence_counter != 0:
                 # not first call -> remove itemdict from selection
                 self._items_selection.remove(itemdict)
             # first call in env.reset in an episode
             for s in range(self._n_item_selection):
-                itemKey = str(self._item_sequence_counter + s)
-                if itemKey in self._current_order["order"]["item_sequence"].keys():
-                    self._items_selection.append(
-                        self._current_order["order"]["item_sequence"][str(self._item_sequence_counter + s)]
-                    )
+                item_index = self._item_sequence_counter + s
+                if item_index < len(self._current_order.item_sequence):
+                    self._items_selection.append(self._current_order.item_sequence[item_index])
                 else:
-                    self._items_selection.append({})
+                    self._items_selection.append(None)
         else:
             # call in env.step
             self._items_selection.remove(itemdict)
@@ -686,24 +685,24 @@ class PalletizingEnvironment(gym.Env):
                     self._items_preview.append({})
 
     def __updatePalletVisualization(self, action: dict) -> None:
-        item = action["item"]
+        item: Item = action["item"]
         flbcoordinates = action["flb_coordinates"]
         orientation = action["orientation"]
         if orientation == 0:
-            length = item["length/mm"]
-            width = item["width/mm"]
+            length = item.length_mm
+            width = item.width_mm
 
         elif orientation == 1:
-            length = item["width/mm"]
-            width = item["length/mm"]
+            length = item.width_mm
+            width = item.length_mm
 
         lc = LC(
-            id=item["id"],
-            sku=item["article"],
+            id=item.id,
+            sku=item.article,
             type=None,
             length=length,
             width=width,
-            height=item["height/mm"],
+            height=item.height_mm,
             weight=None,
             position=Position3D(x=flbcoordinates[0], y=flbcoordinates[1], z=flbcoordinates[2]),
         )
@@ -711,7 +710,7 @@ class PalletizingEnvironment(gym.Env):
         self._visualization.addLoadCarrier(lc)
         self._visualization.updateVisualization()
 
-    def __determineCornerPoints(self, possibleitems: list) -> dict:
+    def __determineCornerPoints(self, possibleitems: list[Item]) -> dict:
         """
         Determines the corner points for all items that are given.
 
@@ -725,22 +724,21 @@ class PalletizingEnvironment(gym.Env):
         cornerPoints: list
             The corner points for an item that is specified by its dimension.
         """
-        cornerPoints = {}
+        corner_points = {}
         for item in possibleitems:
-            itemArticle = item.get("article", None)
-            if not (itemArticle is None):
-                cornerPoints[itemArticle] = {}
+            if item is not None:
+                corner_points[item.article] = {}
                 for orientation in range(self._n_orientations):
                     if orientation == 0:
-                        length, width, height = item.get("length/mm"), item.get("width/mm"), item.get("height/mm")
+                        length, width, height = item.length_mm, item.width_mm, item.height_mm
                     elif orientation == 1:
-                        width, length, height = item.get("length/mm"), item.get("width/mm"), item.get("height/mm")
+                        width, length, height = item.length_mm, item.width_mm, item.height_mm
 
-                    cornerPoints[itemArticle][orientation] = self._target_space.getCornerPointsIn3D(
+                    corner_points[item.article][orientation] = self._target_space.getCornerPointsIn3D(
                         (length, width, height)
                     )
 
-        return cornerPoints
+        return corner_points
 
     def setSizeMultiplicator(self, size_multiplicator: tuple) -> None:
         """

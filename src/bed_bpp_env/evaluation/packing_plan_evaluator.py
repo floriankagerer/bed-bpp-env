@@ -9,7 +9,9 @@ from typing import Literal
 
 import pandas as pd
 
-from bed_bpp_env.environment.item_3d import Item3D
+from bed_bpp_env.data_model.item import Item
+from bed_bpp_env.data_model.order import Order
+from bed_bpp_env.environment.cuboid import Cuboid
 from bed_bpp_env.environment.space_3d import Space3D
 from bed_bpp_env.evaluation import EVALOUTPUTDIR, FILE_KPI_DEFINITION, KPI_DEFINITION
 from bed_bpp_env.evaluation.kpis import KPIs
@@ -32,7 +34,7 @@ class PackingPlanEvaluator:
         The values of the KPIs for each order that are stored in a file.
     __KPIs: KPIs
         tbd
-    __Order: dict
+    _order: dict
           The order for which the currently investigated packing plan was created.'
     __OrderID: str
         The ID of the order for which the currently investigated packing plan was created.
@@ -47,7 +49,7 @@ class PackingPlanEvaluator:
         """The values of the KPIs for each order that are stored in a file."""
         self.__OrderID = ""
         """The ID of the order for which the currently investigated packing plan was created."""
-        self.__Order = {}
+        self._order = {}
         """The order for which the currently investigated packing plan was created."""
         self.__PackingPlan = []
         """The packing plan that is currently investigated. It is a list of actions."""
@@ -133,7 +135,7 @@ class PackingPlanEvaluator:
         unpalletizedOrderRatio: float
             Indicates the ratio of an order that is not palletized.
         """
-        nItemsInOrder = len(self.__Order["item_sequence"])
+        nItemsInOrder = len(self._order["item_sequence"])
         nUnpalItems = nItemsInOrder - len(self.__PackingPlan)
 
         return float(nUnpalItems / nItemsInOrder)
@@ -172,7 +174,7 @@ class PackingPlanEvaluator:
         evalHeightLevel = evalheightlevel
 
         isStable = self.evalStability()
-        itemsInOrder = len(self.__Order["item_sequence"])
+        itemsInOrder = len(self._order["item_sequence"])
         unpalletizedItems = self.__TargetSpace.getItemsAboveHeightLevel(evalHeightLevel)
         itemsOnPallet = len(self.__TargetSpace.getPlacedItems())
 
@@ -272,27 +274,33 @@ class PackingPlanEvaluator:
         }
         """
         self.__OrderID = orderid
-        self.__Order = order
+
+        order_data = {"id": orderid}
+        order_data.update(order)
+
+        self._order = Order.from_dict(order_data)
         self.__PackingPlan = packingplan
 
         logger.info(f"evaluate order {orderid}")
 
         # rebuild target space
-        target = self.__Order["properties"]["target"]
+        target = self._order.properties.target
         if target == "euro-pallet":
-            targetSize = (1200, 800)
+            target_size = (1200, 800)
         elif target == "rollcontainer":
-            targetSize = (800, 700)
+            target_size = (800, 700)
         else:
             raise ValueError(f"target {target} unknown")
-        self.__TargetSpace.reset(targetSize)
-        self.__KPIs.reset(self.__TargetSpace, {"order": self.__Order})
+        self.__TargetSpace.reset(target_size)
+
+        self.__KPIs.reset(self.__TargetSpace, self._order)
 
         for action in self.__PackingPlan:
-            item = Item3D(action["item"])
-            item.setOrientation(action["orientation"])
+            item = Item.from_dict(action["item"])
+            cuboid = Cuboid(item)
+            cuboid.setOrientation(action["orientation"])
             flbCoordinates = [int(coord) for coord in action["flb_coordinates"]]
-            self.__TargetSpace.addItem(item, action["orientation"], flbCoordinates)
+            self.__TargetSpace.addItem(cuboid, action["orientation"], flbCoordinates)
             self.__KPIs.update()
 
         # obtain the values of the KPIs

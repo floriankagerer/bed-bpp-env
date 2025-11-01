@@ -258,14 +258,14 @@ class Cuboid(object):
         """Returns the list of all items that are belowed this object."""
         return self._items_below
 
-    def storeNeighbors(self, neighbors: dict) -> None:
+    def storeNeighbors(self, neighbors: dict[str, list[Cuboid]]) -> None:
         """
         Stores the neighbors of this object and adds itself to its neighbors on the corresponding edge.
 
         Example.
         --------
         >>> neighbors = {
-            "north": [environment.Item3D object],
+            "north": [Cuboid object],
             "east": [],
             "south": [],
             "west": []
@@ -276,9 +276,9 @@ class Cuboid(object):
         # edgeNeighbor = EDGE_MAPPER[edge_self]
         EDGE_MAPPER = {"north": "south", "east": "west", "south": "north", "west": "east"}
 
-        for edgeSelf, neighborList in neighbors.items():
-            for neighbor in neighborList:
-                neighbor.addNeighbor(EDGE_MAPPER[edgeSelf], self)
+        for edge_self, edge_neighbors in neighbors.items():
+            for neighbor in edge_neighbors:
+                neighbor.addNeighbor(EDGE_MAPPER[edge_self], self)
 
         logger.debug(f'item "{self.id}" neighbors: {self._neighbors}')
 
@@ -290,13 +290,13 @@ class Cuboid(object):
         -----------
         edge: str
             On which edge have `self` and `neighbor` contact. Values can be `"north"`, `"east"`, `"south"`, or `"west"`.
-        neighbor: Item3D
+        neighbor: Cuboid
             The neighbor that is added to this object.
         """
         if neighbor not in self._neighbors[edge]:
             self._neighbors[edge].append(neighbor)
 
-    def getNeighbors(self) -> dict:
+    def getNeighbors(self) -> dict[str, list[Cuboid]]:
         """
         Returns the neighbors in each direction of this object.
 
@@ -304,7 +304,7 @@ class Cuboid(object):
         --------
         >>> Item3D.getNeighbors()
         {
-            "north": [environment.Item3D object],
+            "north": [Cuboid object],
             "east": [],
             "south": [],
             "west": []
@@ -322,27 +322,27 @@ class Cuboid(object):
             self._percentage_direct_support_surface = 0.0  # initial value
             self._direct_support_surface = np.zeros(self._representation.shape, dtype=int)
 
-            selfCoordinatesX, selfCoordinatesY = self.getCoordinatesXRange(), self.getCoordinatesYRange()
-            for itemBelow in self._items_below:
-                overlappingPointsX = set.intersection(selfCoordinatesX, itemBelow.getCoordinatesXRange())
-                overlappingPointsY = set.intersection(selfCoordinatesY, itemBelow.getCoordinatesYRange())
+            self_coordinate_x, self_coordinate_y = self.getCoordinatesXRange(), self.getCoordinatesYRange()
+            for item_below in self._items_below:
+                overlapping_points_x = set.intersection(self_coordinate_x, item_below.getCoordinatesXRange())
+                overlapping_points_y = set.intersection(self_coordinate_y, item_below.getCoordinatesYRange())
 
-                self._percentage_direct_support_surface += (len(overlappingPointsX) * len(overlappingPointsY)) / (
+                self._percentage_direct_support_surface += (len(overlapping_points_x) * len(overlapping_points_y)) / (
                     self._representation.shape[0] * self._representation.shape[1]
                 )
 
                 # create the DirectSupportSurface ndarray
-                startX, startY = (
-                    min(overlappingPointsX) - self.flb.x,
-                    min(overlappingPointsY) - self.flb.y,
+                start_x, start_y = (
+                    min(overlapping_points_x) - self.flb.x,
+                    min(overlapping_points_y) - self.flb.y,
                 )
-                endX, endY = (
-                    max(overlappingPointsX) - self.flb.x + 1,
-                    max(overlappingPointsY) - self.flb.y + 1,
+                end_x, end_y = (
+                    max(overlapping_points_x) - self.flb.x + 1,
+                    max(overlapping_points_y) - self.flb.y + 1,
                 )
 
-                self._direct_support_surface[startY:endY, startX:endX] = np.ones(
-                    (endY - startY, endX - startX), dtype=int
+                self._direct_support_surface[start_y:end_y, start_x:end_x] = np.ones(
+                    (end_y - start_y, end_x - start_x), dtype=int
                 )
 
         logger.debug(f'item "{self.id}" direct support surface(%): {self._percentage_direct_support_surface}')
@@ -354,57 +354,61 @@ class Cuboid(object):
         else:
             self._effective_support_surface = np.zeros(self._representation.shape, dtype=int)
 
-            selfCoordinatesX, selfCoordinatesY = self.getCoordinatesXRange(), self.getCoordinatesYRange()
-            for itemBelow in self._items_below:
-                overlappingPointsX = set.intersection(selfCoordinatesX, itemBelow.getCoordinatesXRange())
-                overlappingPointsY = set.intersection(selfCoordinatesY, itemBelow.getCoordinatesYRange())
+            self_coordinate_x, self_coordinate_y = self.getCoordinatesXRange(), self.getCoordinatesYRange()
+            for item_below in self._items_below:
+                overlapping_points_x = set.intersection(self_coordinate_x, item_below.getCoordinatesXRange())
+                overlapping_points_y = set.intersection(self_coordinate_y, item_below.getCoordinatesYRange())
 
                 # create the DirectSupportSurface ndarray
-                startX, startY = (
-                    min(overlappingPointsX) - self.flb.x,
-                    min(overlappingPointsY) - self.flb.y,
+                start_x, start_y = (
+                    min(overlapping_points_x) - self.flb.x,
+                    min(overlapping_points_y) - self.flb.y,
                 )
-                endX, endY = (
-                    max(overlappingPointsX) - self.flb.x + 1,
-                    max(overlappingPointsY) - self.flb.y + 1,
+                end_x, end_y = (
+                    max(overlapping_points_x) - self.flb.x + 1,
+                    max(overlapping_points_y) - self.flb.y + 1,
                 )
 
-                self._effective_support_surface[startY:endY, startX:endX] = np.ones(
-                    (endY - startY, endX - startX), dtype=int
+                self._effective_support_surface[start_y:end_y, start_x:end_x] = np.ones(
+                    (end_y - start_y, end_x - start_x), dtype=int
                 )
 
             if len(self._items_below) > 1:
                 # multi package support => change corners
-                coordsEffectiveSupportSurface = np.argwhere(self._effective_support_surface >= 1)
+                coords_effective_support_surface = np.argwhere(self._effective_support_surface >= 1)
 
-                min1stCoord = np.amin(coordsEffectiveSupportSurface[:, 0])  # min first coord
-                max1stCoord = np.amax(coordsEffectiveSupportSurface[:, 0])  # max first coord
+                min_1st_coord = np.amin(coords_effective_support_surface[:, 0])  # min first coord
+                max_1st_coord = np.amax(coords_effective_support_surface[:, 0])  # max first coord
 
-                candMin1Extr2 = np.where(
-                    coordsEffectiveSupportSurface[:, 0] == min1stCoord, coordsEffectiveSupportSurface[:, 1], np.nan
+                cand_min1_extr2 = np.where(
+                    coords_effective_support_surface[:, 0] == min_1st_coord,
+                    coords_effective_support_surface[:, 1],
+                    np.nan,
                 )
-                min1stMax2nd = int(np.nanmax(candMin1Extr2))
-                min1stMin2nd = int(np.nanmin(candMin1Extr2))
+                min_1st_max_2nd = int(np.nanmax(cand_min1_extr2))
+                min_1st_min_2nd = int(np.nanmin(cand_min1_extr2))
 
-                candMax1Extr2 = np.where(
-                    coordsEffectiveSupportSurface[:, 0] == max1stCoord, coordsEffectiveSupportSurface[:, 1], np.nan
+                cand_max1_extr2 = np.where(
+                    coords_effective_support_surface[:, 0] == max_1st_coord,
+                    coords_effective_support_surface[:, 1],
+                    np.nan,
                 )
-                max1stMax2nd = int(np.nanmax(candMax1Extr2))
-                max1stMin2nd = int(np.nanmin(candMax1Extr2))
+                max_1st_max_2nd = int(np.nanmax(cand_max1_extr2))
+                max_1st_min_2nd = int(np.nanmin(cand_max1_extr2))
 
-                point1 = [min1stCoord, min1stMin2nd]
-                point2 = [min1stCoord, min1stMax2nd]
-                point3 = [max1stCoord, max1stMax2nd]
-                point4 = [max1stCoord, max1stMin2nd]
+                point1 = [min_1st_coord, min_1st_min_2nd]
+                point2 = [min_1st_coord, min_1st_max_2nd]
+                point3 = [max_1st_coord, max_1st_max_2nd]
+                point4 = [max_1st_coord, max_1st_min_2nd]
 
-                startX = min(point1[1], point4[1])
-                startY = min(point1[0], point2[0])
+                start_x = min(point1[1], point4[1])
+                start_y = min(point1[0], point2[0])
 
-                endX = max(point2[1], point3[1]) + 1
-                endY = max(point3[0], point4[0]) + 1
+                end_x = max(point2[1], point3[1]) + 1
+                end_y = max(point3[0], point4[0]) + 1
 
-                self._effective_support_surface[startY:endY, startX:endX] = np.ones(
-                    (endY - startY, endX - startX), dtype=int
+                self._effective_support_surface[start_y:end_y, start_x:end_x] = np.ones(
+                    (end_y - start_y, end_x - start_x), dtype=int
                 )
             else:
                 # single package support

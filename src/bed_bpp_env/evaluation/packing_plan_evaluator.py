@@ -220,8 +220,8 @@ class PackingPlanEvaluator:
         rInterlDenominator = 0
 
         for item in placedItems:
-            itemsBelowItem = item.getItemsBelow()
-            nItemsBelow = len(itemsBelowItem)
+            items_below_item = item.items_below
+            nItemsBelow = len(items_below_item)
 
             if not (nItemsBelow == 0):
                 # item is not directly placed on target
@@ -231,7 +231,7 @@ class PackingPlanEvaluator:
                 if nItemsBelow > 1:
                     rInterlEnumerator += 1
                 elif nItemsBelow == 1:
-                    if not (item.getOrientation() == placedItems[0].getOrientation()):
+                    if item.orientation != placedItems[0].orientation:
                         rInterlEnumerator += 1
 
         logger.debug(f"r_interl = {rInterlEnumerator} / {rInterlDenominator}")
@@ -298,7 +298,7 @@ class PackingPlanEvaluator:
         for action in self.__PackingPlan:
             item = Item.from_dict(action["item"])
             cuboid = Cuboid(item)
-            cuboid.setOrientation(action["orientation"])
+            cuboid.set_orientation(action["orientation"])
             flbCoordinates = [int(coord) for coord in action["flb_coordinates"]]
             self.__TargetSpace.addItem(cuboid, action["orientation"], flbCoordinates)
             self.__KPIs.update()

@@ -18,30 +18,30 @@ class HeightMap:
     """
 
     def __init__(self, title: str = "HeightMap", size: tuple = (1200, 800), initialheight: int = 0) -> None:
-        self.__TITLE = title
+        self._title = title
         """Defining the object for which this height map is created."""
 
-        self.__INITIALHEIGHT = int(initialheight)
+        self._initial_height = int(initialheight)
         """The initial height of the height map."""
 
-        self.__SIZE = size
+        self._size = size
         """The size of the height map. Note that the first element is the size in x-direction and the second in y-direction. Thus, when creating a `np.array`, the elements have to be swapped."""
 
-        self.__Heights = self.__INITIALHEIGHT * np.ones((int(self.__SIZE[1]), int(self.__SIZE[0])), dtype=int)
+        self._heights = self._initial_height * np.ones((int(self._size[1]), int(self._size[0])), dtype=int)
         """The heights on the target represented as `np.array`. Every unit is in millimeters."""
 
-        self.shape = self.__Heights.shape
+        self.shape = self._heights.shape
         """The shape of the height map. This is exactly the same as `np.shape`."""
 
-        self.__PercentageSupportAreas = []
+        self._percentage_support_surface = []
         """Defines how many percentage of an item bottom has direct support of its item below."""
 
     def __str__(self) -> str:
-        prettyString = f"Visualization of {self.__TITLE}"
-        for v in self.__Heights:
-            printString = "{:<3} " * len(v)
-            prettyString += "\n" + printString.format(*v)  # *v is needed to unpack the row
-        return prettyString
+        pretty_string = f"Visualization of {self._title}"
+        for v in self._heights:
+            print_string = "{:<3} " * len(v)
+            pretty_string += "\n" + print_string.format(*v)  # *v is needed to unpack the row
+        return pretty_string
 
     def reset(self, resize: tuple = (1200, 800)) -> None:
         """
@@ -52,53 +52,53 @@ class HeightMap:
             resize: tuple (default = (1200, 800))
                 The size of the height map. The first coordinate is the size in x-direction, the second in y-direction.
         """
-        self.__SIZE = resize
+        self._size = resize
 
-        self.__Heights = self.__INITIALHEIGHT * np.ones((int(self.__SIZE[1]), int(self.__SIZE[0])), dtype=int)
-        self.shape = self.__Heights.shape
-        self.__PercentageSupportAreas = []
+        self._heights = self._initial_height * np.ones((int(self._size[1]), int(self._size[0])), dtype=int)
+        self.shape = self._heights.shape
+        self._percentage_support_surface = []
 
     def show(self) -> None:
-        plt.imshow(self.__Heights, interpolation="nearest")
-        plt.title(self.__TITLE)
+        plt.imshow(self._heights, interpolation="nearest")
+        plt.title(self._title)
         plt.show()
 
     def updateHeightMap(self, flbposition: tuple, other: "HeightMap") -> float:
         """Adds the height map of the item, starting at the FLB coordinates to the height map of a target."""
-        flbCoordinates = [int(coord) for coord in flbposition]
+        flb_coordinates = [int(coord) for coord in flbposition]
         # define the ranges
-        deltaY, deltaX = other.shape
-        xStart, xEnd = flbCoordinates[0], flbCoordinates[0] + deltaX
-        yStart, yEnd = flbCoordinates[1], flbCoordinates[1] + deltaY
+        delta_y, delta_x = other.shape
+        x_start, x_end = flb_coordinates[0], flb_coordinates[0] + delta_x
+        y_start, y_end = flb_coordinates[1], flb_coordinates[1] + delta_y
 
         # calculate the percentage where the item has direct support
-        idxAreaDirectSupport = np.argwhere(self.__Heights[yStart:yEnd, xStart:xEnd] == flbCoordinates[2])
-        percentageDirectItemSupport = float(idxAreaDirectSupport.shape[0]) / float(deltaX * deltaY)
-        self.__PercentageSupportAreas.append(percentageDirectItemSupport)
+        idx_area_direct_support = np.argwhere(self._heights[y_start:y_end, x_start:x_end] == flb_coordinates[2])
+        percentage_direct_item_support = float(idx_area_direct_support.shape[0]) / float(delta_x * delta_y)
+        self._percentage_support_surface.append(percentage_direct_item_support)
         # set all height values of the area where the item map is updated to the target z coordinate
-        self.__Heights[yStart:yEnd, xStart:xEnd] = flbCoordinates[2] * np.ones((deltaY, deltaX), dtype=int)
+        self._heights[y_start:y_end, x_start:x_end] = flb_coordinates[2] * np.ones((delta_y, delta_x), dtype=int)
         # add the height of the item
-        self.__Heights[yStart:yEnd, xStart:xEnd] += other.getHeights()
+        self._heights[y_start:y_end, x_start:x_end] += other.getHeights()
 
-        return percentageDirectItemSupport
+        return percentage_direct_item_support
 
     def getPercentageOfSupportAreas(self):
         """Returns the values of the supporting areas during palletization."""
-        return self.__PercentageSupportAreas
+        return self._percentage_support_surface
 
     def getHeights(self) -> np.ndarray:
-        return self.__Heights
+        return self._heights
 
     def getValues(self):
         return self.getHeights()
 
     def getValue(self, x, y) -> int:
         """Get the height value in (x,y)."""
-        return self.__Heights[y, x]
+        return self._heights[y, x]
 
     def setValue(self, x, y, val) -> None:
         """Sets the given value `val` to the idx (x,y) in the area."""
-        self.__Heights[y, x] = val
+        self._heights[y, x] = val
 
     def getSubMap(self, startcoord, endcoord) -> np.ndarray:
         """Returns the requested part of the height map.
@@ -110,7 +110,7 @@ class HeightMap:
         endcoord: tuple
             Coordinates (x, y)
         """
-        xStart, xEnd = startcoord[0], endcoord[0]
-        yStart, yEnd = startcoord[1], endcoord[1]
+        x_start, x_end = startcoord[0], endcoord[0]
+        y_start, y_end = startcoord[1], endcoord[1]
 
-        return self.__Heights[yStart:yEnd, xStart:xEnd]
+        return self._heights[y_start:y_end, x_start:x_end]

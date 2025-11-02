@@ -146,66 +146,66 @@ class PalletizingEnvironment(gym.Env):
         info = {}
 
         # get the variables that are needed here
-        sVars = self._get_step_variables(action)
+        step_vars = self._get_step_variables(action)
         item_for_action = action["item"]
         if not (self.__isItemSelectable(item_for_action)):
             raise ValueError(f"item {item_for_action} must not be selected.")
 
         # define the item
         item = Cuboid(item_for_action)
-        item.setOrientation(sVars["orientation"])
+        item.set_orientation(step_vars["orientation"])
 
         # create a np.ndarray that has the same shape as the target, its elements are 1 if the item is located in this region and 0 otherwise
-        itemOnTarget = np.zeros((self._size[1], self._size[0]), dtype=int)
-        itemDeltaY, itemDeltaX = item.getRepresentation().shape
-        startX, startY = sVars["xCoord"], sVars["yCoord"]
+        item_on_target = np.zeros((self._size[1], self._size[0]), dtype=int)
+        item_delta_y, item_delta_x = item.array_representation.shape
+        start_x, start_y = step_vars["xCoord"], step_vars["yCoord"]
         try:
-            itemOnTarget[startY : startY + itemDeltaY, startX : startX + itemDeltaX] = np.ones(
-                item.getRepresentation().shape, dtype=int
+            item_on_target[start_y : start_y + item_delta_y, start_x : start_x + item_delta_x] = np.ones(
+                item.array_representation.shape, dtype=int
             )
-        except:
+        except Exception:
             # have to crop item like in `environment.Space3D.addItem`
-            logger.warning(f"cropped item")
-            croppedShape = (
-                min(itemOnTarget.shape[0], startY + itemDeltaY) - startY,
-                min(itemOnTarget.shape[1], startX + itemDeltaX) - startX,
+            logger.warning("cropped item")
+            cropped_shape = (
+                min(item_on_target.shape[0], start_y + item_delta_y) - start_y,
+                min(item_on_target.shape[1], start_x + item_delta_x) - start_x,
             )
-            itemOnTarget[startY : startY + croppedShape[0], startX : startX + croppedShape[1]] = np.ones(
-                croppedShape, dtype=int
+            item_on_target[start_y : start_y + cropped_shape[0], start_x : start_x + cropped_shape[1]] = np.ones(
+                cropped_shape, dtype=int
             )
 
         # obtaiin the FLB height for the item in the selected (x, y)-coordinate
-        maxHeightInTargetArea = int(np.amax(np.multiply(self._target_space.getHeights(), itemOnTarget)))
+        max_height_in_target_area = int(np.amax(np.multiply(self._target_space.getHeights(), item_on_target)))
 
         # define the action in the needed format
-        actionExt = {
+        action_extended = {
             "item": item_for_action,
-            "flb_coordinates": [sVars["xCoord"], sVars["yCoord"], maxHeightInTargetArea],
-            "orientation": sVars["orientation"],
+            "flb_coordinates": [step_vars["xCoord"], step_vars["yCoord"], max_height_in_target_area],
+            "orientation": step_vars["orientation"],
         }
-        self._actions.append(actionExt)
-        info.update({"action_for_vis": actionExt})
-        logger.info(f"step() -> extended action: {actionExt}")
+        self._actions.append(action_extended)
+        info.update({"action_for_vis": action_extended})
+        logger.info(f"step() -> extended action: {action_extended}")
 
         # add the item to the palletizing target
-        self._target_space.addItem(item, actionExt["orientation"], actionExt["flb_coordinates"])
-        info.update({"support_area/%": item.getPercentageDirectSupportSurface()})
+        self._target_space.addItem(item, action_extended["orientation"], action_extended["flb_coordinates"])
+        info.update({"support_area/%": item.percentage_direct_support_surface})
 
         # prepare for next call of step
-        additionalInfo = self.__prepareForNextStep(item_for_action)
-        done = additionalInfo.pop("done")
-        info.update(additionalInfo)
+        additional_info = self.__prepareForNextStep(item_for_action)
+        done = additional_info.pop("done")
+        info.update(additional_info)
 
         # update the attributes
-        self.__updatePalletVisualization(actionExt)
-        self._palletized_volume += (sVars["deltaX"] * sVars["deltaY"] * sVars["itemHeight"]) / 1000.0
+        self.__updatePalletVisualization(action_extended)
+        self._palletized_volume += (step_vars["deltaX"] * step_vars["deltaY"] * step_vars["itemHeight"]) / 1000.0
         self._kpis.update()
 
         reward = self.__getReward(done)
         info = self.__getInfo("step", info, done)
 
-        stepReturns = self._target_space.getHeights(), reward, done, info
-        return stepReturns
+        step_returns = self._target_space.getHeights(), reward, done, info
+        return step_returns
 
     def reset(self, order_sequence: Optional[list[Order]] = None) -> tuple[np.ndarray, dict]:
         """
@@ -306,75 +306,73 @@ class PalletizingEnvironment(gym.Env):
 
         DISPLAYTIME = 100  # ms
 
-        renderImage = Image.new("RGB", (1800, 900), color=(255, 255, 255))
-        testStatus = Image.open(self._visualization.getFilenameOfImage())
-        testStatus = testStatus.resize((800, 800))
-        renderImage.paste(testStatus, (0, 0))
+        render_image = Image.new("RGB", (1800, 900), color=(255, 255, 255))
+        test_status = Image.open(self._visualization.getFilenameOfImage())
+        test_status = test_status.resize((800, 800))
+        render_image.paste(test_status, (0, 0))
 
-        draw = ImageDraw.Draw(renderImage)
+        draw = ImageDraw.Draw(render_image)
         if self._actions == []:
             pass
         else:
             # find path for font
-            usedPlatforn = platform.platform()
-            if "macOS" in usedPlatforn:
-                pathToFont = "~/Library/Fonts/Arial Unicode.ttf"
-            elif "Linux" in usedPlatforn:
-                pathToFont = "/usr/share/fonts/opentype/cabin/Cabin-Regular.otf"
+            used_platform = platform.platform()
+            if "macOS" in used_platform:
+                path_to_font = "~/Library/Fonts/Arial Unicode.ttf"
+            elif "Linux" in used_platform:
+                path_to_font = "/usr/share/fonts/opentype/cabin/Cabin-Regular.otf"
             else:
                 # windows is currently not implemented
                 pass
 
-            fontHeader = ImageFont.truetype(pathToFont, size=30)
-            fontTxt = ImageFont.truetype(pathToFont, size=20)
+            font_header = ImageFont.truetype(path_to_font, size=30)
+            font_txt = ImageFont.truetype(path_to_font, size=20)
 
             action = self._actions[-1]
             item: Item = action["item"]
-            txtItem = item.repr_key_value_pair()
+            txt_item = item.repr_key_value_pair()
 
-            draw.text((700, 5), "Item", font=fontHeader, fill="black", align="left")
-            draw.text((700, 40), txtItem, font=fontTxt, fill="black", align="left")
+            draw.text((700, 5), "Item", font=font_header, fill="black", align="left")
+            draw.text((700, 40), txt_item, font=font_txt, fill="black", align="left")
 
-            coordinateFromAction = action["flb_coordinates"]
-            draw.text((1000, 5), "FLB Coordinates", font=fontHeader, fill="black", align="left")
-            draw.text((1000, 40), str(coordinateFromAction), font=fontTxt, fill="black", align="left")
+            coordinate_from_action = action["flb_coordinates"]
+            draw.text((1000, 5), "FLB Coordinates", font=font_header, fill="black", align="left")
+            draw.text((1000, 40), str(coordinate_from_action), font=font_txt, fill="black", align="left")
 
             orientation = action["orientation"]
-            draw.text((1000, 85), "Orientation", font=fontHeader, fill="black", align="left")
-            draw.text((1000, 120), str(orientation), font=fontTxt, fill="black", align="left")
+            draw.text((1000, 85), "Orientation", font=font_header, fill="black", align="left")
+            draw.text((1000, 120), str(orientation), font=font_txt, fill="black", align="left")
 
-            draw.text((1300, 5), "KPIs", font=fontHeader, fill="black", align="left")
+            draw.text((1300, 5), "KPIs", font=font_header, fill="black", align="left")
             kpis = self._kpis.getPrettyStr()
-            draw.text((1300, 40), kpis, font=fontTxt, fill="black", align="left")
+            draw.text((1300, 40), kpis, font=font_txt, fill="black", align="left")
 
-            palletHeights = self._target_space.getHeights()
+            pallet_heights = self._target_space.getHeights()
             draw.text(
                 (700, 300),
                 f"State of Env (h {MAXHEIGHT_OBSERVATION_SPACE}mm => white)",
-                font=fontHeader,
+                font=font_header,
                 fill="black",
                 align="left",
             )
-            draw.text((700, 335), f"Size = {palletHeights.shape}", font=fontTxt, fill="black", align="left")
+            draw.text((700, 335), f"Size = {pallet_heights.shape}", font=font_txt, fill="black", align="left")
 
-            testState = Image.fromarray((palletHeights * 255 / 2500).astype(float))  # np.uint8))
-            hflippedtestState = testState.transpose(PIL.Image.FLIP_TOP_BOTTOM)
-            hflippedtestState = hflippedtestState.resize(
-                (hflippedtestState.size[0] // 2, hflippedtestState.size[1] // 2)
-            )
-            renderImage.paste(hflippedtestState, (700, 365))
+            test_state = Image.fromarray((pallet_heights * 255 / 2500).astype(float))  # np.uint8))
+            h_flipped_state = test_state.transpose(PIL.Image.FLIP_TOP_BOTTOM)
+            h_flipped_state = h_flipped_state.resize((h_flipped_state.size[0] // 2, h_flipped_state.size[1] // 2))
+            render_image.paste(h_flipped_state, (700, 365))
 
         # # uncomment the lines below if you want to save the render image
         # fname = f"vis_{self._current_order['key']}_{self._item_sequence_counter}.png" # "render_image.png"
         # targetpathForRenderImage = pathlib.Path.joinpath(utils.OUTPUTDIRECTORY, fname)
-        # renderImage.save(targetpathForRenderImage)
+        # render_image.save(targetpathForRenderImage)
 
         windowname = "BED-BPP Environment | Render Image"
         cv2.namedWindow(windowname)  # , cv2.WINDOW_NORMAL)
         cv2.moveWindow(windowname, 0, 0)
         # cv2.setWindowProperty(windowname, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
-        img1 = cv2.cvtColor(np.array(renderImage), cv2.COLOR_RGB2BGR)
+        img1 = cv2.cvtColor(np.array(render_image), cv2.COLOR_RGB2BGR)
         cv2.imshow(windowname, img1)
         cv2.waitKey(DISPLAYTIME)
 
@@ -428,9 +426,9 @@ class PalletizingEnvironment(gym.Env):
                 logger.info(f"PackingPlan = {packing_plan}")
 
         if True:  # tofile:
-            packingPlansFile = "packing_plans.json"
-            outputFile = pathlib.Path.joinpath(OUTPUTDIRECTORY, packingPlansFile)
-            with open(outputFile, "w") as PPFile:
+            packing_plans_file = "packing_plans.json"
+            output_file = pathlib.Path.joinpath(OUTPUTDIRECTORY, packing_plans_file)
+            with open(output_file, "w") as PPFile:
                 json.dump(self._packing_plans, PPFile)
 
     def __getReward(self, done: bool) -> float:
@@ -527,12 +525,12 @@ class PalletizingEnvironment(gym.Env):
         This method returns a dictionary that contains np.arrays, which define in which coordinates the given item can be placed.
         Returns.
         --------
-        allowedArea: dict
+        allowed_area: dict
             A dictionary whose keys define the orientation and the values define the possible coordinates of an item placement.
 
         Example.
         --------
-        >>> allowedArea = {
+        >>> allowed_area = {
                 0: np.array,
                 1: np.array,
                 <orientation>: np.array # element == 1: allowed; element == 0: not allowed
@@ -585,19 +583,19 @@ class PalletizingEnvironment(gym.Env):
             done = False
             self.__updateItemsSelection(placeditem)
             self.__updateItemsPreview()
-            nextItems = self.__obtainNextItems()
-            item = nextItems["selection"][0]
-            allowedArea = self._obtain_allowed_areas(item)
+            next_items = self.__obtainNextItems()
+            item = next_items["selection"][0]
+            allowed_area = self._obtain_allowed_areas(item)
 
             # get the corner points for the items that can be selected
-            cornerPoints = self.__determineCornerPoints(nextItems["selection"])
+            corner_points = self.__determineCornerPoints(next_items["selection"])
 
             info.update(
                 {
-                    "allowed_area": allowedArea,
-                    "next_items_selection": nextItems["selection"],
-                    "next_items_preview": nextItems["preview"],
-                    "corner_points": cornerPoints,
+                    "allowed_area": allowed_area,
+                    "next_items_selection": next_items["selection"],
+                    "next_items_preview": next_items["preview"],
+                    "corner_points": corner_points,
                 }
             )
 
@@ -615,7 +613,7 @@ class PalletizingEnvironment(gym.Env):
 
         Returns.
         --------
-        nextItems: dict
+        next_items: dict
             Contains the next items in the item sequence.
 
         Examples.
@@ -632,8 +630,8 @@ class PalletizingEnvironment(gym.Env):
         }
 
         """
-        nextItems = {"selection": self._items_selection, "preview": self._items_preview}
-        return nextItems
+        next_items = {"selection": self._items_selection, "preview": self._items_preview}
+        return next_items
 
     def __updateItemsSelection(self, itemdict: dict = {}) -> None:
         """
@@ -673,15 +671,15 @@ class PalletizingEnvironment(gym.Env):
         Call this method after `self.__updateItemsSelection`.
         """
         for k in range(self._n_item_selection, self._n_item_preview):
-            itemCounter = self._item_sequence_counter + k
-            itemKey = str(itemCounter)
-            if itemKey in self._current_order["order"]["item_sequence"].keys():
-                prevItem = self._current_order["order"]["item_sequence"][itemKey]
-                if not (prevItem in self._items_preview):
-                    self._items_preview.append(prevItem)
+            item_counter = self._item_sequence_counter + k
+            item_key = str(item_counter)
+            if item_key in self._current_order["order"]["item_sequence"].keys():
+                preview_item = self._current_order["order"]["item_sequence"][item_key]
+                if preview_item not in self._items_preview:
+                    self._items_preview.append(preview_item)
             else:
-                nPurePrevItems = self._n_item_preview - self._n_item_selection
-                if not (len(self._items_preview) >= nPurePrevItems):
+                n_pure_preview_items = self._n_item_preview - self._n_item_selection
+                if not (len(self._items_preview) >= n_pure_preview_items):
                     self._items_preview.append({})
 
     def __updatePalletVisualization(self, action: dict) -> None:
@@ -721,7 +719,7 @@ class PalletizingEnvironment(gym.Env):
 
         Returns.
         --------
-        cornerPoints: list
+        corner_points: list
             The corner points for an item that is specified by its dimension.
         """
         corner_points = {}

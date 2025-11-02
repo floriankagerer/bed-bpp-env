@@ -1,0 +1,54 @@
+"""Tests the module `orientation_reduction`."""
+
+import pytest
+
+from bed_bpp_env.data_model.item import Item
+from bed_bpp_env.integration.banpu_lahcsisr.full_orientation import FullOrientation
+from bed_bpp_env.integration.banpu_lahcsisr.orientation_reduction import equivalent_item_for_given_orientation
+
+
+@pytest.fixture
+def sample_item() -> Item:
+    """A sample item."""
+    return Item(
+        article="article",
+        id="id",
+        product_group="product_group",
+        length_mm=300,
+        width_mm=200,
+        height_mm=100,
+        weight_kg=3.14,
+        sequence=1,
+    )
+
+
+@pytest.mark.parametrize(
+    "orientation, expected_lwh",
+    [
+        (FullOrientation.LWH, (300, 200, 100)),
+        (FullOrientation.LHW, (300, 100, 200)),
+        (FullOrientation.WLH, (200, 300, 100)),
+        (FullOrientation.WHL, (200, 100, 300)),
+        (FullOrientation.HLW, (100, 300, 200)),
+        (FullOrientation.HWL, (100, 200, 300)),
+    ],
+)
+def test_equivalent_item_for_given_orientation(
+    sample_item: Item, orientation: FullOrientation, expected_lwh: tuple[int, int, int]
+) -> None:
+    """Tests whether the dimensions are correctly swapped to retrieve an equivalent item."""
+    expected_length, expected_width, expected_height = expected_lwh
+
+    equivalent_item = equivalent_item_for_given_orientation(item=sample_item, orientation=orientation)
+
+    expected_item = Item(
+        article=sample_item.article,
+        id=sample_item.id,
+        product_group=sample_item.product_group,
+        length_mm=expected_length,
+        width_mm=expected_width,
+        height_mm=expected_height,
+        weight_kg=sample_item.weight_kg,
+        sequence=sample_item.sequence,
+    )
+    assert equivalent_item == expected_item

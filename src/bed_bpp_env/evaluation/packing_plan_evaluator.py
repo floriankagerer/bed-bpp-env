@@ -9,8 +9,8 @@ from typing import Literal
 
 import pandas as pd
 
-from bed_bpp_env.data_model.item import Item
 from bed_bpp_env.data_model.order import Order
+from bed_bpp_env.data_model.packing_plan import PackingPlan
 from bed_bpp_env.environment.cuboid import Cuboid
 from bed_bpp_env.environment.space_3d import Space3D
 from bed_bpp_env.evaluation import EVALOUTPUTDIR, FILE_KPI_DEFINITION, KPI_DEFINITION
@@ -239,13 +239,13 @@ class PackingPlanEvaluator:
         rInterl = pd.NA if rInterlDenominator == 0 else float(rInterlEnumerator / rInterlDenominator)
         return rInterl
 
-    def evaluate(self, orderid: str, order: dict, packingplan: list) -> dict:
+    def evaluate(self, packing_plan: PackingPlan, order: dict) -> dict:
         """
         This method evaluates the packing plan for a given order.
 
         Parameters.
         -----------
-        orderid: str
+        order_id: str
             The id of the order which packing plan is evaluated.
         order: dict
             The order of the packing plan.
@@ -273,15 +273,16 @@ class PackingPlanEvaluator:
             'eval_score_absolute_n_stable_pal_items': 32
         }
         """
-        self.__OrderID = orderid
+        order_id = packing_plan.id
+        self.__OrderID = order_id
 
-        order_data = {"id": orderid}
+        order_data = {"id": order_id}
         order_data.update(order)
 
         self._order = Order.from_dict(order_data)
-        self.__PackingPlan = packingplan
+        self.__PackingPlan = packing_plan.actions
 
-        logger.info(f"evaluate order {orderid}")
+        logger.info(f"evaluate order {order_id}")
 
         # rebuild target space
         target = self._order.properties.target
@@ -296,23 +297,22 @@ class PackingPlanEvaluator:
         self.__KPIs.reset(self.__TargetSpace, self._order)
 
         for action in self.__PackingPlan:
-            item = Item.from_dict(action["item"])
-            cuboid = Cuboid(item)
-            cuboid.set_orientation(action["orientation"])
-            flbCoordinates = [int(coord) for coord in action["flb_coordinates"]]
-            self.__TargetSpace.addItem(cuboid, action["orientation"], flbCoordinates)
+            cuboid = Cuboid(action.item)
+            cuboid.set_orientation(action.orientation)
+            self.__TargetSpace.addItem(cuboid, action.orientation, action.flb_coordinates.xyz)
             self.__KPIs.update()
 
         # obtain the values of the KPIs
         KPIs = {"order_id": self.__OrderID}
         for kpiDict in KPI_DEFINITION.values():
+            logger.info(kpiDict)
             try:
                 kpiMethod = getattr(self, kpiDict.get("method"))
                 if "eval_score" in kpiDict.get("name"):
                     KPIs[kpiDict.get("name")] = kpiMethod()
                 else:
                     KPIs[f"kpi_{kpiDict.get('num')}"] = kpiMethod()
-            except:
+            except Exception:
                 msg = "method missing"
                 logger.warning(msg)
                 KPIs[f"kpi_{kpiDict.get('num')}"] = msg

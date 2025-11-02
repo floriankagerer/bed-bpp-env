@@ -9,9 +9,12 @@ import platform
 import subprocess
 import time
 
+from bed_bpp_env.data_model.action import Action
+from bed_bpp_env.data_model.packing_plan import PackingPlan
 from bed_bpp_env.evaluation import EVALOUTPUTDIR
 from bed_bpp_env.evaluation.blender import TEMPLATEFILE
 from bed_bpp_env.evaluation.packing_plan_evaluator import PackingPlanEvaluator
+from bed_bpp_env.io_utils import load_packing_plan_sequence
 from bed_bpp_env.utils import ENTIRECONFIG
 
 logger = logging.getLogger(__name__)
@@ -39,7 +42,7 @@ else:
         raise FileNotFoundError(f"check your blender path in bed-bpp_env.conf!")
 
 
-def evaluatePackingPlan(id: str, order: dict, packingplan: list) -> None:
+def evaluate_packing_plan(packing_plan: PackingPlan, order: dict) -> None:
     """
     This methods evaluates the given packing plan with a PackingPlanEvaluator instance.
 
@@ -52,11 +55,16 @@ def evaluatePackingPlan(id: str, order: dict, packingplan: list) -> None:
     packingplan: list
         The packing plan that is evaluated.
     """
-    ppEvaluator.evaluate(id, order, packingplan)
+    ppEvaluator.evaluate(packing_plan, order)
 
 
-def runBlenderStabilityCheck(
-    background: bool, orderid: str, renderscene: bool, actionplan: list, orderofpackingplan: dict, ordercolors: dict
+def run_blender_stability_check(
+    background: bool,
+    orderid: str,
+    renderscene: bool,
+    actionplan: list[Action],
+    orderofpackingplan: dict,
+    ordercolors: dict,
 ) -> None:
     """
     This method calls blender to create a scene and start a rigid body simulation. Finally, the movement of all items during the simulation time is written to a file. For details see the file that is given by `blenderSceneGen`.
@@ -74,6 +82,8 @@ def runBlenderStabilityCheck(
     orderofpackingplan: dict
         The order that was the basis for the given packing plan.
     """
+    serialized_actions = [action.to_dict() for action in actionplan]
+
     templFile = str(TEMPLATEFILE)
     blenderSceneGen = str(TEMPLATEFILE.parent.resolve().joinpath("scene_creation.py"))
 
@@ -93,7 +103,7 @@ def runBlenderStabilityCheck(
         "render",
         str(renderscene),
         "order_packing_plan",
-        str(actionplan),
+        str(serialized_actions),
         "order",
         str(orderofpackingplan),
         "order_colors",
@@ -146,12 +156,11 @@ if __name__ == "__main__":
     args = PARSEDARGUMENTS
     logger.info(f"got arguments: {args}")
 
-    pathPackingPlan = pathlib.Path(args.get("packing_plan"))
+    packing_plans_path = pathlib.Path(args.get("packing_plan"))
     pathBenData = pathlib.Path(args.get("data"))
     notOpenBlender = args.get("background")
 
-    with open(pathPackingPlan) as file:
-        PACKINGPLANS = json.load(file, parse_int=False)
+    PACKING_PLANS = load_packing_plan_sequence(packing_plans_path)
 
     with open(pathBenData) as file:
         BENDATA = json.load(file, parse_int=False)
@@ -168,24 +177,25 @@ if __name__ == "__main__":
         COLOR_DB = json.load(file, parse_int=False)
 
     # Start Evaluation
-    for orderID, actionPlan in PACKINGPLANS.items():
-        bendataOrder = BENDATA.get(orderID)
+    for packing_plan in PACKING_PLANS:
+        packing_plan_id = packing_plan.id
+        bendataOrder = BENDATA.get(packing_plan_id)
         startTime = time.time()
-        runBlenderStabilityCheck(
+        run_blender_stability_check(
             background=notOpenBlender,
-            orderid=orderID,
+            orderid=packing_plan_id,
             renderscene=args.get("render"),
-            actionplan=actionPlan,
+            actionplan=packing_plan.actions,
             orderofpackingplan=bendataOrder,
-            ordercolors=COLOR_DB[orderID],
+            ordercolors=COLOR_DB[packing_plan_id],
         )
         logger.info(f"blender stability check took {round(time.time() - startTime, 3)} seconds")
-        evaluatePackingPlan(orderID, bendataOrder, actionPlan)
+        evaluate_packing_plan(packing_plan, bendataOrder)
         logger.info(f"complete evaluation of order/packing plan took {round(time.time() - startTime, 3)} seconds")
 
         # free memory
-        del BENDATA[orderID]
-        if not (int(orderID) % 500):
+        del BENDATA[packing_plan_id]
+        if not (int(packing_plan_id) % 500):
             gc.collect()
 
     ppEvaluator.writeToFile(totalAmountOfItemsInBendata)

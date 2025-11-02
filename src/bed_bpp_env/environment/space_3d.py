@@ -9,6 +9,7 @@ import numpy as np
 from bed_bpp_env.data_model.position_3d import Position3D
 from bed_bpp_env.environment import HEIGHT_TOLERANCE_MM as HEIGHT_TOLERANCE_MM
 from bed_bpp_env.environment.cuboid import Cuboid
+from bed_bpp_env.environment.direction import Direction, opposite_direction
 
 logger = logging.getLogger(__name__)
 
@@ -215,17 +216,17 @@ class Space3D:
         possibleneighbors: list (of Cuboid objects)
             Items that could be neighbors of item.
         """
-        EDGES_TO_COMPARE = {0: ["north", "south"], 1: ["east", "west"], 2: ["south", "north"], 3: ["west", "east"]}
-        """Holds the combination of the edges that have to be compared, formatted as [edge_of_item, edge_of_possible_neighbor]"""
+        # the combination of the edges that have to be compared, formatted as [edge_of_item, edge_of_possible_neighbor]
+        edges_to_compare = [(direction, opposite_direction(direction)) for direction in Direction]
 
-        identified_neighbors = {"north": [], "east": [], "south": [], "west": []}
+        identified_neighbors = {Direction.NORTH: [], Direction.EAST: [], Direction.SOUTH: [], Direction.WEST: []}
 
         all_items_investigated = possibleneighbors == []
 
         while not all_items_investigated:
             neighbor_to_investigate = possibleneighbors.pop(0)
 
-            for edge_item, edge_possible_neighbor in EDGES_TO_COMPARE.values():
+            for edge_item, edge_possible_neighbor in edges_to_compare:
                 item_edge = item.coordinates_ranges_of_edge(edge_item)
                 possible_neighbor_edge = neighbor_to_investigate.coordinates_ranges_of_edge(edge_possible_neighbor)
 

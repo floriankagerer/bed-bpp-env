@@ -11,6 +11,7 @@ import numpy as np
 
 from bed_bpp_env.data_model.item import Item
 from bed_bpp_env.data_model.position_3d import Position3D
+from bed_bpp_env.environment.direction import Direction, opposite_direction
 
 logger = logging.getLogger(__name__)
 
@@ -38,8 +39,8 @@ class Cuboid(object):
 
         self._items_below: list[Self] = []
         """Stores the items that are located below this object."""
-        # TODO(florian): implement module for neighbor, enum for direction.
-        self._neighbors = {"north": [], "east": [], "south": [], "west": []}
+        # TODO(florian): implement module for neighbor
+        self._neighbors = {Direction.NORTH: [], Direction.EAST: [], Direction.SOUTH: [], Direction.WEST: []}
         """Stores the items that are situated around this object."""
 
         self._representation = self.height * np.ones((self.width, self.length), dtype=int)
@@ -177,7 +178,7 @@ class Cuboid(object):
         """The item represented as array."""
         return self._representation
 
-    def coordinates_ranges_of_edge(self, which: str) -> dict[str, set[int]]:
+    def coordinates_ranges_of_edge(self, which: Direction) -> dict[str, set[int]]:
         """
         Returns the coordinates of the edge of an item when it is placed in an `Space3D`.
 
@@ -266,7 +267,7 @@ class Cuboid(object):
         width = self._representation.shape[0]
         return set(range(flb_y, flb_y + width))
 
-    def store_neighbors(self, neighbors: dict[str, list[Self]]) -> None:
+    def store_neighbors(self, neighbors: dict[Direction, list[Self]]) -> None:
         """
         Stores the neighbors of this object and adds itself to its neighbors on the corresponding edge.
 
@@ -281,16 +282,15 @@ class Cuboid(object):
         """
         self._neighbors = neighbors
 
-        # TODO(florian): This edge mapper belongs in the direction module, e.g., opposite_direction
-        EDGE_MAPPER = {"north": "south", "east": "west", "south": "north", "west": "east"}
-
         for edge_self, edge_neighbors in neighbors.items():
+            edge_of_neighbor = opposite_direction(edge_self)
+
             for neighbor in edge_neighbors:
-                neighbor.add_neighbor(EDGE_MAPPER[edge_self], self)
+                neighbor.add_neighbor(edge_of_neighbor, self)
 
         logger.debug(f'item "{self.id}" neighbors: {self._neighbors}')
 
-    def add_neighbor(self, edge: str, neighbor: Self) -> None:
+    def add_neighbor(self, edge: Direction, neighbor: Self) -> None:
         """
         Adds the given neighbor to the defined edge to this object's neighbors.
 

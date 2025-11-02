@@ -4,20 +4,15 @@ Instances of this class represents cubic items that can be placed in a three-dim
 One essential assumption we made here is that the items are placed parallel to the edges of the target!
 """
 
-from __future__ import annotations
-
 import logging
+from typing import Optional, Self
 
 import numpy as np
 
 from bed_bpp_env.data_model.item import Item
 from bed_bpp_env.data_model.position_3d import Position3D
-from bed_bpp_env.environment import HEIGHT_TOLERANCE_MM
 
 logger = logging.getLogger(__name__)
-
-PROPERTIES_DEFAULT_VALUE = -1
-"""The default value that is set to an attribute whenever a key in the given properties is missing."""
 
 
 class Cuboid(object):
@@ -34,14 +29,16 @@ class Cuboid(object):
         self._metadata = metadata
 
         self._direct_support_surface = None
-        """This np.ndarray has exactly the same shape as the item and its values are in `[0, 1]`. A value of 1 represents direct support with the item below in this coordinate, otherwise the value is 0."""
-        self._percentage_direct_support_surface = None
+        """This np.ndarray has exactly the same shape as the item and its values are in `[0, 1]`. A value of `1` 
+        represents direct support with the item below in this coordinate, otherwise the value is `0`."""
+        self._percentage_direct_support_surface: Optional[float] = None
         """A `float` that indicates how many percent of this object's base area has direct support from below. Values are in `[0, 1]`."""
         self._effective_support_surface = None
         """The effective support surface of the item."""
 
-        self._items_below = []
+        self._items_below: list[Self] = []
         """Stores the items that are located below this object."""
+        # TODO(florian): implement module for neighbor, enum for direction.
         self._neighbors = {"north": [], "east": [], "south": [], "west": []}
         """Stores the items that are situated around this object."""
 
@@ -90,7 +87,48 @@ class Cuboid(object):
     def flb(self, position: Position3D) -> None:
         self._flb_coordinates = position
 
-    def setOrientation(self, value: int) -> None:
+    @property
+    def direct_support_surface(self) -> np.ndarray:
+        """This np.ndarray has exactly the same shape as the item and its values are in `[0, 1]`. A value of 1
+        represents direct support with the item below in this coordinate, otherwise the value is 0."""
+        return self._direct_support_surface
+
+    @property
+    def percentage_direct_support_surface(self) -> float:
+        """Returns the percentage, i.e., a value in [0, 1], of the bottom surface that has direct support
+        to the item below."""
+        return self._percentage_direct_support_surface
+
+    @property
+    def effective_support_surface(self) -> np.ndarray:
+        """An array that shows where the item has effective support. The shape of this array is identical to the
+        item's shape; a value `1` represents effective support, `0` says no effective support."""
+        return self._effective_support_surface
+
+    @property
+    def neighbors(self) -> dict[str, list[Self]]:
+        """
+        The neighbors in each direction of this cuboid.
+
+        # TODO(florian): Remove example once tests are implemented.
+        Example.
+        --------
+        >>> cuboid.getNeighbors()
+        {
+            "north": [Cuboid object],
+            "east": [],
+            "south": [],
+            "west": []
+        }
+        """
+        return self._neighbors
+
+    @property
+    def items_below(self) -> list[Self]:
+        """Returns the list of all items that are belowed this object."""
+        return self._items_below
+
+    def set_orientation(self, value: int) -> None:
         """
         Sets the orientation of the item and thus, changes the shape of the representation.
 
@@ -107,9 +145,10 @@ class Cuboid(object):
         else:
             logger.warning(f'item "{self.id}" orientation: value {value} is not known! do nothing')
 
-    def getOrientation(self) -> int:
+    @property
+    def orientation(self) -> int:
         """
-        Returns the orientation of an item.
+        The orientation of an item.
 
         Returns.
         --------
@@ -126,49 +165,19 @@ class Cuboid(object):
             logger.warning(f'item "{self.id}" get orientation: not known! return None')
             return None
 
-    def storeFLBCoordinates(self, coordinates: list) -> None:
-        """Stores the FLB coordinates, e.g. `[x, y, z]`, of this object."""
-        self._flb_coordinates = coordinates
-
-    def storeItemsDirectlyBelow(self, items: list) -> None:
+    def store_items_directly_below(self, items: list[Self]) -> None:
         """Sets the attribute that stores the items that are directly below this object."""
         self._items_below = items
 
-        self.__calculateDirectSupportSurface()
+        self._calculate_direct_support_surface()
         self._calculate_effective_support_surface()
 
-    def getDirectSupportSurface(self) -> np.ndarray:
-        """
-        Returns a np.ndarray that represents the areas where the item has direct support from below.
-
-        Returns.
-        --------
-        _direct_support_surface: np.ndarray
-            An array that shows where the item has direct support from below. The shape of this np.ndarray is identical to the item's shape; a value 1 represents direct support, 0 says no direct support.
-        """
-        return self._direct_support_surface
-
-    def getEffectiveSupportSurface(self) -> np.ndarray:
-        """
-        Returns a np.ndarray that represents the areas where the item has effective support.
-
-        Returns.
-        --------
-        _effective_support_surface: np.ndarray
-            An array that shows where the item has effective support. The shape of this np.ndarray is identical to the item's shape; a value 1 represents effective support, 0 says no effective support.
-        """
-        return self._effective_support_surface
-
-    def getPercentageDirectSupportSurface(self) -> float:
-        """Returns the percentage of the bottom surface that has direct support to the item below."""
-        # a value in [0, 1]
-        return self._percentage_direct_support_surface
-
-    def getRepresentation(self) -> np.ndarray:
-        """Returns the representation of the item."""
+    @property
+    def array_representation(self) -> np.ndarray:
+        """The item represented as array."""
         return self._representation
 
-    def getCoordinatesEdge(self, which: str) -> dict:
+    def coordinates_ranges_of_edge(self, which: str) -> dict[str, set[int]]:
         """
         Returns the coordinates of the edge of an item when it is placed in an `Space3D`.
 
@@ -215,7 +224,8 @@ class Cuboid(object):
 
         return coordinates
 
-    def getCoordinatesHeightRange(self) -> set:
+    @property
+    def coordinates_z_range(self) -> set[int]:
         """
         Returns the range of the z-coordinates of this item.
 
@@ -228,7 +238,8 @@ class Cuboid(object):
         height = self._representation[0, 0]
         return set(range(flb_z, flb_z + height))
 
-    def getCoordinatesXRange(self) -> set:
+    @property
+    def coordinates_x_range(self) -> set[int]:
         """
         Returns the range of the x-coordinates of this item.
 
@@ -241,7 +252,8 @@ class Cuboid(object):
         length = self._representation.shape[1]
         return set(range(flb_x, flb_x + length))
 
-    def getCoordinatesYRange(self) -> set:
+    @property
+    def coordinates_y_range(self) -> set[int]:
         """
         Returns the range of the y-coordinates of this item.
 
@@ -254,11 +266,7 @@ class Cuboid(object):
         width = self._representation.shape[0]
         return set(range(flb_y, flb_y + width))
 
-    def getItemsBelow(self) -> list:
-        """Returns the list of all items that are belowed this object."""
-        return self._items_below
-
-    def storeNeighbors(self, neighbors: dict[str, list[Cuboid]]) -> None:
+    def store_neighbors(self, neighbors: dict[str, list[Self]]) -> None:
         """
         Stores the neighbors of this object and adds itself to its neighbors on the corresponding edge.
 
@@ -273,16 +281,16 @@ class Cuboid(object):
         """
         self._neighbors = neighbors
 
-        # edgeNeighbor = EDGE_MAPPER[edge_self]
+        # TODO(florian): This edge mapper belongs in the direction module, e.g., opposite_direction
         EDGE_MAPPER = {"north": "south", "east": "west", "south": "north", "west": "east"}
 
         for edge_self, edge_neighbors in neighbors.items():
             for neighbor in edge_neighbors:
-                neighbor.addNeighbor(EDGE_MAPPER[edge_self], self)
+                neighbor.add_neighbor(EDGE_MAPPER[edge_self], self)
 
         logger.debug(f'item "{self.id}" neighbors: {self._neighbors}')
 
-    def addNeighbor(self, edge: str, neighbor: Cuboid) -> None:
+    def add_neighbor(self, edge: str, neighbor: Self) -> None:
         """
         Adds the given neighbor to the defined edge to this object's neighbors.
 
@@ -296,23 +304,7 @@ class Cuboid(object):
         if neighbor not in self._neighbors[edge]:
             self._neighbors[edge].append(neighbor)
 
-    def getNeighbors(self) -> dict[str, list[Cuboid]]:
-        """
-        Returns the neighbors in each direction of this object.
-
-        Example.
-        --------
-        >>> cuboid.getNeighbors()
-        {
-            "north": [Cuboid object],
-            "east": [],
-            "south": [],
-            "west": []
-        }
-        """
-        return self._neighbors
-
-    def __calculateDirectSupportSurface(self) -> None:
+    def _calculate_direct_support_surface(self) -> None:
         if self._items_below == []:
             # object is directly located on palletizing target
             self._percentage_direct_support_surface = 1.0
@@ -322,10 +314,10 @@ class Cuboid(object):
             self._percentage_direct_support_surface = 0.0  # initial value
             self._direct_support_surface = np.zeros(self._representation.shape, dtype=int)
 
-            self_coordinate_x, self_coordinate_y = self.getCoordinatesXRange(), self.getCoordinatesYRange()
+            self_coordinate_x, self_coordinate_y = self.coordinates_x_range, self.coordinates_y_range
             for item_below in self._items_below:
-                overlapping_points_x = set.intersection(self_coordinate_x, item_below.getCoordinatesXRange())
-                overlapping_points_y = set.intersection(self_coordinate_y, item_below.getCoordinatesYRange())
+                overlapping_points_x = set.intersection(self_coordinate_x, item_below.coordinates_x_range)
+                overlapping_points_y = set.intersection(self_coordinate_y, item_below.coordinates_y_range)
 
                 self._percentage_direct_support_surface += (len(overlapping_points_x) * len(overlapping_points_y)) / (
                     self._representation.shape[0] * self._representation.shape[1]
@@ -354,10 +346,10 @@ class Cuboid(object):
         else:
             self._effective_support_surface = np.zeros(self._representation.shape, dtype=int)
 
-            self_coordinate_x, self_coordinate_y = self.getCoordinatesXRange(), self.getCoordinatesYRange()
+            self_coordinate_x, self_coordinate_y = self.coordinates_x_range, self.coordinates_y_range
             for item_below in self._items_below:
-                overlapping_points_x = set.intersection(self_coordinate_x, item_below.getCoordinatesXRange())
-                overlapping_points_y = set.intersection(self_coordinate_y, item_below.getCoordinatesYRange())
+                overlapping_points_x = set.intersection(self_coordinate_x, item_below.coordinates_x_range)
+                overlapping_points_y = set.intersection(self_coordinate_y, item_below.coordinates_y_range)
 
                 # create the DirectSupportSurface ndarray
                 start_x, start_y = (

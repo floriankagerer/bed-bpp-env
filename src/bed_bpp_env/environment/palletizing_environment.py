@@ -153,15 +153,15 @@ class PalletizingEnvironment(gym.Env):
 
         # define the item
         item = Cuboid(item_for_action)
-        item.setOrientation(step_vars["orientation"])
+        item.set_orientation(step_vars["orientation"])
 
         # create a np.ndarray that has the same shape as the target, its elements are 1 if the item is located in this region and 0 otherwise
         item_on_target = np.zeros((self._size[1], self._size[0]), dtype=int)
-        item_delta_y, item_delta_x = item.getRepresentation().shape
+        item_delta_y, item_delta_x = item.array_representation.shape
         start_x, start_y = step_vars["xCoord"], step_vars["yCoord"]
         try:
             item_on_target[start_y : start_y + item_delta_y, start_x : start_x + item_delta_x] = np.ones(
-                item.getRepresentation().shape, dtype=int
+                item.array_representation.shape, dtype=int
             )
         except Exception:
             # have to crop item like in `environment.Space3D.addItem`
@@ -189,7 +189,7 @@ class PalletizingEnvironment(gym.Env):
 
         # add the item to the palletizing target
         self._target_space.addItem(item, action_extended["orientation"], action_extended["flb_coordinates"])
-        info.update({"support_area/%": item.getPercentageDirectSupportSurface()})
+        info.update({"support_area/%": item.percentage_direct_support_surface})
 
         # prepare for next call of step
         additional_info = self.__prepareForNextStep(item_for_action)

@@ -71,7 +71,7 @@ class Space3D:
         """
         item.flb = Position3D(x=flbcoordinates[0], y=flbcoordinates[1], z=flbcoordinates[2])
 
-        item_as_array = item.getRepresentation()
+        item_as_array = item.array_representation
         # define the area where the item is located
         start_x, start_y = flbcoordinates[0], flbcoordinates[1]
         delta_x, delta_y = item_as_array.shape[1], item_as_array.shape[0]
@@ -90,7 +90,7 @@ class Space3D:
         ]
         # obtain the Cuboid objects and store it in the current item
         items_directly_below = [self._placed_items[countItem] for countItem in counters_direct_items_below]
-        item.storeItemsDirectlyBelow(items_directly_below)
+        item.store_items_directly_below(items_directly_below)
 
         # detect all neighbors of the current item
         target_size_y, target_size_x = self._uppermost_items.shape
@@ -171,7 +171,7 @@ class Space3D:
         """
         n_items_about_height_level = 0
         for item in self.getPlacedItems():
-            if min(item.getCoordinatesHeightRange()) > heightlevel:
+            if min(item.coordinates_z_range) > heightlevel:
                 n_items_about_height_level += 1
 
         return n_items_about_height_level
@@ -192,7 +192,7 @@ class Space3D:
         """
         max_target_height = 0
         for item in self.getPlacedItems():
-            item_z_location = max(item.getCoordinatesHeightRange())
+            item_z_location = max(item.coordinates_z_range)
             if item_z_location > max_target_height and item_z_location <= heightlevel:
                 max_target_height = item_z_location
 
@@ -226,8 +226,8 @@ class Space3D:
             neighbor_to_investigate = possibleneighbors.pop(0)
 
             for edge_item, edge_possible_neighbor in EDGES_TO_COMPARE.values():
-                item_edge = item.getCoordinatesEdge(edge_item)
-                possible_neighbor_edge = neighbor_to_investigate.getCoordinatesEdge(edge_possible_neighbor)
+                item_edge = item.coordinates_ranges_of_edge(edge_item)
+                possible_neighbor_edge = neighbor_to_investigate.coordinates_ranges_of_edge(edge_possible_neighbor)
 
                 x_intersection, y_intersection = (
                     set.intersection(item_edge["x"], possible_neighbor_edge["x"]),
@@ -237,8 +237,8 @@ class Space3D:
                 if len(x_intersection) and len(y_intersection):
                     # neighbors in x-y-direction
                     # make height check
-                    item_occupied_height = item.getCoordinatesHeightRange()
-                    possible_neighbor_occupied_height = neighbor_to_investigate.getCoordinatesHeightRange()
+                    item_occupied_height = item.coordinates_z_range
+                    possible_neighbor_occupied_height = neighbor_to_investigate.coordinates_z_range
 
                     z_intersection = set.intersection(item_occupied_height, possible_neighbor_occupied_height)
                     height_check_successful = len(z_intersection) > 0
@@ -248,13 +248,13 @@ class Space3D:
 
                     # investigate items below when min height of item less than highest point of possible neighbor
                     if min(item_occupied_height) < max(possible_neighbor_occupied_height):
-                        possibleneighbors += neighbor_to_investigate.getItemsBelow()
+                        possibleneighbors += neighbor_to_investigate.items_below
                         # remove duplicates
                         possibleneighbors = list(set(possibleneighbors))
 
             all_items_investigated = possibleneighbors == []
 
-        item.storeNeighbors(identified_neighbors)
+        item.store_neighbors(identified_neighbors)
 
     def getCornerPointsIn3D(self, itemdimension: tuple = (0, 0, 0)) -> list:
         """
@@ -323,7 +323,7 @@ class Space3D:
 
         def __getEndpointYthenX(item: Cuboid) -> tuple:
             """Returns the endpoint of the item as (y, x)."""
-            delta_y, delta_x = item.getRepresentation().shape
+            delta_y, delta_x = item.array_representation.shape
             return (item.flb.y + delta_y, item.flb.x + delta_x)
 
         if placeditems == []:
@@ -336,7 +336,7 @@ class Space3D:
         items_for_extreme_points: list[Cuboid] = []
         max_x_xalue = 0
         for item in placeditems:
-            value_endpoint_x = item.flb.x + item.getRepresentation().shape[1]
+            value_endpoint_x = item.flb.x + item.array_representation.shape[1]
             if (value_endpoint_x) > max_x_xalue:
                 items_for_extreme_points.append(item)
                 max_x_xalue = value_endpoint_x
@@ -345,17 +345,17 @@ class Space3D:
         n_extreme_points = len(items_for_extreme_points)
         two_dim_corner_points = []
         first_candidate = items_for_extreme_points.pop(0)
-        previous_x = first_candidate.flb.x + first_candidate.getRepresentation().shape[1]
-        previous_y = first_candidate.flb.y + first_candidate.getRepresentation().shape[0]
+        previous_x = first_candidate.flb.x + first_candidate.array_representation.shape[1]
+        previous_y = first_candidate.flb.y + first_candidate.array_representation.shape[0]
         two_dim_corner_points.append((0, previous_y))
 
         if n_extreme_points > 1:
             last_candidate = items_for_extreme_points.pop()
-            last_x = last_candidate.flb.x + last_candidate.getRepresentation().shape[1]
+            last_x = last_candidate.flb.x + last_candidate.array_representation.shape[1]
 
             for candidate in items_for_extreme_points:
-                candidate_x = candidate.flb.x + candidate.getRepresentation().shape[1]
-                candidate_y = candidate.flb.y + candidate.getRepresentation().shape[0]
+                candidate_x = candidate.flb.x + candidate.array_representation.shape[1]
+                candidate_y = candidate.flb.y + candidate.array_representation.shape[0]
 
                 two_dim_corner_points.append((previous_x, candidate_y))
                 previous_x = candidate_x

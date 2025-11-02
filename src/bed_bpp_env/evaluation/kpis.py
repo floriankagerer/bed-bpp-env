@@ -41,12 +41,11 @@ class KPIs:
     def update(self) -> dict:
         targetSpace: Space3D = self.__DataSources.get("target")
         currentOrder: Order = self.__DataSources.get("order")
-        print(f"KPI Update: type: {type(currentOrder)}")
 
         palHeightMap = targetSpace.getHeights()
 
         placedItems = targetSpace.getPlacedItems()
-        percentageSupportingAreas = [item.getPercentageDirectSupportSurface() for item in placedItems]
+        percentage_supporting_areas = [item.percentage_direct_support_surface for item in placedItems]
 
         itemVolumeOnPallet = sum([item.volume / 1000.0 for item in placedItems])
 
@@ -55,10 +54,10 @@ class KPIs:
         self.__Values["vol_items/cm^3"] = itemVolumeOnPallet
         self.__Values["packing_stability"] = {
             "support_area": {
-                "current": percentageSupportingAreas[-1],
-                "min": min(percentageSupportingAreas),
-                "mean": statistics.fmean(percentageSupportingAreas),
-                "stdev": statistics.stdev(percentageSupportingAreas) if len(percentageSupportingAreas) > 1 else 0,
+                "current": percentage_supporting_areas[-1],
+                "min": min(percentage_supporting_areas),
+                "mean": statistics.fmean(percentage_supporting_areas),
+                "stdev": statistics.stdev(percentage_supporting_areas) if len(percentage_supporting_areas) > 1 else 0,
             }
         }
         targetBaseArea = palHeightMap.shape[0] * palHeightMap.shape[1]

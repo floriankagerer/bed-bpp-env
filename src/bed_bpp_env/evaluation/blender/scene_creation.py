@@ -16,6 +16,7 @@ import statistics
 import sys
 import time
 
+from bed_bpp_env.data_model.action import Action
 import bpy
 
 logger = logging.getLogger(__name__)
@@ -165,7 +166,8 @@ def __addGround(size: tuple = (500, 500, 1), target: str = "euro-pallet") -> Non
     color = (1, 1, 1, 1)  # color = (0, 0.0684781, 0.278894, 1)
     bsdf.inputs["Base Color"].default_value = color
     bsdf.inputs["Alpha"].default_value = 1
-    bsdf.inputs["Emission Color"].default_value = (1, 1, 1, 1)
+    # TODO(florian): Fix KeyError: key "Emission Color" not found!
+    # bsdf.inputs["Emission Color"].default_value = (1, 1, 1, 1)
 
     bottomMaterial.diffuse_color = color
     ob = bpy.context.active_object
@@ -378,6 +380,10 @@ def __initScene(target: str) -> None:
         addEURPallet()
 
 
+def deserialize_actions(serialized_actions: list[dict]) -> list[Action]:
+    return [Action.from_dict(serialized) for serialized in serialized_actions]
+
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
@@ -407,6 +413,9 @@ if __name__ == "__main__":
     OUTPUT_DIR = pathlib.Path(commands.get("output_dir"))
     """The directore where the results are stored (pathlib.Path)."""
 
+    # # #
+    action_plan = deserialize_actions(ORDER_PP)
+
     # get packing plan and color db for order
     startTime = time.time()
     target = ORDER["properties"]["target"]
@@ -414,24 +423,24 @@ if __name__ == "__main__":
     logger.debug(f"init scene loading took \t{round(1000 * (time.time() - startTime))} ms")
 
     # iterate over packing plan
-    for i, action in enumerate(ORDER_PP):
-        item = action["item"]
-        orientation = action["orientation"]
+    for i, action in enumerate(action_plan):
+        item = action.item
+        orientation = action.orientation
         if orientation == 0:
             size = (
-                item["length/mm"] / SCALE_DIVISOR,
-                item["width/mm"] / SCALE_DIVISOR,
-                item["height/mm"] / SCALE_DIVISOR,
+                item.length_mm / SCALE_DIVISOR,
+                item.width_mm / SCALE_DIVISOR,
+                item.height_mm / SCALE_DIVISOR,
             )
         elif orientation == 1:
             size = (
-                item["width/mm"] / SCALE_DIVISOR,
-                item["length/mm"] / SCALE_DIVISOR,
-                item["height/mm"] / SCALE_DIVISOR,
+                item.width_mm / SCALE_DIVISOR,
+                item.length_mm / SCALE_DIVISOR,
+                item.height_mm / SCALE_DIVISOR,
             )
 
         flb = []
-        for coord in action["flb_coordinates"]:
+        for coord in action.flb_coordinates.xyz:
             flb.append(coord / SCALE_DIVISOR)
 
         properties = {

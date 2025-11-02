@@ -1,1 +1,3414 @@
-{"00100408": [{"item": {"article": "donut-00101843", "id": "00101843", "product_group": "confectionery", "length/mm": 600, "width/mm": 400, "height/mm": 220, "weight/kg": 6.296, "sequence": 1}, "flb_coordinates": [0, 0, 0], "orientation": 0}, {"item": {"article": "lye bread roll-00107754", "id": "00107754", "product_group": "bakery products", "length/mm": 590, "width/mm": 390, "height/mm": 270, "weight/kg": 6.78, "sequence": 2}, "flb_coordinates": [0, 0, 220], "orientation": 0}, {"item": {"article": "lye bread roll-00107754", "id": "00107754", "product_group": "bakery products", "length/mm": 590, "width/mm": 390, "height/mm": 270, "weight/kg": 6.78, "sequence": 3}, "flb_coordinates": [0, 0, 490], "orientation": 0}, {"item": {"article": "paper folding bag-00102400", "id": "00102400", "product_group": "non-food products", "length/mm": 370, "width/mm": 325, "height/mm": 195, "weight/kg": 10.494, "sequence": 4}, "flb_coordinates": [0, 0, 760], "orientation": 0}, {"item": {"article": "croissant-00101323", "id": "00101323", "product_group": "bakery products", "length/mm": 585, "width/mm": 390, "height/mm": 220, "weight/kg": 5.936, "sequence": 5}, "flb_coordinates": [690, 0, 0], "orientation": 1}, {"item": {"article": "croissant-00101323", "id": "00101323", "product_group": "bakery products", "length/mm": 585, "width/mm": 390, "height/mm": 220, "weight/kg": 5.936, "sequence": 6}, "flb_coordinates": [710, 0, 220], "orientation": 0}, {"item": {"article": "croissant-00101323", "id": "00101323", "product_group": "bakery products", "length/mm": 585, "width/mm": 390, "height/mm": 220, "weight/kg": 5.936, "sequence": 7}, "flb_coordinates": [0, 0, 955], "orientation": 0}, {"item": {"article": "bread roll-00110459", "id": "00110459", "product_group": "bakery products", "length/mm": 590, "width/mm": 390, "height/mm": 290, "weight/kg": 7.63, "sequence": 8}, "flb_coordinates": [0, 0, 1175], "orientation": 0}, {"item": {"article": "fruit-00105433", "id": "00105433", "product_group": "fruit", "length/mm": 380, "width/mm": 300, "height/mm": 170, "weight/kg": 5.72, "sequence": 9}, "flb_coordinates": [700, 0, 440], "orientation": 1}, {"item": {"article": "donut-00101846", "id": "00101846", "product_group": "confectionery", "length/mm": 580, "width/mm": 380, "height/mm": 160, "weight/kg": 7.42, "sequence": 10}, "flb_coordinates": [0, 420, 0], "orientation": 0}, {"item": {"article": "roast duck-00112653", "id": "00112653", "product_group": "poultry", "length/mm": 400, "width/mm": 300, "height/mm": 210, "weight/kg": 7.632, "sequence": 11}, "flb_coordinates": [0, 420, 160], "orientation": 0}, {"item": {"article": "focaccia-00104520", "id": "00104520", "product_group": "snack", "length/mm": 390, "width/mm": 390, "height/mm": 160, "weight/kg": 4.85, "sequence": 12}, "flb_coordinates": [0, 0, 1465], "orientation": 0}, {"item": {"article": "bread-00109731", "id": "00109731", "product_group": "bakery products", "length/mm": 600, "width/mm": 400, "height/mm": 290, "weight/kg": 7.21, "sequence": 13}, "flb_coordinates": [0, 0, 1625], "orientation": 0}, {"item": {"article": "bread-00109731", "id": "00109731", "product_group": "bakery products", "length/mm": 600, "width/mm": 400, "height/mm": 290, "weight/kg": 7.21, "sequence": 14}, "flb_coordinates": [0, 0, 1915], "orientation": 0}, {"item": {"article": "bread-00109731", "id": "00109731", "product_group": "bakery products", "length/mm": 600, "width/mm": 400, "height/mm": 290, "weight/kg": 7.21, "sequence": 15}, "flb_coordinates": [0, 0, 2205], "orientation": 0}, {"item": {"article": "prezel-00104259", "id": "00104259", "product_group": "bakery products", "length/mm": 590, "width/mm": 390, "height/mm": 220, "weight/kg": 7.65, "sequence": 16}, "flb_coordinates": [690, 0, 610], "orientation": 0}, {"item": {"article": "bread roll-00106670", "id": "00106670", "product_group": "bakery products", "length/mm": 600, "width/mm": 400, "height/mm": 260, "weight/kg": 6.996, "sequence": 17}, "flb_coordinates": [680, 0, 830], "orientation": 1}, {"item": {"article": "bread roll-00106670", "id": "00106670", "product_group": "bakery products", "length/mm": 600, "width/mm": 400, "height/mm": 260, "weight/kg": 6.996, "sequence": 18}, "flb_coordinates": [690, 0, 1090], "orientation": 1}, {"item": {"article": "chicken leg-00105511", "id": "00105511", "product_group": "poultry", "length/mm": 580, "width/mm": 390, "height/mm": 120, "weight/kg": 6.38, "sequence": 19}, "flb_coordinates": [0, 425, 370], "orientation": 0}, {"item": {"article": "pastry w. crumble topping-00111825", "id": "00111825", "product_group": "candy", "length/mm": 400, "width/mm": 295, "height/mm": 260, "weight/kg": 4.664, "sequence": 20}, "flb_coordinates": [0, 0, 2495], "orientation": 0}, {"item": {"article": "baguette-00101398", "id": "00101398", "product_group": "bakery products", "length/mm": 595, "width/mm": 400, "height/mm": 295, "weight/kg": 6.11, "sequence": 21}, "flb_coordinates": [680, 0, 1350], "orientation": 1}, {"item": {"article": "baguette-00101162", "id": "00101162", "product_group": "bakery products", "length/mm": 590, "width/mm": 390, "height/mm": 275, "weight/kg": 7.21, "sequence": 22}, "flb_coordinates": [690, 0, 1645], "orientation": 1}, {"item": {"article": "layer cake-00110336", "id": "00110336", "product_group": "confectionery", "length/mm": 395, "width/mm": 380, "height/mm": 205, "weight/kg": 7.64, "sequence": 23}, "flb_coordinates": [0, 430, 490], "orientation": 0}, {"item": {"article": "pastry w. fruit-00102102", "id": "00102102", "product_group": "confectionery", "length/mm": 405, "width/mm": 290, "height/mm": 180, "weight/kg": 4.295, "sequence": 24}, "flb_coordinates": [685, 0, 1920], "orientation": 0}, {"item": {"article": "donut-00108722", "id": "00108722", "product_group": "confectionery", "length/mm": 370, "width/mm": 325, "height/mm": 195, "weight/kg": 10.494, "sequence": 25}, "flb_coordinates": [0, 325, 2495], "orientation": 0}, {"item": {"article": "baguette-00103678", "id": "00103678", "product_group": "bakery products", "length/mm": 595, "width/mm": 395, "height/mm": 290, "weight/kg": 11.7, "sequence": 26}, "flb_coordinates": [710, 0, 2100], "orientation": 0}], "00100001": [{"item": {"article": "ciabatta-00103095", "id": "00103095", "product_group": "bakery products", "length/mm": 590, "width/mm": 200, "height/mm": 210, "weight/kg": 7.67, "sequence": 1}, "flb_coordinates": [0, 0, 0], "orientation": 0}, {"item": {"article": "cake-00111025", "id": "00111025", "product_group": "confectionery", "length/mm": 550, "width/mm": 280, "height/mm": 110, "weight/kg": 8.4, "sequence": 2}, "flb_coordinates": [0, 200, 0], "orientation": 0}, {"item": {"article": "cake-00111025", "id": "00111025", "product_group": "confectionery", "length/mm": 550, "width/mm": 280, "height/mm": 110, "weight/kg": 8.4, "sequence": 3}, "flb_coordinates": [0, 200, 110], "orientation": 0}, {"item": {"article": "dessert-00104636", "id": "00104636", "product_group": "candy", "length/mm": 490, "width/mm": 130, "height/mm": 210, "weight/kg": 5.11, "sequence": 4}, "flb_coordinates": [0, 0, 210], "orientation": 0}, {"item": {"article": "dessert-00104636", "id": "00104636", "product_group": "candy", "length/mm": 490, "width/mm": 130, "height/mm": 210, "weight/kg": 5.11, "sequence": 5}, "flb_coordinates": [0, 130, 220], "orientation": 0}, {"item": {"article": "cake-00111275", "id": "00111275", "product_group": "confectionery", "length/mm": 570, "width/mm": 210, "height/mm": 180, "weight/kg": 8.52, "sequence": 6}, "flb_coordinates": [0, 500, 0], "orientation": 0}, {"item": {"article": "cake-00111275", "id": "00111275", "product_group": "confectionery", "length/mm": 570, "width/mm": 210, "height/mm": 180, "weight/kg": 8.52, "sequence": 7}, "flb_coordinates": [0, 0, 430], "orientation": 0}, {"item": {"article": "pizza w. salami-00112547", "id": "00112547", "product_group": "pizza", "length/mm": 400, "width/mm": 200, "height/mm": 270, "weight/kg": 8.25, "sequence": 8}, "flb_coordinates": [0, 0, 610], "orientation": 0}, {"item": {"article": "pizza w. salami-00112547", "id": "00112547", "product_group": "pizza", "length/mm": 400, "width/mm": 200, "height/mm": 270, "weight/kg": 8.25, "sequence": 9}, "flb_coordinates": [0, 420, 220], "orientation": 0}, {"item": {"article": "muffin-00101974", "id": "00101974", "product_group": "candy", "length/mm": 380, "width/mm": 170, "height/mm": 170, "weight/kg": 7.3, "sequence": 10}, "flb_coordinates": [0, 0, 880], "orientation": 0}, {"item": {"article": "muffin-00101974", "id": "00101974", "product_group": "candy", "length/mm": 380, "width/mm": 170, "height/mm": 170, "weight/kg": 7.3, "sequence": 11}, "flb_coordinates": [0, 0, 1050], "orientation": 0}, {"item": {"article": "herbs-00106519", "id": "00106519", "product_group": "herbs/spice", "length/mm": 380, "width/mm": 250, "height/mm": 340, "weight/kg": 12.5, "sequence": 12}, "flb_coordinates": [0, 210, 490], "orientation": 0}, {"item": {"article": "herbs-00106519", "id": "00106519", "product_group": "herbs/spice", "length/mm": 380, "width/mm": 250, "height/mm": 340, "weight/kg": 12.5, "sequence": 13}, "flb_coordinates": [0, 460, 490], "orientation": 0}, {"item": {"article": "backing parchment-00101126", "id": "00101126", "product_group": "non-food products", "length/mm": 400, "width/mm": 160, "height/mm": 160, "weight/kg": 7.67, "sequence": 14}, "flb_coordinates": [0, 200, 830], "orientation": 0}, {"item": {"article": "backing parchment-00101126", "id": "00101126", "product_group": "non-food products", "length/mm": 400, "width/mm": 160, "height/mm": 160, "weight/kg": 7.67, "sequence": 15}, "flb_coordinates": [400, 260, 220], "orientation": 1}, {"item": {"article": "backing parchment-00101126", "id": "00101126", "product_group": "non-food products", "length/mm": 400, "width/mm": 160, "height/mm": 160, "weight/kg": 7.67, "sequence": 16}, "flb_coordinates": [400, 260, 380], "orientation": 1}, {"item": {"article": "backing parchment-00101126", "id": "00101126", "product_group": "non-food products", "length/mm": 400, "width/mm": 160, "height/mm": 160, "weight/kg": 7.67, "sequence": 17}, "flb_coordinates": [0, 0, 1220], "orientation": 0}, {"item": {"article": "pastry w. chocolate-00109722", "id": "00109722", "product_group": "confectionery", "length/mm": 540, "width/mm": 270, "height/mm": 260, "weight/kg": 10.69, "sequence": 18}, "flb_coordinates": [0, 0, 1380], "orientation": 0}, {"item": {"article": "pastry w. chocolate-00109722", "id": "00109722", "product_group": "confectionery", "length/mm": 540, "width/mm": 270, "height/mm": 260, "weight/kg": 10.69, "sequence": 19}, "flb_coordinates": [0, 0, 1640], "orientation": 0}, {"item": {"article": "pastry w. chocolate-00109722", "id": "00109722", "product_group": "confectionery", "length/mm": 540, "width/mm": 270, "height/mm": 260, "weight/kg": 10.69, "sequence": 20}, "flb_coordinates": [0, 270, 990], "orientation": 0}, {"item": {"article": "herbs-00106516", "id": "00106516", "product_group": "herbs/spice", "length/mm": 590, "width/mm": 200, "height/mm": 280, "weight/kg": 7.55, "sequence": 21}, "flb_coordinates": [0, 0, 1900], "orientation": 0}, {"item": {"article": "vegetables-00109095", "id": "00109095", "product_group": "vegetables", "length/mm": 390, "width/mm": 250, "height/mm": 260, "weight/kg": 9.3, "sequence": 22}, "flb_coordinates": [0, 270, 1250], "orientation": 0}, {"item": {"article": "chicken-00111632", "id": "00111632", "product_group": "poultry", "length/mm": 370, "width/mm": 200, "height/mm": 270, "weight/kg": 7.85, "sequence": 23}, "flb_coordinates": [0, 0, 2180], "orientation": 0}, {"item": {"article": "chicken-00111632", "id": "00111632", "product_group": "poultry", "length/mm": 370, "width/mm": 200, "height/mm": 270, "weight/kg": 7.85, "sequence": 24}, "flb_coordinates": [0, 0, 2450], "orientation": 0}, {"item": {"article": "vegetables-00111710", "id": "00111710", "product_group": "vegetables", "length/mm": 350, "width/mm": 260, "height/mm": 190, "weight/kg": 10.65, "sequence": 25}, "flb_coordinates": [370, 0, 2180], "orientation": 0}, {"item": {"article": "vegetables-00111710", "id": "00111710", "product_group": "vegetables", "length/mm": 350, "width/mm": 260, "height/mm": 190, "weight/kg": 10.65, "sequence": 26}, "flb_coordinates": [0, 0, 2720], "orientation": 0}, {"item": {"article": "instant meal-00104572", "id": "00104572", "product_group": "instant meals", "length/mm": 390, "width/mm": 210, "height/mm": 150, "weight/kg": 3.3, "sequence": 27}, "flb_coordinates": [510, 270, 1250], "orientation": 1}, {"item": {"article": "instant meal-00104572", "id": "00104572", "product_group": "instant meals", "length/mm": 390, "width/mm": 210, "height/mm": 150, "weight/kg": 3.3, "sequence": 28}, "flb_coordinates": [0, 260, 1900], "orientation": 0}, {"item": {"article": "instant meal-00104572", "id": "00104572", "product_group": "instant meals", "length/mm": 390, "width/mm": 210, "height/mm": 150, "weight/kg": 3.3, "sequence": 29}, "flb_coordinates": [0, 360, 2050], "orientation": 1}, {"item": {"article": "fruit-00106110", "id": "00106110", "product_group": "fruit", "length/mm": 400, "width/mm": 270, "height/mm": 240, "weight/kg": 9.9, "sequence": 30}, "flb_coordinates": [0, 360, 2200], "orientation": 1}, {"item": {"article": "fruit-00106110", "id": "00106110", "product_group": "fruit", "length/mm": 400, "width/mm": 270, "height/mm": 240, "weight/kg": 9.9, "sequence": 31}, "flb_coordinates": [0, 260, 2440], "orientation": 0}, {"item": {"article": "frozen yoghurt-00104003", "id": "00104003", "product_group": "dairy products", "length/mm": 460, "width/mm": 160, "height/mm": 240, "weight/kg": 4.37, "sequence": 32}, "flb_coordinates": [0, 260, 2680], "orientation": 0}, {"item": {"article": "frozen yoghurt-00104003", "id": "00104003", "product_group": "dairy products", "length/mm": 460, "width/mm": 160, "height/mm": 240, "weight/kg": 4.37, "sequence": 33}, "flb_coordinates": [430, 0, 2370], "orientation": 0}, {"item": {"article": "sundae-00106909", "id": "00106909", "product_group": "ice cream", "length/mm": 290, "width/mm": 200, "height/mm": 190, "weight/kg": 5.75, "sequence": 34}, "flb_coordinates": [430, 0, 2610], "orientation": 0}, {"item": {"article": "sundae-00106909", "id": "00106909", "product_group": "ice cream", "length/mm": 290, "width/mm": 200, "height/mm": 190, "weight/kg": 5.75, "sequence": 35}, "flb_coordinates": [0, 0, 2910], "orientation": 0}, {"item": {"article": "sundae-00106909", "id": "00106909", "product_group": "ice cream", "length/mm": 290, "width/mm": 200, "height/mm": 190, "weight/kg": 5.75, "sequence": 36}, "flb_coordinates": [0, 410, 2920], "orientation": 0}, {"item": {"article": "bread-00104045", "id": "00104045", "product_group": "bakery products", "length/mm": 490, "width/mm": 220, "height/mm": 250, "weight/kg": 4.0, "sequence": 37}, "flb_coordinates": [560, 260, 1400], "orientation": 1}, {"item": {"article": "pastry w. vanilla stuffing-00102099", "id": "00102099", "product_group": "confectionery", "length/mm": 290, "width/mm": 210, "height/mm": 210, "weight/kg": 5.5, "sequence": 38}, "flb_coordinates": [430, 420, 1650], "orientation": 0}, {"item": {"article": "pastry w. vanilla stuffing-00102099", "id": "00102099", "product_group": "confectionery", "length/mm": 290, "width/mm": 210, "height/mm": 210, "weight/kg": 5.5, "sequence": 39}, "flb_coordinates": [430, 420, 1860], "orientation": 0}, {"item": {"article": "pastry w. vanilla stuffing-00102099", "id": "00102099", "product_group": "confectionery", "length/mm": 290, "width/mm": 210, "height/mm": 210, "weight/kg": 5.5, "sequence": 40}, "flb_coordinates": [430, 420, 2070], "orientation": 0}, {"item": {"article": "pastry w. vanilla stuffing-00102099", "id": "00102099", "product_group": "confectionery", "length/mm": 290, "width/mm": 210, "height/mm": 210, "weight/kg": 5.5, "sequence": 41}, "flb_coordinates": [430, 420, 2280], "orientation": 0}, {"item": {"article": "sundae-00109068", "id": "00109068", "product_group": "ice cream", "length/mm": 590, "width/mm": 200, "height/mm": 190, "weight/kg": 6.65, "sequence": 42}, "flb_coordinates": [520, 0, 2800], "orientation": 1}], "00100002": [{"item": {"article": "puff pastries-00110384", "id": "00110384", "product_group": "confectionery", "length/mm": 590, "width/mm": 390, "height/mm": 150, "weight/kg": 8.68, "sequence": 1}, "flb_coordinates": [0, 0, 0], "orientation": 0}, {"item": {"article": "traybake-00102532", "id": "00102532", "product_group": "confectionery", "length/mm": 510, "width/mm": 170, "height/mm": 170, "weight/kg": 6.07, "sequence": 2}, "flb_coordinates": [0, 0, 150], "orientation": 0}, {"item": {"article": "prezel stick-00107768", "id": "00107768", "product_group": "bakery products", "length/mm": 390, "width/mm": 270, "height/mm": 250, "weight/kg": 10.65, "sequence": 3}, "flb_coordinates": [0, 170, 150], "orientation": 0}, {"item": {"article": "prezel stick-00107768", "id": "00107768", "product_group": "bakery products", "length/mm": 390, "width/mm": 270, "height/mm": 250, "weight/kg": 10.65, "sequence": 4}, "flb_coordinates": [0, 0, 400], "orientation": 0}, {"item": {"article": "chicken breast-00106014", "id": "00106014", "product_group": "poultry", "length/mm": 370, "width/mm": 200, "height/mm": 270, "weight/kg": 7.85, "sequence": 5}, "flb_coordinates": [0, 0, 650], "orientation": 0}, {"item": {"article": "prawn-00104130", "id": "00104130", "product_group": "seafood", "length/mm": 490, "width/mm": 260, "height/mm": 150, "weight/kg": 4.61, "sequence": 6}, "flb_coordinates": [0, 460, 0], "orientation": 0}, {"item": {"article": "plaice-00104334", "id": "00104334", "product_group": "fish", "length/mm": 400, "width/mm": 160, "height/mm": 160, "weight/kg": 7.67, "sequence": 7}, "flb_coordinates": [0, 470, 150], "orientation": 0}, {"item": {"article": "plaice-00104334", "id": "00104334", "product_group": "fish", "length/mm": 400, "width/mm": 160, "height/mm": 160, "weight/kg": 7.67, "sequence": 8}, "flb_coordinates": [0, 470, 310], "orientation": 0}, {"item": {"article": "ice cream in cone-00110429", "id": "00110429", "product_group": "ice cream", "length/mm": 390, "width/mm": 270, "height/mm": 220, "weight/kg": 5.39, "sequence": 9}, "flb_coordinates": [0, 0, 920], "orientation": 0}, {"item": {"article": "vegetables-00104984", "id": "00104984", "product_group": "vegetables", "length/mm": 540, "width/mm": 270, "height/mm": 260, "weight/kg": 9.85, "sequence": 10}, "flb_coordinates": [0, 270, 470], "orientation": 0}, {"item": {"article": "vegetables-00106134", "id": "00106134", "product_group": "vegetables", "length/mm": 330, "width/mm": 200, "height/mm": 280, "weight/kg": 5.25, "sequence": 11}, "flb_coordinates": [390, 0, 320], "orientation": 0}, {"item": {"article": "vegetables-00106134", "id": "00106134", "product_group": "vegetables", "length/mm": 330, "width/mm": 200, "height/mm": 280, "weight/kg": 5.25, "sequence": 12}, "flb_coordinates": [0, 360, 730], "orientation": 0}, {"item": {"article": "squid-00105971", "id": "00105971", "product_group": "seafood", "length/mm": 350, "width/mm": 260, "height/mm": 190, "weight/kg": 10.65, "sequence": 13}, "flb_coordinates": [0, 0, 1140], "orientation": 0}, {"item": {"article": "popsicles multipack-00100469", "id": "00100469", "product_group": "ice cream", "length/mm": 400, "width/mm": 260, "height/mm": 290, "weight/kg": 9.45, "sequence": 14}, "flb_coordinates": [430, 0, 600], "orientation": 0}, {"item": {"article": "muffin-00112741", "id": "00112741", "product_group": "candy", "length/mm": 290, "width/mm": 200, "height/mm": 190, "weight/kg": 5.75, "sequence": 15}, "flb_coordinates": [0, 0, 1330], "orientation": 0}, {"item": {"article": "muffin-00112741", "id": "00112741", "product_group": "candy", "length/mm": 290, "width/mm": 200, "height/mm": 190, "weight/kg": 5.75, "sequence": 16}, "flb_coordinates": [430, 0, 890], "orientation": 0}, {"item": {"article": "layer cake-00104877", "id": "00104877", "product_group": "confectionery", "length/mm": 560, "width/mm": 230, "height/mm": 220, "weight/kg": 6.88, "sequence": 17}, "flb_coordinates": [0, 200, 1330], "orientation": 0}, {"item": {"article": "sundae-00108137", "id": "00108137", "product_group": "ice cream", "length/mm": 380, "width/mm": 170, "height/mm": 170, "weight/kg": 7.3, "sequence": 18}, "flb_coordinates": [0, 460, 1010], "orientation": 0}, {"item": {"article": "sundae-00108137", "id": "00108137", "product_group": "ice cream", "length/mm": 380, "width/mm": 170, "height/mm": 170, "weight/kg": 7.3, "sequence": 19}, "flb_coordinates": [0, 0, 1520], "orientation": 0}, {"item": {"article": "bread-00109739", "id": "00109739", "product_group": "bakery products", "length/mm": 530, "width/mm": 270, "height/mm": 220, "weight/kg": 8.33, "sequence": 20}, "flb_coordinates": [0, 0, 1690], "orientation": 0}, {"item": {"article": "bread-00109739", "id": "00109739", "product_group": "bakery products", "length/mm": 530, "width/mm": 270, "height/mm": 220, "weight/kg": 8.33, "sequence": 21}, "flb_coordinates": [0, 0, 1910], "orientation": 0}, {"item": {"article": "croissant-00102345", "id": "00102345", "product_group": "bakery products", "length/mm": 400, "width/mm": 270, "height/mm": 280, "weight/kg": 9.59, "sequence": 22}, "flb_coordinates": [0, 0, 2130], "orientation": 0}, {"item": {"article": "ciabatta-00103092", "id": "00103092", "product_group": "bakery products", "length/mm": 320, "width/mm": 230, "height/mm": 330, "weight/kg": 9.17, "sequence": 23}, "flb_coordinates": [0, 0, 2410], "orientation": 0}, {"item": {"article": "cake-00108480", "id": "00108480", "product_group": "confectionery", "length/mm": 390, "width/mm": 260, "height/mm": 270, "weight/kg": 8.52, "sequence": 24}, "flb_coordinates": [0, 460, 1180], "orientation": 0}, {"item": {"article": "pasta-00109830", "id": "00109830", "product_group": "side dish", "length/mm": 570, "width/mm": 210, "height/mm": 180, "weight/kg": 8.52, "sequence": 25}, "flb_coordinates": [0, 270, 1550], "orientation": 0}, {"item": {"article": "pasta-00109830", "id": "00109830", "product_group": "side dish", "length/mm": 570, "width/mm": 210, "height/mm": 180, "weight/kg": 8.52, "sequence": 26}, "flb_coordinates": [0, 0, 2740], "orientation": 0}, {"item": {"article": "snack w. spinach-00111189", "id": "00111189", "product_group": "snack", "length/mm": 400, "width/mm": 270, "height/mm": 240, "weight/kg": 9.9, "sequence": 27}, "flb_coordinates": [0, 270, 1730], "orientation": 0}, {"item": {"article": "pastry w. crumble topping-00111835", "id": "00111835", "product_group": "candy", "length/mm": 530, "width/mm": 270, "height/mm": 220, "weight/kg": 9.53, "sequence": 28}, "flb_coordinates": [0, 270, 1970], "orientation": 0}, {"item": {"article": "pizza w. multiple toppings-00106052", "id": "00106052", "product_group": "pizza", "length/mm": 380, "width/mm": 250, "height/mm": 240, "weight/kg": 10.65, "sequence": 29}, "flb_coordinates": [0, 270, 2190], "orientation": 0}, {"item": {"article": "pizza w. multiple toppings-00106052", "id": "00106052", "product_group": "pizza", "length/mm": 380, "width/mm": 250, "height/mm": 240, "weight/kg": 10.65, "sequence": 30}, "flb_coordinates": [0, 290, 2430], "orientation": 0}, {"item": {"article": "salmon-00100742", "id": "00100742", "product_group": "fish", "length/mm": 410, "width/mm": 340, "height/mm": 230, "weight/kg": 8.4, "sequence": 31}, "flb_coordinates": [0, 230, 2670], "orientation": 0}, {"item": {"article": "salmon-00100741", "id": "00100741", "product_group": "fish", "length/mm": 570, "width/mm": 230, "height/mm": 330, "weight/kg": 10.36, "sequence": 32}, "flb_coordinates": [0, 0, 2920], "orientation": 0}, {"item": {"article": "popsicles for children-00110710", "id": "00110710", "product_group": "ice cream", "length/mm": 330, "width/mm": 210, "height/mm": 290, "weight/kg": 5.25, "sequence": 33}, "flb_coordinates": [0, 0, 3250], "orientation": 0}, {"item": {"article": "popsicles for children-00110710", "id": "00110710", "product_group": "ice cream", "length/mm": 330, "width/mm": 210, "height/mm": 290, "weight/kg": 5.25, "sequence": 34}, "flb_coordinates": [520, 0, 3250], "orientation": 1}], "00100003": [{"item": {"article": "cheese-00100264", "id": "00100264", "product_group": "dairy products", "length/mm": 600, "width/mm": 400, "height/mm": 300, "weight/kg": 7.1, "sequence": 1}, "flb_coordinates": [0, 0, 0], "orientation": 0}, {"item": {"article": "cake-00106075", "id": "00106075", "product_group": "confectionery", "length/mm": 540, "width/mm": 270, "height/mm": 260, "weight/kg": 9.49, "sequence": 2}, "flb_coordinates": [0, 0, 300], "orientation": 0}, {"item": {"article": "fries-00112620", "id": "00112620", "product_group": "potatoe products", "length/mm": 390, "width/mm": 270, "height/mm": 250, "weight/kg": 10.65, "sequence": 3}, "flb_coordinates": [0, 0, 560], "orientation": 0}, {"item": {"article": "fries-00112620", "id": "00112620", "product_group": "potatoe products", "length/mm": 390, "width/mm": 270, "height/mm": 250, "weight/kg": 10.65, "sequence": 4}, "flb_coordinates": [0, 0, 810], "orientation": 0}, {"item": {"article": "side dish-00106319", "id": "00106319", "product_group": "side dish", "length/mm": 400, "width/mm": 270, "height/mm": 280, "weight/kg": 9.0, "sequence": 5}, "flb_coordinates": [0, 0, 1060], "orientation": 0}, {"item": {"article": "cake-00104826", "id": "00104826", "product_group": "confectionery", "length/mm": 330, "width/mm": 210, "height/mm": 290, "weight/kg": 5.25, "sequence": 6}, "flb_coordinates": [0, 420, 0], "orientation": 0}, {"item": {"article": "cake-00104826", "id": "00104826", "product_group": "confectionery", "length/mm": 330, "width/mm": 210, "height/mm": 290, "weight/kg": 5.25, "sequence": 7}, "flb_coordinates": [0, 0, 1340], "orientation": 0}, {"item": {"article": "prawn-00101017", "id": "00101017", "product_group": "seafood", "length/mm": 330, "width/mm": 210, "height/mm": 290, "weight/kg": 5.25, "sequence": 8}, "flb_coordinates": [0, 270, 300], "orientation": 0}, {"item": {"article": "vegetables-00103919", "id": "00103919", "product_group": "vegetables", "length/mm": 570, "width/mm": 250, "height/mm": 210, "weight/kg": 8.0, "sequence": 9}, "flb_coordinates": [0, 0, 1630], "orientation": 0}, {"item": {"article": "muffin-00101974", "id": "00101974", "product_group": "candy", "length/mm": 380, "width/mm": 170, "height/mm": 170, "weight/kg": 7.3, "sequence": 10}, "flb_coordinates": [0, 270, 590], "orientation": 0}, {"item": {"article": "muffin-00101974", "id": "00101974", "product_group": "candy", "length/mm": 380, "width/mm": 170, "height/mm": 170, "weight/kg": 7.3, "sequence": 11}, "flb_coordinates": [340, 460, 0], "orientation": 0}, {"item": {"article": "bread roll-00106708", "id": "00106708", "product_group": "bakery products", "length/mm": 570, "width/mm": 230, "height/mm": 330, "weight/kg": 10.36, "sequence": 12}, "flb_coordinates": [0, 0, 1840], "orientation": 0}, {"item": {"article": "pizza Margherita-00106036", "id": "00106036", "product_group": "pizza", "length/mm": 370, "width/mm": 200, "height/mm": 270, "weight/kg": 7.85, "sequence": 13}, "flb_coordinates": [390, 420, 170], "orientation": 0}, {"item": {"article": "instant meal-00109896", "id": "00109896", "product_group": "instant meals", "length/mm": 330, "width/mm": 210, "height/mm": 290, "weight/kg": 5.25, "sequence": 14}, "flb_coordinates": [390, 420, 440], "orientation": 0}, {"item": {"article": "instant meal-00109896", "id": "00109896", "product_group": "instant meals", "length/mm": 330, "width/mm": 210, "height/mm": 290, "weight/kg": 5.25, "sequence": 15}, "flb_coordinates": [0, 270, 760], "orientation": 0}, {"item": {"article": "fruit-00111831", "id": "00111831", "product_group": "fruit", "length/mm": 390, "width/mm": 270, "height/mm": 270, "weight/kg": 10.65, "sequence": 16}, "flb_coordinates": [0, 0, 2170], "orientation": 0}, {"item": {"article": "fruit-00111831", "id": "00111831", "product_group": "fruit", "length/mm": 390, "width/mm": 270, "height/mm": 270, "weight/kg": 10.65, "sequence": 17}, "flb_coordinates": [0, 360, 1050], "orientation": 0}, {"item": {"article": "fruit-00111831", "id": "00111831", "product_group": "fruit", "length/mm": 390, "width/mm": 270, "height/mm": 270, "weight/kg": 10.65, "sequence": 18}, "flb_coordinates": [0, 360, 1320], "orientation": 0}, {"item": {"article": "fruit-00111831", "id": "00111831", "product_group": "fruit", "length/mm": 390, "width/mm": 270, "height/mm": 270, "weight/kg": 10.65, "sequence": 19}, "flb_coordinates": [0, 0, 2440], "orientation": 0}, {"item": {"article": "rye bread roll-00102471", "id": "00102471", "product_group": "bakery products", "length/mm": 530, "width/mm": 270, "height/mm": 220, "weight/kg": 9.53, "sequence": 20}, "flb_coordinates": [0, 360, 1590], "orientation": 0}, {"item": {"article": "pastry w. chocolate-00109722", "id": "00109722", "product_group": "confectionery", "length/mm": 540, "width/mm": 270, "height/mm": 260, "weight/kg": 10.69, "sequence": 21}, "flb_coordinates": [0, 360, 1810], "orientation": 0}, {"item": {"article": "currant bun-00110809", "id": "00110809", "product_group": "bakery products", "length/mm": 530, "width/mm": 270, "height/mm": 220, "weight/kg": 8.33, "sequence": 22}, "flb_coordinates": [0, 360, 2070], "orientation": 0}, {"item": {"article": "bagel-00112877", "id": "00112877", "product_group": "bakery products", "length/mm": 540, "width/mm": 270, "height/mm": 260, "weight/kg": 9.25, "sequence": 23}, "flb_coordinates": [0, 0, 2710], "orientation": 0}, {"item": {"article": "turkey breast-00106124", "id": "00106124", "product_group": "poultry", "length/mm": 330, "width/mm": 200, "height/mm": 280, "weight/kg": 5.25, "sequence": 24}, "flb_coordinates": [0, 360, 2290], "orientation": 0}, {"item": {"article": "fries-00100669", "id": "00100669", "product_group": "potatoe products", "length/mm": 400, "width/mm": 300, "height/mm": 240, "weight/kg": 9.59, "sequence": 25}, "flb_coordinates": [0, 330, 2570], "orientation": 0}, {"item": {"article": "fries-00100669", "id": "00100669", "product_group": "potatoe products", "length/mm": 400, "width/mm": 300, "height/mm": 240, "weight/kg": 9.59, "sequence": 26}, "flb_coordinates": [0, 0, 2970], "orientation": 0}, {"item": {"article": "vegetables-00105990", "id": "00105990", "product_group": "vegetables", "length/mm": 390, "width/mm": 260, "height/mm": 290, "weight/kg": 9.48, "sequence": 27}, "flb_coordinates": [460, 370, 2290], "orientation": 1}, {"item": {"article": "vegetables-00105990", "id": "00105990", "product_group": "vegetables", "length/mm": 390, "width/mm": 260, "height/mm": 290, "weight/kg": 9.48, "sequence": 28}, "flb_coordinates": [0, 240, 3210], "orientation": 0}, {"item": {"article": "bread-00112392", "id": "00112392", "product_group": "bakery products", "length/mm": 590, "width/mm": 390, "height/mm": 150, "weight/kg": 8.78, "sequence": 29}, "flb_coordinates": [460, 0, 2970], "orientation": 1}], "00100004": [{"item": {"article": "crushed ice-00103592", "id": "00103592", "product_group": "ice", "length/mm": 550, "width/mm": 210, "height/mm": 210, "weight/kg": 4.0, "sequence": 1}, "flb_coordinates": [0, 0, 0], "orientation": 0}, {"item": {"article": "popsicles for children-00110443", "id": "00110443", "product_group": "ice cream", "length/mm": 380, "width/mm": 250, "height/mm": 260, "weight/kg": 9.59, "sequence": 2}, "flb_coordinates": [0, 0, 210], "orientation": 0}, {"item": {"article": "bread-00104045", "id": "00104045", "product_group": "bakery products", "length/mm": 490, "width/mm": 220, "height/mm": 250, "weight/kg": 4.0, "sequence": 3}, "flb_coordinates": [0, 250, 0], "orientation": 0}, {"item": {"article": "bread-00104045", "id": "00104045", "product_group": "bakery products", "length/mm": 490, "width/mm": 220, "height/mm": 250, "weight/kg": 4.0, "sequence": 4}, "flb_coordinates": [0, 0, 470], "orientation": 0}, {"item": {"article": "vegetables-00103914", "id": "00103914", "product_group": "vegetables", "length/mm": 330, "width/mm": 190, "height/mm": 290, "weight/kg": 4.91, "sequence": 5}, "flb_coordinates": [0, 500, 0], "orientation": 0}, {"item": {"article": "vegetables-00103914", "id": "00103914", "product_group": "vegetables", "length/mm": 330, "width/mm": 190, "height/mm": 290, "weight/kg": 4.91, "sequence": 6}, "flb_coordinates": [550, 0, 0], "orientation": 0}, {"item": {"article": "vegetables-00103914", "id": "00103914", "product_group": "vegetables", "length/mm": 330, "width/mm": 190, "height/mm": 290, "weight/kg": 4.91, "sequence": 7}, "flb_coordinates": [0, 250, 250], "orientation": 0}, {"item": {"article": "vegetables-00103914", "id": "00103914", "product_group": "vegetables", "length/mm": 330, "width/mm": 190, "height/mm": 290, "weight/kg": 4.91, "sequence": 8}, "flb_coordinates": [490, 210, 0], "orientation": 0}, {"item": {"article": "vegetables-00103914", "id": "00103914", "product_group": "vegetables", "length/mm": 330, "width/mm": 190, "height/mm": 290, "weight/kg": 4.91, "sequence": 9}, "flb_coordinates": [330, 530, 0], "orientation": 0}, {"item": {"article": "vegetables-00103914", "id": "00103914", "product_group": "vegetables", "length/mm": 330, "width/mm": 190, "height/mm": 290, "weight/kg": 4.91, "sequence": 10}, "flb_coordinates": [0, 0, 720], "orientation": 0}, {"item": {"article": "vegetables-00103914", "id": "00103914", "product_group": "vegetables", "length/mm": 330, "width/mm": 190, "height/mm": 290, "weight/kg": 4.91, "sequence": 11}, "flb_coordinates": [490, 0, 290], "orientation": 0}, {"item": {"article": "vegetables-00103914", "id": "00103914", "product_group": "vegetables", "length/mm": 330, "width/mm": 190, "height/mm": 290, "weight/kg": 4.91, "sequence": 12}, "flb_coordinates": [790, 510, 0], "orientation": 0}, {"item": {"article": "pastry w. vanilla stuffing-00102099", "id": "00102099", "product_group": "confectionery", "length/mm": 290, "width/mm": 210, "height/mm": 210, "weight/kg": 5.5, "sequence": 13}, "flb_coordinates": [380, 220, 290], "orientation": 0}, {"item": {"article": "pastry w. vanilla stuffing-00112211", "id": "00112211", "product_group": "confectionery", "length/mm": 390, "width/mm": 260, "height/mm": 270, "weight/kg": 8.52, "sequence": 14}, "flb_coordinates": [0, 510, 290], "orientation": 0}, {"item": {"article": "cheese-00110106", "id": "00110106", "product_group": "dairy products", "length/mm": 570, "width/mm": 210, "height/mm": 180, "weight/kg": 8.52, "sequence": 15}, "flb_coordinates": [0, 220, 540], "orientation": 0}, {"item": {"article": "lamb fillet-00107490", "id": "00107490", "product_group": "red meat", "length/mm": 600, "width/mm": 200, "height/mm": 220, "weight/kg": 5.0, "sequence": 16}, "flb_coordinates": [0, 190, 720], "orientation": 0}, {"item": {"article": "layer cake-00102647", "id": "00102647", "product_group": "confectionery", "length/mm": 570, "width/mm": 190, "height/mm": 260, "weight/kg": 9.8, "sequence": 17}, "flb_coordinates": [0, 190, 940], "orientation": 0}, {"item": {"article": "layer cake-00102647", "id": "00102647", "product_group": "confectionery", "length/mm": 570, "width/mm": 190, "height/mm": 260, "weight/kg": 9.8, "sequence": 18}, "flb_coordinates": [0, 470, 560], "orientation": 0}, {"item": {"article": "vegetables-00109095", "id": "00109095", "product_group": "vegetables", "length/mm": 390, "width/mm": 250, "height/mm": 260, "weight/kg": 9.3, "sequence": 19}, "flb_coordinates": [890, 0, 0], "orientation": 1}, {"item": {"article": "herbs-00106516", "id": "00106516", "product_group": "herbs/spice", "length/mm": 590, "width/mm": 200, "height/mm": 280, "weight/kg": 7.55, "sequence": 20}, "flb_coordinates": [0, 440, 820], "orientation": 0}, {"item": {"article": "croissant-00109025", "id": "00109025", "product_group": "bakery products", "length/mm": 550, "width/mm": 280, "height/mm": 110, "weight/kg": 8.4, "sequence": 21}, "flb_coordinates": [0, 380, 1100], "orientation": 0}, {"item": {"article": "croissant-00109025", "id": "00109025", "product_group": "bakery products", "length/mm": 550, "width/mm": 280, "height/mm": 110, "weight/kg": 8.4, "sequence": 22}, "flb_coordinates": [680, 0, 580], "orientation": 0}, {"item": {"article": "fruit-00106110", "id": "00106110", "product_group": "fruit", "length/mm": 400, "width/mm": 270, "height/mm": 240, "weight/kg": 9.9, "sequence": 23}, "flb_coordinates": [680, 0, 690], "orientation": 0}, {"item": {"article": "fruit-00106110", "id": "00106110", "product_group": "fruit", "length/mm": 400, "width/mm": 270, "height/mm": 240, "weight/kg": 9.9, "sequence": 24}, "flb_coordinates": [0, 0, 1200], "orientation": 0}, {"item": {"article": "instant meal-00104572", "id": "00104572", "product_group": "instant meals", "length/mm": 390, "width/mm": 210, "height/mm": 150, "weight/kg": 3.3, "sequence": 25}, "flb_coordinates": [690, 510, 290], "orientation": 0}, {"item": {"article": "instant meal-00104572", "id": "00104572", "product_group": "instant meals", "length/mm": 390, "width/mm": 210, "height/mm": 150, "weight/kg": 3.3, "sequence": 26}, "flb_coordinates": [690, 510, 440], "orientation": 0}, {"item": {"article": "instant meal-00104572", "id": "00104572", "product_group": "instant meals", "length/mm": 390, "width/mm": 210, "height/mm": 150, "weight/kg": 3.3, "sequence": 27}, "flb_coordinates": [680, 0, 930], "orientation": 0}, {"item": {"article": "cutlet-00105491", "id": "00105491", "product_group": "instant meals", "length/mm": 400, "width/mm": 200, "height/mm": 270, "weight/kg": 6.39, "sequence": 28}, "flb_coordinates": [680, 0, 1080], "orientation": 0}, {"item": {"article": "cutlet-00105491", "id": "00105491", "product_group": "instant meals", "length/mm": 400, "width/mm": 200, "height/mm": 270, "weight/kg": 6.39, "sequence": 29}, "flb_coordinates": [690, 510, 590], "orientation": 0}, {"item": {"article": "cutlet-00105491", "id": "00105491", "product_group": "instant meals", "length/mm": 400, "width/mm": 200, "height/mm": 270, "weight/kg": 6.39, "sequence": 30}, "flb_coordinates": [620, 210, 930], "orientation": 0}, {"item": {"article": "frozen yoghurt-00104003", "id": "00104003", "product_group": "dairy products", "length/mm": 460, "width/mm": 160, "height/mm": 240, "weight/kg": 4.37, "sequence": 31}, "flb_coordinates": [0, 270, 1210], "orientation": 0}, {"item": {"article": "muffin-00101974", "id": "00101974", "product_group": "candy", "length/mm": 380, "width/mm": 170, "height/mm": 170, "weight/kg": 7.3, "sequence": 32}, "flb_coordinates": [690, 450, 860], "orientation": 0}, {"item": {"article": "squid-00112058", "id": "00112058", "product_group": "seafood", "length/mm": 390, "width/mm": 270, "height/mm": 220, "weight/kg": 5.39, "sequence": 33}, "flb_coordinates": [0, 0, 1440], "orientation": 0}, {"item": {"article": "spinach-00110601", "id": "00110601", "product_group": "vegetables", "length/mm": 510, "width/mm": 170, "height/mm": 170, "weight/kg": 6.07, "sequence": 34}, "flb_coordinates": [570, 0, 1350], "orientation": 0}, {"item": {"article": "spinach-00110601", "id": "00110601", "product_group": "vegetables", "length/mm": 510, "width/mm": 170, "height/mm": 170, "weight/kg": 6.07, "sequence": 35}, "flb_coordinates": [0, 0, 1660], "orientation": 0}, {"item": {"article": "muffin-00112207", "id": "00112207", "product_group": "candy", "length/mm": 380, "width/mm": 250, "height/mm": 360, "weight/kg": 12.5, "sequence": 36}, "flb_coordinates": [0, 470, 1210], "orientation": 0}, {"item": {"article": "instant meal-00109895", "id": "00109895", "product_group": "instant meals", "length/mm": 380, "width/mm": 250, "height/mm": 240, "weight/kg": 10.65, "sequence": 37}, "flb_coordinates": [0, 0, 1830], "orientation": 0}, {"item": {"article": "pizza w. tuna-00109548", "id": "00109548", "product_group": "pizza", "length/mm": 300, "width/mm": 210, "height/mm": 230, "weight/kg": 5.27, "sequence": 38}, "flb_coordinates": [0, 0, 2070], "orientation": 0}, {"item": {"article": "pizza w. tuna-00109548", "id": "00109548", "product_group": "pizza", "length/mm": 300, "width/mm": 210, "height/mm": 230, "weight/kg": 5.27, "sequence": 39}, "flb_coordinates": [0, 270, 1570], "orientation": 0}, {"item": {"article": "pastry w. vanilla stuffing-00112704", "id": "00112704", "product_group": "confectionery", "length/mm": 560, "width/mm": 170, "height/mm": 240, "weight/kg": 4.49, "sequence": 40}, "flb_coordinates": [520, 0, 1520], "orientation": 0}, {"item": {"article": "pastry w. vanilla stuffing-00112704", "id": "00112704", "product_group": "confectionery", "length/mm": 560, "width/mm": 170, "height/mm": 240, "weight/kg": 4.49, "sequence": 41}, "flb_coordinates": [540, 0, 1760], "orientation": 0}, {"item": {"article": "prezel-00107257", "id": "00107257", "product_group": "bakery products", "length/mm": 540, "width/mm": 230, "height/mm": 260, "weight/kg": 10.06, "sequence": 42}, "flb_coordinates": [460, 200, 1210], "orientation": 0}, {"item": {"article": "fish stick-00105948", "id": "00105948", "product_group": "fish", "length/mm": 270, "width/mm": 160, "height/mm": 190, "weight/kg": 2.92, "sequence": 43}, "flb_coordinates": [380, 270, 1470], "orientation": 0}, {"item": {"article": "fish stick-00105948", "id": "00105948", "product_group": "fish", "length/mm": 270, "width/mm": 160, "height/mm": 190, "weight/kg": 2.92, "sequence": 44}, "flb_coordinates": [380, 430, 1210], "orientation": 0}, {"item": {"article": "fish stick-00105948", "id": "00105948", "product_group": "fish", "length/mm": 270, "width/mm": 160, "height/mm": 190, "weight/kg": 2.92, "sequence": 45}, "flb_coordinates": [380, 430, 1400], "orientation": 0}, {"item": {"article": "fish stick-00105948", "id": "00105948", "product_group": "fish", "length/mm": 270, "width/mm": 160, "height/mm": 190, "weight/kg": 2.92, "sequence": 46}, "flb_coordinates": [0, 560, 1570], "orientation": 0}, {"item": {"article": "fish stick-00105948", "id": "00105948", "product_group": "fish", "length/mm": 270, "width/mm": 160, "height/mm": 190, "weight/kg": 2.92, "sequence": 47}, "flb_coordinates": [0, 560, 1760], "orientation": 0}, {"item": {"article": "fish stick-00105948", "id": "00105948", "product_group": "fish", "length/mm": 270, "width/mm": 160, "height/mm": 190, "weight/kg": 2.92, "sequence": 48}, "flb_coordinates": [0, 250, 1800], "orientation": 0}, {"item": {"article": "ciabatta-00103095", "id": "00103095", "product_group": "bakery products", "length/mm": 590, "width/mm": 200, "height/mm": 210, "weight/kg": 7.67, "sequence": 49}, "flb_coordinates": [490, 0, 2000], "orientation": 0}, {"item": {"article": "ciabatta-00103095", "id": "00103095", "product_group": "bakery products", "length/mm": 590, "width/mm": 200, "height/mm": 210, "weight/kg": 7.67, "sequence": 50}, "flb_coordinates": [380, 200, 1660], "orientation": 0}, {"item": {"article": "chicken breast-00105503", "id": "00105503", "product_group": "poultry", "length/mm": 360, "width/mm": 350, "height/mm": 260, "weight/kg": 7.2, "sequence": 51}, "flb_coordinates": [270, 250, 1870], "orientation": 0}, {"item": {"article": "croissant with sweet stuffing-00101311", "id": "00101311", "product_group": "confectionery", "length/mm": 550, "width/mm": 220, "height/mm": 310, "weight/kg": 7.9, "sequence": 52}, "flb_coordinates": [0, 0, 2300], "orientation": 0}, {"item": {"article": "croissant with sweet stuffing-00101311", "id": "00101311", "product_group": "confectionery", "length/mm": 550, "width/mm": 220, "height/mm": 310, "weight/kg": 7.9, "sequence": 53}, "flb_coordinates": [710, 200, 1870], "orientation": 0}, {"item": {"article": "spinach-00105650", "id": "00105650", "product_group": "vegetables", "length/mm": 370, "width/mm": 200, "height/mm": 270, "weight/kg": 7.85, "sequence": 54}, "flb_coordinates": [710, 0, 2210], "orientation": 0}, {"item": {"article": "spinach-00105650", "id": "00105650", "product_group": "vegetables", "length/mm": 370, "width/mm": 200, "height/mm": 270, "weight/kg": 7.85, "sequence": 55}, "flb_coordinates": [0, 0, 2610], "orientation": 0}, {"item": {"article": "chicken nugget-00103044", "id": "00103044", "product_group": "poultry", "length/mm": 470, "width/mm": 280, "height/mm": 160, "weight/kg": 5.1, "sequence": 56}, "flb_coordinates": [0, 560, 2130], "orientation": 0}, {"item": {"article": "dessert-00104636", "id": "00104636", "product_group": "candy", "length/mm": 490, "width/mm": 130, "height/mm": 210, "weight/kg": 5.11, "sequence": 57}, "flb_coordinates": [780, 510, 1030], "orientation": 0}, {"item": {"article": "cake-00106166", "id": "00106166", "product_group": "confectionery", "length/mm": 300, "width/mm": 210, "height/mm": 230, "weight/kg": 5.3, "sequence": 58}, "flb_coordinates": [590, 220, 2180], "orientation": 0}]}
+{
+    "00100408": [
+        {
+            "item": {
+                "article": "donut-00101843",
+                "id": "00101843",
+                "product_group": "confectionery",
+                "length/mm": 600,
+                "width/mm": 400,
+                "height/mm": 220,
+                "weight/kg": 6.296,
+                "sequence": 1
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "lye bread roll-00107754",
+                "id": "00107754",
+                "product_group": "bakery products",
+                "length/mm": 590,
+                "width/mm": 390,
+                "height/mm": 270,
+                "weight/kg": 6.78,
+                "sequence": 2
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                220
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "lye bread roll-00107754",
+                "id": "00107754",
+                "product_group": "bakery products",
+                "length/mm": 590,
+                "width/mm": 390,
+                "height/mm": 270,
+                "weight/kg": 6.78,
+                "sequence": 3
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                490
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "paper folding bag-00102400",
+                "id": "00102400",
+                "product_group": "non-food products",
+                "length/mm": 370,
+                "width/mm": 325,
+                "height/mm": 195,
+                "weight/kg": 10.494,
+                "sequence": 4
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                760
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "croissant-00101323",
+                "id": "00101323",
+                "product_group": "bakery products",
+                "length/mm": 585,
+                "width/mm": 390,
+                "height/mm": 220,
+                "weight/kg": 5.936,
+                "sequence": 5
+            },
+            "flb_coordinates": [
+                690,
+                0,
+                0
+            ],
+            "orientation": 1
+        },
+        {
+            "item": {
+                "article": "croissant-00101323",
+                "id": "00101323",
+                "product_group": "bakery products",
+                "length/mm": 585,
+                "width/mm": 390,
+                "height/mm": 220,
+                "weight/kg": 5.936,
+                "sequence": 6
+            },
+            "flb_coordinates": [
+                710,
+                0,
+                220
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "croissant-00101323",
+                "id": "00101323",
+                "product_group": "bakery products",
+                "length/mm": 585,
+                "width/mm": 390,
+                "height/mm": 220,
+                "weight/kg": 5.936,
+                "sequence": 7
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                955
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "bread roll-00110459",
+                "id": "00110459",
+                "product_group": "bakery products",
+                "length/mm": 590,
+                "width/mm": 390,
+                "height/mm": 290,
+                "weight/kg": 7.63,
+                "sequence": 8
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1175
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fruit-00105433",
+                "id": "00105433",
+                "product_group": "fruit",
+                "length/mm": 380,
+                "width/mm": 300,
+                "height/mm": 170,
+                "weight/kg": 5.72,
+                "sequence": 9
+            },
+            "flb_coordinates": [
+                700,
+                0,
+                440
+            ],
+            "orientation": 1
+        },
+        {
+            "item": {
+                "article": "donut-00101846",
+                "id": "00101846",
+                "product_group": "confectionery",
+                "length/mm": 580,
+                "width/mm": 380,
+                "height/mm": 160,
+                "weight/kg": 7.42,
+                "sequence": 10
+            },
+            "flb_coordinates": [
+                0,
+                420,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "roast duck-00112653",
+                "id": "00112653",
+                "product_group": "poultry",
+                "length/mm": 400,
+                "width/mm": 300,
+                "height/mm": 210,
+                "weight/kg": 7.632,
+                "sequence": 11
+            },
+            "flb_coordinates": [
+                0,
+                420,
+                160
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "focaccia-00104520",
+                "id": "00104520",
+                "product_group": "snack",
+                "length/mm": 390,
+                "width/mm": 390,
+                "height/mm": 160,
+                "weight/kg": 4.85,
+                "sequence": 12
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1465
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "bread-00109731",
+                "id": "00109731",
+                "product_group": "bakery products",
+                "length/mm": 600,
+                "width/mm": 400,
+                "height/mm": 290,
+                "weight/kg": 7.21,
+                "sequence": 13
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1625
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "bread-00109731",
+                "id": "00109731",
+                "product_group": "bakery products",
+                "length/mm": 600,
+                "width/mm": 400,
+                "height/mm": 290,
+                "weight/kg": 7.21,
+                "sequence": 14
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1915
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "bread-00109731",
+                "id": "00109731",
+                "product_group": "bakery products",
+                "length/mm": 600,
+                "width/mm": 400,
+                "height/mm": 290,
+                "weight/kg": 7.21,
+                "sequence": 15
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2205
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "prezel-00104259",
+                "id": "00104259",
+                "product_group": "bakery products",
+                "length/mm": 590,
+                "width/mm": 390,
+                "height/mm": 220,
+                "weight/kg": 7.65,
+                "sequence": 16
+            },
+            "flb_coordinates": [
+                690,
+                0,
+                610
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "bread roll-00106670",
+                "id": "00106670",
+                "product_group": "bakery products",
+                "length/mm": 600,
+                "width/mm": 400,
+                "height/mm": 260,
+                "weight/kg": 6.996,
+                "sequence": 17
+            },
+            "flb_coordinates": [
+                680,
+                0,
+                830
+            ],
+            "orientation": 1
+        },
+        {
+            "item": {
+                "article": "bread roll-00106670",
+                "id": "00106670",
+                "product_group": "bakery products",
+                "length/mm": 600,
+                "width/mm": 400,
+                "height/mm": 260,
+                "weight/kg": 6.996,
+                "sequence": 18
+            },
+            "flb_coordinates": [
+                690,
+                0,
+                1090
+            ],
+            "orientation": 1
+        },
+        {
+            "item": {
+                "article": "chicken leg-00105511",
+                "id": "00105511",
+                "product_group": "poultry",
+                "length/mm": 580,
+                "width/mm": 390,
+                "height/mm": 120,
+                "weight/kg": 6.38,
+                "sequence": 19
+            },
+            "flb_coordinates": [
+                0,
+                425,
+                370
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pastry w. crumble topping-00111825",
+                "id": "00111825",
+                "product_group": "candy",
+                "length/mm": 400,
+                "width/mm": 295,
+                "height/mm": 260,
+                "weight/kg": 4.664,
+                "sequence": 20
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2495
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "baguette-00101398",
+                "id": "00101398",
+                "product_group": "bakery products",
+                "length/mm": 595,
+                "width/mm": 400,
+                "height/mm": 295,
+                "weight/kg": 6.11,
+                "sequence": 21
+            },
+            "flb_coordinates": [
+                680,
+                0,
+                1350
+            ],
+            "orientation": 1
+        },
+        {
+            "item": {
+                "article": "baguette-00101162",
+                "id": "00101162",
+                "product_group": "bakery products",
+                "length/mm": 590,
+                "width/mm": 390,
+                "height/mm": 275,
+                "weight/kg": 7.21,
+                "sequence": 22
+            },
+            "flb_coordinates": [
+                690,
+                0,
+                1645
+            ],
+            "orientation": 1
+        },
+        {
+            "item": {
+                "article": "layer cake-00110336",
+                "id": "00110336",
+                "product_group": "confectionery",
+                "length/mm": 395,
+                "width/mm": 380,
+                "height/mm": 205,
+                "weight/kg": 7.64,
+                "sequence": 23
+            },
+            "flb_coordinates": [
+                0,
+                430,
+                490
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pastry w. fruit-00102102",
+                "id": "00102102",
+                "product_group": "confectionery",
+                "length/mm": 405,
+                "width/mm": 290,
+                "height/mm": 180,
+                "weight/kg": 4.295,
+                "sequence": 24
+            },
+            "flb_coordinates": [
+                685,
+                0,
+                1920
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "donut-00108722",
+                "id": "00108722",
+                "product_group": "confectionery",
+                "length/mm": 370,
+                "width/mm": 325,
+                "height/mm": 195,
+                "weight/kg": 10.494,
+                "sequence": 25
+            },
+            "flb_coordinates": [
+                0,
+                325,
+                2495
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "baguette-00103678",
+                "id": "00103678",
+                "product_group": "bakery products",
+                "length/mm": 595,
+                "width/mm": 395,
+                "height/mm": 290,
+                "weight/kg": 11.7,
+                "sequence": 26
+            },
+            "flb_coordinates": [
+                710,
+                0,
+                2100
+            ],
+            "orientation": 0
+        }
+    ],
+    "00100001": [
+        {
+            "item": {
+                "article": "ciabatta-00103095",
+                "id": "00103095",
+                "product_group": "bakery products",
+                "length/mm": 590,
+                "width/mm": 200,
+                "height/mm": 210,
+                "weight/kg": 7.67,
+                "sequence": 1
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "cake-00111025",
+                "id": "00111025",
+                "product_group": "confectionery",
+                "length/mm": 550,
+                "width/mm": 280,
+                "height/mm": 110,
+                "weight/kg": 8.4,
+                "sequence": 2
+            },
+            "flb_coordinates": [
+                0,
+                200,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "cake-00111025",
+                "id": "00111025",
+                "product_group": "confectionery",
+                "length/mm": 550,
+                "width/mm": 280,
+                "height/mm": 110,
+                "weight/kg": 8.4,
+                "sequence": 3
+            },
+            "flb_coordinates": [
+                0,
+                200,
+                110
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "dessert-00104636",
+                "id": "00104636",
+                "product_group": "candy",
+                "length/mm": 490,
+                "width/mm": 130,
+                "height/mm": 210,
+                "weight/kg": 5.11,
+                "sequence": 4
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                210
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "dessert-00104636",
+                "id": "00104636",
+                "product_group": "candy",
+                "length/mm": 490,
+                "width/mm": 130,
+                "height/mm": 210,
+                "weight/kg": 5.11,
+                "sequence": 5
+            },
+            "flb_coordinates": [
+                0,
+                130,
+                220
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "cake-00111275",
+                "id": "00111275",
+                "product_group": "confectionery",
+                "length/mm": 570,
+                "width/mm": 210,
+                "height/mm": 180,
+                "weight/kg": 8.52,
+                "sequence": 6
+            },
+            "flb_coordinates": [
+                0,
+                500,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "cake-00111275",
+                "id": "00111275",
+                "product_group": "confectionery",
+                "length/mm": 570,
+                "width/mm": 210,
+                "height/mm": 180,
+                "weight/kg": 8.52,
+                "sequence": 7
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                430
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pizza w. salami-00112547",
+                "id": "00112547",
+                "product_group": "pizza",
+                "length/mm": 400,
+                "width/mm": 200,
+                "height/mm": 270,
+                "weight/kg": 8.25,
+                "sequence": 8
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                610
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pizza w. salami-00112547",
+                "id": "00112547",
+                "product_group": "pizza",
+                "length/mm": 400,
+                "width/mm": 200,
+                "height/mm": 270,
+                "weight/kg": 8.25,
+                "sequence": 9
+            },
+            "flb_coordinates": [
+                0,
+                420,
+                220
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "muffin-00101974",
+                "id": "00101974",
+                "product_group": "candy",
+                "length/mm": 380,
+                "width/mm": 170,
+                "height/mm": 170,
+                "weight/kg": 7.3,
+                "sequence": 10
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                880
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "muffin-00101974",
+                "id": "00101974",
+                "product_group": "candy",
+                "length/mm": 380,
+                "width/mm": 170,
+                "height/mm": 170,
+                "weight/kg": 7.3,
+                "sequence": 11
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1050
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "herbs-00106519",
+                "id": "00106519",
+                "product_group": "herbs/spice",
+                "length/mm": 380,
+                "width/mm": 250,
+                "height/mm": 340,
+                "weight/kg": 12.5,
+                "sequence": 12
+            },
+            "flb_coordinates": [
+                0,
+                210,
+                490
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "herbs-00106519",
+                "id": "00106519",
+                "product_group": "herbs/spice",
+                "length/mm": 380,
+                "width/mm": 250,
+                "height/mm": 340,
+                "weight/kg": 12.5,
+                "sequence": 13
+            },
+            "flb_coordinates": [
+                0,
+                460,
+                490
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "backing parchment-00101126",
+                "id": "00101126",
+                "product_group": "non-food products",
+                "length/mm": 400,
+                "width/mm": 160,
+                "height/mm": 160,
+                "weight/kg": 7.67,
+                "sequence": 14
+            },
+            "flb_coordinates": [
+                0,
+                200,
+                830
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "backing parchment-00101126",
+                "id": "00101126",
+                "product_group": "non-food products",
+                "length/mm": 400,
+                "width/mm": 160,
+                "height/mm": 160,
+                "weight/kg": 7.67,
+                "sequence": 15
+            },
+            "flb_coordinates": [
+                400,
+                260,
+                220
+            ],
+            "orientation": 1
+        },
+        {
+            "item": {
+                "article": "backing parchment-00101126",
+                "id": "00101126",
+                "product_group": "non-food products",
+                "length/mm": 400,
+                "width/mm": 160,
+                "height/mm": 160,
+                "weight/kg": 7.67,
+                "sequence": 16
+            },
+            "flb_coordinates": [
+                400,
+                260,
+                380
+            ],
+            "orientation": 1
+        },
+        {
+            "item": {
+                "article": "backing parchment-00101126",
+                "id": "00101126",
+                "product_group": "non-food products",
+                "length/mm": 400,
+                "width/mm": 160,
+                "height/mm": 160,
+                "weight/kg": 7.67,
+                "sequence": 17
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1220
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pastry w. chocolate-00109722",
+                "id": "00109722",
+                "product_group": "confectionery",
+                "length/mm": 540,
+                "width/mm": 270,
+                "height/mm": 260,
+                "weight/kg": 10.69,
+                "sequence": 18
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1380
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pastry w. chocolate-00109722",
+                "id": "00109722",
+                "product_group": "confectionery",
+                "length/mm": 540,
+                "width/mm": 270,
+                "height/mm": 260,
+                "weight/kg": 10.69,
+                "sequence": 19
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1640
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pastry w. chocolate-00109722",
+                "id": "00109722",
+                "product_group": "confectionery",
+                "length/mm": 540,
+                "width/mm": 270,
+                "height/mm": 260,
+                "weight/kg": 10.69,
+                "sequence": 20
+            },
+            "flb_coordinates": [
+                0,
+                270,
+                990
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "herbs-00106516",
+                "id": "00106516",
+                "product_group": "herbs/spice",
+                "length/mm": 590,
+                "width/mm": 200,
+                "height/mm": 280,
+                "weight/kg": 7.55,
+                "sequence": 21
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1900
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00109095",
+                "id": "00109095",
+                "product_group": "vegetables",
+                "length/mm": 390,
+                "width/mm": 250,
+                "height/mm": 260,
+                "weight/kg": 9.3,
+                "sequence": 22
+            },
+            "flb_coordinates": [
+                0,
+                270,
+                1250
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "chicken-00111632",
+                "id": "00111632",
+                "product_group": "poultry",
+                "length/mm": 370,
+                "width/mm": 200,
+                "height/mm": 270,
+                "weight/kg": 7.85,
+                "sequence": 23
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2180
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "chicken-00111632",
+                "id": "00111632",
+                "product_group": "poultry",
+                "length/mm": 370,
+                "width/mm": 200,
+                "height/mm": 270,
+                "weight/kg": 7.85,
+                "sequence": 24
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2450
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00111710",
+                "id": "00111710",
+                "product_group": "vegetables",
+                "length/mm": 350,
+                "width/mm": 260,
+                "height/mm": 190,
+                "weight/kg": 10.65,
+                "sequence": 25
+            },
+            "flb_coordinates": [
+                370,
+                0,
+                2180
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00111710",
+                "id": "00111710",
+                "product_group": "vegetables",
+                "length/mm": 350,
+                "width/mm": 260,
+                "height/mm": 190,
+                "weight/kg": 10.65,
+                "sequence": 26
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2720
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "instant meal-00104572",
+                "id": "00104572",
+                "product_group": "instant meals",
+                "length/mm": 390,
+                "width/mm": 210,
+                "height/mm": 150,
+                "weight/kg": 3.3,
+                "sequence": 27
+            },
+            "flb_coordinates": [
+                510,
+                270,
+                1250
+            ],
+            "orientation": 1
+        },
+        {
+            "item": {
+                "article": "instant meal-00104572",
+                "id": "00104572",
+                "product_group": "instant meals",
+                "length/mm": 390,
+                "width/mm": 210,
+                "height/mm": 150,
+                "weight/kg": 3.3,
+                "sequence": 28
+            },
+            "flb_coordinates": [
+                0,
+                260,
+                1900
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "instant meal-00104572",
+                "id": "00104572",
+                "product_group": "instant meals",
+                "length/mm": 390,
+                "width/mm": 210,
+                "height/mm": 150,
+                "weight/kg": 3.3,
+                "sequence": 29
+            },
+            "flb_coordinates": [
+                0,
+                360,
+                2050
+            ],
+            "orientation": 1
+        },
+        {
+            "item": {
+                "article": "fruit-00106110",
+                "id": "00106110",
+                "product_group": "fruit",
+                "length/mm": 400,
+                "width/mm": 270,
+                "height/mm": 240,
+                "weight/kg": 9.9,
+                "sequence": 30
+            },
+            "flb_coordinates": [
+                0,
+                360,
+                2200
+            ],
+            "orientation": 1
+        },
+        {
+            "item": {
+                "article": "fruit-00106110",
+                "id": "00106110",
+                "product_group": "fruit",
+                "length/mm": 400,
+                "width/mm": 270,
+                "height/mm": 240,
+                "weight/kg": 9.9,
+                "sequence": 31
+            },
+            "flb_coordinates": [
+                0,
+                260,
+                2440
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "frozen yoghurt-00104003",
+                "id": "00104003",
+                "product_group": "dairy products",
+                "length/mm": 460,
+                "width/mm": 160,
+                "height/mm": 240,
+                "weight/kg": 4.37,
+                "sequence": 32
+            },
+            "flb_coordinates": [
+                0,
+                260,
+                2680
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "frozen yoghurt-00104003",
+                "id": "00104003",
+                "product_group": "dairy products",
+                "length/mm": 460,
+                "width/mm": 160,
+                "height/mm": 240,
+                "weight/kg": 4.37,
+                "sequence": 33
+            },
+            "flb_coordinates": [
+                430,
+                0,
+                2370
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "sundae-00106909",
+                "id": "00106909",
+                "product_group": "ice cream",
+                "length/mm": 290,
+                "width/mm": 200,
+                "height/mm": 190,
+                "weight/kg": 5.75,
+                "sequence": 34
+            },
+            "flb_coordinates": [
+                430,
+                0,
+                2610
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "sundae-00106909",
+                "id": "00106909",
+                "product_group": "ice cream",
+                "length/mm": 290,
+                "width/mm": 200,
+                "height/mm": 190,
+                "weight/kg": 5.75,
+                "sequence": 35
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2910
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "sundae-00106909",
+                "id": "00106909",
+                "product_group": "ice cream",
+                "length/mm": 290,
+                "width/mm": 200,
+                "height/mm": 190,
+                "weight/kg": 5.75,
+                "sequence": 36
+            },
+            "flb_coordinates": [
+                0,
+                410,
+                2920
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "bread-00104045",
+                "id": "00104045",
+                "product_group": "bakery products",
+                "length/mm": 490,
+                "width/mm": 220,
+                "height/mm": 250,
+                "weight/kg": 4.0,
+                "sequence": 37
+            },
+            "flb_coordinates": [
+                560,
+                260,
+                1400
+            ],
+            "orientation": 1
+        },
+        {
+            "item": {
+                "article": "pastry w. vanilla stuffing-00102099",
+                "id": "00102099",
+                "product_group": "confectionery",
+                "length/mm": 290,
+                "width/mm": 210,
+                "height/mm": 210,
+                "weight/kg": 5.5,
+                "sequence": 38
+            },
+            "flb_coordinates": [
+                430,
+                420,
+                1650
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pastry w. vanilla stuffing-00102099",
+                "id": "00102099",
+                "product_group": "confectionery",
+                "length/mm": 290,
+                "width/mm": 210,
+                "height/mm": 210,
+                "weight/kg": 5.5,
+                "sequence": 39
+            },
+            "flb_coordinates": [
+                430,
+                420,
+                1860
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pastry w. vanilla stuffing-00102099",
+                "id": "00102099",
+                "product_group": "confectionery",
+                "length/mm": 290,
+                "width/mm": 210,
+                "height/mm": 210,
+                "weight/kg": 5.5,
+                "sequence": 40
+            },
+            "flb_coordinates": [
+                430,
+                420,
+                2070
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pastry w. vanilla stuffing-00102099",
+                "id": "00102099",
+                "product_group": "confectionery",
+                "length/mm": 290,
+                "width/mm": 210,
+                "height/mm": 210,
+                "weight/kg": 5.5,
+                "sequence": 41
+            },
+            "flb_coordinates": [
+                430,
+                420,
+                2280
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "sundae-00109068",
+                "id": "00109068",
+                "product_group": "ice cream",
+                "length/mm": 590,
+                "width/mm": 200,
+                "height/mm": 190,
+                "weight/kg": 6.65,
+                "sequence": 42
+            },
+            "flb_coordinates": [
+                520,
+                0,
+                2800
+            ],
+            "orientation": 1
+        }
+    ],
+    "00100002": [
+        {
+            "item": {
+                "article": "puff pastries-00110384",
+                "id": "00110384",
+                "product_group": "confectionery",
+                "length/mm": 590,
+                "width/mm": 390,
+                "height/mm": 150,
+                "weight/kg": 8.68,
+                "sequence": 1
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "traybake-00102532",
+                "id": "00102532",
+                "product_group": "confectionery",
+                "length/mm": 510,
+                "width/mm": 170,
+                "height/mm": 170,
+                "weight/kg": 6.07,
+                "sequence": 2
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                150
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "prezel stick-00107768",
+                "id": "00107768",
+                "product_group": "bakery products",
+                "length/mm": 390,
+                "width/mm": 270,
+                "height/mm": 250,
+                "weight/kg": 10.65,
+                "sequence": 3
+            },
+            "flb_coordinates": [
+                0,
+                170,
+                150
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "prezel stick-00107768",
+                "id": "00107768",
+                "product_group": "bakery products",
+                "length/mm": 390,
+                "width/mm": 270,
+                "height/mm": 250,
+                "weight/kg": 10.65,
+                "sequence": 4
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                400
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "chicken breast-00106014",
+                "id": "00106014",
+                "product_group": "poultry",
+                "length/mm": 370,
+                "width/mm": 200,
+                "height/mm": 270,
+                "weight/kg": 7.85,
+                "sequence": 5
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                650
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "prawn-00104130",
+                "id": "00104130",
+                "product_group": "seafood",
+                "length/mm": 490,
+                "width/mm": 260,
+                "height/mm": 150,
+                "weight/kg": 4.61,
+                "sequence": 6
+            },
+            "flb_coordinates": [
+                0,
+                460,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "plaice-00104334",
+                "id": "00104334",
+                "product_group": "fish",
+                "length/mm": 400,
+                "width/mm": 160,
+                "height/mm": 160,
+                "weight/kg": 7.67,
+                "sequence": 7
+            },
+            "flb_coordinates": [
+                0,
+                470,
+                150
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "plaice-00104334",
+                "id": "00104334",
+                "product_group": "fish",
+                "length/mm": 400,
+                "width/mm": 160,
+                "height/mm": 160,
+                "weight/kg": 7.67,
+                "sequence": 8
+            },
+            "flb_coordinates": [
+                0,
+                470,
+                310
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "ice cream in cone-00110429",
+                "id": "00110429",
+                "product_group": "ice cream",
+                "length/mm": 390,
+                "width/mm": 270,
+                "height/mm": 220,
+                "weight/kg": 5.39,
+                "sequence": 9
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                920
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00104984",
+                "id": "00104984",
+                "product_group": "vegetables",
+                "length/mm": 540,
+                "width/mm": 270,
+                "height/mm": 260,
+                "weight/kg": 9.85,
+                "sequence": 10
+            },
+            "flb_coordinates": [
+                0,
+                270,
+                470
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00106134",
+                "id": "00106134",
+                "product_group": "vegetables",
+                "length/mm": 330,
+                "width/mm": 200,
+                "height/mm": 280,
+                "weight/kg": 5.25,
+                "sequence": 11
+            },
+            "flb_coordinates": [
+                390,
+                0,
+                320
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00106134",
+                "id": "00106134",
+                "product_group": "vegetables",
+                "length/mm": 330,
+                "width/mm": 200,
+                "height/mm": 280,
+                "weight/kg": 5.25,
+                "sequence": 12
+            },
+            "flb_coordinates": [
+                0,
+                360,
+                730
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "squid-00105971",
+                "id": "00105971",
+                "product_group": "seafood",
+                "length/mm": 350,
+                "width/mm": 260,
+                "height/mm": 190,
+                "weight/kg": 10.65,
+                "sequence": 13
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1140
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "popsicles multipack-00100469",
+                "id": "00100469",
+                "product_group": "ice cream",
+                "length/mm": 400,
+                "width/mm": 260,
+                "height/mm": 290,
+                "weight/kg": 9.45,
+                "sequence": 14
+            },
+            "flb_coordinates": [
+                430,
+                0,
+                600
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "muffin-00112741",
+                "id": "00112741",
+                "product_group": "candy",
+                "length/mm": 290,
+                "width/mm": 200,
+                "height/mm": 190,
+                "weight/kg": 5.75,
+                "sequence": 15
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1330
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "muffin-00112741",
+                "id": "00112741",
+                "product_group": "candy",
+                "length/mm": 290,
+                "width/mm": 200,
+                "height/mm": 190,
+                "weight/kg": 5.75,
+                "sequence": 16
+            },
+            "flb_coordinates": [
+                430,
+                0,
+                890
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "layer cake-00104877",
+                "id": "00104877",
+                "product_group": "confectionery",
+                "length/mm": 560,
+                "width/mm": 230,
+                "height/mm": 220,
+                "weight/kg": 6.88,
+                "sequence": 17
+            },
+            "flb_coordinates": [
+                0,
+                200,
+                1330
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "sundae-00108137",
+                "id": "00108137",
+                "product_group": "ice cream",
+                "length/mm": 380,
+                "width/mm": 170,
+                "height/mm": 170,
+                "weight/kg": 7.3,
+                "sequence": 18
+            },
+            "flb_coordinates": [
+                0,
+                460,
+                1010
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "sundae-00108137",
+                "id": "00108137",
+                "product_group": "ice cream",
+                "length/mm": 380,
+                "width/mm": 170,
+                "height/mm": 170,
+                "weight/kg": 7.3,
+                "sequence": 19
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1520
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "bread-00109739",
+                "id": "00109739",
+                "product_group": "bakery products",
+                "length/mm": 530,
+                "width/mm": 270,
+                "height/mm": 220,
+                "weight/kg": 8.33,
+                "sequence": 20
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1690
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "bread-00109739",
+                "id": "00109739",
+                "product_group": "bakery products",
+                "length/mm": 530,
+                "width/mm": 270,
+                "height/mm": 220,
+                "weight/kg": 8.33,
+                "sequence": 21
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1910
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "croissant-00102345",
+                "id": "00102345",
+                "product_group": "bakery products",
+                "length/mm": 400,
+                "width/mm": 270,
+                "height/mm": 280,
+                "weight/kg": 9.59,
+                "sequence": 22
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2130
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "ciabatta-00103092",
+                "id": "00103092",
+                "product_group": "bakery products",
+                "length/mm": 320,
+                "width/mm": 230,
+                "height/mm": 330,
+                "weight/kg": 9.17,
+                "sequence": 23
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2410
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "cake-00108480",
+                "id": "00108480",
+                "product_group": "confectionery",
+                "length/mm": 390,
+                "width/mm": 260,
+                "height/mm": 270,
+                "weight/kg": 8.52,
+                "sequence": 24
+            },
+            "flb_coordinates": [
+                0,
+                460,
+                1180
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pasta-00109830",
+                "id": "00109830",
+                "product_group": "side dish",
+                "length/mm": 570,
+                "width/mm": 210,
+                "height/mm": 180,
+                "weight/kg": 8.52,
+                "sequence": 25
+            },
+            "flb_coordinates": [
+                0,
+                270,
+                1550
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pasta-00109830",
+                "id": "00109830",
+                "product_group": "side dish",
+                "length/mm": 570,
+                "width/mm": 210,
+                "height/mm": 180,
+                "weight/kg": 8.52,
+                "sequence": 26
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2740
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "snack w. spinach-00111189",
+                "id": "00111189",
+                "product_group": "snack",
+                "length/mm": 400,
+                "width/mm": 270,
+                "height/mm": 240,
+                "weight/kg": 9.9,
+                "sequence": 27
+            },
+            "flb_coordinates": [
+                0,
+                270,
+                1730
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pastry w. crumble topping-00111835",
+                "id": "00111835",
+                "product_group": "candy",
+                "length/mm": 530,
+                "width/mm": 270,
+                "height/mm": 220,
+                "weight/kg": 9.53,
+                "sequence": 28
+            },
+            "flb_coordinates": [
+                0,
+                270,
+                1970
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pizza w. multiple toppings-00106052",
+                "id": "00106052",
+                "product_group": "pizza",
+                "length/mm": 380,
+                "width/mm": 250,
+                "height/mm": 240,
+                "weight/kg": 10.65,
+                "sequence": 29
+            },
+            "flb_coordinates": [
+                0,
+                270,
+                2190
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pizza w. multiple toppings-00106052",
+                "id": "00106052",
+                "product_group": "pizza",
+                "length/mm": 380,
+                "width/mm": 250,
+                "height/mm": 240,
+                "weight/kg": 10.65,
+                "sequence": 30
+            },
+            "flb_coordinates": [
+                0,
+                290,
+                2430
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "salmon-00100742",
+                "id": "00100742",
+                "product_group": "fish",
+                "length/mm": 410,
+                "width/mm": 340,
+                "height/mm": 230,
+                "weight/kg": 8.4,
+                "sequence": 31
+            },
+            "flb_coordinates": [
+                0,
+                230,
+                2670
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "salmon-00100741",
+                "id": "00100741",
+                "product_group": "fish",
+                "length/mm": 570,
+                "width/mm": 230,
+                "height/mm": 330,
+                "weight/kg": 10.36,
+                "sequence": 32
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2920
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "popsicles for children-00110710",
+                "id": "00110710",
+                "product_group": "ice cream",
+                "length/mm": 330,
+                "width/mm": 210,
+                "height/mm": 290,
+                "weight/kg": 5.25,
+                "sequence": 33
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                3250
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "popsicles for children-00110710",
+                "id": "00110710",
+                "product_group": "ice cream",
+                "length/mm": 330,
+                "width/mm": 210,
+                "height/mm": 290,
+                "weight/kg": 5.25,
+                "sequence": 34
+            },
+            "flb_coordinates": [
+                520,
+                0,
+                3250
+            ],
+            "orientation": 1
+        }
+    ],
+    "00100003": [
+        {
+            "item": {
+                "article": "cheese-00100264",
+                "id": "00100264",
+                "product_group": "dairy products",
+                "length/mm": 600,
+                "width/mm": 400,
+                "height/mm": 300,
+                "weight/kg": 7.1,
+                "sequence": 1
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "cake-00106075",
+                "id": "00106075",
+                "product_group": "confectionery",
+                "length/mm": 540,
+                "width/mm": 270,
+                "height/mm": 260,
+                "weight/kg": 9.49,
+                "sequence": 2
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                300
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fries-00112620",
+                "id": "00112620",
+                "product_group": "potatoe products",
+                "length/mm": 390,
+                "width/mm": 270,
+                "height/mm": 250,
+                "weight/kg": 10.65,
+                "sequence": 3
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                560
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fries-00112620",
+                "id": "00112620",
+                "product_group": "potatoe products",
+                "length/mm": 390,
+                "width/mm": 270,
+                "height/mm": 250,
+                "weight/kg": 10.65,
+                "sequence": 4
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                810
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "side dish-00106319",
+                "id": "00106319",
+                "product_group": "side dish",
+                "length/mm": 400,
+                "width/mm": 270,
+                "height/mm": 280,
+                "weight/kg": 9.0,
+                "sequence": 5
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1060
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "cake-00104826",
+                "id": "00104826",
+                "product_group": "confectionery",
+                "length/mm": 330,
+                "width/mm": 210,
+                "height/mm": 290,
+                "weight/kg": 5.25,
+                "sequence": 6
+            },
+            "flb_coordinates": [
+                0,
+                420,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "cake-00104826",
+                "id": "00104826",
+                "product_group": "confectionery",
+                "length/mm": 330,
+                "width/mm": 210,
+                "height/mm": 290,
+                "weight/kg": 5.25,
+                "sequence": 7
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1340
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "prawn-00101017",
+                "id": "00101017",
+                "product_group": "seafood",
+                "length/mm": 330,
+                "width/mm": 210,
+                "height/mm": 290,
+                "weight/kg": 5.25,
+                "sequence": 8
+            },
+            "flb_coordinates": [
+                0,
+                270,
+                300
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00103919",
+                "id": "00103919",
+                "product_group": "vegetables",
+                "length/mm": 570,
+                "width/mm": 250,
+                "height/mm": 210,
+                "weight/kg": 8.0,
+                "sequence": 9
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1630
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "muffin-00101974",
+                "id": "00101974",
+                "product_group": "candy",
+                "length/mm": 380,
+                "width/mm": 170,
+                "height/mm": 170,
+                "weight/kg": 7.3,
+                "sequence": 10
+            },
+            "flb_coordinates": [
+                0,
+                270,
+                590
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "muffin-00101974",
+                "id": "00101974",
+                "product_group": "candy",
+                "length/mm": 380,
+                "width/mm": 170,
+                "height/mm": 170,
+                "weight/kg": 7.3,
+                "sequence": 11
+            },
+            "flb_coordinates": [
+                340,
+                460,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "bread roll-00106708",
+                "id": "00106708",
+                "product_group": "bakery products",
+                "length/mm": 570,
+                "width/mm": 230,
+                "height/mm": 330,
+                "weight/kg": 10.36,
+                "sequence": 12
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1840
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pizza Margherita-00106036",
+                "id": "00106036",
+                "product_group": "pizza",
+                "length/mm": 370,
+                "width/mm": 200,
+                "height/mm": 270,
+                "weight/kg": 7.85,
+                "sequence": 13
+            },
+            "flb_coordinates": [
+                390,
+                420,
+                170
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "instant meal-00109896",
+                "id": "00109896",
+                "product_group": "instant meals",
+                "length/mm": 330,
+                "width/mm": 210,
+                "height/mm": 290,
+                "weight/kg": 5.25,
+                "sequence": 14
+            },
+            "flb_coordinates": [
+                390,
+                420,
+                440
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "instant meal-00109896",
+                "id": "00109896",
+                "product_group": "instant meals",
+                "length/mm": 330,
+                "width/mm": 210,
+                "height/mm": 290,
+                "weight/kg": 5.25,
+                "sequence": 15
+            },
+            "flb_coordinates": [
+                0,
+                270,
+                760
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fruit-00111831",
+                "id": "00111831",
+                "product_group": "fruit",
+                "length/mm": 390,
+                "width/mm": 270,
+                "height/mm": 270,
+                "weight/kg": 10.65,
+                "sequence": 16
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2170
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fruit-00111831",
+                "id": "00111831",
+                "product_group": "fruit",
+                "length/mm": 390,
+                "width/mm": 270,
+                "height/mm": 270,
+                "weight/kg": 10.65,
+                "sequence": 17
+            },
+            "flb_coordinates": [
+                0,
+                360,
+                1050
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fruit-00111831",
+                "id": "00111831",
+                "product_group": "fruit",
+                "length/mm": 390,
+                "width/mm": 270,
+                "height/mm": 270,
+                "weight/kg": 10.65,
+                "sequence": 18
+            },
+            "flb_coordinates": [
+                0,
+                360,
+                1320
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fruit-00111831",
+                "id": "00111831",
+                "product_group": "fruit",
+                "length/mm": 390,
+                "width/mm": 270,
+                "height/mm": 270,
+                "weight/kg": 10.65,
+                "sequence": 19
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2440
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "rye bread roll-00102471",
+                "id": "00102471",
+                "product_group": "bakery products",
+                "length/mm": 530,
+                "width/mm": 270,
+                "height/mm": 220,
+                "weight/kg": 9.53,
+                "sequence": 20
+            },
+            "flb_coordinates": [
+                0,
+                360,
+                1590
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pastry w. chocolate-00109722",
+                "id": "00109722",
+                "product_group": "confectionery",
+                "length/mm": 540,
+                "width/mm": 270,
+                "height/mm": 260,
+                "weight/kg": 10.69,
+                "sequence": 21
+            },
+            "flb_coordinates": [
+                0,
+                360,
+                1810
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "currant bun-00110809",
+                "id": "00110809",
+                "product_group": "bakery products",
+                "length/mm": 530,
+                "width/mm": 270,
+                "height/mm": 220,
+                "weight/kg": 8.33,
+                "sequence": 22
+            },
+            "flb_coordinates": [
+                0,
+                360,
+                2070
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "bagel-00112877",
+                "id": "00112877",
+                "product_group": "bakery products",
+                "length/mm": 540,
+                "width/mm": 270,
+                "height/mm": 260,
+                "weight/kg": 9.25,
+                "sequence": 23
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2710
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "turkey breast-00106124",
+                "id": "00106124",
+                "product_group": "poultry",
+                "length/mm": 330,
+                "width/mm": 200,
+                "height/mm": 280,
+                "weight/kg": 5.25,
+                "sequence": 24
+            },
+            "flb_coordinates": [
+                0,
+                360,
+                2290
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fries-00100669",
+                "id": "00100669",
+                "product_group": "potatoe products",
+                "length/mm": 400,
+                "width/mm": 300,
+                "height/mm": 240,
+                "weight/kg": 9.59,
+                "sequence": 25
+            },
+            "flb_coordinates": [
+                0,
+                330,
+                2570
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fries-00100669",
+                "id": "00100669",
+                "product_group": "potatoe products",
+                "length/mm": 400,
+                "width/mm": 300,
+                "height/mm": 240,
+                "weight/kg": 9.59,
+                "sequence": 26
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2970
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00105990",
+                "id": "00105990",
+                "product_group": "vegetables",
+                "length/mm": 390,
+                "width/mm": 260,
+                "height/mm": 290,
+                "weight/kg": 9.48,
+                "sequence": 27
+            },
+            "flb_coordinates": [
+                460,
+                370,
+                2290
+            ],
+            "orientation": 1
+        },
+        {
+            "item": {
+                "article": "vegetables-00105990",
+                "id": "00105990",
+                "product_group": "vegetables",
+                "length/mm": 390,
+                "width/mm": 260,
+                "height/mm": 290,
+                "weight/kg": 9.48,
+                "sequence": 28
+            },
+            "flb_coordinates": [
+                0,
+                240,
+                3210
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "bread-00112392",
+                "id": "00112392",
+                "product_group": "bakery products",
+                "length/mm": 590,
+                "width/mm": 390,
+                "height/mm": 150,
+                "weight/kg": 8.78,
+                "sequence": 29
+            },
+            "flb_coordinates": [
+                460,
+                0,
+                2970
+            ],
+            "orientation": 1
+        }
+    ],
+    "00100004": [
+        {
+            "item": {
+                "article": "crushed ice-00103592",
+                "id": "00103592",
+                "product_group": "ice",
+                "length/mm": 550,
+                "width/mm": 210,
+                "height/mm": 210,
+                "weight/kg": 4.0,
+                "sequence": 1
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "popsicles for children-00110443",
+                "id": "00110443",
+                "product_group": "ice cream",
+                "length/mm": 380,
+                "width/mm": 250,
+                "height/mm": 260,
+                "weight/kg": 9.59,
+                "sequence": 2
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                210
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "bread-00104045",
+                "id": "00104045",
+                "product_group": "bakery products",
+                "length/mm": 490,
+                "width/mm": 220,
+                "height/mm": 250,
+                "weight/kg": 4.0,
+                "sequence": 3
+            },
+            "flb_coordinates": [
+                0,
+                250,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "bread-00104045",
+                "id": "00104045",
+                "product_group": "bakery products",
+                "length/mm": 490,
+                "width/mm": 220,
+                "height/mm": 250,
+                "weight/kg": 4.0,
+                "sequence": 4
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                470
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00103914",
+                "id": "00103914",
+                "product_group": "vegetables",
+                "length/mm": 330,
+                "width/mm": 190,
+                "height/mm": 290,
+                "weight/kg": 4.91,
+                "sequence": 5
+            },
+            "flb_coordinates": [
+                0,
+                500,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00103914",
+                "id": "00103914",
+                "product_group": "vegetables",
+                "length/mm": 330,
+                "width/mm": 190,
+                "height/mm": 290,
+                "weight/kg": 4.91,
+                "sequence": 6
+            },
+            "flb_coordinates": [
+                550,
+                0,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00103914",
+                "id": "00103914",
+                "product_group": "vegetables",
+                "length/mm": 330,
+                "width/mm": 190,
+                "height/mm": 290,
+                "weight/kg": 4.91,
+                "sequence": 7
+            },
+            "flb_coordinates": [
+                0,
+                250,
+                250
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00103914",
+                "id": "00103914",
+                "product_group": "vegetables",
+                "length/mm": 330,
+                "width/mm": 190,
+                "height/mm": 290,
+                "weight/kg": 4.91,
+                "sequence": 8
+            },
+            "flb_coordinates": [
+                490,
+                210,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00103914",
+                "id": "00103914",
+                "product_group": "vegetables",
+                "length/mm": 330,
+                "width/mm": 190,
+                "height/mm": 290,
+                "weight/kg": 4.91,
+                "sequence": 9
+            },
+            "flb_coordinates": [
+                330,
+                530,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00103914",
+                "id": "00103914",
+                "product_group": "vegetables",
+                "length/mm": 330,
+                "width/mm": 190,
+                "height/mm": 290,
+                "weight/kg": 4.91,
+                "sequence": 10
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                720
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00103914",
+                "id": "00103914",
+                "product_group": "vegetables",
+                "length/mm": 330,
+                "width/mm": 190,
+                "height/mm": 290,
+                "weight/kg": 4.91,
+                "sequence": 11
+            },
+            "flb_coordinates": [
+                490,
+                0,
+                290
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00103914",
+                "id": "00103914",
+                "product_group": "vegetables",
+                "length/mm": 330,
+                "width/mm": 190,
+                "height/mm": 290,
+                "weight/kg": 4.91,
+                "sequence": 12
+            },
+            "flb_coordinates": [
+                790,
+                510,
+                0
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pastry w. vanilla stuffing-00102099",
+                "id": "00102099",
+                "product_group": "confectionery",
+                "length/mm": 290,
+                "width/mm": 210,
+                "height/mm": 210,
+                "weight/kg": 5.5,
+                "sequence": 13
+            },
+            "flb_coordinates": [
+                380,
+                220,
+                290
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pastry w. vanilla stuffing-00112211",
+                "id": "00112211",
+                "product_group": "confectionery",
+                "length/mm": 390,
+                "width/mm": 260,
+                "height/mm": 270,
+                "weight/kg": 8.52,
+                "sequence": 14
+            },
+            "flb_coordinates": [
+                0,
+                510,
+                290
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "cheese-00110106",
+                "id": "00110106",
+                "product_group": "dairy products",
+                "length/mm": 570,
+                "width/mm": 210,
+                "height/mm": 180,
+                "weight/kg": 8.52,
+                "sequence": 15
+            },
+            "flb_coordinates": [
+                0,
+                220,
+                540
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "lamb fillet-00107490",
+                "id": "00107490",
+                "product_group": "red meat",
+                "length/mm": 600,
+                "width/mm": 200,
+                "height/mm": 220,
+                "weight/kg": 5.0,
+                "sequence": 16
+            },
+            "flb_coordinates": [
+                0,
+                190,
+                720
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "layer cake-00102647",
+                "id": "00102647",
+                "product_group": "confectionery",
+                "length/mm": 570,
+                "width/mm": 190,
+                "height/mm": 260,
+                "weight/kg": 9.8,
+                "sequence": 17
+            },
+            "flb_coordinates": [
+                0,
+                190,
+                940
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "layer cake-00102647",
+                "id": "00102647",
+                "product_group": "confectionery",
+                "length/mm": 570,
+                "width/mm": 190,
+                "height/mm": 260,
+                "weight/kg": 9.8,
+                "sequence": 18
+            },
+            "flb_coordinates": [
+                0,
+                470,
+                560
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "vegetables-00109095",
+                "id": "00109095",
+                "product_group": "vegetables",
+                "length/mm": 390,
+                "width/mm": 250,
+                "height/mm": 260,
+                "weight/kg": 9.3,
+                "sequence": 19
+            },
+            "flb_coordinates": [
+                890,
+                0,
+                0
+            ],
+            "orientation": 1
+        },
+        {
+            "item": {
+                "article": "herbs-00106516",
+                "id": "00106516",
+                "product_group": "herbs/spice",
+                "length/mm": 590,
+                "width/mm": 200,
+                "height/mm": 280,
+                "weight/kg": 7.55,
+                "sequence": 20
+            },
+            "flb_coordinates": [
+                0,
+                440,
+                820
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "croissant-00109025",
+                "id": "00109025",
+                "product_group": "bakery products",
+                "length/mm": 550,
+                "width/mm": 280,
+                "height/mm": 110,
+                "weight/kg": 8.4,
+                "sequence": 21
+            },
+            "flb_coordinates": [
+                0,
+                380,
+                1100
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "croissant-00109025",
+                "id": "00109025",
+                "product_group": "bakery products",
+                "length/mm": 550,
+                "width/mm": 280,
+                "height/mm": 110,
+                "weight/kg": 8.4,
+                "sequence": 22
+            },
+            "flb_coordinates": [
+                680,
+                0,
+                580
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fruit-00106110",
+                "id": "00106110",
+                "product_group": "fruit",
+                "length/mm": 400,
+                "width/mm": 270,
+                "height/mm": 240,
+                "weight/kg": 9.9,
+                "sequence": 23
+            },
+            "flb_coordinates": [
+                680,
+                0,
+                690
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fruit-00106110",
+                "id": "00106110",
+                "product_group": "fruit",
+                "length/mm": 400,
+                "width/mm": 270,
+                "height/mm": 240,
+                "weight/kg": 9.9,
+                "sequence": 24
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1200
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "instant meal-00104572",
+                "id": "00104572",
+                "product_group": "instant meals",
+                "length/mm": 390,
+                "width/mm": 210,
+                "height/mm": 150,
+                "weight/kg": 3.3,
+                "sequence": 25
+            },
+            "flb_coordinates": [
+                690,
+                510,
+                290
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "instant meal-00104572",
+                "id": "00104572",
+                "product_group": "instant meals",
+                "length/mm": 390,
+                "width/mm": 210,
+                "height/mm": 150,
+                "weight/kg": 3.3,
+                "sequence": 26
+            },
+            "flb_coordinates": [
+                690,
+                510,
+                440
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "instant meal-00104572",
+                "id": "00104572",
+                "product_group": "instant meals",
+                "length/mm": 390,
+                "width/mm": 210,
+                "height/mm": 150,
+                "weight/kg": 3.3,
+                "sequence": 27
+            },
+            "flb_coordinates": [
+                680,
+                0,
+                930
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "cutlet-00105491",
+                "id": "00105491",
+                "product_group": "instant meals",
+                "length/mm": 400,
+                "width/mm": 200,
+                "height/mm": 270,
+                "weight/kg": 6.39,
+                "sequence": 28
+            },
+            "flb_coordinates": [
+                680,
+                0,
+                1080
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "cutlet-00105491",
+                "id": "00105491",
+                "product_group": "instant meals",
+                "length/mm": 400,
+                "width/mm": 200,
+                "height/mm": 270,
+                "weight/kg": 6.39,
+                "sequence": 29
+            },
+            "flb_coordinates": [
+                690,
+                510,
+                590
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "cutlet-00105491",
+                "id": "00105491",
+                "product_group": "instant meals",
+                "length/mm": 400,
+                "width/mm": 200,
+                "height/mm": 270,
+                "weight/kg": 6.39,
+                "sequence": 30
+            },
+            "flb_coordinates": [
+                620,
+                210,
+                930
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "frozen yoghurt-00104003",
+                "id": "00104003",
+                "product_group": "dairy products",
+                "length/mm": 460,
+                "width/mm": 160,
+                "height/mm": 240,
+                "weight/kg": 4.37,
+                "sequence": 31
+            },
+            "flb_coordinates": [
+                0,
+                270,
+                1210
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "muffin-00101974",
+                "id": "00101974",
+                "product_group": "candy",
+                "length/mm": 380,
+                "width/mm": 170,
+                "height/mm": 170,
+                "weight/kg": 7.3,
+                "sequence": 32
+            },
+            "flb_coordinates": [
+                690,
+                450,
+                860
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "squid-00112058",
+                "id": "00112058",
+                "product_group": "seafood",
+                "length/mm": 390,
+                "width/mm": 270,
+                "height/mm": 220,
+                "weight/kg": 5.39,
+                "sequence": 33
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1440
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "spinach-00110601",
+                "id": "00110601",
+                "product_group": "vegetables",
+                "length/mm": 510,
+                "width/mm": 170,
+                "height/mm": 170,
+                "weight/kg": 6.07,
+                "sequence": 34
+            },
+            "flb_coordinates": [
+                570,
+                0,
+                1350
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "spinach-00110601",
+                "id": "00110601",
+                "product_group": "vegetables",
+                "length/mm": 510,
+                "width/mm": 170,
+                "height/mm": 170,
+                "weight/kg": 6.07,
+                "sequence": 35
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1660
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "muffin-00112207",
+                "id": "00112207",
+                "product_group": "candy",
+                "length/mm": 380,
+                "width/mm": 250,
+                "height/mm": 360,
+                "weight/kg": 12.5,
+                "sequence": 36
+            },
+            "flb_coordinates": [
+                0,
+                470,
+                1210
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "instant meal-00109895",
+                "id": "00109895",
+                "product_group": "instant meals",
+                "length/mm": 380,
+                "width/mm": 250,
+                "height/mm": 240,
+                "weight/kg": 10.65,
+                "sequence": 37
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                1830
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pizza w. tuna-00109548",
+                "id": "00109548",
+                "product_group": "pizza",
+                "length/mm": 300,
+                "width/mm": 210,
+                "height/mm": 230,
+                "weight/kg": 5.27,
+                "sequence": 38
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2070
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pizza w. tuna-00109548",
+                "id": "00109548",
+                "product_group": "pizza",
+                "length/mm": 300,
+                "width/mm": 210,
+                "height/mm": 230,
+                "weight/kg": 5.27,
+                "sequence": 39
+            },
+            "flb_coordinates": [
+                0,
+                270,
+                1570
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pastry w. vanilla stuffing-00112704",
+                "id": "00112704",
+                "product_group": "confectionery",
+                "length/mm": 560,
+                "width/mm": 170,
+                "height/mm": 240,
+                "weight/kg": 4.49,
+                "sequence": 40
+            },
+            "flb_coordinates": [
+                520,
+                0,
+                1520
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "pastry w. vanilla stuffing-00112704",
+                "id": "00112704",
+                "product_group": "confectionery",
+                "length/mm": 560,
+                "width/mm": 170,
+                "height/mm": 240,
+                "weight/kg": 4.49,
+                "sequence": 41
+            },
+            "flb_coordinates": [
+                540,
+                0,
+                1760
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "prezel-00107257",
+                "id": "00107257",
+                "product_group": "bakery products",
+                "length/mm": 540,
+                "width/mm": 230,
+                "height/mm": 260,
+                "weight/kg": 10.06,
+                "sequence": 42
+            },
+            "flb_coordinates": [
+                460,
+                200,
+                1210
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fish stick-00105948",
+                "id": "00105948",
+                "product_group": "fish",
+                "length/mm": 270,
+                "width/mm": 160,
+                "height/mm": 190,
+                "weight/kg": 2.92,
+                "sequence": 43
+            },
+            "flb_coordinates": [
+                380,
+                270,
+                1470
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fish stick-00105948",
+                "id": "00105948",
+                "product_group": "fish",
+                "length/mm": 270,
+                "width/mm": 160,
+                "height/mm": 190,
+                "weight/kg": 2.92,
+                "sequence": 44
+            },
+            "flb_coordinates": [
+                380,
+                430,
+                1210
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fish stick-00105948",
+                "id": "00105948",
+                "product_group": "fish",
+                "length/mm": 270,
+                "width/mm": 160,
+                "height/mm": 190,
+                "weight/kg": 2.92,
+                "sequence": 45
+            },
+            "flb_coordinates": [
+                380,
+                430,
+                1400
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fish stick-00105948",
+                "id": "00105948",
+                "product_group": "fish",
+                "length/mm": 270,
+                "width/mm": 160,
+                "height/mm": 190,
+                "weight/kg": 2.92,
+                "sequence": 46
+            },
+            "flb_coordinates": [
+                0,
+                560,
+                1570
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fish stick-00105948",
+                "id": "00105948",
+                "product_group": "fish",
+                "length/mm": 270,
+                "width/mm": 160,
+                "height/mm": 190,
+                "weight/kg": 2.92,
+                "sequence": 47
+            },
+            "flb_coordinates": [
+                0,
+                560,
+                1760
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "fish stick-00105948",
+                "id": "00105948",
+                "product_group": "fish",
+                "length/mm": 270,
+                "width/mm": 160,
+                "height/mm": 190,
+                "weight/kg": 2.92,
+                "sequence": 48
+            },
+            "flb_coordinates": [
+                0,
+                250,
+                1800
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "ciabatta-00103095",
+                "id": "00103095",
+                "product_group": "bakery products",
+                "length/mm": 590,
+                "width/mm": 200,
+                "height/mm": 210,
+                "weight/kg": 7.67,
+                "sequence": 49
+            },
+            "flb_coordinates": [
+                490,
+                0,
+                2000
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "ciabatta-00103095",
+                "id": "00103095",
+                "product_group": "bakery products",
+                "length/mm": 590,
+                "width/mm": 200,
+                "height/mm": 210,
+                "weight/kg": 7.67,
+                "sequence": 50
+            },
+            "flb_coordinates": [
+                380,
+                200,
+                1660
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "chicken breast-00105503",
+                "id": "00105503",
+                "product_group": "poultry",
+                "length/mm": 360,
+                "width/mm": 350,
+                "height/mm": 260,
+                "weight/kg": 7.2,
+                "sequence": 51
+            },
+            "flb_coordinates": [
+                270,
+                250,
+                1870
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "croissant with sweet stuffing-00101311",
+                "id": "00101311",
+                "product_group": "confectionery",
+                "length/mm": 550,
+                "width/mm": 220,
+                "height/mm": 310,
+                "weight/kg": 7.9,
+                "sequence": 52
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2300
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "croissant with sweet stuffing-00101311",
+                "id": "00101311",
+                "product_group": "confectionery",
+                "length/mm": 550,
+                "width/mm": 220,
+                "height/mm": 310,
+                "weight/kg": 7.9,
+                "sequence": 53
+            },
+            "flb_coordinates": [
+                710,
+                200,
+                1870
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "spinach-00105650",
+                "id": "00105650",
+                "product_group": "vegetables",
+                "length/mm": 370,
+                "width/mm": 200,
+                "height/mm": 270,
+                "weight/kg": 7.85,
+                "sequence": 54
+            },
+            "flb_coordinates": [
+                710,
+                0,
+                2210
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "spinach-00105650",
+                "id": "00105650",
+                "product_group": "vegetables",
+                "length/mm": 370,
+                "width/mm": 200,
+                "height/mm": 270,
+                "weight/kg": 7.85,
+                "sequence": 55
+            },
+            "flb_coordinates": [
+                0,
+                0,
+                2610
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "chicken nugget-00103044",
+                "id": "00103044",
+                "product_group": "poultry",
+                "length/mm": 470,
+                "width/mm": 280,
+                "height/mm": 160,
+                "weight/kg": 5.1,
+                "sequence": 56
+            },
+            "flb_coordinates": [
+                0,
+                560,
+                2130
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "dessert-00104636",
+                "id": "00104636",
+                "product_group": "candy",
+                "length/mm": 490,
+                "width/mm": 130,
+                "height/mm": 210,
+                "weight/kg": 5.11,
+                "sequence": 57
+            },
+            "flb_coordinates": [
+                780,
+                510,
+                1030
+            ],
+            "orientation": 0
+        },
+        {
+            "item": {
+                "article": "cake-00106166",
+                "id": "00106166",
+                "product_group": "confectionery",
+                "length/mm": 300,
+                "width/mm": 210,
+                "height/mm": 230,
+                "weight/kg": 5.3,
+                "sequence": 58
+            },
+            "flb_coordinates": [
+                590,
+                220,
+                2180
+            ],
+            "orientation": 0
+        }
+    ]
+}

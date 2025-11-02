@@ -107,7 +107,7 @@ class Cuboid(object):
         return self._effective_support_surface
 
     @property
-    def neighbors(self) -> dict[str, list[Self]]:
+    def neighbors(self) -> dict[Direction, list[Self]]:
         """
         The neighbors in each direction of this cuboid.
 
@@ -187,8 +187,8 @@ class Cuboid(object):
 
         Parameters.
         -----------
-        which: str
-            Defines for which edge you get the coordinates. Possible values are `"north"`, `"east"`, `"south"`, and `"west"`.
+        which: Direction
+            Defines for which edge you get the coordinates.
 
         Returns.
         --------
@@ -199,22 +199,22 @@ class Cuboid(object):
         flb_y = self.flb.y
         width, length = self._representation.shape
 
-        if which == "north":
+        if which is Direction.NORTH:
             coordinates = {
                 "x": set(range(flb_x, (flb_x + length))),
                 "y": set(range(flb_y + width - 1, flb_y + width + 1)),
             }
-        elif which == "east":
+        elif which is Direction.EAST:
             coordinates = {
                 "x": set(range(flb_x + length - 1, flb_x + length + 1)),
                 "y": set(range(flb_y, (flb_y + width))),
             }
-        elif which == "south":
+        elif which is Direction.SOUTH:
             coordinates = {
                 "x": set(range(flb_x, (flb_x + length))),
                 "y": set(range(flb_y - 1, flb_y + 1)),
             }
-        elif which == "west":
+        elif which is Direction.WEST:
             coordinates = {
                 "x": set(range(flb_x - 1, flb_x + 1)),
                 "y": set(range(flb_y, (flb_y + width))),

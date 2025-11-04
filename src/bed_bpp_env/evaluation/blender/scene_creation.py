@@ -16,7 +16,7 @@ import statistics
 import sys
 import time
 
-from bed_bpp_env.evaluation.blender.bpy_modelling import add_euro_pallet_to_blender
+from bed_bpp_env.evaluation.blender.bpy_modelling import add_euro_pallet_to_blender, add_rollcontainer_to_blender
 import bpy
 
 from bed_bpp_env.data_model.action import Action
@@ -181,101 +181,6 @@ def __addGround(size: tuple = (500, 500, 1), target: str = "euro-pallet") -> Non
     bpy.context.object.name = "bottom"
 
 
-def __setMaterialAndEnableRigidBody(materialname: str) -> None:
-    """
-    Set the material and enable the rigid body simulation.
-
-    Parameters.
-    -----------
-    materialname:str
-        The name of the used material. Allowed materials are `"rc_part"` and `"pal_part"`.
-    """
-    if materialname == "rc_part":
-        matcolor = (0.0343398, 0.0466651, 0.061246, 1)  # "space gray", HEX:343d46
-    elif materialname == "pal_part":
-        matcolor = (0.730461, 0.47932, 0.242281, 1)  # "burlywood"
-
-    # set the color and material, respectively
-    ob = bpy.context.active_object
-
-    # Get material
-    mat = bpy.data.materials.get(materialname)
-    if mat is None:
-        mat = bpy.data.materials.new(materialname)
-        # set the color
-        mat.use_nodes = True
-        tree = mat.node_tree
-        nodes = tree.nodes
-        bsdf = nodes["Principled BSDF"]
-        bsdf.inputs["Base Color"].default_value = matcolor
-        mat.diffuse_color = matcolor
-
-    # assign it to object
-    if ob.data.materials:
-        # assign to 1st material slot
-        ob.data.materials[0] = mat
-    else:
-        # no slots
-        ob.data.materials.append(mat)
-
-    # first set material, then enable rigid body
-    bpy.ops.rigidbody.object_add()
-    bpy.context.object.rigid_body.type = "PASSIVE"
-    bpy.context.object.name = materialname
-
-
-def __addRCObject(position: list, size: list) -> None:
-    offsetX, offsetY, offsetZ = 0, 0, -0.05
-    translatedPosition = position[0] + offsetX, position[1] + offsetY, position[2] + size[2] / 2 + offsetZ
-    bpy.ops.mesh.primitive_cube_add(
-        size=1, enter_editmode=False, align="WORLD", location=list(translatedPosition), scale=size
-    )
-    __setMaterialAndEnableRigidBody("rc_part")
-
-
-def __addRCWheels(xyposition: tuple) -> None:
-    """
-    Adds wheels of the rollcontainer to the given position.
-
-    Parameters.
-    -----------
-    xyposition: tuple
-        The (x,y) position of the wheel.
-    """
-    position = (xyposition[0], xyposition[1], -0.11)
-    bpy.ops.mesh.primitive_cylinder_add(
-        radius=0.05,
-        depth=0.075,
-        enter_editmode=False,
-        align="WORLD",
-        location=[0, 0, 0],
-        rotation=((90.0 / 180.0 * 3.14159265), (90.0 / 180.0 * 3.14159265), (90.0 / 180.0 * 3.14159265)),
-        scale=(1, 1, 1),
-    )
-    ob = bpy.context.active_object
-    ob.location = position
-    __setMaterialAndEnableRigidBody("rc_part")
-
-
-def addRollcontainer() -> None:
-    """Adds objects to the scene that represent a rollcontainer."""
-    # add stripes in x-direction
-    sizes = 10 * [(0.8, 0.0367, 0.05)]
-    positions = [(0 + size[0] / 2, i * (0.0367 + 0.333 / 9) + size[1] / 2, 0) for i, size in enumerate(sizes)]
-    for pos, size in zip(positions, sizes):
-        __addRCObject(pos, size)
-
-    # add stripes in y-direction
-    sizes = 10 * [(0.0367, 0.7, 0.05)]
-    positions = [(i * (0.0367 + 0.433 / 9) + size[0] / 2, 0 + size[1] / 2, 0) for i, size in enumerate(sizes)]
-    for pos, size in zip(positions, sizes):
-        __addRCObject(pos, size)
-
-    wheelPositions = [(0.1, 0.1), (0.1, 0.6), (0.7, 0.6), (0.7, 0.1)]
-    for pos in wheelPositions:
-        __addRCWheels(pos)
-
-
 def __initScene(target: str) -> None:
     """Initializes the scene."""
     for mat in bpy.data.materials:
@@ -312,7 +217,7 @@ def __initScene(target: str) -> None:
 
     __addGround(target=target)
     if target == "rollcontainer":
-        addRollcontainer()
+        add_rollcontainer_to_blender()
     elif target == "euro-pallet":
         add_euro_pallet_to_blender()
 

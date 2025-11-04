@@ -16,6 +16,7 @@ import statistics
 import sys
 import time
 
+from bed_bpp_env.evaluation.blender.bpy_modelling import add_euro_pallet_to_blender
 import bpy
 
 from bed_bpp_env.data_model.action import Action
@@ -223,71 +224,6 @@ def __setMaterialAndEnableRigidBody(materialname: str) -> None:
     bpy.context.object.name = materialname
 
 
-def __addPalObject(position: list, size: list) -> None:
-    offsetX, offsetY, offsetZ = 0, 0, -0.144 - 0.001
-    translatedPosition = [position[0] + offsetX, position[1] + offsetY, position[2] + size[2] / 2 + offsetZ]
-    bpy.ops.mesh.primitive_cube_add(
-        size=1.0,
-        calc_uvs=True,
-        enter_editmode=False,
-        align="WORLD",
-        location=list(translatedPosition),
-        rotation=(0.0, 0.0, 0.0),
-        scale=size,
-    )
-    __setMaterialAndEnableRigidBody("pal_part")
-
-
-def addEURPallet() -> None:
-    # add lowest layer
-    positions = [(0 + 0.6, 0 + 0.1 / 2, 0), (0 + 0.6, 0.4, 0), (0 + 0.6, 0.8 - 0.1 / 2, 0)]
-    sizes = [(1.2, 0.1, 0.022), (1.2, 0.145, 0.022), (1.2, 0.1, 0.022)]
-    for pos, size in zip(positions, sizes):
-        __addPalObject(pos, size)
-
-    # add lower middle layer
-    positions = [
-        (0 + 0.145 / 2, 0 + 0.1 / 2, 0.022),
-        (0 + 0.145 / 2, 0.4, 0.022),
-        (0 + 0.145 / 2, 0.8 - 0.1 / 2, 0.022),
-    ]
-    sizes = [(0.145, 0.1, 0.078), (0.145, 0.145, 0.078), (0.145, 0.1, 0.078)]
-    for pos, size in zip(positions, sizes):
-        __addPalObject(pos, size)
-
-    positions = [
-        (1.2 - 0.145 / 2, 0 + 0.1 / 2, 0.022),
-        (1.2 - 0.145 / 2, 0.4, 0.022),
-        (1.2 - 0.145 / 2, 0.8 - 0.1 / 2, 0.022),
-    ]
-    sizes = [(0.145, 0.1, 0.078), (0.145, 0.145, 0.078), (0.145, 0.1, 0.078)]
-    for pos, size in zip(positions, sizes):
-        __addPalObject(pos, size)
-
-    positions = [(0.6, 0 + 0.1 / 2, 0.022), (0.6, 0.4, 0.022), (0.6, 0.8 - 0.1 / 2, 0.022)]
-    sizes = [(0.145, 0.1, 0.078), (0.145, 0.145, 0.078), (0.145, 0.1, 0.078)]
-    for pos, size in zip(positions, sizes):
-        __addPalObject(pos, size)
-
-    # balken quer
-    positions = [(0 + 0.145 / 2, 0.4, 0.1), (0.6, 0.4, 0.1), (1.2 - 0.145 / 2, 0.4, 0.1)]
-    sizes = [(0.145, 0.8, 0.022), (0.145, 0.8, 0.022), (0.145, 0.8, 0.022)]
-    for pos, size in zip(positions, sizes):
-        __addPalObject(pos, size)
-
-    # längsbalken ganz oben breit
-    positions = [(0.6, 0 + 0.145 / 2, 0.122), (0.6, 0.4, 0.122), (0.6, 0.8 - 0.145 / 2, 0.122)]
-    sizes = [(1.2, 0.145, 0.022), (1.2, 0.145, 0.022), (1.2, 0.145, 0.022)]
-    for pos, size in zip(positions, sizes):
-        __addPalObject(pos, size)
-
-    # längsbalken ganz oben schmak
-    positions = [(0.6, 0.4 - 0.145 / 2 - 0.04 - 0.1 / 2, 0.122), (0.6, 0.4 + 0.145 / 2 + 0.04 + 0.1 / 2, 0.122)]
-    sizes = [(1.2, 0.1, 0.022), (1.2, 0.1, 0.022)]
-    for pos, size in zip(positions, sizes):
-        __addPalObject(pos, size)
-
-
 def __addRCObject(position: list, size: list) -> None:
     offsetX, offsetY, offsetZ = 0, 0, -0.05
     translatedPosition = position[0] + offsetX, position[1] + offsetY, position[2] + size[2] / 2 + offsetZ
@@ -378,7 +314,7 @@ def __initScene(target: str) -> None:
     if target == "rollcontainer":
         addRollcontainer()
     elif target == "euro-pallet":
-        addEURPallet()
+        add_euro_pallet_to_blender()
 
 
 def deserialize_actions(serialized_actions: list[dict]) -> list[Action]:

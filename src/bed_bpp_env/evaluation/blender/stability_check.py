@@ -49,6 +49,7 @@ def _build_stability_check_cmd(
         blender_template.as_posix(),
         "--python",
         scene_generation_script.as_posix(),
+        "--python-use-system-env",
         "--",
         "order_number",
         packing_plan.id,

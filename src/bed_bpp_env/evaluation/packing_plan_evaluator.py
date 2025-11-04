@@ -30,32 +30,32 @@ class PackingPlanEvaluator:
 
     Attributes.
     -----------
-    __EvaluationKPIs: list
+    _evaluation_kpis: list
         The values of the KPIs for each order that are stored in a file.
-    __KPIs: KPIs
+    _kpis: KPIs
         tbd
     _order: dict
           The order for which the currently investigated packing plan was created.'
-    __OrderID: str
+    _order_id: str
         The ID of the order for which the currently investigated packing plan was created.
-    __PackingPlan: list
+    _packing_plan: list
         The packing plan that is currently investigated. It is a list of actions.
-    __TargetSpace: Space3D
+    _target_space: Space3D
         The target that represents the rebuilt packing plan.
     """
 
     def __init__(self) -> None:
-        self.__EvaluationKPIs = []
+        self._evaluation_kpis = []
         """The values of the KPIs for each order that are stored in a file."""
-        self.__OrderID = ""
+        self._order_id = ""
         """The ID of the order for which the currently investigated packing plan was created."""
         self._order = {}
         """The order for which the currently investigated packing plan was created."""
-        self.__PackingPlan = []
+        self._packing_plan = []
         """The packing plan that is currently investigated. It is a list of actions."""
-        self.__KPIs = KPIs()
+        self._kpis = KPIs()
         """An instance of this class is responsible for the calculation of the KPIs. It is coupled with the target space."""
-        self.__TargetSpace = Space3D()
+        self._target_space = Space3D()
         """The target that represents the rebuilt packing plan."""
 
     def evalStability(self) -> Literal[0, 1]:
@@ -71,16 +71,16 @@ class PackingPlanEvaluator:
         VAL_STABLE, VAL_UNSTABLE = 1, 0
 
         with open(EVALOUTPUTDIR.joinpath("stability.txt")) as file:
-            stabilityInformation = file.readlines()
+            stability_information = file.readlines()
 
         # the last line from the file should be the correct
-        for line in reversed(stabilityInformation):
-            orderInLine, value = line.split(":", maxsplit=1)
+        for line in reversed(stability_information):
+            order_in_line, value = line.split(":", maxsplit=1)
 
-            if orderInLine == self.__OrderID:
+            if order_in_line == self._order_id:
                 # found correct line
-                valueDict = ast.literal_eval(value)
-                if valueDict.get("max_z-movements/m") > STABILITY_Z_THRESHOLD:
+                value_dict = ast.literal_eval(value)
+                if value_dict.get("max_z-movements/m") > STABILITY_Z_THRESHOLD:
                     return VAL_UNSTABLE
                 else:
                     return VAL_STABLE
@@ -98,7 +98,7 @@ class PackingPlanEvaluator:
         meanSupportArea: float
             The mean of the support areas of all items in a packing plan.
         """
-        return self.__KPIs.getMeanSupportArea()
+        return self._kpis.getMeanSupportArea()
 
     def evalVolumeUtilization(self) -> float:
         """
@@ -111,7 +111,7 @@ class PackingPlanEvaluator:
         volUtilization: float
             How many times the volume of the items is needed on the target caused by the pile of a packing plan.
         """
-        return self.__KPIs.getVolumeUtilization()
+        return self._kpis.getVolumeUtilization()
 
     def evalMaxHeightOnTarget(self) -> float:
         """
@@ -124,7 +124,7 @@ class PackingPlanEvaluator:
         maxHeightInM: float
             The hightest point of a pile in meter.
         """
-        return self.__KPIs.getMaxHeightOnTarget() / 1000.0
+        return self._kpis.getMaxHeightOnTarget() / 1000.0
 
     def evalUnpalletizedOrderRatio(self) -> float:
         """
@@ -135,10 +135,10 @@ class PackingPlanEvaluator:
         unpalletizedOrderRatio: float
             Indicates the ratio of an order that is not palletized.
         """
-        nItemsInOrder = len(self._order.item_sequence)
-        nUnpalItems = nItemsInOrder - len(self.__PackingPlan)
+        n_items_in_order = len(self._order.item_sequence)
+        n_items_unpalletized = n_items_in_order - len(self._packing_plan)
 
-        return float(nUnpalItems / nItemsInOrder)
+        return float(n_items_unpalletized / n_items_in_order)
 
     def evalScorePalletizingHeight(self, evalheightlevel: int = EVALUATION_HEIGHT) -> float:
         """
@@ -154,8 +154,8 @@ class PackingPlanEvaluator:
         maxHeightInM: float
             The value of the highest pile in meters.
         """
-        maxHeightInMM = self.__TargetSpace.getMaximumHeightBelowHeightLevel(evalheightlevel)
-        return round(maxHeightInMM / 1000.0, 3)
+        max_height_in_mm = self._target_space.getMaximumHeightBelowHeightLevel(evalheightlevel)
+        return round(max_height_in_mm / 1000.0, 3)
 
     def evalScoreOrderPalletizingRatio(self, evalheightlevel: int = EVALUATION_HEIGHT) -> float:
         """
@@ -168,20 +168,22 @@ class PackingPlanEvaluator:
 
         Returns.
         --------
-        palletizingRatioScore: float
+        palletizing_ratio_score: float
             For stable piles this is the value of the palletizing order ratio, else it is 0.
         """
-        evalHeightLevel = evalheightlevel
+        evaluation_height_level = evalheightlevel
 
-        isStable = self.evalStability()
-        itemsInOrder = len(self._order.item_sequence)
-        unpalletizedItems = self.__TargetSpace.getItemsAboveHeightLevel(evalHeightLevel)
-        itemsOnPallet = len(self.__TargetSpace.getPlacedItems())
+        is_stable = self.evalStability()
+        n_items_in_order = len(self._order.item_sequence)
+        number_items_above_eval_height_levelon_pallet = self._target_space.getItemsAboveHeightLevel(
+            evaluation_height_level
+        )
+        number_items_on_pallet = len(self._target_space.getPlacedItems())
 
-        palletizationRatio = (itemsOnPallet - unpalletizedItems) / itemsInOrder
-        palletizingRatioScore = isStable * palletizationRatio
+        palletizing_ratio = (number_items_on_pallet - number_items_above_eval_height_levelon_pallet) / n_items_in_order
+        palletizing_ratio_score = is_stable * palletizing_ratio
 
-        return palletizingRatioScore
+        return palletizing_ratio_score
 
     def evalScoreAbsoluteNStablePalletizedItems(self, evalheightlevel: int = EVALUATION_HEIGHT) -> int:
         """
@@ -196,15 +198,17 @@ class PackingPlanEvaluator:
 
         Returns.
         --------
-        nStablePalletizedItems: float
+        number_stable_palletized_items: float
             For stable piles this is the value of the palletizing order ratio, else it is 0.
         """
-        isStable = self.evalStability()
-        unpalletizedItems = self.__TargetSpace.getItemsAboveHeightLevel(evalheightlevel)
-        nItemsOnPalletBelowThreshold = len(self.__TargetSpace.getPlacedItems()) - unpalletizedItems
+        is_stable = self.evalStability()
+        number_items_above_eval_height_level = self._target_space.getItemsAboveHeightLevel(evalheightlevel)
+        number_items_below_eval_height_level = (
+            len(self._target_space.getPlacedItems()) - number_items_above_eval_height_level
+        )
 
-        nStablePalletizedItems = isStable * nItemsOnPalletBelowThreshold
-        return nStablePalletizedItems
+        number_stable_palletized_items = is_stable * number_items_below_eval_height_level
+        return number_stable_palletized_items
 
     def evalInterlockingRatio(self) -> float:
         """
@@ -215,29 +219,33 @@ class PackingPlanEvaluator:
         interlockingRatio: float
             The interlocking ratio of the packing plan.
         """
-        placedItems = self.__TargetSpace.getPlacedItems()
-        rInterlEnumerator = 0
-        rInterlDenominator = 0
+        placed_items = self._target_space.getPlacedItems()
+        interlocking_ratio_enumerator = 0
+        interlocking_ratio_denominator = 0
 
-        for item in placedItems:
+        for item in placed_items:
             items_below_item = item.items_below
-            nItemsBelow = len(items_below_item)
+            number_items_below_item = len(items_below_item)
 
-            if not (nItemsBelow == 0):
+            if not (number_items_below_item == 0):
                 # item is not directly placed on target
-                rInterlDenominator += 1
+                interlocking_ratio_denominator += 1
 
                 # check whether item contributes to enumerator
-                if nItemsBelow > 1:
-                    rInterlEnumerator += 1
-                elif nItemsBelow == 1:
-                    if item.orientation != placedItems[0].orientation:
-                        rInterlEnumerator += 1
+                if number_items_below_item > 1:
+                    interlocking_ratio_enumerator += 1
+                elif number_items_below_item == 1:
+                    if item.orientation != placed_items[0].orientation:
+                        interlocking_ratio_enumerator += 1
 
-        logger.debug(f"r_interl = {rInterlEnumerator} / {rInterlDenominator}")
+        logger.debug(f"r_interl = {interlocking_ratio_enumerator} / {interlocking_ratio_denominator}")
 
-        rInterl = pd.NA if rInterlDenominator == 0 else float(rInterlEnumerator / rInterlDenominator)
-        return rInterl
+        interlocking_ratio = (
+            pd.NA
+            if interlocking_ratio_denominator == 0
+            else float(interlocking_ratio_enumerator / interlocking_ratio_denominator)
+        )
+        return interlocking_ratio
 
     def evaluate(self, packing_plan: PackingPlan, order: dict) -> dict:
         """
@@ -274,13 +282,13 @@ class PackingPlanEvaluator:
         }
         """
         order_id = packing_plan.id
-        self.__OrderID = order_id
+        self._order_id = order_id
 
         order_data = {"id": order_id}
         order_data.update(order)
 
         self._order = Order.from_dict(order_data)
-        self.__PackingPlan = packing_plan.actions
+        self._packing_plan = packing_plan.actions
 
         logger.info(f"evaluate order {order_id}")
 
@@ -292,57 +300,58 @@ class PackingPlanEvaluator:
             target_size = (800, 700)
         else:
             raise ValueError(f"target {target} unknown")
-        self.__TargetSpace.reset(target_size)
+        self._target_space.reset(target_size)
 
-        self.__KPIs.reset(self.__TargetSpace, self._order)
+        self._kpis.reset(self._target_space, self._order)
 
-        for action in self.__PackingPlan:
+        for action in self._packing_plan:
             cuboid = Cuboid(action.item)
             cuboid.set_orientation(action.orientation)
-            self.__TargetSpace.addItem(cuboid, action.orientation, action.flb_coordinates.xyz)
-            self.__KPIs.update()
+            self._target_space.addItem(cuboid, action.orientation, action.flb_coordinates.xyz)
+            self._kpis.update()
 
         # obtain the values of the KPIs
-        KPIs = {"order_id": self.__OrderID}
-        for kpiDict in KPI_DEFINITION.values():
-            logger.info(kpiDict)
+        kpis_dict = {"order_id": self._order_id}
+        for kpi_def_dict in KPI_DEFINITION.values():
+            logger.info(kpi_def_dict)
             try:
-                kpiMethod = getattr(self, kpiDict.get("method"))
-                if "eval_score" in kpiDict.get("name"):
-                    KPIs[kpiDict.get("name")] = kpiMethod()
+                kpi_method = getattr(self, kpi_def_dict.get("method"))
+                if "eval_score" in kpi_def_dict.get("name"):
+                    kpis_dict[kpi_def_dict.get("name")] = kpi_method()
                 else:
-                    KPIs[f"kpi_{kpiDict.get('num')}"] = kpiMethod()
+                    kpis_dict[f"kpi_{kpi_def_dict.get('num')}"] = kpi_method()
             except Exception as e:
                 msg = "method missing"
                 logger.warning(msg)
                 logger.exception(e)
-                KPIs[f"kpi_{kpiDict.get('num')}"] = msg
+                kpis_dict[f"kpi_{kpi_def_dict.get('num')}"] = msg
 
-        self.__EvaluationKPIs.append(KPIs)
-        return KPIs
+        self._evaluation_kpis.append(kpis_dict)
+        return kpis_dict
 
     def writeToFile(self, totalamountitems: int = 1) -> None:
         """Writes the stored values of the KPIs to a file with name `"evaluation.xlsx"`."""
-        dfOrderwiseEval = pd.DataFrame(data=self.__EvaluationKPIs)
+        df_orderwise_evaluation = pd.DataFrame(data=self._evaluation_kpis)
 
         # get the column names in the dataframe
-        stabilityColName = f"kpi_{KPI_DEFINITION['stability'].get('num')}"
+        stability_col_name = f"kpi_{KPI_DEFINITION['stability'].get('num')}"
 
         # calculate overview KPIs
-        overviewDict = {
-            "stable": dfOrderwiseEval[stabilityColName].value_counts(normalize=True).get(1),
-            "unstable": dfOrderwiseEval[stabilityColName].value_counts(normalize=True).get(0),
-            "avg_eval_score_pal_ratio": dfOrderwiseEval["eval_score_pal_ratio"].mean(),
-            "avg_target_height/m": dfOrderwiseEval["eval_score_height"].mean(),
-            "n_stable_palletized_items": dfOrderwiseEval["eval_score_absolute_n_stable_pal_items"].sum(),
-            "rating_algorithm": dfOrderwiseEval["eval_score_absolute_n_stable_pal_items"].sum() / totalamountitems,
+        overview_dict = {
+            "stable": df_orderwise_evaluation[stability_col_name].value_counts(normalize=True).get(1),
+            "unstable": df_orderwise_evaluation[stability_col_name].value_counts(normalize=True).get(0),
+            "avg_eval_score_pal_ratio": df_orderwise_evaluation["eval_score_pal_ratio"].mean(),
+            "avg_target_height/m": df_orderwise_evaluation["eval_score_height"].mean(),
+            "n_stable_palletized_items": df_orderwise_evaluation["eval_score_absolute_n_stable_pal_items"].sum(),
+            "rating_algorithm": df_orderwise_evaluation["eval_score_absolute_n_stable_pal_items"].sum()
+            / totalamountitems,
         }
-        logger.info(f"SCORE OF ALGORITHM = {round(overviewDict['rating_algorithm'], 6)}")
-        overviewDF = pd.DataFrame.from_dict(overviewDict, orient="index")
+        logger.info(f"SCORE OF ALGORITHM = {round(overview_dict['rating_algorithm'], 6)}")
+        overview_df = pd.DataFrame.from_dict(overview_dict, orient="index")
 
-        srcFile = FILE_KPI_DEFINITION
-        shutil.copy(srcFile, EVALOUTPUTDIR.joinpath(srcFile.name))
+        kpi_definition_file = FILE_KPI_DEFINITION
+        shutil.copy(kpi_definition_file, EVALOUTPUTDIR.joinpath(kpi_definition_file.name))
 
         with pd.ExcelWriter(EVALOUTPUTDIR.joinpath("evaluation.xlsx"), mode="w") as writer:
-            overviewDF.to_excel(writer, sheet_name="overview", index=True)
-            dfOrderwiseEval.to_excel(writer, sheet_name="orderwise", index=False)
+            overview_df.to_excel(writer, sheet_name="overview", index=True)
+            df_orderwise_evaluation.to_excel(writer, sheet_name="orderwise", index=False)

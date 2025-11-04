@@ -2,12 +2,18 @@
 This module gathers the KPIs in a single class.
 """
 
+from pathlib import Path
 import statistics
 
 import numpy as np
+import yaml
 
 from bed_bpp_env.data_model.order import Order
 from bed_bpp_env.environment.space_3d import Space3D
+
+FILE_KPI_DEFINITION = Path(__file__).parent.resolve().joinpath("kpi_definition.yaml")
+with open(FILE_KPI_DEFINITION) as file:
+    KPI_DEFINITION = yaml.load(file, Loader=yaml.loader.SafeLoader)
 
 
 class KPIs:

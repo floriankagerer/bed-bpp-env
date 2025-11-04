@@ -13,8 +13,8 @@ from bed_bpp_env.data_model.order import Order
 from bed_bpp_env.data_model.packing_plan import PackingPlan
 from bed_bpp_env.environment.cuboid import Cuboid
 from bed_bpp_env.environment.space_3d import Space3D
-from bed_bpp_env.evaluation import EVALOUTPUTDIR, FILE_KPI_DEFINITION, KPI_DEFINITION
-from bed_bpp_env.evaluation.kpis import KPIs
+from bed_bpp_env.evaluation import EVALOUTPUTDIR
+from bed_bpp_env.evaluation.kpis import FILE_KPI_DEFINITION, KPI_DEFINITION, KPIs
 
 logger = logging.getLogger(__name__)
 

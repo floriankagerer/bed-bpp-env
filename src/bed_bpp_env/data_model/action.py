@@ -40,6 +40,6 @@ class Action(DataclassBase):
         as_dict = {
             "item": self.item.to_dict(),
             "orientation": self.orientation,
-            "flb_coordinates": self.flb_coordinates.to_dict(),
+            "flb_coordinates": list(self.flb_coordinates.xyz),
         }
         return as_dict

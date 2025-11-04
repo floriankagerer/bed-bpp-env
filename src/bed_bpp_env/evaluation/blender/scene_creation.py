@@ -16,8 +16,9 @@ import statistics
 import sys
 import time
 
-from bed_bpp_env.data_model.action import Action
 import bpy
+
+from bed_bpp_env.data_model.action import Action
 
 logger = logging.getLogger(__name__)
 
@@ -381,6 +382,14 @@ def __initScene(target: str) -> None:
 
 
 def deserialize_actions(serialized_actions: list[dict]) -> list[Action]:
+    """Deserializes the given actions.
+
+    Args:
+        serialized_actions (list[dict]): The serialized actions that are deserialized.
+
+    Returns
+        list[Action]: The deserialized actions
+    """
     return [Action.from_dict(serialized) for serialized in serialized_actions]
 
 
@@ -446,9 +455,9 @@ if __name__ == "__main__":
         properties = {
             "size": size,
             "flb": flb,
-            "weight": item["weight/kg"],
-            "id": item["id"],
-            "article": item["article"],
+            "weight": item.weight_kg,
+            "id": item.id,
+            "article": item.article,
         }
 
         addItemToScene(properties)

@@ -1,6 +1,6 @@
 """Functions for setting properties, e.g., materials, in the Blender scene."""
 
-import bpy
+import bpy  # type: ignore
 
 # TODO(florian): Define enum for materials
 

@@ -2,7 +2,7 @@
 
 import math
 
-import bpy
+import bpy  # type: ignore
 
 from bed_bpp_env.evaluation.blender.bpy_object_properties import set_material_and_enable_rigid_body
 

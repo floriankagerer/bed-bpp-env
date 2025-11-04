@@ -16,10 +16,10 @@ import statistics
 import sys
 import time
 
-from bed_bpp_env.evaluation.blender.bpy_modelling import add_euro_pallet_to_blender, add_rollcontainer_to_blender
-import bpy
+import bpy  # type: ignore
 
 from bed_bpp_env.data_model.action import Action
+from bed_bpp_env.evaluation.blender.bpy_modelling import add_euro_pallet_to_blender, add_rollcontainer_to_blender
 
 logger = logging.getLogger(__name__)
 

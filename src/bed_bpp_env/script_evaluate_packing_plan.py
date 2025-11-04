@@ -1,153 +1,104 @@
 """
-This script evaluates a packing plan, i.e., a Blender stability check is performed and the KPIs of the packing plan are calculated.
+This script evaluates a packing plan, i.e., a Blender stability check is performed and the KPIs of the packing plan
+are calculated.
 """
 
 import gc
 import logging
-import pathlib
-import platform
-import subprocess
-import time
+from pathlib import Path
 
-from bed_bpp_env.data_model.action import Action
-from bed_bpp_env.data_model.packing_plan import PackingPlan
-from bed_bpp_env.evaluation import EVALOUTPUTDIR
-from bed_bpp_env.evaluation.blender import TEMPLATEFILE
-from bed_bpp_env.evaluation.packing_plan_evaluator import PackingPlanEvaluator
-from bed_bpp_env.io_utils import load_packing_plan_sequence
-from bed_bpp_env.utils import ENTIRECONFIG
+from bed_bpp_env.data_model.order import Order
+from bed_bpp_env.io_utils import load_order_sequence
 
 logger = logging.getLogger(__name__)
 
-ppEvaluator = PackingPlanEvaluator()
-"""An instance of PackingPlanEvaluator that evaluates the given packing plan."""
-
-EVALCONFIG = ENTIRECONFIG["evaluation"]
-"""The configuration for the evaluation."""
-
-# get blender cmd
-# cmd = ["blender"] # works only when "blender" is in PATH
-if EVALCONFIG["blenderpath"] == "":
-    usedPlatform = platform.platform()
-    if "macOS" in usedPlatform:
-        BLENDERPATH = "/Applications/Blender.app/Contents/MacOS/Blender"
-    elif "Linux" in usedPlatform:
-        BLENDERPATH = "/snap/blender/current/blender"
-    else:
-        raise ValueError(f"platform {usedPlatform} is currently not implemented > set blenderpath in bed-bpp_env.conf")
-else:
-    print(f"use blender path from configuration file")
-    BLENDERPATH = EVALCONFIG["blenderpath"]
-    if not (pathlib.Path(BLENDERPATH).exists()):
-        raise FileNotFoundError(f"check your blender path in bed-bpp_env.conf!")
+ARG_NAME_ORDER_PATH = "data"
+ARG_NAME_PACKING_PLAN_PATH = "packing_plan"
+ARG_NAME_BLENDER_BACKGROUND = "background"
+ARG_NAME_RENDER_SCENE = "render"
 
 
-def evaluate_packing_plan(packing_plan: PackingPlan, order: dict) -> None:
+def unpack_parsed_arguments(args: dict[str, Path | bool]) -> tuple[Path, Path, bool]:
     """
-    This methods evaluates the given packing plan with a PackingPlanEvaluator instance.
+    Unpacks the parsed arguments.
 
-    Parameters.
-    -----------
-    id: str
-        The id of the order.
-    order: dict
-        The order that correpsonds to the packing plan that is evaluated.
-    packingplan: list
-        The packing plan that is evaluated.
+    Args:
+        args (dict[str, Path | bool]): The arguments that are parsed.
+
+    Returns:
+        Path: The path to the file that contains the order sequence.
+        Path: The path to the file that contains the packing plans.
+        bool: Indicates whether Blender is run in background.
+        bool: Indicates whether the scene is rendered.
+
     """
-    ppEvaluator.evaluate(packing_plan, order)
+    order_sequence_path: Path = args.get(ARG_NAME_ORDER_PATH)
+    packing_plans_path: Path = args.get(ARG_NAME_PACKING_PLAN_PATH)
+    run_blender_in_background: bool = args.get(ARG_NAME_BLENDER_BACKGROUND)
+    render_scene: bool = args.get(ARG_NAME_RENDER_SCENE)
+
+    return order_sequence_path, packing_plans_path, run_blender_in_background, render_scene
 
 
-def run_blender_stability_check(
-    background: bool,
-    orderid: str,
-    renderscene: bool,
-    actionplan: list[Action],
-    orderofpackingplan: dict,
-    ordercolors: dict,
-) -> None:
+def run_garbage_collector() -> None:
+    """It seems that the run of subprocess leads to a memory leak. To this end, we explicitely collect the garbage."""
+    logger.info("Collect garbage.")
+    gc.collect()
+
+
+def get_number_of_items_in_order_sequence(order_sequence: list[Order]) -> int:
+    """Returns the total number of items in the given order sequence.
+
+    Args:
+        order_sequence (list[Order]): The order sequence for that the items are counted.
+
+    Returns:
+        int: The number of items in the order sequence.
     """
-    This method calls blender to create a scene and start a rigid body simulation. Finally, the movement of all items during the simulation time is written to a file. For details see the file that is given by `blenderSceneGen`.
-
-    Parameters.
-    -----------
-    packingplan: str
-        The path to the packing plan as string.
-    order: str
-        The path to the order as string.
-    orderid: str
-        The ID of the order.
-    actionplan: list
-        The list of actions for the given order.
-    orderofpackingplan: dict
-        The order that was the basis for the given packing plan.
-    """
-    serialized_actions = [action.to_dict() for action in actionplan]
-
-    templFile = str(TEMPLATEFILE)
-    blenderSceneGen = str(TEMPLATEFILE.parent.resolve().joinpath("scene_creation.py"))
-
-    cmd = [BLENDERPATH]
-
-    if background:
-        cmd += ["-b"]
-    cmd += [
-        templFile,
-        "--python",
-        blenderSceneGen,
-        "--",
-        "order_number",
-        orderid,
-        "output_dir",
-        EVALOUTPUTDIR,
-        "render",
-        str(renderscene),
-        "order_packing_plan",
-        str(serialized_actions),
-        "order",
-        str(orderofpackingplan),
-        "order_colors",
-        str(ordercolors),
-    ]
-
-    subprocess.run(cmd, shell=False)
-    # run garbage collector -> it seems that the run of subprocess leads to a memory leak
-    if not (int(orderid) % 10):
-        gc.collect()  # run every 10 orders
+    count = 0
+    for order in order_sequence:
+        count += len(order.item_sequence)
+    return count
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
     import json
+    import time
 
     import bed_bpp_env.utils as utils
-    from bed_bpp_env.utils import PARSEDARGUMENTS, getPathToExampleData
+    from bed_bpp_env.evaluation import EVALOUTPUTDIR
+    from bed_bpp_env.evaluation.blender.configuration import retrieve_blender_path
+    from bed_bpp_env.evaluation.blender.stability_check import run_blender_stability_check_in_subprocess
+    from bed_bpp_env.evaluation.packing_plan_evaluator import PackingPlanEvaluator
+    from bed_bpp_env.io_utils import load_packing_plan_sequence
+    from bed_bpp_env.utils import ENTIRECONFIG, PARSEDARGUMENTS, getPathToExampleData
 
     # configure the parser of the given arguments
     parser = utils.arguments_parser.addGroupToParser("EvalPackingPlan", "the arguments of the packing plan evaluation")
     parser.add_argument(
-        "--data",
+        f"--{ARG_NAME_ORDER_PATH}",
         type=str,
         default=getPathToExampleData().joinpath("5_bed-bpp.json"),
         help="Defines which data is used.",
     )
     parser.add_argument(
-        "--packing_plan",
+        f"--{ARG_NAME_PACKING_PLAN_PATH}",
         type=str,
         default=getPathToExampleData().joinpath("packing_plan_5-bed-bpp.json"),
         help="Defines the packing plan that is evaluated.",
     )
     parser.add_argument(
         "-b",
-        "--background",
+        f"--{ARG_NAME_BLENDER_BACKGROUND}",
         action="store_false",
         default=True,
         help="Indicates whether the Blender file should be opened.",
     )
     parser.add_argument(
         "-r",
-        "--render",
+        f"--{ARG_NAME_RENDER_SCENE}",
         action="store_true",
         default=False,
         help="Indicates whether the created scenes are written to disk.",
@@ -156,46 +107,56 @@ if __name__ == "__main__":
     args = PARSEDARGUMENTS
     logger.info(f"got arguments: {args}")
 
-    packing_plans_path = pathlib.Path(args.get("packing_plan"))
-    pathBenData = pathlib.Path(args.get("data"))
-    notOpenBlender = args.get("background")
+    order_sequence_path, packing_plans_path, run_blender_in_background, render_scene = unpack_parsed_arguments(args)
 
     PACKING_PLANS = load_packing_plan_sequence(packing_plans_path)
+    order_sequence = load_order_sequence(order_sequence_path)
 
-    with open(pathBenData) as file:
+    with open(order_sequence_path) as file:
         BENDATA = json.load(file, parse_int=False)
 
-    totalAmountOfItemsInBendata = 0
-    for orderData in BENDATA.values():
-        totalAmountOfItemsInBendata += len(orderData["item_sequence"])
-    logger.info(f"have {totalAmountOfItemsInBendata} items in {pathBenData}")
+    number_of_items_in_order_sequence = get_number_of_items_in_order_sequence(order_sequence)
+    logger.info(f"have {number_of_items_in_order_sequence} items in {order_sequence_path}")
 
     file_color_db = (
-        pathlib.Path(__file__).resolve().joinpath(f"../visualization/colors/colordb_{pathBenData.name}").resolve()
+        Path(__file__).resolve().joinpath(f"../visualization/colors/colordb_{order_sequence_path.name}").resolve()
     )
     with open(file_color_db) as file:
         COLOR_DB = json.load(file, parse_int=False)
 
+    packing_plan_evaluator = PackingPlanEvaluator()
+    evaluation_configuration = ENTIRECONFIG["evaluation"]
+
+    blender_path = retrieve_blender_path(evaluation_configuration)
+
     # Start Evaluation
-    for packing_plan in PACKING_PLANS:
+    for i, packing_plan in enumerate(PACKING_PLANS):
         packing_plan_id = packing_plan.id
-        bendataOrder = BENDATA.get(packing_plan_id)
+        order = BENDATA.get(packing_plan_id)
         startTime = time.time()
-        run_blender_stability_check(
-            background=notOpenBlender,
-            orderid=packing_plan_id,
-            renderscene=args.get("render"),
-            actionplan=packing_plan.actions,
-            orderofpackingplan=bendataOrder,
-            ordercolors=COLOR_DB[packing_plan_id],
+        run_blender_stability_check_in_subprocess(
+            blender_path=blender_path,
+            order=order,
+            packing_plan=packing_plan,
+            output_dir=EVALOUTPUTDIR,
+            colors=COLOR_DB[packing_plan.id],
+            run_blender_in_background=run_blender_in_background,
+            render_scene=render_scene,
         )
         logger.info(f"blender stability check took {round(time.time() - startTime, 3)} seconds")
-        evaluate_packing_plan(packing_plan, bendataOrder)
+        # Check whether to collect garbage
+        if not (i % 10) and i:
+            run_garbage_collector()
+
+        # evaluate packing plan with evaluator
+        packing_plan_evaluator.evaluate(packing_plan, order)
         logger.info(f"complete evaluation of order/packing plan took {round(time.time() - startTime, 3)} seconds")
 
         # free memory
         del BENDATA[packing_plan_id]
-        if not (int(packing_plan_id) % 500):
-            gc.collect()
+        if not (i % 500) and i:
+            run_garbage_collector()
 
-    ppEvaluator.writeToFile(totalAmountOfItemsInBendata)
+        break
+
+    packing_plan_evaluator.writeToFile(number_of_items_in_order_sequence)

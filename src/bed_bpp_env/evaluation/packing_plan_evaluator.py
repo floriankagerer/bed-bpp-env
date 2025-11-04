@@ -135,7 +135,7 @@ class PackingPlanEvaluator:
         unpalletizedOrderRatio: float
             Indicates the ratio of an order that is not palletized.
         """
-        nItemsInOrder = len(self._order["item_sequence"])
+        nItemsInOrder = len(self._order.item_sequence)
         nUnpalItems = nItemsInOrder - len(self.__PackingPlan)
 
         return float(nUnpalItems / nItemsInOrder)
@@ -174,7 +174,7 @@ class PackingPlanEvaluator:
         evalHeightLevel = evalheightlevel
 
         isStable = self.evalStability()
-        itemsInOrder = len(self._order["item_sequence"])
+        itemsInOrder = len(self._order.item_sequence)
         unpalletizedItems = self.__TargetSpace.getItemsAboveHeightLevel(evalHeightLevel)
         itemsOnPallet = len(self.__TargetSpace.getPlacedItems())
 
@@ -312,9 +312,10 @@ class PackingPlanEvaluator:
                     KPIs[kpiDict.get("name")] = kpiMethod()
                 else:
                     KPIs[f"kpi_{kpiDict.get('num')}"] = kpiMethod()
-            except Exception:
+            except Exception as e:
                 msg = "method missing"
                 logger.warning(msg)
+                logger.exception(e)
                 KPIs[f"kpi_{kpiDict.get('num')}"] = msg
 
         self.__EvaluationKPIs.append(KPIs)

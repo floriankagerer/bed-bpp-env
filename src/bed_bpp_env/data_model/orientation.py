@@ -26,7 +26,7 @@ class Orientation(IntEnum):
             size = item.length_mm, item.width_mm, item.height_mm
 
         elif self is Orientation.WLH:
-            size = item.length_mm, item.width_mm, item.height_mm
+            size = item.width_mm, item.length_mm, item.height_mm
 
         else:
             raise NotImplementedError(f"'get_item_size' is not implented for '{self}'")

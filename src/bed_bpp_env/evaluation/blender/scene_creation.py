@@ -13,7 +13,7 @@ from pathlib import Path
 import bpy  # type: ignore
 
 from bed_bpp_env.data_model.action import Action
-from bed_bpp_env.evaluation.blender.bpy_modelling import add_euro_pallet_to_blender, add_rollcontainer_to_blender
+from bed_bpp_env.evaluation.blender.target import Target
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +25,7 @@ ENDFRAME = bpy.context.scene.frame_end
 FIXED_OBJECTS = ["Light.000", "Light.001", "Light.002"]
 
 
-def __addGround(size: tuple = (500, 500, 1), target: str = "euro-pallet") -> None:
+def _add_floor(target: Target, size: tuple = (500, 500, 1)) -> None:
     """Adds a ground plane to the scene."""
     bpy.ops.mesh.primitive_plane_add(size=1.0, enter_editmode=False, align="WORLD", location=(0, 0, 0))
     # scale argument does not work here
@@ -41,11 +41,8 @@ def __addGround(size: tuple = (500, 500, 1), target: str = "euro-pallet") -> Non
         use_proportional_connected=False,
         use_proportional_projected=False,
     )
-    if target == "euro-pallet":
-        zOffsetGround = -0.144 - 0.002
-    elif target == "rollcontainer":
-        zOffsetGround = -0.05 - 0.11 - 0.001
-    bpy.ops.transform.translate(value=(0, 0, zOffsetGround))
+    z_offset_floor = target.get_z_offset_for_floor_in_blender()
+    bpy.ops.transform.translate(value=(0, 0, z_offset_floor))
 
     # set the color
     bottomMaterial = bpy.data.materials.new(name="bottom_color")
@@ -70,7 +67,7 @@ def __addGround(size: tuple = (500, 500, 1), target: str = "euro-pallet") -> Non
     bpy.context.object.name = "bottom"
 
 
-def __initScene(target: str) -> None:
+def _init_scene(target: Target) -> None:
     """Initializes the scene."""
     for mat in bpy.data.materials:
         bpy.data.materials.remove(mat)
@@ -86,29 +83,24 @@ def __initScene(target: str) -> None:
     for objName in FIXED_OBJECTS:
         objsNotToRemove.append(bpy.data.objects.get(objName))
     for obj in bpy.data.objects:
-        if not (obj) in objsNotToRemove:
+        if obj not in objsNotToRemove:
             bpy.data.objects.remove(obj)
 
     # init the camera
-    if target == "rollcontainer":
-        camPosition = (2.3388, -2.3318, 2.1809)
-    elif target == "euro-pallet":
-        camPosition = (2.6788, -2.4603, 2.1692)
+    camera_position, camera_rotation = target.get_camera_pose_in_blender()
     bpy.ops.object.camera_add(
         enter_editmode=False,
         align="VIEW",
-        location=camPosition,
-        rotation=(1.22872, -4.53789e-07, 0.642278),
+        location=camera_position,
+        rotation=camera_rotation,
         scale=(1, 1, 1),
     )
     bpy.context.object.name = "Camera"
     bpy.context.scene.camera = bpy.context.object
 
-    __addGround(target=target)
-    if target == "rollcontainer":
-        add_rollcontainer_to_blender()
-    elif target == "euro-pallet":
-        add_euro_pallet_to_blender()
+    _add_floor(target=target)
+    target_modelling_function = target.get_modelling_function_in_blender()
+    target_modelling_function()
 
 
 def deserialize_actions(serialized_actions: list[dict]) -> list[Action]:
@@ -172,8 +164,8 @@ if __name__ == "__main__":
 
     # get packing plan and color db for order
     startTime = time.time()
-    target = ORDER["properties"]["target"]
-    __initScene(target)
+    target = Target(ORDER["properties"]["target"])
+    _init_scene(target)
     logger.debug(f"init scene loading took \t{round(1000 * (time.time() - startTime))} ms")
 
     # iterate over packing plan

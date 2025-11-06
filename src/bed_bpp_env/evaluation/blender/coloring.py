@@ -1,11 +1,20 @@
 """Responsible for coloring in Blender."""
 
+import json
 import logging
+from pathlib import Path
 
 from bed_bpp_env.data_model.item import Item
 from bed_bpp_env.data_model.type_alias import RGBAColor, RGBColor
 
 logger = logging.getLogger(__name__)
+
+
+def load_custom_hex_color_map(file_path: Path) -> dict[str, str]:
+    with open(file_path) as file:
+        custom_hex_color_map = json.load(file, parse_int=False)
+
+    return custom_hex_color_map
 
 
 def rgb_from_hex(hex: str) -> RGBColor:

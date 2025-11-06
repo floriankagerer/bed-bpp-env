@@ -7,14 +7,8 @@ Run in combination with
 The above mentioned command runs Blender in the background (-b) and opens the file `template.blend`, and runs the Python script `scene_creation.py`. The arguments following the Python file are needed by the script.
 """
 
-import ast
-import json
 import logging
-import math
-import pathlib
-import statistics
-import sys
-import time
+from pathlib import Path
 
 import bpy  # type: ignore
 
@@ -23,117 +17,12 @@ from bed_bpp_env.evaluation.blender.bpy_modelling import add_euro_pallet_to_blen
 
 logger = logging.getLogger(__name__)
 
-filePath = pathlib.Path(__file__)
-colorsPath = filePath.parents[2].resolve().joinpath("visualization/colors/colors.json")
-with open(colorsPath) as file:
-    OWN_HEX_COLORS = json.load(file, parse_int=False)
-
+CUSTOM_HEX_COLOR_MAP_PATH = Path(__file__).parents[2] / "visualization" / "colors" / "colors.json"
+"""The path to the .json file that contains the name of custom hex colors and the corresponding hex value."""
 
 ENDFRAME = bpy.context.scene.frame_end
 """The integer of the last frame in the .blend file."""
 FIXED_OBJECTS = ["Light.000", "Light.001", "Light.002"]
-SCALE_DIVISOR = 1000  # for Blender scene: convert mm to m
-
-
-def getRGBFromHex(hex: str) -> tuple:
-    """
-    Converts the color from hex in RGB format.
-
-    Parameters.
-    -----------
-    hex: str
-        The color given in hex format.
-
-    Returns.
-    --------
-    rgb: tuple
-        The percentage of red, green, and blue in %, i.e., values are in [0, 1].
-
-    Example.
-    --------
-    >>> getRGBFromHex("#FFFFFF")
-    (1.0, 1.0, 1.0)
-    """
-    r_hex = hex[1:3]
-    g_hex = hex[3:5]
-    b_hex = hex[5:7]
-    return int(r_hex, 16) / 255.0, int(g_hex, 16) / 255.0, int(b_hex, 16) / 255.0
-
-
-def getRGBFromColorName(name: str) -> tuple:
-    """For a given name, which is specified in colors.json in the visualization package, the RGB percentages are returned."""
-    hexname = OWN_HEX_COLORS.get(name)
-    return getRGBFromHex(hexname)
-
-
-def addItemToScene(properties: dict) -> None:
-    """
-    Adds an item that is specified by `properties` to the Blender scene.
-
-    Parameters.
-    -----------
-    properties: dict
-        Contains the item's properties.
-
-    Examples.
-    ---------
-    >>> properties
-    {
-        "article": "prezel-00107732",
-        "id": "001077732",
-        "flb": [0, 0, 0],
-        "size": [0.59, 0.39, 0.15],
-        "weight": 1.23
-    }
-    """
-    # add the item size to the fbb coordinates
-    locationValues = [vFLB + vSIZE / 2 for vFLB, vSIZE in zip(properties["flb"], properties["size"])]
-    # add the item
-    bpy.ops.mesh.primitive_cube_add(
-        size=1.0,
-        calc_uvs=True,
-        enter_editmode=False,
-        align="WORLD",
-        location=locationValues,
-        rotation=(0.0, 0.0, 0.0),
-        scale=properties["size"],
-    )
-
-    # add physics
-    bpy.ops.rigidbody.object_add()
-    bpy.context.object.rigid_body.enabled = True
-    bpy.context.object.rigid_body.mass = properties["weight"]
-    bpy.context.object.rigid_body.collision_shape = "BOX"
-
-    # set name
-    bpy.context.object.name = f"item_{properties['id'][1:]}"
-
-    # set the color and material, respectively
-    ob = bpy.context.active_object
-
-    # Get material
-    mat = bpy.data.materials.get(properties["id"])
-    if mat is None:
-        # create material
-        mat = bpy.data.materials.new(name=properties["id"])
-        # set the color
-        mat.use_nodes = True
-        tree = mat.node_tree
-        nodes = tree.nodes
-        bsdf = nodes["Principled BSDF"]
-        colorname = ORDER_COLORS[properties["article"]]
-        color = getRGBFromColorName(colorname)
-        color = (color[0], color[1], color[2], 1)
-        bsdf.inputs["Base Color"].default_value = color
-        mat.diffuse_color = color
-
-    # Assign it to object
-    if ob.data.materials:
-        # assign to 1st material slot
-        ob.data.materials[0] = mat
-    else:
-        # no slots
-        ob.data.materials.append(mat)
 
 
 def __addGround(size: tuple = (500, 500, 1), target: str = "euro-pallet") -> None:
@@ -165,7 +54,7 @@ def __addGround(size: tuple = (500, 500, 1), target: str = "euro-pallet") -> Non
     nodes = tree.nodes
     bsdf = nodes["Principled BSDF"]
     # make the bottom "transparent" -> white
-    color = (1, 1, 1, 1)  # color = (0, 0.0684781, 0.278894, 1)
+    color = (1, 1, 1, 1)
     bsdf.inputs["Base Color"].default_value = color
     bsdf.inputs["Alpha"].default_value = 1
     # TODO(florian): Fix KeyError: key "Emission Color" not found!
@@ -237,6 +126,19 @@ def deserialize_actions(serialized_actions: list[dict]) -> list[Action]:
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
+    import ast
+    import math
+    import statistics
+    import sys
+    import time
+
+    from bed_bpp_env.evaluation.blender.bpy_modelling import add_box_to_blender
+    from bed_bpp_env.evaluation.blender.coloring import (
+        load_custom_hex_color_map,
+        retrieve_rgb_color_for_item,
+        rgba_from_rgb,
+    )
+
     blenderMainStart = time.time()
     # get all arguments after "--"
     argsCommandLine = sys.argv[sys.argv.index("--") + 1 :]
@@ -260,11 +162,13 @@ if __name__ == "__main__":
     """The order for which the packing plan was generated (dict)."""
     RENDER_SCENE = ast.literal_eval(commands.get("render", "False"))
     """This bool indicates whether to render the scene and store it on disk."""
-    OUTPUT_DIR = pathlib.Path(commands.get("output_dir"))
-    """The directore where the results are stored (pathlib.Path)."""
+    OUTPUT_DIR = Path(commands.get("output_dir"))
+    """The directore where the results are stored (Path)."""
 
     # # #
     action_plan = deserialize_actions(ORDER_PP)
+
+    custom_hex_color_map = load_custom_hex_color_map(CUSTOM_HEX_COLOR_MAP_PATH)
 
     # get packing plan and color db for order
     startTime = time.time()
@@ -274,35 +178,15 @@ if __name__ == "__main__":
 
     # iterate over packing plan
     for i, action in enumerate(action_plan):
-        item = action.item
-        orientation = action.orientation
-        if orientation == 0:
-            size = (
-                item.length_mm / SCALE_DIVISOR,
-                item.width_mm / SCALE_DIVISOR,
-                item.height_mm / SCALE_DIVISOR,
-            )
-        elif orientation == 1:
-            size = (
-                item.width_mm / SCALE_DIVISOR,
-                item.length_mm / SCALE_DIVISOR,
-                item.height_mm / SCALE_DIVISOR,
-            )
+        # retrieve rgba color for item
+        rgb = retrieve_rgb_color_for_item(
+            custom_hex_color_map=custom_hex_color_map, item_color_name_map=ORDER_COLORS, item=action.item
+        )
+        color_rgba = rgba_from_rgb(rgb, 1.0)
 
-        flb = []
-        for coord in action.flb_coordinates.xyz:
-            flb.append(coord / SCALE_DIVISOR)
+        add_box_to_blender(action, color_rgba)
 
-        properties = {
-            "size": size,
-            "flb": flb,
-            "weight": item.weight_kg,
-            "id": item.id,
-            "article": item.article,
-        }
-
-        addItemToScene(properties)
-
+    # TODO(florian): Move these lines in a module called bpy_simulation
     # every frame has to be set in order to have a correct render and rigid body simulation
     startTime = time.time()
     scene = bpy.context.scene
@@ -323,8 +207,8 @@ if __name__ == "__main__":
         frameLocations = {}
         for obj in bpy.data.objects:
             itemName = obj.name
-            if not (itemName in FIXED_OBJECTS):
-                if not (itemName in itemLocations.keys()):
+            if itemName not in FIXED_OBJECTS:
+                if itemName not in itemLocations.keys():
                     itemLocations[itemName] = {}
                 itemLocations[itemName][f] = list(obj.matrix_world.translation)
 

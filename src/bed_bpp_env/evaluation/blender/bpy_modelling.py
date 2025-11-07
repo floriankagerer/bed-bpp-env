@@ -17,8 +17,6 @@ from bed_bpp_env.evaluation.blender.bpy_object_properties import (
 )
 from bed_bpp_env.evaluation.blender.collision_shape import CollisionShape
 
-# TODO(florian): Add enum for targets
-
 
 def _add_euro_pallet_part(position: tuple[float, float, float], size: tuple[float, float, float]) -> None:
     """Adds the part of a Euro-pallet to the scene in Blender."""

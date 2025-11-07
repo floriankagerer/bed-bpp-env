@@ -10,6 +10,7 @@ The above mentioned command runs Blender in the background (-b) and opens the fi
 import logging
 from pathlib import Path
 
+from bed_bpp_env.evaluation.blender.bpy_data import delete_all_materials_in_bpy_data, delete_objects_from_bpy_data
 import bpy  # type: ignore
 
 from bed_bpp_env.data_model.action import Action
@@ -69,8 +70,7 @@ def _add_floor(target: Target, size: tuple = (500, 500, 1)) -> None:
 
 def _init_scene(target: Target) -> None:
     """Initializes the scene."""
-    for mat in bpy.data.materials:
-        bpy.data.materials.remove(mat)
+    delete_all_materials_in_bpy_data()
 
     # enable the rigidbody world such that the simulation is enabled
     bpy.context.scene.rigidbody_world.enabled = True
@@ -79,12 +79,7 @@ def _init_scene(target: Target) -> None:
     # draw border of objects
     bpy.context.scene.render.use_freestyle = True
 
-    objsNotToRemove = []
-    for objName in FIXED_OBJECTS:
-        objsNotToRemove.append(bpy.data.objects.get(objName))
-    for obj in bpy.data.objects:
-        if obj not in objsNotToRemove:
-            bpy.data.objects.remove(obj)
+    delete_objects_from_bpy_data(FIXED_OBJECTS)
 
     # init the camera
     camera_position, camera_rotation = target.get_camera_pose_in_blender()

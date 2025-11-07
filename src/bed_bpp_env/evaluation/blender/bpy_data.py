@@ -4,6 +4,8 @@ from typing import Optional
 
 import bpy  # type: ignore
 
+from bed_bpp_env.data_model.type_alias import RGBAColor
+
 
 def delete_all_materials_in_bpy_data() -> None:
     """
@@ -41,3 +43,30 @@ def get_material_from_bpy_data(material_name: str) -> Optional[bpy.types.Materia
         Optional[bpy.types.Material]: The material with the given name, or `None` if no material has the specified name.
     """
     return bpy.data.materials.get(material_name)
+
+
+def define_material(material_name: str, material_color: RGBAColor) -> bpy.types.Material:
+    """
+    Defines a new material with the given name and sets the color to the given value.
+
+    Args:
+        material_name (str): The name of the material.
+        material_color (RGBAColor): The RGBA value of the material's color.
+
+    Returns:
+        Material: The defined material.
+
+    Links:
+        Material: https://docs.blender.org/api/current/bpy.types.Material.html
+    """
+    # define new material
+    material = bpy.data.materials.new(material_name)
+
+    # set color of material
+    material.use_nodes = True
+    tree_nodes = material.node_tree.nodes
+    bsdf = tree_nodes["Principled BSDF"]
+    bsdf.inputs["Base Color"].default_value = material_color
+    material.diffuse_color = material_color
+
+    return material

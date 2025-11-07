@@ -1,6 +1,7 @@
 """Convenience functions for working with `bpy.data`."""
 
 from typing import Optional
+
 import bpy  # type: ignore
 
 
@@ -26,3 +27,17 @@ def delete_objects_from_bpy_data(objects_to_keep: Optional[list[str]] = None) ->
             continue
         else:
             bpy.data.objects.remove(object)
+
+
+def get_material_from_bpy_data(material_name: str) -> Optional[bpy.types.Material]:
+    """
+    Returns the material that is stored in `bpy.data.materials` with the given name. If no material with the name
+    is stored, `None` is returned.
+
+    Args:
+        material_name (str): The name of the material.
+
+    Returns:
+        Optional[bpy.types.Material]: The material with the given name, or `None` if no material has the specified name.
+    """
+    return bpy.data.materials.get(material_name)

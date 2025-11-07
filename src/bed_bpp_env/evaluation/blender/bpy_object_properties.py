@@ -5,24 +5,11 @@ from typing import Optional
 import bpy  # type: ignore
 
 from bed_bpp_env.data_model.type_alias import RGBAColor
+from bed_bpp_env.evaluation.blender.bpy_data import get_material_from_bpy_data
 from bed_bpp_env.evaluation.blender.collision_shape import CollisionShape
 from bed_bpp_env.evaluation.blender.rigid_body_type import RigidBodyType
 
 # TODO(florian): When defining targets, retrieve material names in enum!--Define enum for materials--
-
-
-def get_material_from_bpy_data(material_name: str) -> Optional[bpy.types.Material]:
-    """
-    Returns the material that is stored in `bpy.data.materials` with the given name. If no material with the name
-    is stored, `None` is returned.
-
-    Args:
-        material_name (str): The name of the material.
-
-    Returns:
-        Optional[bpy.types.Material]: The material with the given name, or `None` if no material has the specified name.
-    """
-    return bpy.data.materials.get(material_name)
 
 
 def define_and_get_material(material_name: str, material_color: RGBAColor) -> bpy.types.Material:

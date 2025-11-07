@@ -17,8 +17,6 @@ from bed_bpp_env.evaluation.blender.bpy_object_properties import (
 )
 from bed_bpp_env.evaluation.blender.collision_shape import CollisionShape
 
-# TODO(florian): Add enum for targets
-
 
 def _add_euro_pallet_part(position: tuple[float, float, float], size: tuple[float, float, float]) -> None:
     """Adds the part of a Euro-pallet to the scene in Blender."""
@@ -159,11 +157,11 @@ def add_box_to_blender(action: Action, color_rgba: RGBAColor) -> None:
     size_wrt_orientation = orientation.get_item_size(item)
     size_wrt_orientation_in_m = [LengthUnit.MILLIMETER.convert(dim, LengthUnit.METER) for dim in size_wrt_orientation]
 
-    scaled_flb_coordinates = [
+    flb_coordinates_in_m = [
         LengthUnit.MILLIMETER.convert(coord, LengthUnit.METER) for coord in action.flb_coordinates.xyz
     ]
 
-    location = [coord + dim / 2 for coord, dim in zip(scaled_flb_coordinates, size_wrt_orientation_in_m)]
+    location = [coord + dim / 2 for coord, dim in zip(flb_coordinates_in_m, size_wrt_orientation_in_m)]
 
     # add the item
     bpy.ops.mesh.primitive_cube_add(

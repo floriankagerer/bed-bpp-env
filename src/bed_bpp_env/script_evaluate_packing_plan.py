@@ -157,6 +157,4 @@ if __name__ == "__main__":
         if not (i % 500) and i:
             run_garbage_collector()
 
-        break
-
     packing_plan_evaluator.writeToFile(number_of_items_in_order_sequence)

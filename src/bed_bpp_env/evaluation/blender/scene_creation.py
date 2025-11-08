@@ -15,6 +15,7 @@ import bpy  # type: ignore
 from bed_bpp_env.data_model.action import Action
 from bed_bpp_env.evaluation.blender.bpy_data import delete_objects_from_bpy_data
 from bed_bpp_env.evaluation.blender.bpy_helpers.materials import delete_all_materials_in_bpy_data
+from bed_bpp_env.evaluation.blender.bpy_helpers.populators.floor import place_floor
 from bed_bpp_env.evaluation.blender.target import Target
 
 logger = logging.getLogger(__name__)
@@ -25,48 +26,6 @@ CUSTOM_HEX_COLOR_MAP_PATH = Path(__file__).parents[2] / "visualization" / "color
 ENDFRAME = bpy.context.scene.frame_end
 """The integer of the last frame in the .blend file."""
 FIXED_OBJECTS = ["Light.000", "Light.001", "Light.002"]
-
-
-def _add_floor(target: Target, size: tuple = (500, 500, 1)) -> None:
-    """Adds a ground plane to the scene."""
-    bpy.ops.mesh.primitive_plane_add(size=1.0, enter_editmode=False, align="WORLD", location=(0, 0, 0))
-    # scale argument does not work here
-    bpy.ops.transform.resize(
-        value=size,
-        orient_type="GLOBAL",
-        orient_matrix=((1, 0, 0), (0, 1, 0), (0, 0, 1)),
-        orient_matrix_type="GLOBAL",
-        mirror=False,
-        use_proportional_edit=False,
-        proportional_edit_falloff="SMOOTH",
-        proportional_size=1,
-        use_proportional_connected=False,
-        use_proportional_projected=False,
-    )
-    z_offset_floor = target.get_z_offset_for_floor_in_blender()
-    bpy.ops.transform.translate(value=(0, 0, z_offset_floor))
-
-    # set the color
-    bottomMaterial = bpy.data.materials.new(name="bottom_color")
-    bottomMaterial.use_nodes = True
-    tree = bottomMaterial.node_tree
-    nodes = tree.nodes
-    bsdf = nodes["Principled BSDF"]
-    # make the bottom "transparent" -> white
-    color = (1, 1, 1, 1)
-    bsdf.inputs["Base Color"].default_value = color
-    bsdf.inputs["Alpha"].default_value = 1
-    # TODO(florian): Fix KeyError: key "Emission Color" not found!
-    # bsdf.inputs["Emission Color"].default_value = (1, 1, 1, 1)
-
-    bottomMaterial.diffuse_color = color
-    ob = bpy.context.active_object
-    ob.data.materials.append(bottomMaterial)
-
-    # set rigid body to passive
-    bpy.ops.rigidbody.object_add()
-    bpy.context.object.rigid_body.type = "PASSIVE"
-    bpy.context.object.name = "bottom"
 
 
 def _init_scene(target: Target) -> None:
@@ -94,7 +53,7 @@ def _init_scene(target: Target) -> None:
     bpy.context.object.name = "Camera"
     bpy.context.scene.camera = bpy.context.object
 
-    _add_floor(target=target)
+    place_floor(target=target)
     target_modelling_function = target.get_modelling_function_in_blender()
     target_modelling_function()
 

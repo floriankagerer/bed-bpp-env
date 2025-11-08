@@ -13,8 +13,7 @@ from pathlib import Path
 import bpy  # type: ignore
 
 from bed_bpp_env.data_model.action import Action
-from bed_bpp_env.evaluation.blender.bpy_data import delete_objects_from_bpy_data
-from bed_bpp_env.evaluation.blender.bpy_helpers.materials import delete_all_materials_in_bpy_data
+from bed_bpp_env.evaluation.blender.bpy_helpers.cleanup import cleanup_materials, cleanup_objects
 from bed_bpp_env.evaluation.blender.bpy_helpers.populators.camera import place_camera
 from bed_bpp_env.evaluation.blender.bpy_helpers.populators.floor import place_floor
 from bed_bpp_env.evaluation.blender.target import Target
@@ -31,7 +30,7 @@ FIXED_OBJECTS = ["Light.000", "Light.001", "Light.002"]
 
 def _init_scene(target: Target) -> None:
     """Initializes the scene."""
-    delete_all_materials_in_bpy_data()
+    cleanup_materials()
 
     # enable the rigidbody world such that the simulation is enabled
     bpy.context.scene.rigidbody_world.enabled = True
@@ -40,7 +39,7 @@ def _init_scene(target: Target) -> None:
     # draw border of objects
     bpy.context.scene.render.use_freestyle = True
 
-    delete_objects_from_bpy_data(FIXED_OBJECTS)
+    cleanup_objects(FIXED_OBJECTS)
 
     place_camera(target)
     place_floor(target=target)

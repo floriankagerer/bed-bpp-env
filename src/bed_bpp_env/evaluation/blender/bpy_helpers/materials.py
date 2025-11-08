@@ -12,14 +12,6 @@ import bpy  # type: ignore
 from bed_bpp_env.data_model.type_alias import RGBAColor
 
 
-def delete_all_materials_in_bpy_data() -> None:
-    """
-    Removes all materials that are stored in `bpy.data.materials`.
-    """
-    for material in bpy.data.materials:
-        bpy.data.materials.remove(material)
-
-
 def get_material_from_bpy_data(material_name: str) -> Optional[bpy.types.Material]:
     """
     Returns the material that is stored in `bpy.data.materials` with the given name. If no material with the name

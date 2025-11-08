@@ -1,11 +1,19 @@
-"""Convenience functions for working with `bpy.data`."""
+"""Module to cleanup the Blender simulation."""
 
 from typing import Optional
 
 import bpy  # type: ignore
 
 
-def delete_objects_from_bpy_data(objects_to_keep: Optional[list[str]] = None) -> None:
+def cleanup_materials() -> None:
+    """
+    Removes all materials that are stored in `bpy.data.materials`.
+    """
+    for material in bpy.data.materials:
+        bpy.data.materials.remove(material)
+
+
+def cleanup_objects(objects_to_keep: Optional[list[str]] = None) -> None:
     """
     Removes the objects that are stored in `bpy.data.objects`, except the ones that are given.
 

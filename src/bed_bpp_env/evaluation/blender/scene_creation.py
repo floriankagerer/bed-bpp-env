@@ -13,10 +13,8 @@ from pathlib import Path
 import bpy  # type: ignore
 
 from bed_bpp_env.data_model.action import Action
-from bed_bpp_env.evaluation.blender.bpy_data import delete_objects_from_bpy_data
-from bed_bpp_env.evaluation.blender.bpy_helpers.materials import delete_all_materials_in_bpy_data
-from bed_bpp_env.evaluation.blender.bpy_helpers.populators.camera import place_camera
-from bed_bpp_env.evaluation.blender.bpy_helpers.populators.floor import place_floor
+from bed_bpp_env.evaluation.blender.bpy_helpers.scene_setup import initialize_scene
+from bed_bpp_env.evaluation.blender.coloring import create_item_rgb_color_map
 from bed_bpp_env.evaluation.blender.target import Target
 
 logger = logging.getLogger(__name__)
@@ -27,25 +25,6 @@ CUSTOM_HEX_COLOR_MAP_PATH = Path(__file__).parents[2] / "visualization" / "color
 ENDFRAME = bpy.context.scene.frame_end
 """The integer of the last frame in the .blend file."""
 FIXED_OBJECTS = ["Light.000", "Light.001", "Light.002"]
-
-
-def _init_scene(target: Target) -> None:
-    """Initializes the scene."""
-    delete_all_materials_in_bpy_data()
-
-    # enable the rigidbody world such that the simulation is enabled
-    bpy.context.scene.rigidbody_world.enabled = True
-    bpy.context.scene.rigidbody_world.collection = bpy.data.collections["Collection"]
-
-    # draw border of objects
-    bpy.context.scene.render.use_freestyle = True
-
-    delete_objects_from_bpy_data(FIXED_OBJECTS)
-
-    place_camera(target)
-    place_floor(target=target)
-    target_modelling_function = target.get_modelling_function_in_blender()
-    target_modelling_function()
 
 
 def deserialize_actions(serialized_actions: list[dict]) -> list[Action]:
@@ -69,12 +48,7 @@ if __name__ == "__main__":
     import sys
     import time
 
-    from bed_bpp_env.evaluation.blender.bpy_helpers.populators.box import place_box
-    from bed_bpp_env.evaluation.blender.coloring import (
-        load_custom_hex_color_map,
-        retrieve_rgb_color_for_item,
-        rgba_from_rgb,
-    )
+    from bed_bpp_env.evaluation.blender.coloring import load_custom_hex_color_map
 
     blenderMainStart = time.time()
     # get all arguments after "--"
@@ -107,21 +81,18 @@ if __name__ == "__main__":
 
     custom_hex_color_map = load_custom_hex_color_map(CUSTOM_HEX_COLOR_MAP_PATH)
 
-    # get packing plan and color db for order
-    startTime = time.time()
     target = Target(ORDER["properties"]["target"])
-    _init_scene(target)
-    logger.debug(f"init scene loading took \t{round(1000 * (time.time() - startTime))} ms")
 
-    # iterate over packing plan
-    for i, action in enumerate(action_plan):
-        # retrieve rgba color for item
-        rgb = retrieve_rgb_color_for_item(
-            custom_hex_color_map=custom_hex_color_map, item_color_name_map=ORDER_COLORS, item=action.item
-        )
-        color_rgba = rgba_from_rgb(rgb, 1.0)
-
-        place_box(action, color_rgba)
+    items = [action.item for action in action_plan]
+    item_rgb_color_map = create_item_rgb_color_map(
+        custom_hex_color_map=custom_hex_color_map, item_custom_color_name_map=ORDER_COLORS, items=items
+    )
+    initialize_scene(
+        target=target,
+        actions=action_plan,
+        item_rgb_color_map=item_rgb_color_map,
+        objects_to_keep=FIXED_OBJECTS,
+    )
 
     # TODO(florian): Move these lines in a module called bpy_simulation
     # every frame has to be set in order to have a correct render and rigid body simulation

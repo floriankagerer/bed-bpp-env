@@ -55,20 +55,28 @@ def rgba_from_rgb(rgb: RGBColor, alpha: float) -> RGBAColor:
     return (r, g, b, alpha)
 
 
-def retrieve_rgb_color_for_item(
-    custom_hex_color_map: dict[str, str], item_color_name_map: dict[str, str], item: Item
-) -> RGBColor:
+def create_item_rgb_color_map(
+    custom_hex_color_map: dict[str, str], item_custom_color_name_map: dict[str, str], items: list[Item]
+) -> dict[str, RGBColor]:
     """
-    Retrieves the color for the given item.
+    Creates a dictionary that contains the item's color identifier as key and the corresponding rgb color.
 
     Args:
         custom_hex_color_map (dict[str, str]): Contains custom color names, e.g., `"own_01"` , as key and a hex value.
-        item_color_name_map (dict[str, str]): Contains which item has which custom color name
-        item (Item): The item for that the rgb color is retrieved.
+        item_color_name_map (dict[str, str]): Contains which item has which custom color name.
+        item (list[Item]): The items for that the color map is created.
 
     Returns:
-        RGBColor: The rgb color that is used for the item.
+        dict[str, RGBColor]: The map of the item to the corresponding color.
     """
-    color_name = item_color_name_map[item.article]
-    hex_str = custom_hex_color_map.get(color_name)
-    return rgb_from_hex(hex_str)
+    item_rgb_color_map = {}
+
+    for item in items:
+        color_name = item_custom_color_name_map[item.color_identifier]
+        hex_str = custom_hex_color_map.get(color_name)
+        rgb = rgb_from_hex(hex_str)
+        if item.color_identifier in item_rgb_color_map:
+            continue
+        item_rgb_color_map[item.color_identifier] = rgb
+
+    return item_rgb_color_map

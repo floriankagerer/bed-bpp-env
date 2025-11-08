@@ -8,10 +8,9 @@ from bed_bpp_env.data_model.action import Action
 from bed_bpp_env.data_model.length_unit import LengthUnit
 from bed_bpp_env.data_model.orientation import Orientation
 from bed_bpp_env.data_model.type_alias import RGBAColor
+from bed_bpp_env.evaluation.blender.bpy_data import define_material, get_material_from_bpy_data
 from bed_bpp_env.evaluation.blender.bpy_object_properties import (
     assign_material_to_object,
-    define_and_get_material,
-    get_material_from_bpy_data,
     set_material_and_enable_rigid_body,
     set_rigid_body_settings,
 )
@@ -185,6 +184,6 @@ def add_box_to_blender(action: Action, color_rgba: RGBAColor) -> None:
     # Get material
     material = get_material_from_bpy_data(item.id)
     if material is None:
-        material = define_and_get_material(item.id, color_rgba)
+        material = define_material(item.id, color_rgba)
 
     assign_material_to_object(ob, material)

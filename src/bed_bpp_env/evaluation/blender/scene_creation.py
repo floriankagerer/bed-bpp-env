@@ -15,6 +15,7 @@ import bpy  # type: ignore
 from bed_bpp_env.data_model.action import Action
 from bed_bpp_env.evaluation.blender.bpy_data import delete_objects_from_bpy_data
 from bed_bpp_env.evaluation.blender.bpy_helpers.materials import delete_all_materials_in_bpy_data
+from bed_bpp_env.evaluation.blender.bpy_helpers.populators.camera import place_camera
 from bed_bpp_env.evaluation.blender.bpy_helpers.populators.floor import place_floor
 from bed_bpp_env.evaluation.blender.target import Target
 
@@ -41,18 +42,7 @@ def _init_scene(target: Target) -> None:
 
     delete_objects_from_bpy_data(FIXED_OBJECTS)
 
-    # init the camera
-    camera_position, camera_rotation = target.get_camera_pose_in_blender()
-    bpy.ops.object.camera_add(
-        enter_editmode=False,
-        align="VIEW",
-        location=camera_position,
-        rotation=camera_rotation,
-        scale=(1, 1, 1),
-    )
-    bpy.context.object.name = "Camera"
-    bpy.context.scene.camera = bpy.context.object
-
+    place_camera(target)
     place_floor(target=target)
     target_modelling_function = target.get_modelling_function_in_blender()
     target_modelling_function()

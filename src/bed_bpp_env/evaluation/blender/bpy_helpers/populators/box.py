@@ -1,4 +1,4 @@
-"""Modelling functions for Blender."""
+"""Module that contains functions to place a box in Blender."""
 
 import bpy  # type: ignore
 
@@ -15,7 +15,7 @@ from bed_bpp_env.evaluation.blender.bpy_helpers.materials import (
 from bed_bpp_env.evaluation.blender.bpy_object_properties import set_rigid_body_settings
 
 
-def add_box_to_blender(action: Action, color_rgba: RGBAColor) -> None:
+def place_box(action: Action, color_rgba: RGBAColor) -> None:
     """
     Adds the item to the given position. The item gets the given color assigned.
 

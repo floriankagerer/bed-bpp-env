@@ -120,7 +120,7 @@ if __name__ == "__main__":
     import sys
     import time
 
-    from bed_bpp_env.evaluation.blender.bpy_modelling import add_box_to_blender
+    from bed_bpp_env.evaluation.blender.bpy_helpers.populators.box import place_box
     from bed_bpp_env.evaluation.blender.coloring import (
         load_custom_hex_color_map,
         retrieve_rgb_color_for_item,
@@ -172,7 +172,7 @@ if __name__ == "__main__":
         )
         color_rgba = rgba_from_rgb(rgb, 1.0)
 
-        add_box_to_blender(action, color_rgba)
+        place_box(action, color_rgba)
 
     # TODO(florian): Move these lines in a module called bpy_simulation
     # every frame has to be set in order to have a correct render and rigid body simulation

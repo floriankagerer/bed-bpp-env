@@ -20,6 +20,9 @@ def cleanup_objects(objects_to_keep: Optional[list[str]] = None) -> None:
     Args:
         objects_to_keep (Optional[list[str]]): The name of the objects that are not removed from `bpy.data.objects`.
     """
+    if objects_to_keep is None:
+        objects_to_keep = []
+
     objects_to_keep = [bpy.data.objects.get(name) for name in objects_to_keep]
 
     for object in bpy.data.objects:

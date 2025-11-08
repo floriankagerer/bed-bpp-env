@@ -1,7 +1,8 @@
-from enum import Enum
 from collections.abc import Callable
+from enum import Enum
 
-from bed_bpp_env.evaluation.blender.bpy_modelling import add_euro_pallet_to_blender, add_rollcontainer_to_blender
+from bed_bpp_env.evaluation.blender.bpy_helpers.populators.euro_pallet import place_euro_pallet
+from bed_bpp_env.evaluation.blender.bpy_modelling import add_rollcontainer_to_blender
 
 Position = tuple[float, float, float]
 Rotation = tuple[float, float, float]
@@ -63,7 +64,7 @@ class Target(Enum):
             modelling_function = add_rollcontainer_to_blender
 
         elif self is Target.EURO_PALLET:
-            modelling_function = add_euro_pallet_to_blender
+            modelling_function = place_euro_pallet
 
         else:
             raise NotImplementedError(f"No modelling function defined for target '{self}'")

@@ -8,9 +8,12 @@ from bed_bpp_env.data_model.action import Action
 from bed_bpp_env.data_model.length_unit import LengthUnit
 from bed_bpp_env.data_model.orientation import Orientation
 from bed_bpp_env.data_model.type_alias import RGBAColor
-from bed_bpp_env.evaluation.blender.bpy_data import define_material, get_material_from_bpy_data
-from bed_bpp_env.evaluation.blender.bpy_object_properties import (
+from bed_bpp_env.evaluation.blender.bpy_helpers.materials import (
     assign_material_to_object,
+    define_material,
+    get_material_from_bpy_data,
+)
+from bed_bpp_env.evaluation.blender.bpy_object_properties import (
     set_material_and_enable_rigid_body,
     set_rigid_body_settings,
 )

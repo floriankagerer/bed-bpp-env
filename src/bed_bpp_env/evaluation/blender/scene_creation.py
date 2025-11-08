@@ -10,10 +10,11 @@ The above mentioned command runs Blender in the background (-b) and opens the fi
 import logging
 from pathlib import Path
 
-from bed_bpp_env.evaluation.blender.bpy_data import delete_all_materials_in_bpy_data, delete_objects_from_bpy_data
 import bpy  # type: ignore
 
 from bed_bpp_env.data_model.action import Action
+from bed_bpp_env.evaluation.blender.bpy_data import delete_objects_from_bpy_data
+from bed_bpp_env.evaluation.blender.bpy_helpers.materials import delete_all_materials_in_bpy_data
 from bed_bpp_env.evaluation.blender.target import Target
 
 logger = logging.getLogger(__name__)

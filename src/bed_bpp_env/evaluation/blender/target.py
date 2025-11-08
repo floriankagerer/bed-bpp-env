@@ -1,7 +1,8 @@
-from enum import Enum
 from collections.abc import Callable
+from enum import Enum
 
-from bed_bpp_env.evaluation.blender.bpy_modelling import add_euro_pallet_to_blender, add_rollcontainer_to_blender
+from bed_bpp_env.evaluation.blender.bpy_helpers.populators.euro_pallet import place_euro_pallet
+from bed_bpp_env.evaluation.blender.bpy_helpers.populators.rollcontainer import place_rollcontainer
 
 Position = tuple[float, float, float]
 Rotation = tuple[float, float, float]
@@ -60,10 +61,10 @@ class Target(Enum):
             Callable[[], None]: The function that adds the target to the Blender scene.
         """
         if self is Target.ROLLCONTAINER:
-            modelling_function = add_rollcontainer_to_blender
+            modelling_function = place_rollcontainer
 
         elif self is Target.EURO_PALLET:
-            modelling_function = add_euro_pallet_to_blender
+            modelling_function = place_euro_pallet
 
         else:
             raise NotImplementedError(f"No modelling function defined for target '{self}'")

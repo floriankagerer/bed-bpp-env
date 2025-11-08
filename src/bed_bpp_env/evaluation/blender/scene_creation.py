@@ -10,10 +10,13 @@ The above mentioned command runs Blender in the background (-b) and opens the fi
 import logging
 from pathlib import Path
 
-from bed_bpp_env.evaluation.blender.bpy_data import delete_all_materials_in_bpy_data, delete_objects_from_bpy_data
 import bpy  # type: ignore
 
 from bed_bpp_env.data_model.action import Action
+from bed_bpp_env.evaluation.blender.bpy_data import delete_objects_from_bpy_data
+from bed_bpp_env.evaluation.blender.bpy_helpers.materials import delete_all_materials_in_bpy_data
+from bed_bpp_env.evaluation.blender.bpy_helpers.populators.camera import place_camera
+from bed_bpp_env.evaluation.blender.bpy_helpers.populators.floor import place_floor
 from bed_bpp_env.evaluation.blender.target import Target
 
 logger = logging.getLogger(__name__)
@@ -24,48 +27,6 @@ CUSTOM_HEX_COLOR_MAP_PATH = Path(__file__).parents[2] / "visualization" / "color
 ENDFRAME = bpy.context.scene.frame_end
 """The integer of the last frame in the .blend file."""
 FIXED_OBJECTS = ["Light.000", "Light.001", "Light.002"]
-
-
-def _add_floor(target: Target, size: tuple = (500, 500, 1)) -> None:
-    """Adds a ground plane to the scene."""
-    bpy.ops.mesh.primitive_plane_add(size=1.0, enter_editmode=False, align="WORLD", location=(0, 0, 0))
-    # scale argument does not work here
-    bpy.ops.transform.resize(
-        value=size,
-        orient_type="GLOBAL",
-        orient_matrix=((1, 0, 0), (0, 1, 0), (0, 0, 1)),
-        orient_matrix_type="GLOBAL",
-        mirror=False,
-        use_proportional_edit=False,
-        proportional_edit_falloff="SMOOTH",
-        proportional_size=1,
-        use_proportional_connected=False,
-        use_proportional_projected=False,
-    )
-    z_offset_floor = target.get_z_offset_for_floor_in_blender()
-    bpy.ops.transform.translate(value=(0, 0, z_offset_floor))
-
-    # set the color
-    bottomMaterial = bpy.data.materials.new(name="bottom_color")
-    bottomMaterial.use_nodes = True
-    tree = bottomMaterial.node_tree
-    nodes = tree.nodes
-    bsdf = nodes["Principled BSDF"]
-    # make the bottom "transparent" -> white
-    color = (1, 1, 1, 1)
-    bsdf.inputs["Base Color"].default_value = color
-    bsdf.inputs["Alpha"].default_value = 1
-    # TODO(florian): Fix KeyError: key "Emission Color" not found!
-    # bsdf.inputs["Emission Color"].default_value = (1, 1, 1, 1)
-
-    bottomMaterial.diffuse_color = color
-    ob = bpy.context.active_object
-    ob.data.materials.append(bottomMaterial)
-
-    # set rigid body to passive
-    bpy.ops.rigidbody.object_add()
-    bpy.context.object.rigid_body.type = "PASSIVE"
-    bpy.context.object.name = "bottom"
 
 
 def _init_scene(target: Target) -> None:
@@ -81,19 +42,8 @@ def _init_scene(target: Target) -> None:
 
     delete_objects_from_bpy_data(FIXED_OBJECTS)
 
-    # init the camera
-    camera_position, camera_rotation = target.get_camera_pose_in_blender()
-    bpy.ops.object.camera_add(
-        enter_editmode=False,
-        align="VIEW",
-        location=camera_position,
-        rotation=camera_rotation,
-        scale=(1, 1, 1),
-    )
-    bpy.context.object.name = "Camera"
-    bpy.context.scene.camera = bpy.context.object
-
-    _add_floor(target=target)
+    place_camera(target)
+    place_floor(target=target)
     target_modelling_function = target.get_modelling_function_in_blender()
     target_modelling_function()
 
@@ -119,7 +69,7 @@ if __name__ == "__main__":
     import sys
     import time
 
-    from bed_bpp_env.evaluation.blender.bpy_modelling import add_box_to_blender
+    from bed_bpp_env.evaluation.blender.bpy_helpers.populators.box import place_box
     from bed_bpp_env.evaluation.blender.coloring import (
         load_custom_hex_color_map,
         retrieve_rgb_color_for_item,
@@ -171,7 +121,7 @@ if __name__ == "__main__":
         )
         color_rgba = rgba_from_rgb(rgb, 1.0)
 
-        add_box_to_blender(action, color_rgba)
+        place_box(action, color_rgba)
 
     # TODO(florian): Move these lines in a module called bpy_simulation
     # every frame has to be set in order to have a correct render and rigid body simulation

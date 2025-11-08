@@ -4,31 +4,15 @@ from typing import Optional
 
 import bpy  # type: ignore
 
-from bed_bpp_env.evaluation.blender.bpy_data import define_material, get_material_from_bpy_data
-from bed_bpp_env.evaluation.blender.collision_shape import CollisionShape
-from bed_bpp_env.evaluation.blender.rigid_body_type import RigidBodyType
+from bed_bpp_env.evaluation.blender.bpy_helpers.data_model.collision_shape import CollisionShape
+from bed_bpp_env.evaluation.blender.bpy_helpers.data_model.rigid_body_type import RigidBodyType
+from bed_bpp_env.evaluation.blender.bpy_helpers.materials import (
+    assign_material_to_object,
+    define_material,
+    get_material_from_bpy_data,
+)
 
 # TODO(florian): When defining targets, retrieve material names in enum!--Define enum for materials--
-
-
-def assign_material_to_object(active_object: bpy.types.Object, material: bpy.types.Material) -> None:
-    """
-    Assigns the material to the given object.
-
-    Args:
-        active_object (Object): The object to that the material is assigned.
-        material (Material): The material.
-
-    Links:
-        Object: https://docs.blender.org/api/current/bpy.types.Object.html#bpy.types.Object
-        Material: https://docs.blender.org/api/current/bpy.types.Material.html
-    """
-    if active_object.data.materials:
-        # Assign to 1st material slot
-        active_object.data.materials[0] = material
-    else:
-        # no slots
-        active_object.data.materials.append(material)
 
 
 def set_rigid_body_settings(

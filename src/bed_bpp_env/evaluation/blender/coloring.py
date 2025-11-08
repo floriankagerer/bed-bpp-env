@@ -69,6 +69,6 @@ def retrieve_rgb_color_for_item(
     Returns:
         RGBColor: The rgb color that is used for the item.
     """
-    color_name = item_color_name_map[item.article]
+    color_name = item_color_name_map[item.color_identifier]
     hex_str = custom_hex_color_map.get(color_name)
     return rgb_from_hex(hex_str)

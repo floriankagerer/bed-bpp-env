@@ -26,6 +26,11 @@ class Item(DataclassBase):
     sequence: int
     """The position of this item within the item sequence."""
 
+    @property
+    def color_identifier(self) -> str:
+        """Returns the attribute's value that defines the color of this object."""
+        return self.article
+
     def repr_key_value_pair(self) -> str:
         key_value_pair_repr = ""
 

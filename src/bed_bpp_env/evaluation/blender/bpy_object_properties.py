@@ -5,12 +5,12 @@ from typing import Optional
 import bpy  # type: ignore
 
 from bed_bpp_env.evaluation.blender.bpy_helpers.data_model.collision_shape import CollisionShape
+from bed_bpp_env.evaluation.blender.bpy_helpers.data_model.rigid_body_type import RigidBodyType
 from bed_bpp_env.evaluation.blender.bpy_helpers.materials import (
     assign_material_to_object,
     define_material,
     get_material_from_bpy_data,
 )
-from bed_bpp_env.evaluation.blender.rigid_body_type import RigidBodyType
 
 # TODO(florian): When defining targets, retrieve material names in enum!--Define enum for materials--
 

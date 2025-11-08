@@ -8,6 +8,7 @@ from bed_bpp_env.data_model.action import Action
 from bed_bpp_env.data_model.length_unit import LengthUnit
 from bed_bpp_env.data_model.orientation import Orientation
 from bed_bpp_env.data_model.type_alias import RGBAColor
+from bed_bpp_env.evaluation.blender.bpy_helpers.data_model.collision_shape import CollisionShape
 from bed_bpp_env.evaluation.blender.bpy_helpers.materials import (
     assign_material_to_object,
     define_material,
@@ -17,7 +18,6 @@ from bed_bpp_env.evaluation.blender.bpy_object_properties import (
     set_material_and_enable_rigid_body,
     set_rigid_body_settings,
 )
-from bed_bpp_env.evaluation.blender.collision_shape import CollisionShape
 
 
 def _add_euro_pallet_part(position: tuple[float, float, float], size: tuple[float, float, float]) -> None:

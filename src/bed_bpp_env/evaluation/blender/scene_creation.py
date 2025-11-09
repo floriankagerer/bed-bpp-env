@@ -9,11 +9,13 @@ The above mentioned command runs Blender in the background (-b) and opens the fi
 
 import logging
 from pathlib import Path
+from time import perf_counter
 from typing import Optional
 
 import bpy  # type: ignore
 
 from bed_bpp_env.data_model.action import Action
+from bed_bpp_env.evaluation.blender.bpy_helpers.scene import get_render_range, get_scene, set_frame
 from bed_bpp_env.evaluation.blender.coloring import create_item_rgb_color_map
 from bed_bpp_env.evaluation.blender.scene_setup import initialize_scene
 from bed_bpp_env.evaluation.blender.target import Target
@@ -23,8 +25,6 @@ logger = logging.getLogger(__name__)
 CUSTOM_HEX_COLOR_MAP_PATH = Path(__file__).parents[2] / "visualization" / "colors" / "colors.json"
 """The path to the .json file that contains the name of custom hex colors and the corresponding hex value."""
 
-ENDFRAME = bpy.context.scene.frame_end
-"""The integer of the last frame in the .blend file."""
 FIXED_OBJECTS = ["Light.000", "Light.001", "Light.002"]
 
 
@@ -68,6 +68,24 @@ def prepare_blender_file(
         item_rgb_color_map=item_rgb_color_map,
         objects_to_keep=objects_to_keep,
     )
+
+
+def run_simulation() -> None:
+    """
+    Runs the simulation in Blender by setting every frame. This updates all objects and leads to a correct render and
+    rigid body simulation.
+    """
+    # every frame has to be set in order to have a correct render and rigid body simulation
+    start_time = perf_counter()
+
+    first_frame, last_frame = get_render_range()
+
+    scene = get_scene()
+    for frame in range(first_frame, last_frame + 1):
+        set_frame(scene, frame)
+
+    end_time = perf_counter()
+    logger.debug(f"simulation took {end_time - start_time} seconds")
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -115,22 +133,15 @@ if __name__ == "__main__":
         target=target, actions=action_plan, item_custom_color_name_map=ORDER_COLORS, objects_to_keep=FIXED_OBJECTS
     )
 
-    # TODO(florian): Move these lines in a module called bpy_simulation
-    # every frame has to be set in order to have a correct render and rigid body simulation
-    startTime = time.time()
-    scene = bpy.context.scene
-    for f in range(ENDFRAME + 1):
-        scene.frame_set(f)
-    logger.debug(f"frame set took \t\t\t{round(1000 * (time.time() - startTime))} ms")
+    run_simulation()
 
     # store the item locations for start and endframe
     startTime = time.time()
     itemLocations = {}
-    frames4investigation = [0, ENDFRAME]
-    for f in frames4investigation:
-        # set the correct frame
-        scene = bpy.context.scene
-        scene.frame_set(f)
+    first_and_last_frame = get_render_range()
+    scene = get_scene()
+    for frame in first_and_last_frame:
+        set_frame(scene, frame)
 
         # get the locations of each item
         frameLocations = {}
@@ -139,14 +150,15 @@ if __name__ == "__main__":
             if itemName not in FIXED_OBJECTS:
                 if itemName not in itemLocations.keys():
                     itemLocations[itemName] = {}
-                itemLocations[itemName][f] = list(obj.matrix_world.translation)
+                itemLocations[itemName][frame] = list(obj.matrix_world.translation)
 
     # compare the previously stored item locations
+    first_frame, last_frame = first_and_last_frame
     itemMovements = []
     zMovements = []
     for itemName, frameAndPositions in itemLocations.items():
-        startPos = frameAndPositions.get(frames4investigation[0])
-        endPos = frameAndPositions.get(frames4investigation[-1])
+        startPos = frameAndPositions.get(first_frame)
+        endPos = frameAndPositions.get(last_frame)
 
         itemDelta = math.dist(startPos, endPos)
         itemMovements.append(itemDelta)
@@ -165,11 +177,11 @@ if __name__ == "__main__":
     if RENDER_SCENE:
         RENDERDIRECTORY = OUTPUT_DIR.joinpath("render/")
         RENDERDIRECTORY.mkdir(exist_ok=True)
-        for f in frames4investigation:
-            scene = bpy.context.scene
-            scene.frame_set(f)
+        scene = get_scene()
+        for frame in first_and_last_frame:
+            set_frame(scene, frame)
 
-            renderFilepath = RENDERDIRECTORY.joinpath(f"{ORDER_NUMBER}_frame_{f}")
+            renderFilepath = RENDERDIRECTORY.joinpath(f"{ORDER_NUMBER}_frame_{frame}")
             bpy.context.scene.render.filepath = str(renderFilepath)
             bpy.ops.render.render(write_still=True)
 

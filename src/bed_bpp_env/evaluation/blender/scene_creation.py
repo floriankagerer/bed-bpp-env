@@ -15,6 +15,8 @@ from typing import Optional
 import bpy  # type: ignore
 
 from bed_bpp_env.data_model.action import Action
+from bed_bpp_env.evaluation.blender.bpy_helpers.objects import get_name, get_objects
+from bed_bpp_env.evaluation.blender.bpy_helpers.position import get_position
 from bed_bpp_env.evaluation.blender.bpy_helpers.scene import get_render_range, get_scene, set_frame
 from bed_bpp_env.evaluation.blender.coloring import create_item_rgb_color_map
 from bed_bpp_env.evaluation.blender.scene_setup import initialize_scene
@@ -88,6 +90,45 @@ def run_simulation() -> None:
     logger.debug(f"simulation took {end_time - start_time} seconds")
 
 
+def retrieve_item_positions(
+    frames: list[int], objects_to_ignore: Optional[list[str]] = None
+) -> dict[str, dict[int, tuple[float, float, float]]]:
+    """
+    Retrieves the position of the objects for the specified frames.
+
+    Args:
+        frames (list[int]): The frames in that we retrieve the location of each item.
+        objects_to_ignore (Optional[list[str]]): The name of the objects that are not returned.
+
+    Returns:
+        dict[str, dict[int, tuple[float, float, float]]]: The positions of the items in the specified frames.
+    """
+    # TODO(florian): Introduce data class for positions.
+
+    start_time = perf_counter()
+
+    item_locations = {}
+
+    scene = get_scene()
+    focus_objects = get_objects(objects_to_ignore)
+
+    for frame in frames:
+        set_frame(scene, frame)
+
+        for obj in focus_objects:
+            item_name = get_name(obj)
+            item_position = get_position(obj)
+
+            if item_name not in item_locations.keys():
+                item_locations[item_name] = {}
+            item_locations[item_name][frame] = item_position
+
+    end_time = perf_counter()
+    logger.debug(f"retrieved item positions in {end_time - start_time} seconds")
+
+    return item_locations
+
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
@@ -135,28 +176,17 @@ if __name__ == "__main__":
 
     run_simulation()
 
-    # store the item locations for start and endframe
-    startTime = time.time()
-    itemLocations = {}
     first_and_last_frame = get_render_range()
-    scene = get_scene()
-    for frame in first_and_last_frame:
-        set_frame(scene, frame)
 
-        # get the locations of each item
-        frameLocations = {}
-        for obj in bpy.data.objects:
-            itemName = obj.name
-            if itemName not in FIXED_OBJECTS:
-                if itemName not in itemLocations.keys():
-                    itemLocations[itemName] = {}
-                itemLocations[itemName][frame] = list(obj.matrix_world.translation)
+    # retrieve positions of items
+    item_positions = retrieve_item_positions(first_and_last_frame, FIXED_OBJECTS)
 
     # compare the previously stored item locations
+    startTime = time.time()
     first_frame, last_frame = first_and_last_frame
     itemMovements = []
     zMovements = []
-    for itemName, frameAndPositions in itemLocations.items():
+    for itemName, frameAndPositions in item_positions.items():
         startPos = frameAndPositions.get(first_frame)
         endPos = frameAndPositions.get(last_frame)
 

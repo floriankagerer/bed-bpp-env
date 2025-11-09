@@ -55,7 +55,7 @@ def initialize_scene(
 
     Args:
         target (Target): The palletizing target.
-        actions (lisr[Action]): Contains the items and how they are placed in the scene.
+        actions (list[Action]): Contains the items and how they are placed in the scene.
         items_rgb_color_map (dict[str, RGBColor]): The map of the item to the corresponding color.
         objects_to_keep (Optional[list[str]]): The name of the objects that are not removed from the scene,
             e.g., lights.

@@ -63,7 +63,7 @@ def create_item_rgb_color_map(
 
     Args:
         custom_hex_color_map (dict[str, str]): Contains custom color names, e.g., `"own_01"` , as key and a hex value.
-        item_color_name_map (dict[str, str]): Contains which item has which custom color name.
+        item_custom_color_name_map (dict[str, str]): Contains which item has which custom color name.
         item (list[Item]): The items for that the color map is created.
 
     Returns:

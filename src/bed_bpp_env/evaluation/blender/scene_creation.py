@@ -13,8 +13,8 @@ from pathlib import Path
 import bpy  # type: ignore
 
 from bed_bpp_env.data_model.action import Action
-from bed_bpp_env.evaluation.blender.bpy_helpers.scene_setup import initialize_scene
 from bed_bpp_env.evaluation.blender.coloring import create_item_rgb_color_map
+from bed_bpp_env.evaluation.blender.scene_setup import initialize_scene
 from bed_bpp_env.evaluation.blender.target import Target
 
 logger = logging.getLogger(__name__)

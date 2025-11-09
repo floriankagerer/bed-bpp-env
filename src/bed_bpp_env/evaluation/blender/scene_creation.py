@@ -9,6 +9,7 @@ The above mentioned command runs Blender in the background (-b) and opens the fi
 
 import logging
 from pathlib import Path
+from typing import Optional
 
 import bpy  # type: ignore
 
@@ -37,6 +38,36 @@ def deserialize_actions(serialized_actions: list[dict]) -> list[Action]:
         list[Action]: The deserialized actions
     """
     return [Action.from_dict(serialized) for serialized in serialized_actions]
+
+
+def prepare_blender_file(
+    target: Target,
+    actions: list[Action],
+    item_custom_color_name_map: dict[str, str],
+    objects_to_keep: Optional[list[str]] = None,
+) -> None:
+    """
+    Prepares the Blender file, i.e., initialize the scene, remove not required objects.
+
+    Args:
+        target (Target): The palletizing target.
+        actions (list[Action]): Contains the items and how they are placed in the scene.
+        item_custom_color_name_map (dict[str, str]): Contains which item has which custom color name.
+        objects_to_keep (Optional[list[str]]): The name of the objects that are not removed from the scene,
+            e.g., lights.
+    """
+    custom_hex_color_map = load_custom_hex_color_map(CUSTOM_HEX_COLOR_MAP_PATH)
+
+    items = [action.item for action in actions]
+    item_rgb_color_map = create_item_rgb_color_map(
+        custom_hex_color_map=custom_hex_color_map, item_custom_color_name_map=item_custom_color_name_map, items=items
+    )
+    initialize_scene(
+        target=target,
+        actions=actions,
+        item_rgb_color_map=item_rgb_color_map,
+        objects_to_keep=objects_to_keep,
+    )
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -78,20 +109,10 @@ if __name__ == "__main__":
 
     # # #
     action_plan = deserialize_actions(ORDER_PP)
-
-    custom_hex_color_map = load_custom_hex_color_map(CUSTOM_HEX_COLOR_MAP_PATH)
-
     target = Target(ORDER["properties"]["target"])
 
-    items = [action.item for action in action_plan]
-    item_rgb_color_map = create_item_rgb_color_map(
-        custom_hex_color_map=custom_hex_color_map, item_custom_color_name_map=ORDER_COLORS, items=items
-    )
-    initialize_scene(
-        target=target,
-        actions=action_plan,
-        item_rgb_color_map=item_rgb_color_map,
-        objects_to_keep=FIXED_OBJECTS,
+    prepare_blender_file(
+        target=target, actions=action_plan, item_custom_color_name_map=ORDER_COLORS, objects_to_keep=FIXED_OBJECTS
     )
 
     # TODO(florian): Move these lines in a module called bpy_simulation

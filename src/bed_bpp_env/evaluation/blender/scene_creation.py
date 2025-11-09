@@ -9,12 +9,17 @@ The above mentioned command runs Blender in the background (-b) and opens the fi
 
 import logging
 from pathlib import Path
+from time import perf_counter
+from typing import Optional
 
 import bpy  # type: ignore
 
 from bed_bpp_env.data_model.action import Action
-from bed_bpp_env.evaluation.blender.bpy_helpers.scene_setup import initialize_scene
+from bed_bpp_env.evaluation.blender.bpy_helpers.objects import get_name, get_objects
+from bed_bpp_env.evaluation.blender.bpy_helpers.position import get_position
+from bed_bpp_env.evaluation.blender.bpy_helpers.scene import get_render_range, get_scene, set_frame
 from bed_bpp_env.evaluation.blender.coloring import create_item_rgb_color_map
+from bed_bpp_env.evaluation.blender.scene_setup import initialize_scene
 from bed_bpp_env.evaluation.blender.target import Target
 
 logger = logging.getLogger(__name__)
@@ -22,8 +27,6 @@ logger = logging.getLogger(__name__)
 CUSTOM_HEX_COLOR_MAP_PATH = Path(__file__).parents[2] / "visualization" / "colors" / "colors.json"
 """The path to the .json file that contains the name of custom hex colors and the corresponding hex value."""
 
-ENDFRAME = bpy.context.scene.frame_end
-"""The integer of the last frame in the .blend file."""
 FIXED_OBJECTS = ["Light.000", "Light.001", "Light.002"]
 
 
@@ -37,6 +40,93 @@ def deserialize_actions(serialized_actions: list[dict]) -> list[Action]:
         list[Action]: The deserialized actions
     """
     return [Action.from_dict(serialized) for serialized in serialized_actions]
+
+
+def prepare_blender_file(
+    target: Target,
+    actions: list[Action],
+    item_custom_color_name_map: dict[str, str],
+    objects_to_keep: Optional[list[str]] = None,
+) -> None:
+    """
+    Prepares the Blender file, i.e., initialize the scene, remove not required objects.
+
+    Args:
+        target (Target): The palletizing target.
+        actions (list[Action]): Contains the items and how they are placed in the scene.
+        item_custom_color_name_map (dict[str, str]): Contains which item has which custom color name.
+        objects_to_keep (Optional[list[str]]): The name of the objects that are not removed from the scene,
+            e.g., lights.
+    """
+    custom_hex_color_map = load_custom_hex_color_map(CUSTOM_HEX_COLOR_MAP_PATH)
+
+    items = [action.item for action in actions]
+    item_rgb_color_map = create_item_rgb_color_map(
+        custom_hex_color_map=custom_hex_color_map, item_custom_color_name_map=item_custom_color_name_map, items=items
+    )
+    initialize_scene(
+        target=target,
+        actions=actions,
+        item_rgb_color_map=item_rgb_color_map,
+        objects_to_keep=objects_to_keep,
+    )
+
+
+def run_simulation() -> None:
+    """
+    Runs the simulation in Blender by setting every frame. This updates all objects and leads to a correct render and
+    rigid body simulation.
+    """
+    # every frame has to be set in order to have a correct render and rigid body simulation
+    start_time = perf_counter()
+
+    first_frame, last_frame = get_render_range()
+
+    scene = get_scene()
+    for frame in range(first_frame, last_frame + 1):
+        set_frame(scene, frame)
+
+    end_time = perf_counter()
+    logger.debug(f"simulation took {end_time - start_time} seconds")
+
+
+def retrieve_item_positions(
+    frames: list[int], objects_to_ignore: Optional[list[str]] = None
+) -> dict[str, dict[int, tuple[float, float, float]]]:
+    """
+    Retrieves the position of the objects for the specified frames.
+
+    Args:
+        frames (list[int]): The frames in that we retrieve the location of each item.
+        objects_to_ignore (Optional[list[str]]): The name of the objects that are not returned.
+
+    Returns:
+        dict[str, dict[int, tuple[float, float, float]]]: The positions of the items in the specified frames.
+    """
+    # TODO(florian): Introduce data class for positions.
+
+    start_time = perf_counter()
+
+    item_locations = {}
+
+    scene = get_scene()
+    focus_objects = get_objects(objects_to_ignore)
+
+    for frame in frames:
+        set_frame(scene, frame)
+
+        for obj in focus_objects:
+            item_name = get_name(obj)
+            item_position = get_position(obj)
+
+            if item_name not in item_locations.keys():
+                item_locations[item_name] = {}
+            item_locations[item_name][frame] = item_position
+
+    end_time = perf_counter()
+    logger.debug(f"retrieved item positions in {end_time - start_time} seconds")
+
+    return item_locations
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -78,54 +168,27 @@ if __name__ == "__main__":
 
     # # #
     action_plan = deserialize_actions(ORDER_PP)
-
-    custom_hex_color_map = load_custom_hex_color_map(CUSTOM_HEX_COLOR_MAP_PATH)
-
     target = Target(ORDER["properties"]["target"])
 
-    items = [action.item for action in action_plan]
-    item_rgb_color_map = create_item_rgb_color_map(
-        custom_hex_color_map=custom_hex_color_map, item_custom_color_name_map=ORDER_COLORS, items=items
-    )
-    initialize_scene(
-        target=target,
-        actions=action_plan,
-        item_rgb_color_map=item_rgb_color_map,
-        objects_to_keep=FIXED_OBJECTS,
+    prepare_blender_file(
+        target=target, actions=action_plan, item_custom_color_name_map=ORDER_COLORS, objects_to_keep=FIXED_OBJECTS
     )
 
-    # TODO(florian): Move these lines in a module called bpy_simulation
-    # every frame has to be set in order to have a correct render and rigid body simulation
-    startTime = time.time()
-    scene = bpy.context.scene
-    for f in range(ENDFRAME + 1):
-        scene.frame_set(f)
-    logger.debug(f"frame set took \t\t\t{round(1000 * (time.time() - startTime))} ms")
+    run_simulation()
 
-    # store the item locations for start and endframe
-    startTime = time.time()
-    itemLocations = {}
-    frames4investigation = [0, ENDFRAME]
-    for f in frames4investigation:
-        # set the correct frame
-        scene = bpy.context.scene
-        scene.frame_set(f)
+    first_and_last_frame = get_render_range()
 
-        # get the locations of each item
-        frameLocations = {}
-        for obj in bpy.data.objects:
-            itemName = obj.name
-            if itemName not in FIXED_OBJECTS:
-                if itemName not in itemLocations.keys():
-                    itemLocations[itemName] = {}
-                itemLocations[itemName][f] = list(obj.matrix_world.translation)
+    # retrieve positions of items
+    item_positions = retrieve_item_positions(first_and_last_frame, FIXED_OBJECTS)
 
     # compare the previously stored item locations
+    startTime = time.time()
+    first_frame, last_frame = first_and_last_frame
     itemMovements = []
     zMovements = []
-    for itemName, frameAndPositions in itemLocations.items():
-        startPos = frameAndPositions.get(frames4investigation[0])
-        endPos = frameAndPositions.get(frames4investigation[-1])
+    for itemName, frameAndPositions in item_positions.items():
+        startPos = frameAndPositions.get(first_frame)
+        endPos = frameAndPositions.get(last_frame)
 
         itemDelta = math.dist(startPos, endPos)
         itemMovements.append(itemDelta)
@@ -144,11 +207,11 @@ if __name__ == "__main__":
     if RENDER_SCENE:
         RENDERDIRECTORY = OUTPUT_DIR.joinpath("render/")
         RENDERDIRECTORY.mkdir(exist_ok=True)
-        for f in frames4investigation:
-            scene = bpy.context.scene
-            scene.frame_set(f)
+        scene = get_scene()
+        for frame in first_and_last_frame:
+            set_frame(scene, frame)
 
-            renderFilepath = RENDERDIRECTORY.joinpath(f"{ORDER_NUMBER}_frame_{f}")
+            renderFilepath = RENDERDIRECTORY.joinpath(f"{ORDER_NUMBER}_frame_{frame}")
             bpy.context.scene.render.filepath = str(renderFilepath)
             bpy.ops.render.render(write_still=True)
 

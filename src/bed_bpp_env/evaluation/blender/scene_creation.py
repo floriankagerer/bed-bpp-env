@@ -200,6 +200,8 @@ if __name__ == "__main__":
     movementValues = {"mean_z-movements/m": statistics.fmean(zMovements), "max_z-movements/m": max(zMovements)}
     evalFile = OUTPUT_DIR.joinpath("stability.txt")
 
+    if not OUTPUT_DIR.exists():
+        OUTPUT_DIR.mkdir(exist_ok=True)
     with open(evalFile, "a") as file:
         file.write(f"{ORDER_NUMBER}:{str(movementValues)}\n")
 

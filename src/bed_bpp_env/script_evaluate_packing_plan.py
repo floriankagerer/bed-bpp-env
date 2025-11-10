@@ -146,8 +146,9 @@ if __name__ == "__main__":
     blender_path = retrieve_blender_path(evaluation_configuration)
 
     # Start Evaluation
-    for i, packing_plan in enumerate(PACKING_PLANS):
-        packing_plan_id = packing_plan.id
+    while len(PACKING_PLANS):
+        packing_plan = PACKING_PLANS.pop(0)
+
         order = BENDATA.pop(packing_plan.id)
         start_time = perf_counter()
         run_blender_stability_check_in_subprocess(
@@ -161,7 +162,7 @@ if __name__ == "__main__":
         )
         logger.info(f"blender stability check took {round(perf_counter() - start_time, 3)} seconds")
         # Check whether to collect garbage
-        if not (i % 10) and i:
+        if not (len(PACKING_PLANS) % 10):
             run_garbage_collector()
 
         # evaluate packing plan with evaluator

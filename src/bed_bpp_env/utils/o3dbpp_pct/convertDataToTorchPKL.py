@@ -114,6 +114,9 @@ if __name__ == "__main__":
     """
     from bed_bpp_env.utils import OUTPUTDIRECTORY, getPathToExampleData
 
+    if not OUTPUTDIRECTORY.exists():
+        OUTPUTDIRECTORY.mkdir(parents=True, exist_ok=True)
+
     parser = argparse.ArgumentParser(
         description="Possible arguments for the results converter BED-BPP format => Online-3D-BPP-PCT. The converted file can be used for `evaluation.py` of the solver."
     )

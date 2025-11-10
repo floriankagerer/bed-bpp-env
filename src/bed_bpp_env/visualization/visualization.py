@@ -190,6 +190,10 @@ class Visualization:
             w2if.SetInput(self.__RenderWindow)
             w2if.Update()
 
+            screenshot_path = pathlib.Path(filename)
+            if not screenshot_path.exists():
+                screenshot_path.parent.mkdir(parents=True, exist_ok=True)
+
             # write the image
             writer = vtk.vtkPNGWriter()
             writer.SetFileName(filename.as_posix())
@@ -342,6 +346,8 @@ class Visualization:
         for i, image in enumerate(self.__Images4Video):
             filename = pathlib.Path.joinpath(self.__OutputFolder, f"item{i + 1}.png")
             # create a writer
+            if not self.__OutputFolder.exists():
+                self.__OutputFolder.mkdir(parents=True, exist_ok=True)
             cv2.imwrite(filename.as_posix(), image)
 
     def setDisplayTime(self, value: int) -> None:

@@ -49,8 +49,8 @@ class Video:
         fourcc = cv2.VideoWriter_fourcc(*"mp4v")
 
         pathVideo = self.__Outputfolder
-        if not os.path.exists(pathVideo):
-            os.makedirs(pathVideo)
+        if not pathVideo.exists():
+            pathVideo.mkdir(parents=True, exist_ok=True)
 
         videoname = pathlib.Path.joinpath(pathVideo, self.__Filename)
         videoname = videoname.as_posix()

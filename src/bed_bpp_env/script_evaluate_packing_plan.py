@@ -17,6 +17,9 @@ ARG_NAME_PACKING_PLAN_PATH = "packing_plan"
 ARG_NAME_BLENDER_BACKGROUND = "background"
 ARG_NAME_RENDER_SCENE = "render"
 
+COLORS_DIR = Path(__file__).parent / "visualization" / "colors"
+"""The directory that contains the colors."""
+
 
 def unpack_parsed_arguments(args: dict[str, Path | bool]) -> tuple[Path, Path, bool]:
     """
@@ -61,11 +64,27 @@ def get_number_of_items_in_order_sequence(order_sequence: list[Order]) -> int:
     return count
 
 
+def load_color_database_for_order_sequence(file_path: Path) -> dict[str, dict[str, str]]:
+    """
+    Loads the color database that is stored in the given file path.
+
+    Args:
+        file_path (Path): The path to the file.
+
+    Returns:
+        dict[str, dict[str, str]]: The color data for the order sequence.
+    """
+    with open(file_path) as file:
+        color_db = json.load(file, parse_int=False)
+
+    return color_db
+
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 if __name__ == "__main__":
     import json
-    import time
+    from time import perf_counter
 
     import bed_bpp_env.utils as utils
     from bed_bpp_env.evaluation import EVALOUTPUTDIR
@@ -113,16 +132,13 @@ if __name__ == "__main__":
     order_sequence = load_order_sequence(order_sequence_path)
 
     with open(order_sequence_path) as file:
-        BENDATA = json.load(file, parse_int=False)
+        BENDATA: dict[str, dict[str, str | float | int]] = json.load(file, parse_int=False)
 
     number_of_items_in_order_sequence = get_number_of_items_in_order_sequence(order_sequence)
     logger.info(f"have {number_of_items_in_order_sequence} items in {order_sequence_path}")
 
-    file_color_db = (
-        Path(__file__).resolve().joinpath(f"../visualization/colors/colordb_{order_sequence_path.name}").resolve()
-    )
-    with open(file_color_db) as file:
-        COLOR_DB = json.load(file, parse_int=False)
+    file_color_db = COLORS_DIR / f"colordb_{order_sequence_path.name}"
+    color_database_for_order_sequence = load_color_database_for_order_sequence(file_color_db)
 
     packing_plan_evaluator = PackingPlanEvaluator()
     evaluation_configuration = ENTIRECONFIG["evaluation"]
@@ -130,31 +146,27 @@ if __name__ == "__main__":
     blender_path = retrieve_blender_path(evaluation_configuration)
 
     # Start Evaluation
-    for i, packing_plan in enumerate(PACKING_PLANS):
-        packing_plan_id = packing_plan.id
-        order = BENDATA.get(packing_plan_id)
-        startTime = time.time()
+    while len(PACKING_PLANS):
+        packing_plan = PACKING_PLANS.pop(0)
+
+        order = BENDATA.pop(packing_plan.id)
+        start_time = perf_counter()
         run_blender_stability_check_in_subprocess(
             blender_path=blender_path,
             order=order,
             packing_plan=packing_plan,
             output_dir=EVALOUTPUTDIR,
-            colors=COLOR_DB[packing_plan.id],
+            colors=color_database_for_order_sequence.pop(packing_plan.id),
             run_blender_in_background=run_blender_in_background,
             render_scene=render_scene,
         )
-        logger.info(f"blender stability check took {round(time.time() - startTime, 3)} seconds")
+        logger.info(f"blender stability check took {round(perf_counter() - start_time, 3)} seconds")
         # Check whether to collect garbage
-        if not (i % 10) and i:
+        if not (len(PACKING_PLANS) % 10):
             run_garbage_collector()
 
         # evaluate packing plan with evaluator
         packing_plan_evaluator.evaluate(packing_plan, order)
-        logger.info(f"complete evaluation of order/packing plan took {round(time.time() - startTime, 3)} seconds")
-
-        # free memory
-        del BENDATA[packing_plan_id]
-        if not (i % 500) and i:
-            run_garbage_collector()
+        logger.info(f"complete evaluation of order/packing plan took {round(perf_counter() - start_time, 3)} seconds")
 
     packing_plan_evaluator.writeToFile(number_of_items_in_order_sequence)

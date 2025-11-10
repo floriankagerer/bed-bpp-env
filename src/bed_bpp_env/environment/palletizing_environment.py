@@ -312,18 +312,18 @@ class PalletizingEnvironment(gym.Env):
         render_image.paste(test_status, (0, 0))
 
         draw = ImageDraw.Draw(render_image)
-        if self._actions == []:
-            pass
-        else:
+
+        if self._actions != []:
             # find path for font
             used_platform = platform.platform()
             if "macOS" in used_platform:
                 path_to_font = "~/Library/Fonts/Arial Unicode.ttf"
             elif "Linux" in used_platform:
                 path_to_font = "/usr/share/fonts/opentype/cabin/Cabin-Regular.otf"
+            elif "Windows" in used_platform:
+                path_to_font = "C:/Windows/Fonts/arial.ttf"
             else:
-                # windows is currently not implemented
-                pass
+                raise NotImplementedError(f"For platform '{used_platform}' no path to a font is set.")
 
             font_header = ImageFont.truetype(path_to_font, size=30)
             font_txt = ImageFont.truetype(path_to_font, size=20)

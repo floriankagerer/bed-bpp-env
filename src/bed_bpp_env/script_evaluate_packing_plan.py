@@ -35,7 +35,7 @@ def unpack_parsed_arguments(args: dict[str, Path | bool]) -> tuple[Path, Path, b
         bool: Indicates whether the scene is rendered.
 
     """
-    order_sequence_path: Path = args.get(ARG_NAME_ORDER_PATH)
+    order_sequence_path = Path(args.get(ARG_NAME_ORDER_PATH))
     packing_plans_path: Path = args.get(ARG_NAME_PACKING_PLAN_PATH)
     run_blender_in_background: bool = args.get(ARG_NAME_BLENDER_BACKGROUND)
     render_scene: bool = args.get(ARG_NAME_RENDER_SCENE)

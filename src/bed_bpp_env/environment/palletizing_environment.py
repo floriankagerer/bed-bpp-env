@@ -7,7 +7,6 @@ Depending on the task, e.g., `"O3DBP-k-s"`, the dictionary that contains additio
 import configparser
 import json
 import logging
-import pathlib
 import platform
 from typing import Optional
 
@@ -364,7 +363,9 @@ class PalletizingEnvironment(gym.Env):
 
         # # uncomment the lines below if you want to save the render image
         # fname = f"vis_{self._current_order['key']}_{self._item_sequence_counter}.png" # "render_image.png"
-        # targetpathForRenderImage = pathlib.Path.joinpath(utils.OUTPUTDIRECTORY, fname)
+        # targetpathForRenderImage = pathlib.Path.joinpath(OUTPUTDIRECTORY, fname)
+        # if not OUTPUTDIRECTORY.exists():
+        #     OUTPUTDIRECTORY.mkdir(parents=True, exist_ok=True)
         # render_image.save(targetpathForRenderImage)
 
         windowname = "BED-BPP Environment | Render Image"
@@ -426,8 +427,9 @@ class PalletizingEnvironment(gym.Env):
                 logger.info(f"PackingPlan = {packing_plan}")
 
         if True:  # tofile:
-            packing_plans_file = "packing_plans.json"
-            output_file = pathlib.Path.joinpath(OUTPUTDIRECTORY, packing_plans_file)
+            output_file = OUTPUTDIRECTORY / "packing_plans.json"
+            if not OUTPUTDIRECTORY.exists():
+                OUTPUTDIRECTORY.mkdir(parents=True, exist_ok=True)
             with open(output_file, "w") as PPFile:
                 json.dump(self._packing_plans, PPFile)
 

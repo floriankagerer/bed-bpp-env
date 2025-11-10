@@ -6,5 +6,4 @@ Note that it is neither checked whether the file `kpi_definition.yaml` contains 
 
 from bed_bpp_env.utils import OUTPUTDIRECTORY
 
-EVALOUTPUTDIR = OUTPUTDIRECTORY.joinpath("evaluation/")
-EVALOUTPUTDIR.mkdir(exist_ok=True)
+EVALOUTPUTDIR = OUTPUTDIRECTORY / "evaluation"

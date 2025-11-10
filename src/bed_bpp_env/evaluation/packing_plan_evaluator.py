@@ -350,6 +350,8 @@ class PackingPlanEvaluator:
         overview_df = pd.DataFrame.from_dict(overview_dict, orient="index")
 
         kpi_definition_file = FILE_KPI_DEFINITION
+        if not EVALOUTPUTDIR.exists():
+            EVALOUTPUTDIR.mkdir(exist_ok=True)
         shutil.copy(kpi_definition_file, EVALOUTPUTDIR.joinpath(kpi_definition_file.name))
 
         with pd.ExcelWriter(EVALOUTPUTDIR.joinpath("evaluation.xlsx"), mode="w") as writer:

@@ -173,6 +173,9 @@ if __name__ == "__main__":
     from bed_bpp_env.utils import getPathToExampleData
     from bed_bpp_env.utils.o3dbpp_pct import DEFAULT_FILENAME_CONVERTED_OUTPUT
 
+    if not OUTPUTDIRECTORY.exists():
+        OUTPUTDIRECTORY.mkdir(parents=True, exist_ok=True)
+
     parser = argparse.ArgumentParser(
         description="Possible arguments for the results converter Online-3D-BPP-PCT => MyPa format."
     )

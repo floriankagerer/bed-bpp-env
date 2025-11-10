@@ -132,7 +132,7 @@ if __name__ == "__main__":
     order_sequence = load_order_sequence(order_sequence_path)
 
     with open(order_sequence_path) as file:
-        BENDATA = json.load(file, parse_int=False)
+        BENDATA: dict[str, dict[str, str | float | int]] = json.load(file, parse_int=False)
 
     number_of_items_in_order_sequence = get_number_of_items_in_order_sequence(order_sequence)
     logger.info(f"have {number_of_items_in_order_sequence} items in {order_sequence_path}")
@@ -148,7 +148,7 @@ if __name__ == "__main__":
     # Start Evaluation
     for i, packing_plan in enumerate(PACKING_PLANS):
         packing_plan_id = packing_plan.id
-        order = BENDATA.get(packing_plan_id)
+        order = BENDATA.pop(packing_plan.id)
         startTime = time.time()
         run_blender_stability_check_in_subprocess(
             blender_path=blender_path,
@@ -167,10 +167,5 @@ if __name__ == "__main__":
         # evaluate packing plan with evaluator
         packing_plan_evaluator.evaluate(packing_plan, order)
         logger.info(f"complete evaluation of order/packing plan took {round(time.time() - startTime, 3)} seconds")
-
-        # free memory
-        del BENDATA[packing_plan_id]
-        if not (i % 500) and i:
-            run_garbage_collector()
 
     packing_plan_evaluator.writeToFile(number_of_items_in_order_sequence)

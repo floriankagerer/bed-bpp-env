@@ -84,7 +84,7 @@ def load_color_database_for_order_sequence(file_path: Path) -> dict[str, dict[st
 
 if __name__ == "__main__":
     import json
-    import time
+    from time import perf_counter
 
     import bed_bpp_env.utils as utils
     from bed_bpp_env.evaluation import EVALOUTPUTDIR
@@ -149,7 +149,7 @@ if __name__ == "__main__":
     for i, packing_plan in enumerate(PACKING_PLANS):
         packing_plan_id = packing_plan.id
         order = BENDATA.pop(packing_plan.id)
-        startTime = time.time()
+        start_time = perf_counter()
         run_blender_stability_check_in_subprocess(
             blender_path=blender_path,
             order=order,
@@ -159,13 +159,13 @@ if __name__ == "__main__":
             run_blender_in_background=run_blender_in_background,
             render_scene=render_scene,
         )
-        logger.info(f"blender stability check took {round(time.time() - startTime, 3)} seconds")
+        logger.info(f"blender stability check took {round(perf_counter() - start_time, 3)} seconds")
         # Check whether to collect garbage
         if not (i % 10) and i:
             run_garbage_collector()
 
         # evaluate packing plan with evaluator
         packing_plan_evaluator.evaluate(packing_plan, order)
-        logger.info(f"complete evaluation of order/packing plan took {round(time.time() - startTime, 3)} seconds")
+        logger.info(f"complete evaluation of order/packing plan took {round(perf_counter() - start_time, 3)} seconds")
 
     packing_plan_evaluator.writeToFile(number_of_items_in_order_sequence)

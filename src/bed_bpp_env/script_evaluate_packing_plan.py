@@ -17,6 +17,9 @@ ARG_NAME_PACKING_PLAN_PATH = "packing_plan"
 ARG_NAME_BLENDER_BACKGROUND = "background"
 ARG_NAME_RENDER_SCENE = "render"
 
+COLORS_DIR = Path(__file__).parent / "visualization" / "colors"
+"""The directory that contains the colors."""
+
 
 def unpack_parsed_arguments(args: dict[str, Path | bool]) -> tuple[Path, Path, bool]:
     """
@@ -59,6 +62,22 @@ def get_number_of_items_in_order_sequence(order_sequence: list[Order]) -> int:
     for order in order_sequence:
         count += len(order.item_sequence)
     return count
+
+
+def load_color_database_for_order_sequence(file_path: Path) -> dict[str, dict[str, str]]:
+    """
+    Loads the color database that is stored in the given file path.
+
+    Args:
+        file_path (Path): The path to the file.
+
+    Returns:
+        dict[str, dict[str, str]]: The color data for the order sequence.
+    """
+    with open(file_path) as file:
+        color_db = json.load(file, parse_int=False)
+
+    return color_db
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -118,11 +137,8 @@ if __name__ == "__main__":
     number_of_items_in_order_sequence = get_number_of_items_in_order_sequence(order_sequence)
     logger.info(f"have {number_of_items_in_order_sequence} items in {order_sequence_path}")
 
-    file_color_db = (
-        Path(__file__).resolve().joinpath(f"../visualization/colors/colordb_{order_sequence_path.name}").resolve()
-    )
-    with open(file_color_db) as file:
-        COLOR_DB = json.load(file, parse_int=False)
+    file_color_db = COLORS_DIR / f"colordb_{order_sequence_path.name}"
+    color_database_for_order_sequence = load_color_database_for_order_sequence(file_color_db)
 
     packing_plan_evaluator = PackingPlanEvaluator()
     evaluation_configuration = ENTIRECONFIG["evaluation"]
@@ -139,7 +155,7 @@ if __name__ == "__main__":
             order=order,
             packing_plan=packing_plan,
             output_dir=EVALOUTPUTDIR,
-            colors=COLOR_DB[packing_plan.id],
+            colors=color_database_for_order_sequence.pop(packing_plan.id),
             run_blender_in_background=run_blender_in_background,
             render_scene=render_scene,
         )

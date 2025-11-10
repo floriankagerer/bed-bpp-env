@@ -3,6 +3,7 @@
 import pytest
 
 from bed_bpp_env.data_model.item import Item
+from bed_bpp_env.data_model.orientation import Orientation
 from bed_bpp_env.integration.banpu_lahcsisr.full_orientation import FullOrientation
 from bed_bpp_env.integration.banpu_lahcsisr.orientation_reduction import equivalent_item_for_given_orientation
 
@@ -39,7 +40,9 @@ def test_equivalent_item_for_given_orientation(
     """Tests whether the dimensions are correctly swapped to retrieve an equivalent item."""
     expected_length, expected_width, expected_height = expected_lwh
 
-    equivalent_item = equivalent_item_for_given_orientation(item=sample_item, orientation=orientation)
+    equivalent_item, actual_orientation = equivalent_item_for_given_orientation(
+        item=sample_item, orientation=orientation
+    )
 
     expected_item = Item(
         article=sample_item.article,
@@ -52,3 +55,4 @@ def test_equivalent_item_for_given_orientation(
         sequence=sample_item.sequence,
     )
     assert equivalent_item == expected_item
+    assert actual_orientation is Orientation.LWH

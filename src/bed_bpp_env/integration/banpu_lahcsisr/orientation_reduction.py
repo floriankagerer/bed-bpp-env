@@ -1,10 +1,11 @@
 """Module to reduce the values of orientation to the values that the `PalletizingEnvironment` is capable of."""
 
 from bed_bpp_env.data_model.item import Item
+from bed_bpp_env.data_model.orientation import Orientation
 from bed_bpp_env.integration.banpu_lahcsisr.full_orientation import FullOrientation
 
 
-def equivalent_item_for_given_orientation(item: Item, orientation: FullOrientation) -> Item:
+def equivalent_item_for_given_orientation(item: Item, orientation: FullOrientation) -> tuple[Item, Orientation]:
     """
     Swaps the item's dimension such that the returned item is equivalent to the original item in the
     given orientation.
@@ -15,6 +16,7 @@ def equivalent_item_for_given_orientation(item: Item, orientation: FullOrientati
 
     Returns:
         Item: A reshaped item that is equivalent to the given item with the orientation.
+        Orientation: The orientation that is recognized by this package.
     """
 
     original_length = item.length_mm
@@ -46,7 +48,7 @@ def equivalent_item_for_given_orientation(item: Item, orientation: FullOrientati
         new_width = original_width
         new_height = original_length
 
-    return Item(
+    equivalent_item = Item(
         article=item.article,
         id=item.id,
         product_group=item.product_group,
@@ -55,4 +57,9 @@ def equivalent_item_for_given_orientation(item: Item, orientation: FullOrientati
         height_mm=new_height,
         weight_kg=item.weight_kg,
         sequence=item.sequence,
+    )
+
+    return (
+        equivalent_item,
+        Orientation.LWH,
     )

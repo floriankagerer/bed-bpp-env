@@ -157,13 +157,13 @@ For details, visit https://floriankagerer.github.io/dataset and https://floriank
 
 Till now, we integrated the following solvers in this repo and used `BED-BPP` as benchmark:  
 
-- [alexfrom0815/sisyphus](./alexfrom0815_O3D-BPP-PCT/readme_Online-3D-BPP-PCT_integration.md)
+- [alexfrom0815/sisyphus](https://github.com/floriankagerer/bed-bpp-env/blob/paper-implementation/alexfrom0815_O3D-BPP-PCT/readme_Online-3D-BPP-PCT_integration.md)
 
-- [floriankagerer/heuristic_O3DBP-3-2](./code/heuristics/O3DBP_3_2.md)
+- [floriankagerer/heuristic_O3DBP-3-2](https://github.com/floriankagerer/bed-bpp-env/blob/paper-implementation/code/heuristics/O3DBP_3_2.md)
 
-- [hschneid/xflp](./hschneid_xflp/readme_xflp_integration.md)
+- [hschneid/xflp](https://github.com/floriankagerer/bed-bpp-env/blob/paper-implementation/hschneid_xflp/readme_xflp_integration.md)
 
-- [josch/sisyphus](./josch_sisyphus/readme_sisyphus_integration.md)
+- [josch/sisyphus](https://github.com/floriankagerer/bed-bpp-env/blob/paper-implementation/josch_sisyphus/readme_sisyphus_integration.md)
 
 
 

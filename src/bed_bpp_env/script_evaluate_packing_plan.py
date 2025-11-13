@@ -153,6 +153,7 @@ if __name__ == "__main__":
         order_init_kwargs = order_dict.copy()
         order_init_kwargs.update({"id": packing_plan.id})
         order = Order.from_dict(order_init_kwargs)
+        # TODO (florian): Add a check that tests whether the packing plan contains the same items as the order.
 
         start_time = perf_counter()
         run_blender_stability_check_in_subprocess(

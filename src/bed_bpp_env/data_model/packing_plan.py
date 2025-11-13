@@ -32,3 +32,8 @@ class PackingPlan(DataclassBase):
                 init_kwargs[key] = serialized[key]
 
         return cls(**init_kwargs)
+
+    def to_dict(self) -> dict:
+        """Converts the object to a dictionary."""
+        as_dict = {self.id: [action.to_dict() for action in self.actions]}
+        return as_dict

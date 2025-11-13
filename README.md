@@ -35,9 +35,6 @@ Whenever you use the dataset, please cite our publication:
 <!-- -------------------------------------------------------------- -->
 ## <div align="center">Getting Started</div>
 
-### <div align="center"> 🚧 Work in progress 🚧</div>
-
-
 Please find below the instructions on how to setup and use the code in this repository.
 
 <!-- Preliminaries -->
@@ -46,7 +43,7 @@ Please find below the instructions on how to setup and use the code in this repo
 
 To use all features and functions in this repository, make sure that you have installed Python and Blender on your system.
 
-**Blender.** Download and install [Blender 4.5 LTS](https://www.blender.org/download/lts/4-5/). If [script_evaluate_packing_plan.py](./code/script_evaluate_packing_plan.py) does not find the location of Blender, add the [Blender path to bed-bpp_env.conf](./code/bed-bpp_env.conf#L16).
+**Blender.** Download and install [Blender 4.5 LTS](https://www.blender.org/download/lts/4-5/). If [script_evaluate_packing_plan.py](./src/bed_bpp_env/script_evaluate_packing_plan.py) does not find the location of Blender, add the [Blender path to bed-bpp_env.conf](./src/bed_bpp_env/bed-bpp_env.conf#L16).
 
 **Python.** We manage our Python environments with [Anaconda](https://www.anaconda.com/download). The dependencies of this project are managed with [Poetry](https://python-poetry.org/).
 

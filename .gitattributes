@@ -1,3 +1,4 @@
 colordb*.json filter=lfs diff=lfs merge=lfs -text
 assets/packing_plans/*.json filter=lfs diff=lfs merge=lfs -text
 assets/images/*.png filter=lfs diff=lfs merge=lfs -text
+example_data/packing_plan_evaluation/*.json filter=lfs diff=lfs merge=lfs -text

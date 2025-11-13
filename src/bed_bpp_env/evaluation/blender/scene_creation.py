@@ -148,9 +148,9 @@ if __name__ == "__main__":
         commands[argsCommandLine[2 * i]] = argsCommandLine[2 * i + 1]
 
     # check whether the needed arguments were given
-    for neededCommand in ["order_number", "order", "order_colors", "order_packing_plan", "output_dir"]:
-        if not (neededCommand) in commands:
-            raise ValueError(f'argument "{neededCommand}" must be given!')
+    for required_args in ["order_number", "target", "order_colors", "order_packing_plan", "output_dir"]:
+        if required_args not in commands:
+            raise ValueError(f'argument "{required_args}" must be given!')
 
     # evaluate the str-arguments to expressions
     ORDER_COLORS = ast.literal_eval(commands.get("order_colors"))
@@ -159,7 +159,7 @@ if __name__ == "__main__":
     """The packing plan of the given order (list)."""
     ORDER_NUMBER = commands.get("order_number")
     """The id of the current order (str)."""
-    ORDER = ast.literal_eval(commands.get("order"))
+    TARGET = commands.get("target")
     """The order for which the packing plan was generated (dict)."""
     RENDER_SCENE = ast.literal_eval(commands.get("render", "False"))
     """This bool indicates whether to render the scene and store it on disk."""
@@ -168,7 +168,7 @@ if __name__ == "__main__":
 
     # # #
     action_plan = deserialize_actions(ORDER_PP)
-    target = Target(ORDER["properties"]["target"])
+    target = Target(TARGET)
 
     prepare_blender_file(
         target=target, actions=action_plan, item_custom_color_name_map=ORDER_COLORS, objects_to_keep=FIXED_OBJECTS

@@ -149,7 +149,12 @@ if __name__ == "__main__":
     while len(PACKING_PLANS):
         packing_plan = PACKING_PLANS.pop(0)
 
-        order = BENDATA.pop(packing_plan.id)
+        order_dict = BENDATA.pop(packing_plan.id)
+        order_init_kwargs = order_dict.copy()
+        order_init_kwargs.update({"id": packing_plan.id})
+        order = Order.from_dict(order_init_kwargs)
+        # TODO (florian): Add a check that tests whether the packing plan contains the same items as the order.
+
         start_time = perf_counter()
         run_blender_stability_check_in_subprocess(
             blender_path=blender_path,

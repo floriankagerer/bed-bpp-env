@@ -43,6 +43,8 @@ def _build_stability_check_cmd(
     """
     serialized_actions = [action.to_dict() for action in packing_plan.actions]
 
+    target = order.properties.target
+
     cmd = [
         blender_path.as_posix(),
         # here would be the flag that indicates whether Blender is run in background
@@ -59,9 +61,8 @@ def _build_stability_check_cmd(
         str(render_scene),
         "order_packing_plan",
         str(serialized_actions),
-        "order",
-        # TODO(florian): replace with str(order.to_dict())
-        str(order),
+        "target",
+        target,
         "order_colors",
         str(colors),
     ]

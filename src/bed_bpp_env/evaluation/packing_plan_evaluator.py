@@ -247,7 +247,7 @@ class PackingPlanEvaluator:
         )
         return interlocking_ratio
 
-    def evaluate(self, packing_plan: PackingPlan, order: dict) -> dict:
+    def evaluate(self, packing_plan: PackingPlan, order: Order) -> dict:
         """
         This method evaluates the packing plan for a given order.
 
@@ -284,10 +284,7 @@ class PackingPlanEvaluator:
         order_id = packing_plan.id
         self._order_id = order_id
 
-        order_data = {"id": order_id}
-        order_data.update(order)
-
-        self._order = Order.from_dict(order_data)
+        self._order = order
         self._packing_plan = packing_plan.actions
 
         logger.info(f"evaluate order {order_id}")

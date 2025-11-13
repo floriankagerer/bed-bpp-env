@@ -1,6 +1,6 @@
 <div align="center">
 
-![Banner_Image](./example_data/images/banner.png)
+![Banner_Image](./assets/images/banner.png)
 
 </div>
 
@@ -97,7 +97,7 @@ After a few seconds you should see an image that is similar to the following
 
 <div align="center">
 
-![test_image](./example_data/images/example_render_image.png)
+![test_image](./assets/images/example_render_image.png)
 
 **😀 Happy Coding 😀**
 </div>
@@ -151,7 +151,7 @@ For details, visit https://floriankagerer.github.io/dataset and https://floriank
 
 <div align="center">
     
-![Leaderboardr_Image](./example_data/images/leaderboard.png)
+![Leaderboardr_Image](./assets/images/leaderboard.png)
 
 </div>
 

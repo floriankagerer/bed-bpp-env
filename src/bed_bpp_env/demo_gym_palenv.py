@@ -21,7 +21,7 @@ parser.add_argument(
 )
 parser.add_argument("--task", type=str, default="O3DBP", help="Defines the task.")
 parser.add_argument(
-    "--data", type=str, default=utils.getPathToExampleData().joinpath("5_bed-bpp.json"), help="Defines the used data."
+    "--data", type=str, default=utils.getPathToExampleData().joinpath("2orders-mikp.json"), help="Defines the used data."
 )
 arguments_parser.parse()
 
@@ -37,6 +37,7 @@ if __name__ == "__main__":
     from bed_bpp_env.environment.palletizing_environment import PalletizingEnvironment
     from bed_bpp_env.heuristics.lowest_area import LowestArea
     from bed_bpp_env.io_utils import load_order_sequence
+    from bed_bpp_env.plt_utils import visualize_heightmap_and_cps
     from bed_bpp_env.wrappers.equally_distributed_reward_wrapper import EquallyDistributedRewardWrapper
     from bed_bpp_env.wrappers.rescale_wrapper import RescaleWrapper
 
@@ -51,18 +52,24 @@ if __name__ == "__main__":
         ORDERS_FOR_EPISODES = json.load(f, parse_int=False)
 
     order_sequence = load_order_sequence(order_data_path)
+    options = {"order_sequence": order_sequence}
 
     # USE IMPLEMENTED WRAPPERS
-    base_env = PalletizingEnvironment()
-    env = RescaleWrapper(base_env)  # base_env = env.env
-    env = EquallyDistributedRewardWrapper(env)
+    env = PalletizingEnvironment()
+    # env = RescaleWrapper(base_env)  # base_env = env.env
+    # env = EquallyDistributedRewardWrapper(env)
 
-    observation, info = env.reset(order_sequence=order_sequence)
+    observation, info = env.reset(options=options)
 
     for _ in range(1000):
         env.render()
         action = heuristic.getAction(observation, info)  # User-defined policy function
-        observation, reward, episodeDone, info = env.step(action)
+        observation, reward, episodeDone, trucated, info = env.step(action)
+
+        # extract CP for fictitous item of dimensions (2,2,2)
+        fict_corner_points = env._target_space.getCornerPointsIn3D((2, 2, 2))
+        logger.debug(f"CPs for fictitous item: {fict_corner_points}\n")
+        visualize_heightmap_and_cps(observation,fict_corner_points)
 
         if episodeDone:
             env.render()

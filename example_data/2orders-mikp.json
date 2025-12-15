@@ -1,0 +1,2322 @@
+{
+    "ORDER_102_DIVERSIFIED": {
+        "item_sequence": {
+            "1": {
+                "article": "Box_T22",
+                "id": "T22",
+                "product_group": "V",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 47,
+                "weight/kg": 11.8,
+                "sequence": 1
+            },
+            "2": {
+                "article": "Box_T35",
+                "id": "T35",
+                "product_group": "II",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 60,
+                "weight/kg": 3.0,
+                "sequence": 2
+            },
+            "3": {
+                "article": "Box_T16",
+                "id": "T16",
+                "product_group": "P",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 54,
+                "weight/kg": 9.7,
+                "sequence": 3
+            },
+            "4": {
+                "article": "Box_T29",
+                "id": "T29",
+                "product_group": "CC",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 30,
+                "weight/kg": 7.1,
+                "sequence": 4
+            },
+            "5": {
+                "article": "Box_T21",
+                "id": "T21",
+                "product_group": "U",
+                "width/mm": 5,
+                "length/mm": 5,
+                "height/mm": 30,
+                "weight/kg": 4.2,
+                "sequence": 5
+            },
+            "6": {
+                "article": "Box_T24",
+                "id": "T24",
+                "product_group": "X",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 58,
+                "weight/kg": 1.8,
+                "sequence": 6
+            },
+            "7": {
+                "article": "Box_T30",
+                "id": "T30",
+                "product_group": "DD",
+                "width/mm": 2,
+                "length/mm": 4,
+                "height/mm": 60,
+                "weight/kg": 8.3,
+                "sequence": 7
+            },
+            "8": {
+                "article": "Box_T34",
+                "id": "T34",
+                "product_group": "HH",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 54,
+                "weight/kg": 10.2,
+                "sequence": 8
+            },
+            "9": {
+                "article": "Box_T05",
+                "id": "T05",
+                "product_group": "E",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 50,
+                "weight/kg": 3.6,
+                "sequence": 9
+            },
+            "10": {
+                "article": "Box_T31",
+                "id": "T31",
+                "product_group": "EE",
+                "width/mm": 3,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 7.5,
+                "sequence": 10
+            },
+            "11": {
+                "article": "Box_T12",
+                "id": "T12",
+                "product_group": "L",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 60,
+                "weight/kg": 3.3,
+                "sequence": 11
+            },
+            "12": {
+                "article": "Box_T07",
+                "id": "T07",
+                "product_group": "G",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 40,
+                "weight/kg": 4.3,
+                "sequence": 12
+            },
+            "13": {
+                "article": "Box_T31",
+                "id": "T31",
+                "product_group": "EE",
+                "width/mm": 3,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 7.5,
+                "sequence": 13
+            },
+            "14": {
+                "article": "Box_T28",
+                "id": "T28",
+                "product_group": "BB",
+                "width/mm": 5,
+                "length/mm": 3,
+                "height/mm": 50,
+                "weight/kg": 1.0,
+                "sequence": 14
+            },
+            "15": {
+                "article": "Box_T28",
+                "id": "T28",
+                "product_group": "BB",
+                "width/mm": 5,
+                "length/mm": 3,
+                "height/mm": 50,
+                "weight/kg": 1.0,
+                "sequence": 15
+            },
+            "16": {
+                "article": "Box_T04",
+                "id": "T04",
+                "product_group": "D",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 60,
+                "weight/kg": 1.3,
+                "sequence": 16
+            },
+            "17": {
+                "article": "Box_T09",
+                "id": "T09",
+                "product_group": "I",
+                "width/mm": 2,
+                "length/mm": 4,
+                "height/mm": 40,
+                "weight/kg": 8.2,
+                "sequence": 17
+            },
+            "18": {
+                "article": "Box_T35",
+                "id": "T35",
+                "product_group": "II",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 60,
+                "weight/kg": 3.0,
+                "sequence": 18
+            },
+            "19": {
+                "article": "Box_T15",
+                "id": "T15",
+                "product_group": "O",
+                "width/mm": 5,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 5.4,
+                "sequence": 19
+            },
+            "20": {
+                "article": "Box_T35",
+                "id": "T35",
+                "product_group": "II",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 60,
+                "weight/kg": 3.0,
+                "sequence": 20
+            },
+            "21": {
+                "article": "Box_T12",
+                "id": "T12",
+                "product_group": "L",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 60,
+                "weight/kg": 3.3,
+                "sequence": 21
+            },
+            "22": {
+                "article": "Box_T13",
+                "id": "T13",
+                "product_group": "M",
+                "width/mm": 2,
+                "length/mm": 2,
+                "height/mm": 30,
+                "weight/kg": 10.3,
+                "sequence": 22
+            },
+            "23": {
+                "article": "Box_T15",
+                "id": "T15",
+                "product_group": "O",
+                "width/mm": 5,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 5.4,
+                "sequence": 23
+            },
+            "24": {
+                "article": "Box_T27",
+                "id": "T27",
+                "product_group": "AA",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 40,
+                "weight/kg": 2.3,
+                "sequence": 24
+            },
+            "25": {
+                "article": "Box_T06",
+                "id": "T06",
+                "product_group": "F",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 20,
+                "weight/kg": 10.1,
+                "sequence": 25
+            },
+            "26": {
+                "article": "Box_T16",
+                "id": "T16",
+                "product_group": "P",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 54,
+                "weight/kg": 9.7,
+                "sequence": 26
+            },
+            "27": {
+                "article": "Box_T02",
+                "id": "T02",
+                "product_group": "B",
+                "width/mm": 3,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 2.0,
+                "sequence": 27
+            },
+            "28": {
+                "article": "Box_T07",
+                "id": "T07",
+                "product_group": "G",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 40,
+                "weight/kg": 4.3,
+                "sequence": 28
+            },
+            "29": {
+                "article": "Box_T13",
+                "id": "T13",
+                "product_group": "M",
+                "width/mm": 2,
+                "length/mm": 2,
+                "height/mm": 30,
+                "weight/kg": 10.3,
+                "sequence": 29
+            },
+            "30": {
+                "article": "Box_T05",
+                "id": "T05",
+                "product_group": "E",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 50,
+                "weight/kg": 3.6,
+                "sequence": 30
+            },
+            "31": {
+                "article": "Box_T30",
+                "id": "T30",
+                "product_group": "DD",
+                "width/mm": 2,
+                "length/mm": 4,
+                "height/mm": 60,
+                "weight/kg": 8.3,
+                "sequence": 31
+            },
+            "32": {
+                "article": "Box_T22",
+                "id": "T22",
+                "product_group": "V",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 47,
+                "weight/kg": 11.8,
+                "sequence": 32
+            },
+            "33": {
+                "article": "Box_T30",
+                "id": "T30",
+                "product_group": "DD",
+                "width/mm": 2,
+                "length/mm": 4,
+                "height/mm": 60,
+                "weight/kg": 8.3,
+                "sequence": 33
+            },
+            "34": {
+                "article": "Box_T10",
+                "id": "T10",
+                "product_group": "J",
+                "width/mm": 2,
+                "length/mm": 5,
+                "height/mm": 60,
+                "weight/kg": 2.5,
+                "sequence": 34
+            },
+            "35": {
+                "article": "Box_T28",
+                "id": "T28",
+                "product_group": "BB",
+                "width/mm": 5,
+                "length/mm": 3,
+                "height/mm": 50,
+                "weight/kg": 1.0,
+                "sequence": 35
+            },
+            "36": {
+                "article": "Box_T04",
+                "id": "T04",
+                "product_group": "D",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 60,
+                "weight/kg": 1.3,
+                "sequence": 36
+            },
+            "37": {
+                "article": "Box_T19",
+                "id": "T19",
+                "product_group": "S",
+                "width/mm": 4,
+                "length/mm": 5,
+                "height/mm": 37,
+                "weight/kg": 1.8,
+                "sequence": 37
+            },
+            "38": {
+                "article": "Box_T15",
+                "id": "T15",
+                "product_group": "O",
+                "width/mm": 5,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 5.4,
+                "sequence": 38
+            },
+            "39": {
+                "article": "Box_T18",
+                "id": "T18",
+                "product_group": "R",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 40,
+                "weight/kg": 11.1,
+                "sequence": 39
+            },
+            "40": {
+                "article": "Box_T16",
+                "id": "T16",
+                "product_group": "P",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 54,
+                "weight/kg": 9.7,
+                "sequence": 40
+            },
+            "41": {
+                "article": "Box_T05",
+                "id": "T05",
+                "product_group": "E",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 50,
+                "weight/kg": 3.6,
+                "sequence": 41
+            },
+            "42": {
+                "article": "Box_T05",
+                "id": "T05",
+                "product_group": "E",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 50,
+                "weight/kg": 3.6,
+                "sequence": 42
+            },
+            "43": {
+                "article": "Box_T24",
+                "id": "T24",
+                "product_group": "X",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 58,
+                "weight/kg": 1.8,
+                "sequence": 43
+            },
+            "44": {
+                "article": "Box_T29",
+                "id": "T29",
+                "product_group": "CC",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 30,
+                "weight/kg": 7.1,
+                "sequence": 44
+            },
+            "45": {
+                "article": "Box_T29",
+                "id": "T29",
+                "product_group": "CC",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 30,
+                "weight/kg": 7.1,
+                "sequence": 45
+            },
+            "46": {
+                "article": "Box_T33",
+                "id": "T33",
+                "product_group": "GG",
+                "width/mm": 4,
+                "length/mm": 3,
+                "height/mm": 23,
+                "weight/kg": 3.9,
+                "sequence": 46
+            },
+            "47": {
+                "article": "Box_T15",
+                "id": "T15",
+                "product_group": "O",
+                "width/mm": 5,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 5.4,
+                "sequence": 47
+            },
+            "48": {
+                "article": "Box_T09",
+                "id": "T09",
+                "product_group": "I",
+                "width/mm": 2,
+                "length/mm": 4,
+                "height/mm": 40,
+                "weight/kg": 8.2,
+                "sequence": 48
+            },
+            "49": {
+                "article": "Box_T03",
+                "id": "T03",
+                "product_group": "C",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 49
+            },
+            "50": {
+                "article": "Box_T14",
+                "id": "T14",
+                "product_group": "N",
+                "width/mm": 2,
+                "length/mm": 3,
+                "height/mm": 20,
+                "weight/kg": 5.6,
+                "sequence": 50
+            },
+            "51": {
+                "article": "Box_T02",
+                "id": "T02",
+                "product_group": "B",
+                "width/mm": 3,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 2.0,
+                "sequence": 51
+            },
+            "52": {
+                "article": "Box_T25",
+                "id": "T25",
+                "product_group": "Y",
+                "width/mm": 5,
+                "length/mm": 6,
+                "height/mm": 50,
+                "weight/kg": 7.3,
+                "sequence": 52
+            },
+            "53": {
+                "article": "Box_T28",
+                "id": "T28",
+                "product_group": "BB",
+                "width/mm": 5,
+                "length/mm": 3,
+                "height/mm": 50,
+                "weight/kg": 1.0,
+                "sequence": 53
+            },
+            "54": {
+                "article": "Box_T20",
+                "id": "T20",
+                "product_group": "T",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 8.9,
+                "sequence": 54
+            },
+            "55": {
+                "article": "Box_T29",
+                "id": "T29",
+                "product_group": "CC",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 30,
+                "weight/kg": 7.1,
+                "sequence": 55
+            },
+            "56": {
+                "article": "Box_T23",
+                "id": "T23",
+                "product_group": "W",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 51,
+                "weight/kg": 2.1,
+                "sequence": 56
+            },
+            "57": {
+                "article": "Box_T08",
+                "id": "T08",
+                "product_group": "H",
+                "width/mm": 3,
+                "length/mm": 4,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 57
+            },
+            "58": {
+                "article": "Box_T05",
+                "id": "T05",
+                "product_group": "E",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 50,
+                "weight/kg": 3.6,
+                "sequence": 58
+            },
+            "59": {
+                "article": "Box_T18",
+                "id": "T18",
+                "product_group": "R",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 40,
+                "weight/kg": 11.1,
+                "sequence": 59
+            },
+            "60": {
+                "article": "Box_T15",
+                "id": "T15",
+                "product_group": "O",
+                "width/mm": 5,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 5.4,
+                "sequence": 60
+            },
+            "61": {
+                "article": "Box_T28",
+                "id": "T28",
+                "product_group": "BB",
+                "width/mm": 5,
+                "length/mm": 3,
+                "height/mm": 50,
+                "weight/kg": 1.0,
+                "sequence": 61
+            },
+            "62": {
+                "article": "Box_T14",
+                "id": "T14",
+                "product_group": "N",
+                "width/mm": 2,
+                "length/mm": 3,
+                "height/mm": 20,
+                "weight/kg": 5.6,
+                "sequence": 62
+            },
+            "63": {
+                "article": "Box_T03",
+                "id": "T03",
+                "product_group": "C",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 63
+            },
+            "64": {
+                "article": "Box_T07",
+                "id": "T07",
+                "product_group": "G",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 40,
+                "weight/kg": 4.3,
+                "sequence": 64
+            },
+            "65": {
+                "article": "Box_T04",
+                "id": "T04",
+                "product_group": "D",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 60,
+                "weight/kg": 1.3,
+                "sequence": 65
+            },
+            "66": {
+                "article": "Box_T26",
+                "id": "T26",
+                "product_group": "Z",
+                "width/mm": 6,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 9.2,
+                "sequence": 66
+            },
+            "67": {
+                "article": "Box_T07",
+                "id": "T07",
+                "product_group": "G",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 40,
+                "weight/kg": 4.3,
+                "sequence": 67
+            },
+            "68": {
+                "article": "Box_T23",
+                "id": "T23",
+                "product_group": "W",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 51,
+                "weight/kg": 2.1,
+                "sequence": 68
+            },
+            "69": {
+                "article": "Box_T32",
+                "id": "T32",
+                "product_group": "FF",
+                "width/mm": 6,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 4.9,
+                "sequence": 69
+            },
+            "70": {
+                "article": "Box_T04",
+                "id": "T04",
+                "product_group": "D",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 60,
+                "weight/kg": 1.3,
+                "sequence": 70
+            },
+            "71": {
+                "article": "Box_T27",
+                "id": "T27",
+                "product_group": "AA",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 40,
+                "weight/kg": 2.3,
+                "sequence": 71
+            },
+            "72": {
+                "article": "Box_T14",
+                "id": "T14",
+                "product_group": "N",
+                "width/mm": 2,
+                "length/mm": 3,
+                "height/mm": 20,
+                "weight/kg": 5.6,
+                "sequence": 72
+            },
+            "73": {
+                "article": "Box_T27",
+                "id": "T27",
+                "product_group": "AA",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 40,
+                "weight/kg": 2.3,
+                "sequence": 73
+            },
+            "74": {
+                "article": "Box_T35",
+                "id": "T35",
+                "product_group": "II",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 60,
+                "weight/kg": 3.0,
+                "sequence": 74
+            },
+            "75": {
+                "article": "Box_T31",
+                "id": "T31",
+                "product_group": "EE",
+                "width/mm": 3,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 7.5,
+                "sequence": 75
+            },
+            "76": {
+                "article": "Box_T32",
+                "id": "T32",
+                "product_group": "FF",
+                "width/mm": 6,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 4.9,
+                "sequence": 76
+            },
+            "77": {
+                "article": "Box_T13",
+                "id": "T13",
+                "product_group": "M",
+                "width/mm": 2,
+                "length/mm": 2,
+                "height/mm": 30,
+                "weight/kg": 10.3,
+                "sequence": 77
+            },
+            "78": {
+                "article": "Box_T08",
+                "id": "T08",
+                "product_group": "H",
+                "width/mm": 3,
+                "length/mm": 4,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 78
+            },
+            "79": {
+                "article": "Box_T07",
+                "id": "T07",
+                "product_group": "G",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 40,
+                "weight/kg": 4.3,
+                "sequence": 79
+            },
+            "80": {
+                "article": "Box_T33",
+                "id": "T33",
+                "product_group": "GG",
+                "width/mm": 4,
+                "length/mm": 3,
+                "height/mm": 23,
+                "weight/kg": 3.9,
+                "sequence": 80
+            },
+            "81": {
+                "article": "Box_T26",
+                "id": "T26",
+                "product_group": "Z",
+                "width/mm": 6,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 9.2,
+                "sequence": 81
+            },
+            "82": {
+                "article": "Box_T18",
+                "id": "T18",
+                "product_group": "R",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 40,
+                "weight/kg": 11.1,
+                "sequence": 82
+            },
+            "83": {
+                "article": "Box_T13",
+                "id": "T13",
+                "product_group": "M",
+                "width/mm": 2,
+                "length/mm": 2,
+                "height/mm": 30,
+                "weight/kg": 10.3,
+                "sequence": 83
+            },
+            "84": {
+                "article": "Box_T20",
+                "id": "T20",
+                "product_group": "T",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 8.9,
+                "sequence": 84
+            },
+            "85": {
+                "article": "Box_T13",
+                "id": "T13",
+                "product_group": "M",
+                "width/mm": 2,
+                "length/mm": 2,
+                "height/mm": 30,
+                "weight/kg": 10.3,
+                "sequence": 85
+            },
+            "86": {
+                "article": "Box_T16",
+                "id": "T16",
+                "product_group": "P",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 54,
+                "weight/kg": 9.7,
+                "sequence": 86
+            },
+            "87": {
+                "article": "Box_T01",
+                "id": "T01",
+                "product_group": "A",
+                "width/mm": 2,
+                "length/mm": 2,
+                "height/mm": 40,
+                "weight/kg": 3.9,
+                "sequence": 87
+            },
+            "88": {
+                "article": "Box_T16",
+                "id": "T16",
+                "product_group": "P",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 54,
+                "weight/kg": 9.7,
+                "sequence": 88
+            },
+            "89": {
+                "article": "Box_T34",
+                "id": "T34",
+                "product_group": "HH",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 54,
+                "weight/kg": 10.2,
+                "sequence": 89
+            },
+            "90": {
+                "article": "Box_T04",
+                "id": "T04",
+                "product_group": "D",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 60,
+                "weight/kg": 1.3,
+                "sequence": 90
+            },
+            "91": {
+                "article": "Box_T16",
+                "id": "T16",
+                "product_group": "P",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 54,
+                "weight/kg": 9.7,
+                "sequence": 91
+            },
+            "92": {
+                "article": "Box_T09",
+                "id": "T09",
+                "product_group": "I",
+                "width/mm": 2,
+                "length/mm": 4,
+                "height/mm": 40,
+                "weight/kg": 8.2,
+                "sequence": 92
+            },
+            "93": {
+                "article": "Box_T22",
+                "id": "T22",
+                "product_group": "V",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 47,
+                "weight/kg": 11.8,
+                "sequence": 93
+            },
+            "94": {
+                "article": "Box_T22",
+                "id": "T22",
+                "product_group": "V",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 47,
+                "weight/kg": 11.8,
+                "sequence": 94
+            },
+            "95": {
+                "article": "Box_T17",
+                "id": "T17",
+                "product_group": "Q",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 50,
+                "weight/kg": 4.2,
+                "sequence": 95
+            },
+            "96": {
+                "article": "Box_T07",
+                "id": "T07",
+                "product_group": "G",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 40,
+                "weight/kg": 4.3,
+                "sequence": 96
+            },
+            "97": {
+                "article": "Box_T11",
+                "id": "T11",
+                "product_group": "K",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 4.5,
+                "sequence": 97
+            },
+            "98": {
+                "article": "Box_T34",
+                "id": "T34",
+                "product_group": "HH",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 54,
+                "weight/kg": 10.2,
+                "sequence": 98
+            },
+            "99": {
+                "article": "Box_T05",
+                "id": "T05",
+                "product_group": "E",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 50,
+                "weight/kg": 3.6,
+                "sequence": 99
+            },
+            "100": {
+                "article": "Box_T01",
+                "id": "T01",
+                "product_group": "A",
+                "width/mm": 2,
+                "length/mm": 2,
+                "height/mm": 40,
+                "weight/kg": 3.9,
+                "sequence": 100
+            },
+            "101": {
+                "article": "Box_T26",
+                "id": "T26",
+                "product_group": "Z",
+                "width/mm": 6,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 9.2,
+                "sequence": 101
+            },
+            "102": {
+                "article": "Box_T29",
+                "id": "T29",
+                "product_group": "CC",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 30,
+                "weight/kg": 7.1,
+                "sequence": 102
+            }
+        },
+        "properties": {
+            "id": "ORD_GRID_102_FINAL",
+            "order_nr": "ORD_102",
+            "type": "diverse_controlled_H_test",
+            "target": "15,10,200"
+        }
+    },
+    "ORDER_128_DIVERSIFIED": {
+        "item_sequence": {
+            "1": {
+                "article": "Box_T12",
+                "id": "T12",
+                "product_group": "L",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 60,
+                "weight/kg": 3.3,
+                "sequence": 1
+            },
+            "2": {
+                "article": "Box_T10",
+                "id": "T10",
+                "product_group": "J",
+                "width/mm": 2,
+                "length/mm": 5,
+                "height/mm": 60,
+                "weight/kg": 2.5,
+                "sequence": 2
+            },
+            "3": {
+                "article": "Box_T21",
+                "id": "T21",
+                "product_group": "U",
+                "width/mm": 5,
+                "length/mm": 5,
+                "height/mm": 30,
+                "weight/kg": 4.2,
+                "sequence": 3
+            },
+            "4": {
+                "article": "Box_T17",
+                "id": "T17",
+                "product_group": "Q",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 50,
+                "weight/kg": 4.2,
+                "sequence": 4
+            },
+            "5": {
+                "article": "Box_T13",
+                "id": "T13",
+                "product_group": "M",
+                "width/mm": 2,
+                "length/mm": 2,
+                "height/mm": 30,
+                "weight/kg": 10.3,
+                "sequence": 5
+            },
+            "6": {
+                "article": "Box_T17",
+                "id": "T17",
+                "product_group": "Q",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 50,
+                "weight/kg": 4.2,
+                "sequence": 6
+            },
+            "7": {
+                "article": "Box_T10",
+                "id": "T10",
+                "product_group": "J",
+                "width/mm": 2,
+                "length/mm": 5,
+                "height/mm": 60,
+                "weight/kg": 2.5,
+                "sequence": 7
+            },
+            "8": {
+                "article": "Box_T07",
+                "id": "T07",
+                "product_group": "G",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 40,
+                "weight/kg": 4.3,
+                "sequence": 8
+            },
+            "9": {
+                "article": "Box_T33",
+                "id": "T33",
+                "product_group": "GG",
+                "width/mm": 4,
+                "length/mm": 3,
+                "height/mm": 23,
+                "weight/kg": 3.9,
+                "sequence": 9
+            },
+            "10": {
+                "article": "Box_T05",
+                "id": "T05",
+                "product_group": "E",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 50,
+                "weight/kg": 3.6,
+                "sequence": 10
+            },
+            "11": {
+                "article": "Box_T18",
+                "id": "T18",
+                "product_group": "R",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 40,
+                "weight/kg": 11.1,
+                "sequence": 11
+            },
+            "12": {
+                "article": "Box_T14",
+                "id": "T14",
+                "product_group": "N",
+                "width/mm": 2,
+                "length/mm": 3,
+                "height/mm": 20,
+                "weight/kg": 5.6,
+                "sequence": 12
+            },
+            "13": {
+                "article": "Box_T15",
+                "id": "T15",
+                "product_group": "O",
+                "width/mm": 5,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 5.4,
+                "sequence": 13
+            },
+            "14": {
+                "article": "Box_T28",
+                "id": "T28",
+                "product_group": "BB",
+                "width/mm": 5,
+                "length/mm": 3,
+                "height/mm": 50,
+                "weight/kg": 1.0,
+                "sequence": 14
+            },
+            "15": {
+                "article": "Box_T24",
+                "id": "T24",
+                "product_group": "X",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 58,
+                "weight/kg": 1.8,
+                "sequence": 15
+            },
+            "16": {
+                "article": "Box_T03",
+                "id": "T03",
+                "product_group": "C",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 16
+            },
+            "17": {
+                "article": "Box_T06",
+                "id": "T06",
+                "product_group": "F",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 20,
+                "weight/kg": 10.1,
+                "sequence": 17
+            },
+            "18": {
+                "article": "Box_T33",
+                "id": "T33",
+                "product_group": "GG",
+                "width/mm": 4,
+                "length/mm": 3,
+                "height/mm": 23,
+                "weight/kg": 3.9,
+                "sequence": 18
+            },
+            "19": {
+                "article": "Box_T22",
+                "id": "T22",
+                "product_group": "V",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 47,
+                "weight/kg": 11.8,
+                "sequence": 19
+            },
+            "20": {
+                "article": "Box_T08",
+                "id": "T08",
+                "product_group": "H",
+                "width/mm": 3,
+                "length/mm": 4,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 20
+            },
+            "21": {
+                "article": "Box_T12",
+                "id": "T12",
+                "product_group": "L",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 60,
+                "weight/kg": 3.3,
+                "sequence": 21
+            },
+            "22": {
+                "article": "Box_T28",
+                "id": "T28",
+                "product_group": "BB",
+                "width/mm": 5,
+                "length/mm": 3,
+                "height/mm": 50,
+                "weight/kg": 1.0,
+                "sequence": 22
+            },
+            "23": {
+                "article": "Box_T09",
+                "id": "T09",
+                "product_group": "I",
+                "width/mm": 2,
+                "length/mm": 4,
+                "height/mm": 40,
+                "weight/kg": 8.2,
+                "sequence": 23
+            },
+            "24": {
+                "article": "Box_T02",
+                "id": "T02",
+                "product_group": "B",
+                "width/mm": 3,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 2.0,
+                "sequence": 24
+            },
+            "25": {
+                "article": "Box_T03",
+                "id": "T03",
+                "product_group": "C",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 25
+            },
+            "26": {
+                "article": "Box_T05",
+                "id": "T05",
+                "product_group": "E",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 50,
+                "weight/kg": 3.6,
+                "sequence": 26
+            },
+            "27": {
+                "article": "Box_T15",
+                "id": "T15",
+                "product_group": "O",
+                "width/mm": 5,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 5.4,
+                "sequence": 27
+            },
+            "28": {
+                "article": "Box_T35",
+                "id": "T35",
+                "product_group": "II",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 60,
+                "weight/kg": 3.0,
+                "sequence": 28
+            },
+            "29": {
+                "article": "Box_T23",
+                "id": "T23",
+                "product_group": "W",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 51,
+                "weight/kg": 2.1,
+                "sequence": 29
+            },
+            "30": {
+                "article": "Box_T23",
+                "id": "T23",
+                "product_group": "W",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 51,
+                "weight/kg": 2.1,
+                "sequence": 30
+            },
+            "31": {
+                "article": "Box_T27",
+                "id": "T27",
+                "product_group": "AA",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 40,
+                "weight/kg": 2.3,
+                "sequence": 31
+            },
+            "32": {
+                "article": "Box_T03",
+                "id": "T03",
+                "product_group": "C",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 32
+            },
+            "33": {
+                "article": "Box_T19",
+                "id": "T19",
+                "product_group": "S",
+                "width/mm": 4,
+                "length/mm": 5,
+                "height/mm": 37,
+                "weight/kg": 1.8,
+                "sequence": 33
+            },
+            "34": {
+                "article": "Box_T18",
+                "id": "T18",
+                "product_group": "R",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 40,
+                "weight/kg": 11.1,
+                "sequence": 34
+            },
+            "35": {
+                "article": "Box_T02",
+                "id": "T02",
+                "product_group": "B",
+                "width/mm": 3,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 2.0,
+                "sequence": 35
+            },
+            "36": {
+                "article": "Box_T28",
+                "id": "T28",
+                "product_group": "BB",
+                "width/mm": 5,
+                "length/mm": 3,
+                "height/mm": 50,
+                "weight/kg": 1.0,
+                "sequence": 36
+            },
+            "37": {
+                "article": "Box_T16",
+                "id": "T16",
+                "product_group": "P",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 54,
+                "weight/kg": 9.7,
+                "sequence": 37
+            },
+            "38": {
+                "article": "Box_T13",
+                "id": "T13",
+                "product_group": "M",
+                "width/mm": 2,
+                "length/mm": 2,
+                "height/mm": 30,
+                "weight/kg": 10.3,
+                "sequence": 38
+            },
+            "39": {
+                "article": "Box_T29",
+                "id": "T29",
+                "product_group": "CC",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 30,
+                "weight/kg": 7.1,
+                "sequence": 39
+            },
+            "40": {
+                "article": "Box_T09",
+                "id": "T09",
+                "product_group": "I",
+                "width/mm": 2,
+                "length/mm": 4,
+                "height/mm": 40,
+                "weight/kg": 8.2,
+                "sequence": 40
+            },
+            "41": {
+                "article": "Box_T34",
+                "id": "T34",
+                "product_group": "HH",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 54,
+                "weight/kg": 10.2,
+                "sequence": 41
+            },
+            "42": {
+                "article": "Box_T30",
+                "id": "T30",
+                "product_group": "DD",
+                "width/mm": 2,
+                "length/mm": 4,
+                "height/mm": 60,
+                "weight/kg": 8.3,
+                "sequence": 42
+            },
+            "43": {
+                "article": "Box_T26",
+                "id": "T26",
+                "product_group": "Z",
+                "width/mm": 6,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 9.2,
+                "sequence": 43
+            },
+            "44": {
+                "article": "Box_T27",
+                "id": "T27",
+                "product_group": "AA",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 40,
+                "weight/kg": 2.3,
+                "sequence": 44
+            },
+            "45": {
+                "article": "Box_T20",
+                "id": "T20",
+                "product_group": "T",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 8.9,
+                "sequence": 45
+            },
+            "46": {
+                "article": "Box_T08",
+                "id": "T08",
+                "product_group": "H",
+                "width/mm": 3,
+                "length/mm": 4,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 46
+            },
+            "47": {
+                "article": "Box_T02",
+                "id": "T02",
+                "product_group": "B",
+                "width/mm": 3,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 2.0,
+                "sequence": 47
+            },
+            "48": {
+                "article": "Box_T26",
+                "id": "T26",
+                "product_group": "Z",
+                "width/mm": 6,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 9.2,
+                "sequence": 48
+            },
+            "49": {
+                "article": "Box_T08",
+                "id": "T08",
+                "product_group": "H",
+                "width/mm": 3,
+                "length/mm": 4,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 49
+            },
+            "50": {
+                "article": "Box_T16",
+                "id": "T16",
+                "product_group": "P",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 54,
+                "weight/kg": 9.7,
+                "sequence": 50
+            },
+            "51": {
+                "article": "Box_T01",
+                "id": "T01",
+                "product_group": "A",
+                "width/mm": 2,
+                "length/mm": 2,
+                "height/mm": 40,
+                "weight/kg": 3.9,
+                "sequence": 51
+            },
+            "52": {
+                "article": "Box_T01",
+                "id": "T01",
+                "product_group": "A",
+                "width/mm": 2,
+                "length/mm": 2,
+                "height/mm": 40,
+                "weight/kg": 3.9,
+                "sequence": 52
+            },
+            "53": {
+                "article": "Box_T03",
+                "id": "T03",
+                "product_group": "C",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 53
+            },
+            "54": {
+                "article": "Box_T03",
+                "id": "T03",
+                "product_group": "C",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 54
+            },
+            "55": {
+                "article": "Box_T22",
+                "id": "T22",
+                "product_group": "V",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 47,
+                "weight/kg": 11.8,
+                "sequence": 55
+            },
+            "56": {
+                "article": "Box_T04",
+                "id": "T04",
+                "product_group": "D",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 60,
+                "weight/kg": 1.3,
+                "sequence": 56
+            },
+            "57": {
+                "article": "Box_T06",
+                "id": "T06",
+                "product_group": "F",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 20,
+                "weight/kg": 10.1,
+                "sequence": 57
+            },
+            "58": {
+                "article": "Box_T12",
+                "id": "T12",
+                "product_group": "L",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 60,
+                "weight/kg": 3.3,
+                "sequence": 58
+            },
+            "59": {
+                "article": "Box_T32",
+                "id": "T32",
+                "product_group": "FF",
+                "width/mm": 6,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 4.9,
+                "sequence": 59
+            },
+            "60": {
+                "article": "Box_T31",
+                "id": "T31",
+                "product_group": "EE",
+                "width/mm": 3,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 7.5,
+                "sequence": 60
+            },
+            "61": {
+                "article": "Box_T17",
+                "id": "T17",
+                "product_group": "Q",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 50,
+                "weight/kg": 4.2,
+                "sequence": 61
+            },
+            "62": {
+                "article": "Box_T25",
+                "id": "T25",
+                "product_group": "Y",
+                "width/mm": 5,
+                "length/mm": 6,
+                "height/mm": 50,
+                "weight/kg": 7.3,
+                "sequence": 62
+            },
+            "63": {
+                "article": "Box_T35",
+                "id": "T35",
+                "product_group": "II",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 60,
+                "weight/kg": 3.0,
+                "sequence": 63
+            },
+            "64": {
+                "article": "Box_T28",
+                "id": "T28",
+                "product_group": "BB",
+                "width/mm": 5,
+                "length/mm": 3,
+                "height/mm": 50,
+                "weight/kg": 1.0,
+                "sequence": 64
+            },
+            "65": {
+                "article": "Box_T20",
+                "id": "T20",
+                "product_group": "T",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 8.9,
+                "sequence": 65
+            },
+            "66": {
+                "article": "Box_T03",
+                "id": "T03",
+                "product_group": "C",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 66
+            },
+            "67": {
+                "article": "Box_T07",
+                "id": "T07",
+                "product_group": "G",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 40,
+                "weight/kg": 4.3,
+                "sequence": 67
+            },
+            "68": {
+                "article": "Box_T16",
+                "id": "T16",
+                "product_group": "P",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 54,
+                "weight/kg": 9.7,
+                "sequence": 68
+            },
+            "69": {
+                "article": "Box_T17",
+                "id": "T17",
+                "product_group": "Q",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 50,
+                "weight/kg": 4.2,
+                "sequence": 69
+            },
+            "70": {
+                "article": "Box_T08",
+                "id": "T08",
+                "product_group": "H",
+                "width/mm": 3,
+                "length/mm": 4,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 70
+            },
+            "71": {
+                "article": "Box_T18",
+                "id": "T18",
+                "product_group": "R",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 40,
+                "weight/kg": 11.1,
+                "sequence": 71
+            },
+            "72": {
+                "article": "Box_T15",
+                "id": "T15",
+                "product_group": "O",
+                "width/mm": 5,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 5.4,
+                "sequence": 72
+            },
+            "73": {
+                "article": "Box_T16",
+                "id": "T16",
+                "product_group": "P",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 54,
+                "weight/kg": 9.7,
+                "sequence": 73
+            },
+            "74": {
+                "article": "Box_T25",
+                "id": "T25",
+                "product_group": "Y",
+                "width/mm": 5,
+                "length/mm": 6,
+                "height/mm": 50,
+                "weight/kg": 7.3,
+                "sequence": 74
+            },
+            "75": {
+                "article": "Box_T19",
+                "id": "T19",
+                "product_group": "S",
+                "width/mm": 4,
+                "length/mm": 5,
+                "height/mm": 37,
+                "weight/kg": 1.8,
+                "sequence": 75
+            },
+            "76": {
+                "article": "Box_T28",
+                "id": "T28",
+                "product_group": "BB",
+                "width/mm": 5,
+                "length/mm": 3,
+                "height/mm": 50,
+                "weight/kg": 1.0,
+                "sequence": 76
+            },
+            "77": {
+                "article": "Box_T08",
+                "id": "T08",
+                "product_group": "H",
+                "width/mm": 3,
+                "length/mm": 4,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 77
+            },
+            "78": {
+                "article": "Box_T10",
+                "id": "T10",
+                "product_group": "J",
+                "width/mm": 2,
+                "length/mm": 5,
+                "height/mm": 60,
+                "weight/kg": 2.5,
+                "sequence": 78
+            },
+            "79": {
+                "article": "Box_T22",
+                "id": "T22",
+                "product_group": "V",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 47,
+                "weight/kg": 11.8,
+                "sequence": 79
+            },
+            "80": {
+                "article": "Box_T33",
+                "id": "T33",
+                "product_group": "GG",
+                "width/mm": 4,
+                "length/mm": 3,
+                "height/mm": 23,
+                "weight/kg": 3.9,
+                "sequence": 80
+            },
+            "81": {
+                "article": "Box_T27",
+                "id": "T27",
+                "product_group": "AA",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 40,
+                "weight/kg": 2.3,
+                "sequence": 81
+            },
+            "82": {
+                "article": "Box_T24",
+                "id": "T24",
+                "product_group": "X",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 58,
+                "weight/kg": 1.8,
+                "sequence": 82
+            },
+            "83": {
+                "article": "Box_T26",
+                "id": "T26",
+                "product_group": "Z",
+                "width/mm": 6,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 9.2,
+                "sequence": 83
+            },
+            "84": {
+                "article": "Box_T18",
+                "id": "T18",
+                "product_group": "R",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 40,
+                "weight/kg": 11.1,
+                "sequence": 84
+            },
+            "85": {
+                "article": "Box_T20",
+                "id": "T20",
+                "product_group": "T",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 8.9,
+                "sequence": 85
+            },
+            "86": {
+                "article": "Box_T07",
+                "id": "T07",
+                "product_group": "G",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 40,
+                "weight/kg": 4.3,
+                "sequence": 86
+            },
+            "87": {
+                "article": "Box_T22",
+                "id": "T22",
+                "product_group": "V",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 47,
+                "weight/kg": 11.8,
+                "sequence": 87
+            },
+            "88": {
+                "article": "Box_T35",
+                "id": "T35",
+                "product_group": "II",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 60,
+                "weight/kg": 3.0,
+                "sequence": 88
+            },
+            "89": {
+                "article": "Box_T25",
+                "id": "T25",
+                "product_group": "Y",
+                "width/mm": 5,
+                "length/mm": 6,
+                "height/mm": 50,
+                "weight/kg": 7.3,
+                "sequence": 89
+            },
+            "90": {
+                "article": "Box_T14",
+                "id": "T14",
+                "product_group": "N",
+                "width/mm": 2,
+                "length/mm": 3,
+                "height/mm": 20,
+                "weight/kg": 5.6,
+                "sequence": 90
+            },
+            "91": {
+                "article": "Box_T07",
+                "id": "T07",
+                "product_group": "G",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 40,
+                "weight/kg": 4.3,
+                "sequence": 91
+            },
+            "92": {
+                "article": "Box_T05",
+                "id": "T05",
+                "product_group": "E",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 50,
+                "weight/kg": 3.6,
+                "sequence": 92
+            },
+            "93": {
+                "article": "Box_T18",
+                "id": "T18",
+                "product_group": "R",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 40,
+                "weight/kg": 11.1,
+                "sequence": 93
+            },
+            "94": {
+                "article": "Box_T10",
+                "id": "T10",
+                "product_group": "J",
+                "width/mm": 2,
+                "length/mm": 5,
+                "height/mm": 60,
+                "weight/kg": 2.5,
+                "sequence": 94
+            },
+            "95": {
+                "article": "Box_T23",
+                "id": "T23",
+                "product_group": "W",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 51,
+                "weight/kg": 2.1,
+                "sequence": 95
+            },
+            "96": {
+                "article": "Box_T14",
+                "id": "T14",
+                "product_group": "N",
+                "width/mm": 2,
+                "length/mm": 3,
+                "height/mm": 20,
+                "weight/kg": 5.6,
+                "sequence": 96
+            },
+            "97": {
+                "article": "Box_T11",
+                "id": "T11",
+                "product_group": "K",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 4.5,
+                "sequence": 97
+            },
+            "98": {
+                "article": "Box_T14",
+                "id": "T14",
+                "product_group": "N",
+                "width/mm": 2,
+                "length/mm": 3,
+                "height/mm": 20,
+                "weight/kg": 5.6,
+                "sequence": 98
+            },
+            "99": {
+                "article": "Box_T28",
+                "id": "T28",
+                "product_group": "BB",
+                "width/mm": 5,
+                "length/mm": 3,
+                "height/mm": 50,
+                "weight/kg": 1.0,
+                "sequence": 99
+            },
+            "100": {
+                "article": "Box_T11",
+                "id": "T11",
+                "product_group": "K",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 4.5,
+                "sequence": 100
+            },
+            "101": {
+                "article": "Box_T17",
+                "id": "T17",
+                "product_group": "Q",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 50,
+                "weight/kg": 4.2,
+                "sequence": 101
+            },
+            "102": {
+                "article": "Box_T10",
+                "id": "T10",
+                "product_group": "J",
+                "width/mm": 2,
+                "length/mm": 5,
+                "height/mm": 60,
+                "weight/kg": 2.5,
+                "sequence": 102
+            },
+            "103": {
+                "article": "Box_T31",
+                "id": "T31",
+                "product_group": "EE",
+                "width/mm": 3,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 7.5,
+                "sequence": 103
+            },
+            "104": {
+                "article": "Box_T04",
+                "id": "T04",
+                "product_group": "D",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 60,
+                "weight/kg": 1.3,
+                "sequence": 104
+            },
+            "105": {
+                "article": "Box_T22",
+                "id": "T22",
+                "product_group": "V",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 47,
+                "weight/kg": 11.8,
+                "sequence": 105
+            },
+            "106": {
+                "article": "Box_T11",
+                "id": "T11",
+                "product_group": "K",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 4.5,
+                "sequence": 106
+            },
+            "107": {
+                "article": "Box_T21",
+                "id": "T21",
+                "product_group": "U",
+                "width/mm": 5,
+                "length/mm": 5,
+                "height/mm": 30,
+                "weight/kg": 4.2,
+                "sequence": 107
+            },
+            "108": {
+                "article": "Box_T11",
+                "id": "T11",
+                "product_group": "K",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 4.5,
+                "sequence": 108
+            },
+            "109": {
+                "article": "Box_T29",
+                "id": "T29",
+                "product_group": "CC",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 30,
+                "weight/kg": 7.1,
+                "sequence": 109
+            },
+            "110": {
+                "article": "Box_T03",
+                "id": "T03",
+                "product_group": "C",
+                "width/mm": 5,
+                "length/mm": 2,
+                "height/mm": 20,
+                "weight/kg": 2.1,
+                "sequence": 110
+            },
+            "111": {
+                "article": "Box_T33",
+                "id": "T33",
+                "product_group": "GG",
+                "width/mm": 4,
+                "length/mm": 3,
+                "height/mm": 23,
+                "weight/kg": 3.9,
+                "sequence": 111
+            },
+            "112": {
+                "article": "Box_T12",
+                "id": "T12",
+                "product_group": "L",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 60,
+                "weight/kg": 3.3,
+                "sequence": 112
+            },
+            "113": {
+                "article": "Box_T07",
+                "id": "T07",
+                "product_group": "G",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 40,
+                "weight/kg": 4.3,
+                "sequence": 113
+            },
+            "114": {
+                "article": "Box_T22",
+                "id": "T22",
+                "product_group": "V",
+                "width/mm": 4,
+                "length/mm": 6,
+                "height/mm": 47,
+                "weight/kg": 11.8,
+                "sequence": 114
+            },
+            "115": {
+                "article": "Box_T30",
+                "id": "T30",
+                "product_group": "DD",
+                "width/mm": 2,
+                "length/mm": 4,
+                "height/mm": 60,
+                "weight/kg": 8.3,
+                "sequence": 115
+            },
+            "116": {
+                "article": "Box_T24",
+                "id": "T24",
+                "product_group": "X",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 58,
+                "weight/kg": 1.8,
+                "sequence": 116
+            },
+            "117": {
+                "article": "Box_T23",
+                "id": "T23",
+                "product_group": "W",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 51,
+                "weight/kg": 2.1,
+                "sequence": 117
+            },
+            "118": {
+                "article": "Box_T23",
+                "id": "T23",
+                "product_group": "W",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 51,
+                "weight/kg": 2.1,
+                "sequence": 118
+            },
+            "119": {
+                "article": "Box_T18",
+                "id": "T18",
+                "product_group": "R",
+                "width/mm": 6,
+                "length/mm": 3,
+                "height/mm": 40,
+                "weight/kg": 11.1,
+                "sequence": 119
+            },
+            "120": {
+                "article": "Box_T27",
+                "id": "T27",
+                "product_group": "AA",
+                "width/mm": 6,
+                "length/mm": 4,
+                "height/mm": 40,
+                "weight/kg": 2.3,
+                "sequence": 120
+            },
+            "121": {
+                "article": "Box_T32",
+                "id": "T32",
+                "product_group": "FF",
+                "width/mm": 6,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 4.9,
+                "sequence": 121
+            },
+            "122": {
+                "article": "Box_T17",
+                "id": "T17",
+                "product_group": "Q",
+                "width/mm": 3,
+                "length/mm": 5,
+                "height/mm": 50,
+                "weight/kg": 4.2,
+                "sequence": 122
+            },
+            "123": {
+                "article": "Box_T01",
+                "id": "T01",
+                "product_group": "A",
+                "width/mm": 2,
+                "length/mm": 2,
+                "height/mm": 40,
+                "weight/kg": 3.9,
+                "sequence": 123
+            },
+            "124": {
+                "article": "Box_T15",
+                "id": "T15",
+                "product_group": "O",
+                "width/mm": 5,
+                "length/mm": 4,
+                "height/mm": 30,
+                "weight/kg": 5.4,
+                "sequence": 124
+            },
+            "125": {
+                "article": "Box_T23",
+                "id": "T23",
+                "product_group": "W",
+                "width/mm": 3,
+                "length/mm": 6,
+                "height/mm": 51,
+                "weight/kg": 2.1,
+                "sequence": 125
+            },
+            "126": {
+                "article": "Box_T02",
+                "id": "T02",
+                "product_group": "B",
+                "width/mm": 3,
+                "length/mm": 2,
+                "height/mm": 60,
+                "weight/kg": 2.0,
+                "sequence": 126
+            },
+            "127": {
+                "article": "Box_T09",
+                "id": "T09",
+                "product_group": "I",
+                "width/mm": 2,
+                "length/mm": 4,
+                "height/mm": 40,
+                "weight/kg": 8.2,
+                "sequence": 127
+            },
+            "128": {
+                "article": "Box_T13",
+                "id": "T13",
+                "product_group": "M",
+                "width/mm": 2,
+                "length/mm": 2,
+                "height/mm": 30,
+                "weight/kg": 10.3,
+                "sequence": 128
+            }
+        },
+        "properties": {
+            "id": "ORD_GRID_128_FINAL",
+            "order_nr": "ORD_128",
+            "type": "diverse_controlled_H_test",
+            "target": "15,10,200"
+        }
+    }
+}

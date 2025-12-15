@@ -22,9 +22,9 @@ class LowestArea:
     """
 
     def __init__(self) -> None:
-        self.__Observation = None
-        """The stored heights of the palletizing environment."""
-        self.__Info = None
+        self.__Observation = tuple[list[list], np.ndarray]()
+        """A tuple containing the list of items and the feature map of the container."""
+        self.__Info = dict()
         """The additional info that is provided by the palletizing environment."""
 
     def getAction(self, observation: np.ndarray, info: dict) -> dict:
@@ -56,7 +56,9 @@ class LowestArea:
         self.__Observation = observation
         self.__Info = info
 
-        nextItem = self.__Info.get("next_items_selection")[0]
+        # the case where no items are left never verifies as it is handled by the environment
+        # but to be safe cover it with dict.get(,[])
+        nextItem = self.__Info.get("next_items_selection",[])[0]
 
         # get the allowed actions
         allowedActions = self.__getAllowedActions()

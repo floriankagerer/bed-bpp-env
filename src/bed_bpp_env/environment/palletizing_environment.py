@@ -91,7 +91,7 @@ class PalletizingEnvironment(gym.Env):
         """This dictionary has the keys `"key"`, `"order"`, and `"seq"`, whose values store the key of the order as given in the order data, the current order itself, and the number in the sequence of all orders, respectively."""
         self._order_sequence = []  # list of the keys of the given order data
         """This list contains all keys in the order data in the same order as it is given."""
-        self._item_sequence_counter = None
+        self._item_sequence_counter = 0
         """This integer stores the position within an item sequence of the current order."""
 
         self._visualization = None
@@ -154,7 +154,8 @@ class PalletizingEnvironment(gym.Env):
         item = Cuboid(item_for_action)
         item.set_orientation(step_vars["orientation"])
 
-        # create a np.ndarray that has the same shape as the target, its elements are 1 if the item is located in this region and 0 otherwise
+        # create a np.ndarray that has the same shape as the target, 
+        # its elements are 1 if the item is located in this region and 0 otherwise
         item_on_target = np.zeros((self._size[1], self._size[0]), dtype=int)
         item_delta_y, item_delta_x = item.array_representation.shape
         start_x, start_y = step_vars["xCoord"], step_vars["yCoord"]
@@ -173,7 +174,7 @@ class PalletizingEnvironment(gym.Env):
                 cropped_shape, dtype=int
             )
 
-        # obtaiin the FLB height for the item in the selected (x, y)-coordinate
+        # obtain the FLB height for the item in the selected (x, y)-coordinate
         max_height_in_target_area = int(np.amax(np.multiply(self._target_space.getHeights(), item_on_target)))
 
         # define the action in the needed format
@@ -203,10 +204,10 @@ class PalletizingEnvironment(gym.Env):
         reward = self.__getReward(done)
         info = self.__getInfo("step", info, done)
 
-        step_returns = self._target_space.getHeights(), reward, done, info
+        step_returns = self._target_space.getHeights(), reward, done, False, info # False is for truncation, which is not used here
         return step_returns
 
-    def reset(self, order_sequence: Optional[list[Order]] = None) -> tuple[np.ndarray, dict]:
+    def reset(self, seed = 0, options:Optional[dict]=None, **kwargs) -> tuple[np.ndarray, dict]:
         """
         This method is responsible for
         (a) the change of the orders, e.g., from "00100001" -> "00100002",
@@ -217,8 +218,11 @@ class PalletizingEnvironment(gym.Env):
 
         Parameters.
         -----------
-        data_for_epsidoes: dict (default = {})
-            The data for the episodes in the format of the benchmark data.
+        seed: int (default = 0)
+            The seed for the random number generator.
+        options: dict (default = {})
+            The standard gymnasium parameter for reset method that can hold additional information.
+            it encapsulates order_sequence: Optional[list[Order]] = None
 
         Returns.
         --------
@@ -227,6 +231,14 @@ class PalletizingEnvironment(gym.Env):
         info: dict
             A dictionary that contains additional information that might be useful for the machine learning agent.
         """
+
+        # IMPORTANT: Must call this first to seed the random number generator
+        super().reset(seed=seed)
+
+        # extract order_sequence from options
+        if options is not None:
+            order_sequence: Optional[list[Order]] = options.get("order_sequence", None)
+        
         self.__savePackingPlan()
         # # # # # Change the Order that is considered # # # # #
         done = False
@@ -281,10 +293,12 @@ class PalletizingEnvironment(gym.Env):
 
         self._items_selection = []
         self._items_preview = []
-        if not done:
-            # only update items if we do not
-            self.__updateItemsSelection()
-            self.__updateItemsPreview()
+        # if not done:
+            # done here means that the current order is the last in the list
+            # but why should the logic change if we are at the last order?
+            # we still have N items to palletize in this order
+        self.__updateItemsSelection()
+        self.__updateItemsPreview()
 
         # # # # # Obtain the Observation and Info # # # # #
         observation = self._target_space.getHeights()
@@ -667,6 +681,7 @@ class PalletizingEnvironment(gym.Env):
     def __updateItemsPreview(self) -> None:
         """
         This method updates the items that are known in advance, but cannot be selected.
+        Notice that the selection items are not included in the preview items.
 
         Important.
         ----------
@@ -675,8 +690,8 @@ class PalletizingEnvironment(gym.Env):
         for k in range(self._n_item_selection, self._n_item_preview):
             item_counter = self._item_sequence_counter + k
             item_key = str(item_counter)
-            if item_key in self._current_order["order"]["item_sequence"].keys():
-                preview_item = self._current_order["order"]["item_sequence"][item_key]
+            if item_key in range(1,len(self._current_order.item_sequence)+1):
+                preview_item = self._current_order.item_sequence[item_key]
                 if preview_item not in self._items_preview:
                     self._items_preview.append(preview_item)
             else:
@@ -688,6 +703,9 @@ class PalletizingEnvironment(gym.Env):
         item: Item = action["item"]
         flbcoordinates = action["flb_coordinates"]
         orientation = action["orientation"]
+
+        length = item.length_mm
+        width = item.width_mm
         if orientation == 0:
             length = item.length_mm
             width = item.width_mm
@@ -695,6 +713,9 @@ class PalletizingEnvironment(gym.Env):
         elif orientation == 1:
             length = item.width_mm
             width = item.length_mm
+        else:
+            # unexpected orientation: keep defaults and log a warning
+            logger.warning(f"Unknown orientation '{orientation}' for item '{getattr(item, 'id', None)}', using default dimensions")
 
         lc = LC(
             id=item.id,
@@ -726,7 +747,7 @@ class PalletizingEnvironment(gym.Env):
         """
         corner_points = {}
         for item in possibleitems:
-            if item is not None:
+            if item is not None and item != {}:
                 corner_points[item.article] = {}
                 for orientation in range(self._n_orientations):
                     if orientation == 0:

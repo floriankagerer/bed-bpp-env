@@ -43,7 +43,7 @@ class EquallyDistributedRewardWrapper(gym.Wrapper):
         """Calculate the reward and return it."""
         return 1.0 / (self.__N_ITEMS_IN_ORDER)
 
-    def reset(self, order_sequence: Optional[list[Order]] = None) -> tuple:
+    def reset(self, seed = 0, options:Optional[dict]=None, **kwargs) -> tuple:
         # def reset(self, data_for_episodes={}) -> tuple:
         """
         If `VISUALIZE_REWARD_DISTRIBUTION` is set to `True`, a plot is displayed that shows the original (=old) reward, the new values of the reward and the accumulative value of the new reward. Note that the `plt.show()` methods blocks the simulation!
@@ -66,7 +66,7 @@ class EquallyDistributedRewardWrapper(gym.Wrapper):
         if not (self.__Rewards["old"] is None) and VISUALIZE_REWARD_DISTRIBUTION:
             self.__visualizeDistributedReward()
 
-        observation, info = self.env.reset(order_sequence)
+        observation, info = self.env.reset(seed=seed,options=options)
         self.__N_ITEMS_IN_ORDER = info.get("n_items_in_order", np.inf)
         self.__resetRewardDict()
 
@@ -92,12 +92,12 @@ class EquallyDistributedRewardWrapper(gym.Wrapper):
         info: dict
             The adapted information of the base environment's step method.
         """
-        observation, reward, done, info = self.env.step(action)
+        observation, reward, done, truncated, info = self.env.step(action)
         newReward = self.__calculateReward()
         self.__Rewards["old"].append(reward)
         self.__Rewards["new"].append(newReward)
 
-        return observation, newReward, done, info
+        return observation, newReward, done, truncated, info
 
     def __visualizeDistributedReward(self) -> None:
         x = np.arange(0, 1 + len(self.__Rewards["new"]))

@@ -47,7 +47,7 @@ class RescaleWrapper(gym.Wrapper):
 
         self.env.setSizeMultiplicator(size_divisor)
 
-    def reset(self, order_sequence: Optional[list[Order]] = None) -> tuple:
+    def reset(self, seed = 0, options:Optional[dict]=None, **kwargs) -> tuple:
         # def reset(self, data_for_episodes={}) -> tuple:
         """
         This method rescales the observation and adapts the information dictionary of the base environment.
@@ -64,7 +64,7 @@ class RescaleWrapper(gym.Wrapper):
         info: dict
             The adapted information of the base environment's reset method.
         """
-        observation, info = self.env.reset(order_sequence)
+        observation, info = self.env.reset(seed=seed,options=options)
         rescaledObservation = self.__generateRescaledObservation(observation)
         info["allowed_area"] = self.__rescaleAllowedArea(info["allowed_area"])
         info["next_items_selection"] = self.__rescaleSizeOfNextItems(info["next_items_selection"])
@@ -92,12 +92,12 @@ class RescaleWrapper(gym.Wrapper):
             The adapted information of the base environment's step method.
         """
         rescaledAction = self.action(action)
-        observation, reward, done, info = self.env.step(rescaledAction)
+        observation, reward, done,truncated, info = self.env.step(rescaledAction)
         rescaledObservation = self.__generateRescaledObservation(observation)
         info["allowed_area"] = self.__rescaleAllowedArea(info["allowed_area"])
         info["next_items_selection"] = self.__rescaleSizeOfNextItems(info["next_items_selection"])
         info["next_items_preview"] = self.__rescaleSizeOfNextItems(info["next_items_preview"])
-        return rescaledObservation, reward, done, info
+        return rescaledObservation, reward, done,truncated, info
 
     def action(self, originalAction: dict) -> dict:
         """

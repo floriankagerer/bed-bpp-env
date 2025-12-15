@@ -348,11 +348,17 @@ class Space3D:
         first_candidate = items_for_extreme_points.pop(0)
         previous_x = first_candidate.flb.x + first_candidate.array_representation.shape[1]
         previous_y = first_candidate.flb.y + first_candidate.array_representation.shape[0]
-        two_dim_corner_points.append((0, previous_y))
+        first_x = 0
+        deltaz = first_candidate.array_representation[0,0] + first_candidate.flb.z
+        for i in range(first_candidate.flb.x):
+            if deltaz <= self._heights[previous_y, i]:
+                first_x = i
+        two_dim_corner_points.append((first_x, previous_y))
 
         if n_extreme_points > 1:
             last_candidate = items_for_extreme_points.pop()
             last_x = last_candidate.flb.x + last_candidate.array_representation.shape[1]
+            last_y = last_candidate.flb.y + last_candidate.array_representation.shape[0]
 
             for candidate in items_for_extreme_points:
                 candidate_x = candidate.flb.x + candidate.array_representation.shape[1]
@@ -360,9 +366,16 @@ class Space3D:
 
                 two_dim_corner_points.append((previous_x, candidate_y))
                 previous_x = candidate_x
+
+            two_dim_corner_points.append((previous_x, last_y))
         else:
             last_x = previous_x
-        two_dim_corner_points.append((last_x, 0))
+
+        first_y = 0
+        for i in range(first_candidate.flb.y):
+            if deltaz <= self._heights[i, last_x]:
+                first_y = i
+        two_dim_corner_points.append((last_x, first_y))
 
         # remove infeasible corner points
         for corner_point in two_dim_corner_points.copy():

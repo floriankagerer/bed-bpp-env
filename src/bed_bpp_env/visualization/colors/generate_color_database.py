@@ -36,7 +36,7 @@ def generateColorDatabase(indataorders: pathlib.Path) -> None:
         }
     }
     """
-    colorsAvailable = getPathToExampleData().parent.joinpath("code/visualization/colors/colors.json")
+    colorsAvailable = getPathToExampleData().parent.joinpath("src/bed_bpp_env/visualization/colors/colors.json")
 
     # load input data orders and the color base
     with open(indataorders) as file:
